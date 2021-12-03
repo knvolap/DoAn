@@ -1,0 +1,76 @@
+﻿@model HiemMauNhanDao.Models.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/Login/style.css">
+    <link rel="icon" href="~/Assets/Login/img/favoicon.png">
+    <title>Login Form</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <div class="login-form">
+            <h1>Đăng nhập</h1>
+
+            @Html.AntiForgeryToken()
+
+            <div class="txt">
+                @Html.TextBoxFor(model => model.UserName, new { @class = "", @placeholder = "tài khoản", @autofocus = "autofocus", type = "text" })
+            </div>
+            <div class="txt">
+                @Html.PasswordFor(model => model.UserPassword, new { @class = "", @placeholder = "mật khẩu", type = "password" })
+            </div>
+
+            <div>
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            </div>
+            <div class="text " style="color: #fff; margin-bottom:10px">
+                @Html.Partial("_Notifications")
+            </div>
+            <div class="btn">
+                <button>Đăng nhập</button>
+            </div>
+            <div class="remember" style="margin-top:20px">
+                <span>
+                    <label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Ghi nhớ tài khoản</label>
+                </span>
+                <div class="forgot " style="margin-top:10px; margin-left:20% ">
+                    <h6><a href="#">Bạn quên mật khẩu?</a></h6>
+                </div>
+                <div class="clear"> </div>
+            </div>
+
+
+
+
+                <!-- <span class="" style="margin-top:20px ;">
+                    <label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Lưu mật khẩu</label>
+                </span>
+
+            <div class="txt">
+                <input type="text" name="" id="" placeholder="Tài khoản">
+            </div>
+            <div class="txt">
+                <input type="password" name="" id="" placeholder="Mật khẩu">
+            </div>
+
+            <div class="btn">
+                <button>Đăng nhập</button>
+            </div>
+            <div class="bottom-text">
+                <p><a href="#"> Quên mật khẩu?</a></p>
+            </div>
+
+                    -->
+
+
+        </div>
+     }
+    </body>
+</html>

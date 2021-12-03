@@ -1,0 +1,16 @@
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\Models.dll.config
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\Models.dll
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\Models.pdb
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\EntityFramework.dll
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\EntityFramework.SqlServer.dll
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\EntityFramework.xml
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\EntityFramework.SqlServer.xml
+D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csprojAssemblyReference.cache
+D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csproj.CopyComplete
+D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.dll
+D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.pdb
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\PagedList.dll
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\PagedList.Mvc.dll
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\PagedList.xml
+D:\DoAn\HiemMauNhanDao\Models\bin\Debug\PagedList.Mvc.xml
