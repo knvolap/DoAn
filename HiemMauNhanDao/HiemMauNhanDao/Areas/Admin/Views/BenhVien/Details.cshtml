@@ -1,0 +1,85 @@
+﻿@model Models.EF.BenhVien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi bệnh viện</h2>
+
+<div class="card-body">
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Mã bệnh viện
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IdBenhVien)
+                    </dd>
+                    <dt>
+                        Tên bệnh viện
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TenBenhVien)
+                    </dd>
+                    <dt>
+                        Email
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt>
+                        Số điện thoại
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.soDTBV)
+                    </dd>
+                    <dt>
+                        Địa chỉ
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.diaChi)
+                    </dd>
+                    <dt>
+                        Trạng thái
+                    </dt>
+                    <dd>
+                        @*@Html.DisplayFor(model => model.Status)*@
+                        @Html.DropDownListFor(modelItem => modelItem.trangThai, new[] {
+                       new SelectListItem { Text = "Hoạt động", Value = "True" },
+                       new SelectListItem { Text = "Không hoạt động", Value = "False" } },
+                       new { @disabled = "disabled" })
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Minh chứng
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li> <img style="width:500px;height: 600px ; object-fit: cover" src="~/FileUpLoad/@Model.minhChung" /></li>
+                            <li> @Html.DisplayFor(model => model.minhChung) </li>
+                        </ul>
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+
+    </dl>
+    <button class="mb-2 mr-2 btn-transition btn btn-success">
+        @Html.ActionLink("Chỉnh sửa", "EditBV", new { id = Model.IdBenhVien })
+    </button>
+    <ul></ul>
+    <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+        @Html.ActionLink("Quay lại danh sách", "Index", new { @class = "mb-2 mr-2 btn btn-success" })
+    </button>
+</div>
+
+

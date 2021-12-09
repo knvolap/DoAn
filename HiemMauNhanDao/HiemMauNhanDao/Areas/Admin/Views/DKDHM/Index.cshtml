@@ -1,0 +1,150 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@model PagedList.IPagedList<Models.ViewModel.DotHiemMauView>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-heading">
+        <div class="page-title-icon">
+            <i class="pe-7s-menu icon-gradient bg-ripe-malin"></i>
+        </div>
+        <div>
+            Danh sách bệnh viện
+            <div class="page-title-subheading">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
+<div class="panel-body">
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
+</div>
+
+@using (Html.BeginForm("Index", "DotHienMau", FormMethod.Get))
+{
+    //Tìm Kiếm nhân viên
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">Tìm kiếm</h5>
+            <form class="">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
+                            <label for="exampleCity" class="">Nội dung</label>
+                            <input name="name" value="@ViewBag.SearchString" id="exampleCity" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <button class="mt-2 btn btn-primary"> <i class="fa fa-search"></i> Tìm kiếm</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="input-group">
+        <input type="search" value="@ViewBag.SearchString" name="searchString" class="form-control border-0 bg-light" placeholder="Nhập sản phẩm" aria-describedby="button-addon1">
+        <div class="input-group-append">
+            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+
+    @*Thêm đợt*@
+    <ul></ul>
+    @*<div class="app-header-left">
+            <ul class="header-menu nav">
+                <li class="btn btn-success">
+                    <a href="@Url.Action("CreateBV", "BenhVien")" style="color:white">
+                        <i class="nav-link-icon fa fa-edit">   Thêm bệnh viện</i>
+                    </a>
+                </li>
+            </ul>
+        </div>*@
+
+    <ul></ul>
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <table class="mb-0 table table-hover table table-bordered">
+                <tr>
+                    <th>
+                        STT
+                    </th>
+                    <th>
+                        Tên đợt hiến máu
+                    </th>
+                    <th>
+                        Mã đợt hiến máu
+                    </th>
+                    <th>
+                        Mã bệnh viện
+                    </th>
+                    <th>
+                        Mã đơn vị liên kết
+                    </th>
+                    <th>
+                        Thời gian đăng ký
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                    <th>
+                        Chức năng
+                    </th>
+                </tr>
+                @{ var i = 1;}
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @item.TenDHM
+                        </td>
+                         <td>
+                            @item.IdDHM
+                        </td>
+                        <td>
+                            @item.idNVYT
+                        </td>
+                        <td>
+                            @item.idDVLK
+                        </td>
+                        <td>
+                            @item.ngayDK
+                        </td>
+                        <td>
+                            @item.trangThai
+                        </td>
+                        <td>
+                            @*<button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                    @(item.trangThai == true ? "Active" : "Blocked")
+                                </button>*@
+                        </td>
+                        <td>
+                            @Html.ActionLink("Chỉnh sửa", "EditBV", new { id = item.IdDHM }) |
+                            @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDHM }) |
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.IdDHM })
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </table>
+            <ul></ul>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+        </div>
+    </div>
+}

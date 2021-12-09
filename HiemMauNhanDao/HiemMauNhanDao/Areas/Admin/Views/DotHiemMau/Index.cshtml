@@ -1,0 +1,148 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Models.EF.DotHienMau>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="app-page-title">
+    <div class="page-title-heading">
+        <div class="page-title-icon">
+            <i class="pe-7s-menu icon-gradient bg-ripe-malin"></i>
+        </div>
+        <div>
+            Đợt hiến máu
+            <div class="page-title-subheading">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
+<div class="panel-body">
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
+</div>
+
+@using (Html.BeginForm("Index", "DotHiemMau", FormMethod.Get))
+{
+    @*Tìm Kiếm *@
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">Tìm kiếm</h5>
+            <form class="">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
+                            <label for="exampleCity" class="">Nội dung</label>
+                            <input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label class="control-label" for="datepicker">Thời gian</label>
+                            <input type="date" value="@ViewBag.SearchString2" name="searchString2" id="datepicker" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="mt-2 btn btn-primary">
+                        <i class="fa fa-search"></i> Tìm kiếm
+                    </button>
+
+                    <button class="mb-2  btn btn-outline-danger" style="margin-top:18px"><i class="fa fa-times-circle"></i> Huỷ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+    @*Thêm đợt*@
+    <ul></ul>
+    <div class="app-header-left">
+        <ul class="header-menu nav">
+            <li class="btn btn-success">
+                <a href="@Url.Action("CreateDHM", "DotHiemMau")" style="color:white">
+                    <i class="nav-link-icon fa fa-edit">   Thêm đợt hiến máu</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <ul></ul>
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <table class="mb-0 table table-hover table table-bordered">
+                <tr>
+                    <th>
+                        STT
+                    </th>
+                    <th>
+                        ID đợt
+                    </th>
+                    <th>
+                        Tên đợt
+                    </th>
+                    <th>
+                        Nội dung
+                    </th>
+                    <th>
+                        Ngày bắt đầu
+                    </th>
+                    <th>
+                        Ngày kết thúc
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                    <th>
+                        Chức năng
+                    </th>
+                </tr>
+                @{ var i = 1;}
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @item.IdDHM
+                        </td>
+                        <td>
+                            @item.TenDHM
+                        </td>
+                        <td>
+                            @item.noiDung
+                        </td>
+                        <td>
+                            @item.tgBatDau
+                        </td>
+                        <td>
+                            @item.tgKetThuc
+                        </td>
+                        <td>
+                            <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                @(item.trangThai == true ? "Active" : "Blocked")
+                            </button>
+                        </td>
+                        <td>
+                            @Html.ActionLink("Chỉnh sửa", "EditDHM", new { id = item.IdDHM }) |
+                            @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDHM }) |
+                            @Html.ActionLink("Xóa", "DeleteDHM", new { id = item.IdDHM })
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </table>
+            <ul></ul>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+        </div>
+    </div>

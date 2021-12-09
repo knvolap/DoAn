@@ -9,6 +9,11 @@ namespace Models.EF
     [Table("Quyen")]
     public partial class Quyen
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Quyen()
+        {
+            TaiKhoans = new HashSet<TaiKhoan>();
+        }
         [Key]
         [StringLength(20)]
         public string IdQuyen { get; set; }
@@ -16,5 +21,8 @@ namespace Models.EF
         [Required]
         [StringLength(50)]
         public string tenQuyen { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
     }
 }

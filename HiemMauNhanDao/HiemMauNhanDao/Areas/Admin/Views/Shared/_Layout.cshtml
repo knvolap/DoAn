@@ -3,7 +3,6 @@
 @{
     Layout = null;
 }
-
 <!doctype html>
 <html lang="en">
 
@@ -20,9 +19,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/Assets/Admin/css/main.css" rel="stylesheet">
+    <link href="~/FileUpLoad">
     <link rel="icon" href="~/Assets/Login/img/favoicon.png">
 </head>
 <body>
+
+
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -65,7 +67,7 @@
                         </div>
                         <button class="close"></button>
                     </div>
-                 
+
                 </div>
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
@@ -82,7 +84,7 @@
                                             <button type="button" tabindex="0" class="dropdown-item">Settings</button>
                                             <div tabindex="-1" class="dropdown-divider"></div>
                                             <button type="button" tabindex="0" class="dropdown-item">
-                                                @Html.ActionLink("LogOut", "Logout", "Login")
+                                                @Html.ActionLink("Đăng xuất", "Logout", "Login")
                                             </button>
                                         </div>
                                     </div>
@@ -90,33 +92,38 @@
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
                                         @{
-                                            var session = (LoginModel)Session[CommonConstant.USER_SESSION];
-                                            var result = "Your Name";
-                                            if (session != null)
-                                            {
-                                                @session.UserName;
-                                            }
-                                            else
-                                            {
-                                                @result;
-                                            }
+                                            var session3 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+                                        }
+                                        @if (session3 != null)
+                                        {
+                                            @session3.Accounts
+                                        }
+                                        else
+                                        {
+                                            <a class="nav-icon position-relative text-decoration-none" href="@Url.Action("Index","Login")">
+                                                <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                                                <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                                            </a>
                                         }
                                     </div>
                                     @*chua hien thi dc ten chuc nang admin*@
                                     <div class="widget-subheading">
-                                        @{
-                                            var session2 = (LoginModel)Session[CommonConstant.USER_SESSION];
-                                            var result2 = "No Function";
-                                            if (session != null)
-                                            {
-                                                @session.UserName;
-                                            }
-                                            else
-                                            {
-                                                @result2;
-                                            }
-                                        }
+                                        @*@{
+                                                var session2 = (LoginModel)Session[CommonConstant.USER_SESSION];
+                                                var result2 = "No Function";
+                                                if (session != null)
+                                                {
+                                                    @session.UserName;
+                                                }
+                                                else
+                                                {
+                                                    @result2;
+                                                }
+                                            }*@
                                     </div>
+                                </div>
+                                <div>
+
                                 </div>
 
                                 <div class="widget-content-right header-user-info ml-3">
@@ -463,6 +470,8 @@
     @RenderSection("ClientScript", false)
 
 
-    @*<script src="~/Assets/Admin/scripts/userController.js"></script>*@
+
+
+    <script src="~/Assets/Admin/scripts/userController.js"></script>
 </body>
 </html>

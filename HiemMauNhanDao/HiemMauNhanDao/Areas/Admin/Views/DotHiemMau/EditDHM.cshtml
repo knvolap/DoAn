@@ -1,0 +1,82 @@
+﻿@model Models.EF.DotHienMau
+
+@{
+    ViewBag.Title = "EditDHM";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cập nhật    </h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IdDHM)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenDHM, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenDHM, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenDHM, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.noiDung, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.noiDung, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.noiDung, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">  
+        <div class="col-md-10">
+            <label for="datepicker" class="">Thời gian bắt đầu</label>
+            @Html.EditorFor(model => model.tgBatDau, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.tgBatDau, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="datepicker" class="">Thời gian kết thúc</label>
+            @Html.EditorFor(model => model.tgKetThuc, new { htmlAttributes = new { @class = "form-control", type = "date", id = "datepicker" } })
+            @Html.ValidationMessageFor(model => model.tgKetThuc, "", new { @class = "text-danger",@id = "Date", @type = "date"
+                                                                            , @value = DateTime.Now.ToShortDateString() })
+         
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tgKetThuc, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <label for="datepicker" class="">Thời gian</label>
+            <input type="date" value="@ViewBag.SearchString2" name="SearchString2" id="datepicker" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.trangThai, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.trangThai, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.trangThai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+
+            <button class="mt-2 btn btn-primary"> <i class="fa fa-save" type="submit"></i> Lưu</button>
+        </div>
+    </div>
+ 
+</div>
+}
+
+<div>
+    @Html.ActionLink("Về trang trước", "Index")
+</div>

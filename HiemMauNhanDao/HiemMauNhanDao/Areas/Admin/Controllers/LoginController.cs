@@ -1,5 +1,4 @@
 ﻿using HiemMauNhanDao.Common;
-using HiemMauNhanDao.Extensions;
 using HiemMauNhanDao.Models;
 using Models;
 using Models.DAO;
@@ -22,10 +21,11 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         //Đăng nhập
-        public ActionResult Login(LoginModel model)
+        public ActionResult Index(LoginModel model)
         {
             if (ModelState.IsValid)
             {
@@ -37,18 +37,15 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
                 else if (model.UserPassword == null)
                 {
                     ModelState.AddModelError("", "Vui lòng không bỏ trống Mật khẩu!");
-                }
+                }     
                 else
-                {
+                { 
                     var result = dao.Login(model.UserName, Encryptor.MD5Hash(model.UserPassword));
                     if (result == 1)
                     {
                         var user = dao.GetById(model.UserName);
-                        userSession.Accounts = user.userName;
                         userSession.AuthorID = user.idQuyen;
-                        //userSession.UserType = user.trangThai;
-                        //userSession.Name = user.ThongTinCaNhans;                       
-
+                        userSession.Accounts = user.userName;
                         Session.Add(CommonConstant.USER_SESSION, userSession);
                         return RedirectToAction("Index", "Home");
                     }
@@ -64,7 +61,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             Session[CommonConstant.USER_SESSION] = null;
-            return Redirect("/");
+            return RedirectToAction("Index", "Login");
         }
     }
    

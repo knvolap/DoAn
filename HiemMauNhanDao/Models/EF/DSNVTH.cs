@@ -9,13 +9,15 @@ namespace Models.EF
     [Table("DSNVTH")]
     public partial class DSNVTH
     {
+        [Key]
         [StringLength(20)]
         public string idDTCHM { get; set; }
 
-        [Key]
+        
         [StringLength(20)]
         public string idNVYT { get; set; }
 
         public virtual NhanVienYTe NhanVienYTe { get; set; }
+        public virtual DotToChucHM DotToChucHM { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace Models.DAO
         //Đăng nhập
         public int Login(string UserName, string PassWord)
         {
+           // var Session= db.Quyens.SingleOrDefault(x => x.IdQuyen == id);
             var result = db.TaiKhoans.SingleOrDefault(x => x.userName == UserName);
             if (result == null)
             {
@@ -30,7 +31,6 @@ namespace Models.DAO
                 {
 
                     return 1;
-
                 }
                 else
                     return 0;
@@ -40,6 +40,10 @@ namespace Models.DAO
         public TaiKhoan GetById(string UserName)
         {
             return db.TaiKhoans.SingleOrDefault(x => x.userName == UserName);
+        }
+        public Quyen GetByIdQuyen(string id)
+        {
+            return db.Quyens.SingleOrDefault(x => x.IdQuyen == id);
         }
     }
 }

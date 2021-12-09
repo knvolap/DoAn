@@ -9,6 +9,11 @@ namespace Models.EF
     [Table("ChucVu")]
     public partial class ChucVu
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public ChucVu()
+        {
+            NhanVienYTes = new HashSet<NhanVienYTe>();
+        }
         [Key]
         [StringLength(20)]
         public string IdChucVu { get; set; }
@@ -20,5 +25,11 @@ namespace Models.EF
         [Required]
         [StringLength(50)]
         public string TenChucVu { get; set; }
+
+
+        public virtual BenhVien BenhVien { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanVienYTe> NhanVienYTes { get; set; }
     }
 }

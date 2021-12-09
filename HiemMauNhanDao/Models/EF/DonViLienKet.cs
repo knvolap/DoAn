@@ -42,8 +42,7 @@ namespace Models.EF
         [Required]
         public byte[] minhChung { get; set; }
 
-        [StringLength(50)]
-        public string trangThai { get; set; }
+        public bool? trangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }

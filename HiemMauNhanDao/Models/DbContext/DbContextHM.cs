@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
@@ -7,8 +7,7 @@ namespace Models.EF
 {
     public partial class DbContextHM : DbContext
     {
-        public DbContextHM()
-            : base("name=DbContextHM")
+        public DbContextHM() : base("name=DbContextHM")
         {
         }
 
@@ -28,6 +27,7 @@ namespace Models.EF
         public virtual DbSet<ChiTietPhanCong> ChiTietPhanCongs { get; set; }
         public virtual DbSet<DSNVTH> DSNVTHs { get; set; }
         public virtual DbSet<LichSuHienMau> LichSuHienMaus { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -88,6 +88,12 @@ namespace Models.EF
                 .WithRequired(e => e.DotHienMau)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<DotHienMau>()
+                .HasMany(e => e.DotToChucHMs)
+                .WithRequired(e => e.DotHienMau)
+                .WillCascadeOnDelete(false);
+
+
             modelBuilder.Entity<DotToChucHM>()
                 .Property(e => e.IdDTCHM)
                 .IsUnicode(false);
@@ -95,6 +101,11 @@ namespace Models.EF
             modelBuilder.Entity<DotToChucHM>()
                 .Property(e => e.idDHM)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<DotToChucHM>()
+              .HasMany(e => e.PhieuDKHMs)
+              .WithRequired(e => e.DotToChucHM)
+              .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<KetQuaHienMau>()
                 .Property(e => e.IdKQHM)
@@ -137,10 +148,6 @@ namespace Models.EF
                 .HasMany(e => e.chiTietDHMs)
                 .WithRequired(e => e.NhanVienYTe)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<NhanVienYTe>()
-                .HasOptional(e => e.DSNVTH)
-                .WithRequired(e => e.NhanVienYTe);
 
             modelBuilder.Entity<PhieuDKHM>()
                 .Property(e => e.idDTCHM)
@@ -200,6 +207,11 @@ namespace Models.EF
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.idTTCN)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinCaNhan>()
+              .HasMany(e => e.PhieuDKHMs)
+              .WithRequired(e => e.ThongTinCaNhan)
+              .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.idTK)
@@ -263,5 +275,23 @@ namespace Models.EF
                 .Property(e => e.idKQHM)
                 .IsUnicode(false);
         }
+
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+
+        //    // Configure relationships  
+        //    //liên kết 1 vs N
+        //    //modelBuilder.Entity<TaiKhoan>().HasOne(b => b.Quyens).WithMany(b => b.TaiKhoans).HasForeignKey(p => p.idQuyen).OnDelete(DeleteBehavior.NoAction);
+        //    //modelBuilder.Entity<Room>().HasOne(b => b.Floors).WithMany(b => b.Rooms).HasForeignKey(p => p.floorId).OnDelete(DeleteBehavior.NoAction);
+        //    //modelBuilder.Entity<BookRoom>().HasOne(b => b.Users).WithMany(b => b.BookRooms).HasForeignKey(p => p.personBookingId).OnDelete(DeleteBehavior.NoAction);
+        //    //modelBuilder.Entity<User>().HasOne(b => b.Roles).WithMany(b => b.Users).HasForeignKey(p => p.roleId).OnDelete(DeleteBehavior.NoAction);
+
+        //    //liên kết  N vs 1
+        //    //modelBuilder.Entity<Room>().HasMany<BookRoom>(s => s.BookRooms)
+        //    //        .WithOne(ad => ad.Rooms).HasForeignKey(ad => ad.roomId);
+        //    //Data seeding -- nhập dữ liệu có sẵn ở file "ModelBuilderExtensions"
+        //    //modelBuilder.Seed();
+        //}
     }
 }

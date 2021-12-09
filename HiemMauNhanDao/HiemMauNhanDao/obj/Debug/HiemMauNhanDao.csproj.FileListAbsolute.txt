@@ -55,7 +55,10 @@ D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\EntityFramework.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\EntityFramework.SqlServer.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Microsoft.Web.Infrastructure.dll
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Models.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Newtonsoft.Json.dll
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\PagedList.dll
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\PagedList.Mvc.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Helpers.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Mvc.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Optimization.dll
@@ -64,10 +67,14 @@ D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Webpages.Deployment.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Webpages.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Webpages.Razor.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\WebGrease.dll
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Models.pdb
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Models.dll.config
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Antlr3.Runtime.pdb
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\EntityFramework.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\EntityFramework.SqlServer.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Newtonsoft.Json.xml
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\PagedList.xml
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\PagedList.Mvc.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Optimization.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Razor.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Webpages.xml
@@ -81,10 +88,3 @@ D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HiemMauNhanDao.csproj.CoreCompil
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HiemMauNhanDao.csproj.CopyComplete
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HiemMauNhanDao.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HiemMauNhanDao.pdb
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Models.dll
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Models.pdb
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Models.dll.config
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\PagedList.dll
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\PagedList.Mvc.dll
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\PagedList.xml
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\PagedList.Mvc.xml

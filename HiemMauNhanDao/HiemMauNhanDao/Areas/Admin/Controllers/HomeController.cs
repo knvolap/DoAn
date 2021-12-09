@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HiemMauNhanDao.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +14,14 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         {
             return View();
         }
+
+        //Đăng xuất   
+        public ActionResult Logout()
+        {
+            Session[CommonConstant.USER_SESSION] = null;
+            return RedirectToAction("Index", "Login");
+        }
     }
+
+
 }

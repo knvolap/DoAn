@@ -9,6 +9,12 @@ namespace Models.EF
     [Table("ThongTinCaNhan")]
     public partial class ThongTinCaNhan
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+
+        public ThongTinCaNhan()
+        {
+            PhieuDKHMs = new HashSet<PhieuDKHM>();
+        }
         [Key]
         [StringLength(20)]
         public string idTTCN { get; set; }
@@ -54,9 +60,11 @@ namespace Models.EF
         [StringLength(2)]
         public string nhomMau { get; set; }
 
-        [StringLength(50)]
-        public string trangThai { get; set; }
+        public bool? trangThai { get; set; }
 
         public virtual TaiKhoan TaiKhoan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<PhieuDKHM> PhieuDKHMs { get; set; }
     }
 }

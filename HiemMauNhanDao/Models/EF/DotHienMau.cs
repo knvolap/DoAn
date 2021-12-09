@@ -14,6 +14,7 @@ namespace Models.EF
         {
             chiTietDHMs = new HashSet<chiTietDHM>();
             PhieuYCNMs = new HashSet<PhieuYCNM>();
+            DotToChucHMs = new HashSet<DotToChucHM>();
         }
 
         [Key]
@@ -28,14 +29,22 @@ namespace Models.EF
         [StringLength(150)]
         public string noiDung { get; set; }
 
+
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime tgBatDau { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime tgKetThuc { get; set; }
 
-        [StringLength(50)]
-        public string trangThai { get; set; }
+        [Required]
+        public bool? trangThai { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DotToChucHM> DotToChucHMs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }

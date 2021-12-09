@@ -10,6 +10,7 @@ namespace Models.EF
     public partial class TaiKhoan
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+
         public TaiKhoan()
         {
             DonViLienKets = new HashSet<DonViLienKet>();
@@ -33,14 +34,14 @@ namespace Models.EF
         [StringLength(30)]
         public string password { get; set; }
 
-
         public bool? trangThai { get; set; }
+
+        public virtual Quyen Quyen { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonViLienKet> DonViLienKets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThongTinCaNhan> ThongTinCaNhans { get; set; }
-
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhanVienYTe> NhanVienYTes { get; set; }

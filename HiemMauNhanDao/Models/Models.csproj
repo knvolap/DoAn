@@ -60,11 +60,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\UserDao.cs" />
+    <Compile Include="Data\ModelBuilderExtensions.cs" />
     <Compile Include="EF\BenhVien.cs" />
     <Compile Include="EF\chiTietDHM.cs" />
     <Compile Include="EF\ChiTietPhanCong.cs" />
     <Compile Include="EF\ChucVu.cs" />
-    <Compile Include="EF\DbContextHM.cs" />
+    <Compile Include="DbContext\DbContextHM.cs" />
     <Compile Include="EF\DonViLienKet.cs" />
     <Compile Include="EF\DotHienMau.cs" />
     <Compile Include="EF\DotToChucHM.cs" />
@@ -78,6 +79,10 @@
     <Compile Include="EF\TaiKhoan.cs" />
     <Compile Include="EF\ThongTinCaNhan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BenhVienServices.cs" />
+    <Compile Include="Services\DKDHMServices.cs" />
+    <Compile Include="Services\DotHiemMauServices.cs" />
+    <Compile Include="ViewModel\DotHiemMauView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -89,6 +94,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

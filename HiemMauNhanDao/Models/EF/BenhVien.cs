@@ -9,6 +9,11 @@ namespace Models.EF
     [Table("BenhVien")]
     public partial class BenhVien
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BenhVien()
+        {
+            ChucVus = new HashSet<ChucVu>();
+        }
         [Key]
         [StringLength(20)]
         public string IdBenhVien { get; set; }
@@ -29,12 +34,18 @@ namespace Models.EF
         [StringLength(10)]
         public string soDTBV { get; set; }
 
-        [Column(TypeName = "image")]
-        [Required]
-        public byte[] minhChung { get; set; }
-
+       
         [Required]
         [StringLength(50)]
-        public string trangThai { get; set; }
+        public string minhChung { get; set; }
+
+        [Required]
+
+        public bool? trangThai { get; set; }
+
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChucVu> ChucVus { get; set; }
     }
 }

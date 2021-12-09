@@ -13,12 +13,10 @@ namespace Models.EF
         [Column(Order = 0)]
         [StringLength(20)]
         public string idDHM { get; set; }
-
         [Key]
         [Column(Order = 1)]
         [StringLength(20)]
         public string idDVLK { get; set; }
-
         [Key]
         [Column(Order = 2)]
         [StringLength(20)]

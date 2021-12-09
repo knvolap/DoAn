@@ -16,7 +16,9 @@ namespace Models.EF
         }
 
         [Key]
-        public int idPDKHM { get; set; }
+        [StringLength(20)]
+        public string idPDKHM { get; set; }
+
 
         [Required]
         [StringLength(20)]
@@ -62,6 +64,9 @@ namespace Models.EF
         public bool dTTT { get; set; }
 
         public bool dangMangThai { get; set; }
+
+        public virtual DotToChucHM DotToChucHM { get; set; }
+        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KetQuaHienMau> KetQuaHienMaus { get; set; }
