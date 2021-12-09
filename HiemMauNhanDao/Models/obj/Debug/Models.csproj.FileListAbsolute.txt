@@ -13,3 +13,4 @@ D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csproj.CopyComplete
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.dll
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.pdb
+D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csprojAssemblyReference.cache

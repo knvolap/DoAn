@@ -53,6 +53,14 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("", "Email hoặc mật khẩu không chính xác!");
                     }
+                    else if (result == -1)
+                    {
+                        ModelState.AddModelError("", "Tài khoản bị khoá!");
+                    }
+                    else if (result == -2)
+                    {
+                        ModelState.AddModelError("", "Không có quyền truy cập!");
+                    }
                 }
             }
             return View("Index");

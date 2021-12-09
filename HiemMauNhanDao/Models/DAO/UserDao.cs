@@ -20,6 +20,11 @@ namespace Models.DAO
         public int Login(string UserName, string PassWord)
         {
            // var Session= db.Quyens.SingleOrDefault(x => x.IdQuyen == id);
+
+            // return 0: Tài khoản hoặc mật khẩu không chính xác
+            // return 1: đăng nhập thành cônh
+            //return -1: tài khoản bị khoá
+            //retunrn -2: Không có quyền truy cập
             var result = db.TaiKhoans.SingleOrDefault(x => x.userName == UserName);
             if (result == null)
             {
@@ -27,13 +32,24 @@ namespace Models.DAO
             }
             else
             {
-                if (result.password == PassWord)
+                if(result.idQuyen.Contains("Q01") || result.idQuyen.Contains("Q02"))
                 {
+                    if (result.trangThai == false) { return -1; }
+                    else
+                    {
+                        if (result.password == PassWord)
+                        {
 
-                    return 1;
+                            return 1;
+                        }
+                        else
+                            return 0;
+                    }
                 }
                 else
-                    return 0;
+                {
+                    return -2;
+                }
             }
         }
 
