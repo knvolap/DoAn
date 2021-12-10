@@ -55,7 +55,7 @@
                                     <a class="nav-link" href="donViLienKet.html">Đơn vị liên kết</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="lienHe.html">Liên hệ</a>
+                                    <a class="nav-link" href="/Client/NguoiDung/Index">Liên hệ</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="dangKy.html" id="navbarDropdown_1"
@@ -70,8 +70,6 @@
                                     </li>
                             </ul>
                         </div>
-
-
 
                         @{
                             var session5 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
@@ -89,7 +87,7 @@
                                         Xin chào: @session5.Accounts
                                     </h5>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <h6 class="dropdown-item" href="/Client/LoginClient/Index">Cá nhân</h6>
+                                        <h6 class="dropdown-item"> <a href="/Client/NguoiDung/Index"> Cá nhân</a></h6>
                                         <h6 style="margin-left:20px"> @Html.ActionLink("Đăng xuất", "Logout", "LoginClient")</h6>
                                     </div>
                                 </li>

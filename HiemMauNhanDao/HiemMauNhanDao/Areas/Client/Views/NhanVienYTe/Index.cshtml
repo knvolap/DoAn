@@ -1,0 +1,311 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Cập nhật kết quả </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!--================Blog Area =================-->
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Cá nhân</h4>
+                        <ul class="list cat-list">
+                            <li>
+                                <a href="#" class="d-flex">
+                                    <p>Cập nhật thông tin</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex">
+                                    <p>Xem lịch sử</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex">
+                                    <p>Xem tình trạng sức khỏe</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex">
+                                    <p>Đổi mật khẩu</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                    <aside class="single_sidebar_widget newsletter_widget">
+                        <h4 class="widget_title">Newsletter</h4>
+
+                        <form action="#">
+                            <div class="form-group">
+                                <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                            </div>
+                            <button class="button rounded-0 primary-bg text-white w-100 btn_1"
+                                    type="submit">
+                                Subscribe
+                            </button>
+                        </form>
+                    </aside>
+                </div>
+            </div>
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="col-lg-12 col-md-8">
+                    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+                        <li class="nav-item">
+                            <a role="tab" class="genric-btn info-border radius" id="tab-0" data-toggle="tab"
+                               href="#tab-content-0">
+                                <h3>Khám lâm sàng</h3>
+                            </a>
+                        </li>
+                        <li class="nav-item"  style="margin-left:20px; margin-right:20px">
+                            <a role="tab" class="genric-btn info-border radius" data-toggle="tab" href="#tab-content-1">
+                                <h3>Xét nghiệm trước HM</h3>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a role="tab" class="genric-btn info-border radius" id="tab-2" data-toggle="tab" href="#tab-content-2">
+                                <h3>Lấy máu</h3>
+                            </a>
+                        </li>
+                    </ul>
+                   
+                    <hr>
+
+                    <div class="tab-content">
+                        <!--================tab1 =================-->
+                        <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                            <form action="#">
+                                <table class="mt-10">
+                                    <th style="width:400px">
+                                        <div>
+                                            <input type="text" name="first_name" placeholder="Cân nặng (kg)"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Cân nặng'" required
+                                                   class="single-input">
+                                        </div>
+                                    </th>
+                                    <th class="col-lg-6">
+                                        <div>
+                                            <input type="text" name="last_name" placeholder="Mạch máu (lần / phút)"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mạch '" required
+                                                   class="single-input">
+                                        </div>
+                                    </th>
+                                </table>
+                                <table class="mt-10">
+                                    <th style="width:400px">
+                                        <div>
+                                            <input type="text" name="first_name" placeholder="Huyết áp (mm/Hg)"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Huyết áp'"
+                                                   required class="single-input">
+                                        </div>
+                                    </th>
+                                    <th class="col-lg-6">
+                                        <div>
+                                            <input type="text" name="first_name" placeholder="Tình trạng lâm sàn"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tình trạng lâm sàn'"
+                                                   required class="single-input">
+                                        </div>
+                                    </th>
+                                </table>
+                                <table class="mt-10">
+                                    <th class="col-lg-4">
+                                        <div class="switch-wrap d-flex justify-content-between">
+                                            <p>Hiến máu</p>
+                                            <div class="primary-checkbox" style="margin-top:5px ;">
+                                                <input type="checkbox" id="primary-checkbox" checked="">
+                                                <label for="primary-checkbox"></label>
+                                            </div>
+                                        </div>
+
+                                    </th>
+                                    <th style="width:400px">
+                                        <div>
+
+                                        </div>
+                                    </th>
+
+                                </table>
+                                <div class="form-group">
+                                    <label class="col-md-3 ">
+                                        <p>Thể tích (ml)</p>
+                                    </label>
+                                    <label class="col-lg-2">
+
+                                        <div>
+                                            <input class="primary-radio" type="radio" name="r27"> 250
+                                        </div>
+
+                                    </label>
+                                    <label class="col-md-2">
+                                        <div>
+                                            <input class="primary-radio" type="radio" name="r27"> 350
+                                        </div>
+
+                                    </label>
+                                    <label class="col-md-2">
+                                        <div>
+                                            <input class="primary-radio" type="radio" name="r27"> 450
+                                        </div>
+
+                                    </label>
+                                </div>
+
+                                <table class="mt-10">
+                                    <th style="width:400px">
+                                        <div>
+                                            <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                            <div class="form-select" id="default-select_1">
+                                                <select>
+                                                    <option value="">Người khám  </option>
+                                                    <option>Võ Lập</option>
+                                                    <option>Quang Nhã</option>
+                                                    <option>Ngọc Huy</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                            </div>
+                                    </th>
+                                    <th class="col-lg-6">
+                                        <input type="date" name="last_name" placeholder="ngaySinh"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' Ngày sinh'" required
+                                               class="single-input" for="datepicker">
+                                    </th>
+                                </table>
+                            </form>
+                            <div class="text-center " style="margin-top: 20px;">
+                                <a class="btn_2 " href="#">Cập nhật</a>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel">
+                            <form action="#">
+                                <div class="mt-10">
+                                    <input type="text" name="first_name" placeholder="HTS"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'"
+                                           required class="single-input">
+                                </div>
+                                <div class="mt-10">
+                                    <input type="text" name="last_name" placeholder="HBV"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại '"
+                                           required class="single-input">
+                                </div>
+                                <table class="mt-10">
+                                    <th>
+                                        <div>
+                                            <div class="icon">
+                                                <i class="fa fa-plane" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="form-select" id="default-select_1">
+                                                <select>
+                                                    <option value=" 1">Người xét nghiệm</option>
+                                                    <option value="1">Nam</option>
+                                                    <option value="1">Nữ</option>
+                                                    <option value="1">Khác</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </table>
+                            </form>
+                            <div class="text-center " style="margin-top: 20px;">
+                                <a class="btn_2 " href="#">Cập nhật</a>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
+                            <form action="#">
+                                <table class="mt-10">
+                                    <th style="width:400px">
+                                        <input type="text" name="first_name" placeholder="MSD"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'"
+                                               required class="single-input">
+                                    </th>
+                                    <th class="col-lg-6">
+                                        <input type="date" name="last_name" placeholder="Thời gian lấy máu"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' Ngày sinh'" required
+                                               class="single-input" for="datepicker">
+                                    </th>
+                                </table>
+                                <div class="mt-10">
+                                    <div class="form-group">
+                                        <label class="col-md-4 ">
+                                            <p>Lượng máu hiến (ml)</p>
+                                        </label>
+                                        <label class="col-lg-2">
+
+                                            <div>
+                                                <input class="primary-radio" type="radio" name="r30"> 250
+                                            </div>
+
+                                        </label>
+                                        <label class="col-md-2">
+                                            <div>
+                                                <input class="primary-radio" type="radio" name="r30"> 350
+                                            </div>
+
+                                        </label>
+                                        <label class="col-md-2">
+                                            <div>
+                                                <input class="primary-radio" type="radio" name="r30"> 450
+                                            </div>
+
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-10">
+                                    <input type="text" name="first_name" placeholder="Phản ứng"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'" required
+                                           class="single-input">
+                                </div>
+                                <div class="mt-10">
+                                    <input type="text" name="last_name" placeholder="Xử trí"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại '" required
+                                           class="single-input">
+                                </div>
+                                <table class="mt-10">
+                                    <th>
+                                        <div>
+                                            <div class="icon">
+                                                <i class="fa fa-plane" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="form-select" id="default-select_1">
+                                                <select>
+                                                    <option value=" 1">Người lấy máu</option>
+                                                    <option value="1">Nam</option>
+                                                    <option value="1">Nữ</option>
+                                                    <option value="1">Khác</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </table>
+                            </form>
+                            <div class="text-center " style="margin-top: 20px;">
+                                <a class="btn_2 " href="#">Cập nhật</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

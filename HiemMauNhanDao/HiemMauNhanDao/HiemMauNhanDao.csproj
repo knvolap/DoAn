@@ -384,6 +384,9 @@
     <Content Include="Areas\Client\Views\DotHienMauClient\DangKyHiemMau.cshtml" />
     <Content Include="Areas\Client\Views\DotHienMauClient\ChiTietDKHM.cshtml" />
     <Content Include="Areas\Client\Views\NguoiDung\Index.cshtml" />
+    <Content Include="Areas\Client\Views\NguoiDung\_leftMenu1.cshtml" />
+    <Content Include="Areas\Client\Views\NhanVienYTe\Index.cshtml" />
+    <Content Include="Areas\Client\Views\NhanVienYTe\EditKQHM.cshtml" />
     <None Include="Scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.0.js" />
     <Content Include="Scripts\jquery-1.8.0.min.js" />
@@ -413,6 +416,7 @@
     <Compile Include="Areas\Client\Controllers\HomeController.cs" />
     <Compile Include="Areas\Client\Controllers\LoginClientController.cs" />
     <Compile Include="Areas\Client\Controllers\NguoiDungController.cs" />
+    <Compile Include="Areas\Client\Controllers\NhanVienYTeController.cs" />
     <Compile Include="Common\CommonConstant.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
