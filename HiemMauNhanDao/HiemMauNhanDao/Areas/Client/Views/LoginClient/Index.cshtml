@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HiemMauNhanDao.Models.LoginModel
+@{
     ViewBag.Title = "Login";
     Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
 }
@@ -34,12 +35,12 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                              
-                          
+
+
                             </div>
                         </div>
                         <div class="regerv_btn">
-                                
+
                         </div>
                     </form>
                 </div>
@@ -54,31 +55,35 @@
                 <div class="depertment_content">
                     <div class="row justify-content-center">
                         <div class="col-xl-8 m-auto">
-                           
-                            <div class="col-8  m-auto">
-                                <h2 class="text-center">Đăng nhập</h2>
-                                <form>
-                                    <div class="form-group">
-                                        <h4>Tài khoản</h4>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="nhập email của bạn">
+                            @using (Html.BeginForm("Index", "LoginClient", FormMethod.Post))
+                            {
+                                <div class="col-8  m-auto">
+                                    @Html.AntiForgeryToken()
+                                    <h2 class="text-center">Đăng nhập</h2>
+                                    <form>
+                                        <div class="form-group">
+                                            <h4>Tài khoản</h4>
+                                            @*<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="nhập email của bạn">*@
+                                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "nhập email của bạn", @autofocus = "autofocus", type = "email" })
+                                        </div>
+                                        <div class="form-group">
+                                            <h4>Mật khẩu</h4>
+                                           @* <input type="password" class="form-control" id="exampleInputPassword1" placeholder=" nhập mật khẩu">*@
+                                            @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control", @placeholder = "mật khẩu", type = "password" })
+                                        </div>
+                                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">Lưu mật khẩu</label>
+                                            <a href="#">Quên mật khẩu</a>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top:20px">Đăng nhập</button>
+                                        </div>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <h4>Mật khẩu</h4> 
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder=" nhập mật khẩu">
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Lưu mật khẩu</label>
-                                        <a href="#">Quên mật khẩu</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top:20px">Đăng nhập</button>
-                                    </div>
-
-                                </form>
-                            </div>
-
+                                    </form>
+                                </div>
+                            }
                         </div>
                     </div>
 

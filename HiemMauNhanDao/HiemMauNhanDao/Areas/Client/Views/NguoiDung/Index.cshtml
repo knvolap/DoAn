@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Thông tin cá nhân</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!--================Blog Area =================-->
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Cá nhân</h4>
+                        <ul class="list cat-list">
+                            <li>
+                                <a href="#" class="d-flex">
+                                    <p>Cập nhật thông tin</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex">
+                                    <p>Xem lịch sử</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex">
+                                    <p>Xem tình trạng sức khỏe</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex">
+                                    <p>Đổi mật khẩu</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+
+                </div>
+            </div>
+
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <div class="section-top-border">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-8">
+                                <h3 class="mb-30">Vui lòng điền đầy đủ thông tin</h3>
+                                <form action="#">
+                                    <div class="mt-10">
+                                        <input type="text" name="first_name" placeholder="Họ và tên"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'" required
+                                               class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <input type="text" name="last_name" placeholder="Số điện thoại"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại '" required
+                                               class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <input type="email" name="EMAIL" placeholder="Email address"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email '" required
+                                               class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <input type="text" name="last_name" placeholder="CMND / CCCD"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' CMND / CCCD'" required
+                                               class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <input type="date" name="last_name" placeholder="CMND / CCCD"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' Ngày sinh'" required
+                                               class="single-input" for="datepicker">
+                                    </div>
+
+                                    <table class="mt-10">
+                                        <th>
+                                            <div>
+                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                <div class="form-select" id="default-select_1">
+                                                    <select>
+                                                        <option value=" 1">Giới tính</option>
+                                                        <option value="1">Nam</option>
+                                                        <option value="1">Nữ</option>
+                                                        <option value="1">Khác</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </th>
+
+                                        <th class="col-lg-4">
+                                            <div>
+                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                <div class="form-select" id="default-select_1">
+                                                    <select>
+                                                        <option value=" 1">Nhóm máu</option>
+                                                        <option value="1">Chưa biết</option>
+                                                        <option value="1">A</option>
+                                                        <option value="1">B</option>
+                                                        <option value="1">AB</option>
+                                                        <option value="1">0</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th class="col-lg-8">
+
+                                            @*<label class="fa fa-plane">Ngày sinh:</label>*@
+                                            <input type="date" name="last_name" placeholder="CMND / CCCD"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = ' Ngày sinh'" required
+                                                   class="single-input" for="datepicker">
+                                        </th>
+                                    </table>
+
+                                    <div class="mt-10">
+                                        <input type="email" name="EMAIL" placeholder=" Địa chỉ"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' Địa chỉ'" required
+                                               class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <input type="email" name="EMAIL" placeholder="Nghề nghiệp"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nghề nghiệp'" required
+                                               class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <input type="email" name="EMAIL" placeholder="Trường học / Cơ quan"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Trường học / Cơ quan'" required
+                                               class="single-input">
+                                    </div>
+
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
+                                        <input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = 'Address'" required class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <textarea class="single-textarea" placeholder="Ghi chú khác" onfocus="this.placeholder = ''"
+                                                  onblur="this.placeholder = 'Message'" required></textarea>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="text-center " style="margin-top:20px">
+                            <a class="genric-btn primary-border radius" href="#">Cập nhật</a>
+                        </div>
+                    </div>
+                 
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+@*<div class="input-group-icon mt-10">
+    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+    <div class="form-select" id="default-select_1">
+        <select>
+            <option value=" 1">Nhóm máu</option>
+            <option value="1">Chưa biết</option>
+            <option value="1">A</option>
+            <option value="1">B</option>
+            <option value="1">AB</option>
+            <option value="1">0</option>
+        </select>
+    </div>
+</div>*@

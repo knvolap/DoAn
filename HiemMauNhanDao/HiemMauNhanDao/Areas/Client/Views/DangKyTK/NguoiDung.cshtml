@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "NguoiDung";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Đăng ký thành viên</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Đăng ký</h4>
+                        <ul class="list cat-list">
+                            <li>
+                                <a href="/Client/DangKyTK/NguoiDung" class="d-flex">
+                                    <p>Thành viên</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Client/DangKyTK/DonVi" class="d-flex">
+                                    <p>Đơn vị liên kết</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Client/DangKyTK/BenhVien" class="d-flex">
+                                    <p>Bệnh viện</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+
+
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <div class="section-top-border">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-8">
+                                <h3 class="mb-30">Vui lòng điền đầy đủ thông tin</h3>
+                                <form action="#">
+                                    <div class="mt-10">
+                                        <input type="text" name="first_name" placeholder="Họ và tên"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'" required
+                                               class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <input type="text" name="last_name" placeholder="Số điện thoại"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại'" required
+                                               class="single-input">
+                                    </div>
+                                    <div class="mt-10">
+                                        <input type="email" name="EMAIL" placeholder="Email "
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tài khoản '" required
+                                               class="single-input">
+                                    </div>
+
+                                    <div class="mt-10">
+                                        <input type="password" name="last_name" placeholder="Mật khẩu"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'" required
+                                               class="single-input" id="inputPassword5">
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="text-center ">
+                        <a class="genric-btn info radius" href="#">Đăng ký</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

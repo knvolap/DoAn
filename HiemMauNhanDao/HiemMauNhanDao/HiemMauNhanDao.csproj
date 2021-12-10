@@ -186,7 +186,10 @@
     <Content Include="Assets\client\img\doctor\doctor_4.png" />
     <Content Include="Assets\client\img\doctor\huy.jpg" />
     <Content Include="Assets\client\img\doctor\lap.jpg" />
+    <Content Include="Assets\client\img\doctor\lap2.jpg" />
     <Content Include="Assets\client\img\doctor\nhan.jpg" />
+    <Content Include="Assets\client\img\doctor\nhan2.jpg" />
+    <Content Include="Assets\client\img\doctor\ro2.jpg" />
     <Content Include="Assets\client\img\doctor\ronaldo.jpg" />
     <Content Include="Assets\client\img\elements\a.jpg" />
     <Content Include="Assets\client\img\elements\a2.jpg" />
@@ -373,6 +376,14 @@
     <Content Include="Areas\Admin\Views\DKDHM\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
     <Content Include="Areas\Client\Views\LoginClient\Index.cshtml" />
+    <Content Include="Areas\Client\Views\DotHienMauClient\Index.cshtml" />
+    <Content Include="Areas\Client\Views\LoginClient\Mgs.cshtml" />
+    <Content Include="Areas\Client\Views\DangKyTK\NguoiDung.cshtml" />
+    <Content Include="Areas\Client\Views\DangKyTK\DonVi.cshtml" />
+    <Content Include="Areas\Client\Views\DangKyTK\BenhVien.cshtml" />
+    <Content Include="Areas\Client\Views\DotHienMauClient\DangKyHiemMau.cshtml" />
+    <Content Include="Areas\Client\Views\DotHienMauClient\ChiTietDKHM.cshtml" />
+    <Content Include="Areas\Client\Views\NguoiDung\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.0.js" />
     <Content Include="Scripts\jquery-1.8.0.min.js" />
@@ -397,8 +408,11 @@
     <Compile Include="Areas\Admin\Controllers\DotHiemMauController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Client\Controllers\DangKyTKController.cs" />
+    <Compile Include="Areas\Client\Controllers\DotHienMauClientController.cs" />
     <Compile Include="Areas\Client\Controllers\HomeController.cs" />
     <Compile Include="Areas\Client\Controllers\LoginClientController.cs" />
+    <Compile Include="Areas\Client\Controllers\NguoiDungController.cs" />
     <Compile Include="Common\CommonConstant.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
@@ -444,6 +458,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Client\Data\" />
+    <Folder Include="Areas\Client\Views\DotHienMau\" />
     <Folder Include="Assets\Admin\File\" />
     <Folder Include="Controllers\client\" />
     <Folder Include="FileUpLoad\" />

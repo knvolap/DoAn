@@ -35,7 +35,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html"> <img src="~/Assets/client/img/logo6.png" alt="logo"> <span class="about_us_text">Hiến máu nhân đạo</span></a>
+                        <a class="navbar-brand" href="/Client/Home/Index#"> <img src="~/Assets/client/img/logo6.png" alt="logo"> <span class="about_us_text">Hiến máu nhân đạo</span></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -46,10 +46,10 @@
                              id="navbarSupportedContent">
                             <ul class="navbar-nav align-items-center">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Trang chủ</a>
+                                    <a class="nav-link" href="/Client/Home/Index#">Trang chủ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="hienMau.html">Đợt hiến máu</a>
+                                    <a class="nav-link" href="/Client/DotHienMauClient/Index">Đợt hiến máu</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="donViLienKet.html">Đơn vị liên kết</a>
@@ -58,19 +58,61 @@
                                     <a class="nav-link" href="lienHe.html">Liên hệ</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="dangKy.html" id="navbarDropdown_1"
-                                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Đăng ký
-                                    </a>
+                                        <a class="nav-link dropdown-toggle" href="dangKy.html" id="navbarDropdown_1"
+                                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Đăng ký
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                            <a class="dropdown-item" href="/Client/DangKyTK/NguoiDung">Đăng ký thành viên</a>
+                                            <a class="dropdown-item" href="/Client/DangKyTK/DonVi">Đăng ký đối tác</a>
+                                            <a class="dropdown-item" href="/Client/DangKyTK/BenhVien">Đăng ký bệnh viện</a>
+                                        </div>
+                                    </li>
+                            </ul>
+                        </div>
+
+
+
+                        @{
+                            var session5 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+                        }
+                        @if (session5 == null)
+                        {
+                            <a class="btn_2 d-none d-lg-block" href="/Client/LoginClient/Index">Đăng Nhập</a>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav align-items-center">
+                                <li class="nav-item dropdown">
+                                    <h5 class="nav-link dropdown-toggle" href="dangKy.html" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Xin chào: @session5.Accounts
+                                    </h5>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="dkThanhVien.html">Đăng ký thành viên</a>
-                                        <a class="dropdown-item" href="dkDoiTac.html">Đăng ký đối tác</a>
-                                        <a class="dropdown-item" href="dkBenhVien.html">Đăng ký bệnh viện</a>
+                                        <h6 class="dropdown-item" href="/Client/LoginClient/Index">Cá nhân</h6>
+                                        <h6 style="margin-left:20px"> @Html.ActionLink("Đăng xuất", "Logout", "LoginClient")</h6>
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-                        <a class="btn_2 d-none d-lg-block" href="login.html">Đăng Nhập</a>
+                        }
+
+
+
+
+
+                        @*<a class="btn_2 d-none d-lg-block" href="/Client/LoginClient/Index">Đăng Nhập</a>
+                            <ul class="navbar-nav align-items-center">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="dangKy.html" id="navbarDropdown_1"
+                                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Name
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="dkThanhVien.html">Cá nhân</a>
+                                        <a class="dropdown-item" href="dkDoiTac.html">Đăng xuất</a>
+                                    </div>
+                                </li>
+                            </ul>*@
                     </nav>
                 </div>
             </div>
@@ -86,7 +128,7 @@
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-xl-2 col-md-4 col-sm-6 single-footer-widget">
-                        <a href="#" class="footer_logo"> <img src="~/Assets/client/img/logo6.png" alt="#"> </a>
+                        <a href="#" class="footer_logo"> <img src="~/Assets/client/img/logo3.png" alt="#"> </a>
                         <p>Website phi lợi nhuận </p>
                         <div class="social_logo">
                             <a href="#"><i class="ti-facebook"></i></a>
@@ -130,7 +172,7 @@
                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
                                        required="" type="email">
                                 <button class="click-btn btn btn-default text-uppercase">
-                                    <i class="ti-angle-right" ></i>
+                                    <i class="ti-angle-right"></i>
                                 </button>
                                 <div style="position: absolute; left: -5000px;">
                                     <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
@@ -166,7 +208,7 @@
     </footer>
     <script src="~/Assets/client/js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
-    <script src="~/Assets/client/js/popper.min.js"></script>    
+    <script src="~/Assets/client/js/popper.min.js"></script>
     <!-- bootstrap js -->
     <script src="~/Assets/client/js/bootstrap.min.js"></script>
     <!-- owl carousel js -->
@@ -184,3 +226,28 @@
 </body>
 
 </html>
+
+
+@*@{
+        var session6 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+    }
+    @if (session6.AuthorID == "Q03" || session6.AuthorID == "Q04" || session6.AuthorID == "Q05" || session6.AuthorID == "Q06")
+    {
+
+            <h6 class="nav-link" href="/Client/LoginClient/Mgs"> Đăng ký</h6>
+
+    }
+    else
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="dangKy.html" id="navbarDropdown_1"
+               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Đăng ký
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                <a class="dropdown-item" href="dkThanhVien.html">Đăng ký thành viên</a>
+                <a class="dropdown-item" href="dkDoiTac.html">Đăng ký đối tác</a>
+                <a class="dropdown-item" href="dkBenhVien.html">Đăng ký bệnh viện</a>
+            </div>
+        </li>
+    }*@
