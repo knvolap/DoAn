@@ -17,6 +17,7 @@ namespace HiemMauNhanDao.Note
 		//('TK08', 'Q06', 'nguoidung3@gmail.com','123123'),
 		//('TK09', 'Q06', 'nguoidung4@gmail.com','123123')	
 
+		// 4297f44b13955235245b2497399d7a93
 
 		////Bệnh viện 
 		//		+ Đăng ký đợt hiến máu -> update để sửa đơn vị liên kết 
@@ -25,5 +26,5 @@ namespace HiemMauNhanDao.Note
 
 		////nhân viên
 		//		+ cập nhật kết quả hiến máu
-    }
+	}
 }

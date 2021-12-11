@@ -48,9 +48,7 @@ namespace Models.EF
                 .Property(e => e.IdChucVu)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ChucVu>()
-                .Property(e => e.idBenhVien)
-                .IsUnicode(false);
+       
 
             modelBuilder.Entity<DonViLienKet>()
                 .Property(e => e.IdDVLK)
@@ -139,6 +137,9 @@ namespace Models.EF
             modelBuilder.Entity<NhanVienYTe>()
                 .Property(e => e.idTK)
                 .IsUnicode(false);
+            modelBuilder.Entity<NhanVienYTe>()
+               .Property(e => e.idBenhVien)
+               .IsUnicode(false);
 
             modelBuilder.Entity<NhanVienYTe>()
                 .Property(e => e.idChucVu)

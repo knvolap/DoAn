@@ -12,7 +12,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BenhVien()
         {
-            ChucVus = new HashSet<ChucVu>();
+            NhanVienYTes  = new HashSet<NhanVienYTe >();
         }
         [Key]
         [StringLength(20)]
@@ -46,6 +46,6 @@ namespace Models.EF
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChucVu> ChucVus { get; set; }
+        public virtual ICollection<NhanVienYTe> NhanVienYTes { get; set; }
     }
 }

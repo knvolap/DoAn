@@ -31,7 +31,7 @@ namespace Models.EF
         public string userName { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(50)]
         public string password { get; set; }
 
         public bool? trangThai { get; set; }

@@ -150,6 +150,13 @@
     <Content Include="Assets\client\css\themify-icons.css" />
     <Content Include="Assets\client\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\client\fonts\themify.svg" />
+    <Content Include="Assets\client\hm\hm1.jpg" />
+    <Content Include="Assets\client\hm\hm2.jpg" />
+    <Content Include="Assets\client\hm\hm3.jfif" />
+    <Content Include="Assets\client\hm\hm3.jpg" />
+    <Content Include="Assets\client\hm\hm4.jpg" />
+    <Content Include="Assets\client\hm\hm5.jpg" />
+    <Content Include="Assets\client\hm\hm6.jpg" />
     <Content Include="Assets\client\img\ability_img.png" />
     <Content Include="Assets\client\img\about_bg.png" />
     <Content Include="Assets\client\img\author\author_1.png" />
@@ -384,9 +391,13 @@
     <Content Include="Areas\Client\Views\DotHienMauClient\DangKyHiemMau.cshtml" />
     <Content Include="Areas\Client\Views\DotHienMauClient\ChiTietDKHM.cshtml" />
     <Content Include="Areas\Client\Views\NguoiDung\Index.cshtml" />
-    <Content Include="Areas\Client\Views\NguoiDung\_leftMenu1.cshtml" />
     <Content Include="Areas\Client\Views\NhanVienYTe\Index.cshtml" />
     <Content Include="Areas\Client\Views\NhanVienYTe\EditKQHM.cshtml" />
+    <Content Include="Areas\Client\Views\NguoiDung\_leftMenu1.cshtml" />
+    <Content Include="Areas\Client\Views\NhanVienYTe\EditBV.cshtml" />
+    <Content Include="Areas\Client\Views\NhanVienYTe\ViewNVYT.cshtml" />
+    <Content Include="Areas\Client\Views\NhanVienYTe\CreateNVYT.cshtml" />
+    <Content Include="Areas\Client\Views\NhanVienYTe\DangBai.cshtml" />
     <None Include="Scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.0.js" />
     <Content Include="Scripts\jquery-1.8.0.min.js" />
@@ -412,7 +423,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Client\Controllers\DangKyTKController.cs" />
-    <Compile Include="Areas\Client\Controllers\DotHienMauClientController.cs" />
+    <Compile Include="Areas\Client\Controllers\DotTCHMController.cs" />
     <Compile Include="Areas\Client\Controllers\HomeController.cs" />
     <Compile Include="Areas\Client\Controllers\LoginClientController.cs" />
     <Compile Include="Areas\Client\Controllers\NguoiDungController.cs" />
@@ -463,6 +474,7 @@
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Client\Data\" />
     <Folder Include="Areas\Client\Views\DotHienMau\" />
+    <Folder Include="Areas\Client\Views\DotTCHM\" />
     <Folder Include="Assets\Admin\File\" />
     <Folder Include="Controllers\client\" />
     <Folder Include="FileUpLoad\" />

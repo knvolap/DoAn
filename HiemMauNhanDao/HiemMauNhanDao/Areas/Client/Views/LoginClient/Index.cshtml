@@ -71,11 +71,13 @@
                                            @* <input type="password" class="form-control" id="exampleInputPassword1" placeholder=" nhập mật khẩu">*@
                                             @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control", @placeholder = "mật khẩu", type = "password" })
                                         </div>
-                                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                                        <div class="form-check">
+                                        <div class="text-center">
+                                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                        </div>                                    
+                                        <div class="form-check" style="margin-top:10px">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                             <label class="form-check-label" for="exampleCheck1">Lưu mật khẩu</label>
-                                            <a href="#">Quên mật khẩu</a>
+                                            <a style="margin-left:250px" href="#">Quên mật khẩu</a>
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary" style="width: 100%; margin-top:20px">Đăng nhập</button>

@@ -1,8 +1,10 @@
-﻿
+﻿@model PagedList.IPagedList<Models.EF.TaiKhoan>
+@using PagedList.Mvc
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ViewNVYT";
     Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
 }
+
 
 <section class="breadcrumb_part breadcrumb_bg">
     <div class="container">
@@ -86,7 +88,7 @@
                                                    class="single-input">
                                             @*<input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">*@
                                         </th>
-                                        <th class="col-lg-6">
+                                        @*<th class="col-lg-6">
                                             <div>
                                                 <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
                                                 <div class="form-select" id="default-select_1">
@@ -100,9 +102,9 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </th>
+                                        </th>*@
                                     </table>
-                                    
+
                                 </div>
                                 <div>
                                     <button type="submit" class="mt-2 btn btn-primary">
@@ -121,20 +123,18 @@
                                     <th>
                                         STT
                                     </th>
+                                   
                                     <th>
-                                        ID đợt
+                                        Tên nhân viên
                                     </th>
                                     <th>
-                                        Tên đợt
+                                        Tài khoản
                                     </th>
                                     <th>
-                                        Nội dung
+                                        Chức vụ
                                     </th>
                                     <th>
-                                        Ngày bắt đầu
-                                    </th>
-                                    <th>
-                                        Ngày kết thúc
+                                        Nhiệm vụ
                                     </th>
                                     <th>
                                         Trạng thái
@@ -143,40 +143,40 @@
                                         Chức năng
                                     </th>
                                 </tr>
-                                @*@{ var i = 1;}
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @i
-                            </td>
-                            <td>
-                                @item.IdDHM
-                            </td>
-                            <td>
-                                @item.TenDHM
-                            </td>
-                            <td>
-                                @item.noiDung
-                            </td>
-                            <td>
-                                @item.tgBatDau
-                            </td>
-                            <td>
-                                @item.tgKetThuc
-                            </td>
-                            <td>
-                                <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                    @(item.trangThai == true ? "Active" : "Blocked")
-                                </button>
-                            </td>
-                            <td>
-                                @Html.ActionLink("Chỉnh sửa", "EditDHM", new { id = item.IdDHM }) |
-                                @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDHM }) |
-                                @Html.ActionLink("Xóa", "DeleteDHM", new { id = item.IdDHM })
-                            </td>
-                        </tr>
-                        i++;*@
+                                @{ var i = 1;}
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>
+                                                @item.idQuyen
+                                            </td>
+                                            <td>
+                                                @item.userName
+                                            </td>
+                                            <td>
+                                                @item.password
+                                            </td>
+                                            <td>
+                                              @*  @item.tgBatDau*@
+                                            </td>
+                                            <td>
+                                              @*  @item.tgKetThuc*@
+                                            </td>
+                                            <td>
+                                                <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                                    @(item.trangThai == true ? "Active" : "Blocked")
+                                                </button>
+                                            </td>
+                                            <td>
+                                                @*@Html.ActionLink("Chỉnh sửa", "EditDHM", new { id = item.IdDHM }) |
+                                                @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDHM }) |
+                                                @Html.ActionLink("Xóa", "DeleteDHM", new { id = item.IdDHM })*@
+                                            </td>
+                                        </tr>
+                                        i++;
                                 }
                             </table>
                             <ul></ul>
@@ -192,4 +192,3 @@
         </div>
     </div>
 </section>
-

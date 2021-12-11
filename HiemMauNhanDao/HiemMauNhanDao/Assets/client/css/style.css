@@ -4752,13 +4752,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 515, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_elements.scss */
 .single-input {
-  display: block;
-  width: 100%;
-  line-height: 40px;
-  border: none;
-  outline: none;
-  background: #f9f9ff;
-  padding: 0 20px;
+    display: block;
+    width: 100%;
+    line-height: 40px;
+    border: 1px solid #dbdbdb;
+    outline: none;
+    background: #f9f9ff;
+    padding: 0 20px;
 }
 
 /* line 523, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_elements.scss */
@@ -5402,7 +5402,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 1045, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_elements.scss */
 .form-select .nice-select {
-  border: none;
+  border:  1px solid #dbdbdb;
   border-radius: 0px;
   height: 40px;
   background: #f9f9ff;

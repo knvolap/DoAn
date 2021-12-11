@@ -31,6 +31,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             return View(model);
         }
 
+
         public ActionResult CreateDHM()
         {
             return View();
