@@ -27,17 +27,17 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateBV(BenhVien benhVien, HttpPostedFileBase file)
-        {
-            string duongDan1 = Server.MapPath("~/FileUpLoad");
-            string fileName1 = Path.GetFileName(file.FileName);
-            string fullDuongDan = Path.Combine(duongDan1, fileName1);
-            file.SaveAs(fullDuongDan);
-
+        public ActionResult CreateBV(BenhVien benhVien )
+        {           
             if (ModelState.IsValid)
             {
-                _benhVien.AddBV(benhVien,fileName1);
+                _benhVien.AddBV(benhVien);
                 //SetAlert("Thêm thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                //SetAlert("Thêm thất bại", "error");
                 return RedirectToAction("Index");
             }
             return View(benhVien);

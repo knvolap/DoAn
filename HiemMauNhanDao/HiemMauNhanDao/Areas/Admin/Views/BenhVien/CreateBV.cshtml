@@ -7,7 +7,7 @@
 
 <h2>Thêm bệnh viện</h2>
 
-@using (Html.BeginForm("CreateBV", "BenhVien", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateBV", "BenhVien", FormMethod.Post ))
 {
     @Html.AntiForgeryToken()
 
@@ -15,38 +15,42 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.TenBenhVien, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                <label for="exampleText" class="">Tên bệnh viện</label>
+
                 @Html.EditorFor(model => model.TenBenhVien, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TenBenhVien, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.diaChi, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.diaChi, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                <label for="exampleText" class="">Email</label>
+
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.soDTBV, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                <label for="exampleText" class="">Số điện thoại</label>
+
                 @Html.EditorFor(model => model.soDTBV, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.soDTBV, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleText" class="">Địa chỉ</label>
+
+                @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.diaChi, "", new { @class = "text-danger" })
+            </div>
+        </div>
         @*<div class="form-group">
                 <div class="col-md-10">
                     <label for="exampleFile" class="">Minh chứng</label>
@@ -56,16 +60,21 @@
             </div>*@
         <div class="form-group">
             <div class="col-md-10">
-                <label for="exampleFile" class="">Minh chứng</label><input name="file" id="exampleFile" type="file" class="form-control-file">
+                <label for="exampleFile" class="">Minh chứng</label>
+                @Html.EditorFor(model => model.minhChung, new
+                { htmlAttributes = new { @class = "form-control-file", @name = "file", @id = "exampleFile", @type = "file" } })
 
+               @* <input name="file" id="exampleFile" type="file" class="form-control-file">*@
             </div>
         </div>
 
+
         <div class="form-group">
-            @Html.LabelFor(model => model.trangThai, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.trangThai, new { htmlAttributes = new { @class = "form-control" } })
+                <label for="exampleText" class="">Trạng thái</label>
+                @Html.DropDownListFor(model => model.trangThai, new[] { new SelectListItem { Text = "Hoạt động", Value = "True" }, new SelectListItem { Text = "không hoạt động", Value = "False" } }, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.trangThai, "", new { @class = "text-danger" })
+
             </div>
         </div>
 

@@ -34,7 +34,7 @@ namespace Models.Services
             return model.OrderByDescending(x => x.IdBenhVien).ThenBy(x => x.TenBenhVien).ToPagedList(page, pageSize);
         }
 
-        public void AddBV(BenhVien benhVien, string fileName)
+        public void AddBV(BenhVien benhVien )
         {
             var id = db.BenhViens.Max(x => x.IdBenhVien);
             string phanDau = id.Substring(0, 2);

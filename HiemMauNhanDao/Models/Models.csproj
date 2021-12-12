@@ -83,6 +83,7 @@
     <Compile Include="Services\DKDHMServices.cs" />
     <Compile Include="Services\DotHiemMauServices.cs" />
     <Compile Include="Services\NhanVienYTeServices.cs" />
+    <Compile Include="Services\QuanLyTKServices.cs" />
     <Compile Include="ViewModel\DotHiemMauView.cs" />
   </ItemGroup>
   <ItemGroup>
