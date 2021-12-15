@@ -52,7 +52,7 @@ namespace Models.EF
 
         public DateTime ngayToChuc { get; set; }
 
-        public DateTime? tgCapNhat { get; set; }
+   
 
         [StringLength(50)]
         public string trangThai { get; set; }

@@ -1,0 +1,179 @@
+﻿@model Models.EF.TaiKhoan
+@{
+    ViewBag.Title = "CreateNVYT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Nhân viên y tế</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4">
+                @RenderPage("_leftMenu2.cshtml")
+            </div>
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <div class="section-top-border">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-8">
+                                <h3 class="mb-30">Thêm nhân viên</h3>
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <form action="#">
+                                        <table class="mt-10">
+                                            <th style="width:400px">
+                                                <div>
+                                                    <input type="text" name="last_name" placeholder="Họ và tên"
+                                                           onfocus="this.placeholder = ''" onblur="this.placeholder = ' Họ và tên'" required
+                                                           class="single-input">
+                                                    @*@Html.EditorFor(model => model.hoten, new { htmlAttributes = new { @class = "single-input", @ placeholder = "Họ và tên" } })
+                                                        @Html.ValidationMessageFor(model => model.hoten, "", new { @class = "text-danger" })*@
+
+                                                </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                <div>
+                                                    @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @placeholder = "Tài khoản" } })
+                                                    @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </th>
+                                        </table>
+                                        <table class="mt-10">
+                                            <th style="width:400px">
+                                                <div>
+                                                    @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @placeholder = "Email" } })
+                                                    @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                <div>
+                                                    @*@Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @placeholder = "Mật khẩu", @type = "password" } })
+                                                        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "single-input" })*@
+                                                    <input type="password" name="last_name" placeholder="Mật khẩu"
+                                                           onfocus="this.placeholder = ''" onblur="this.placeholder = ' Mật khẩu'" required
+                                                           class="single-input">
+                                                </div>
+                                            </th>
+                                        </table>
+                                        <table class="mt-10">
+                                            <th style="width:400px">
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value=" 1">Khoa</option>
+                                                            <option value="1">Chưa có</option>
+                                                            <option value="1">Khoa lọc máu</option>
+                                                            <option value="1">Khoa truyền máu</option>
+                                                            <option value="1">Khoa huyết học</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value=" 1">Chức vụ</option>
+                                                            <option value="1">Chủ tịch</option>
+                                                            <option value="1">Trưởng khoa</option>
+                                                            <option value="1">Y tá</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </table>
+
+                                        <table class="mt-10">
+                                            <th style="width:400px">
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value=" 1">Trình độ</option>
+                                                            <option value="1">Chưa có</option>
+                                                            <option value="1">Chưa có</option>
+                                                            <option value="1">Bác sĩ</option>
+                                                            <option value="1">Điều dưỡng</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value=" 1">Nhiệm vụ</option>
+                                                            <option value="1">Chưa có</option>
+                                                            <option value="1">Xét nghiệm</option>
+                                                            <option value="1">Lấy máu</option>
+                                                            <option value="1">Khám lâm sàn</option>
+                                                            <option value="1">Hậu cần</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </table>
+
+                                        <table class="mt-10">
+                                            <th style="width:400px">
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value=" 1">Bệnh viện</option>
+                                                            <option value="1">Chưa có</option>
+                                                            <option value="1">Chưa có</option>
+                                                            <option value="1">Bác sĩ</option>
+                                                            <option value="1">Điều dưỡng</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                @Html.DropDownListFor(model => model.trangThai, new[] {  new SelectListItem { Text = "Active", Value = "True" },
+                                                                                                   new SelectListItem { Text = "Blocked", Value = "False" } },
+                                                                                                   new { @class = " single-input", @id = "default-select_1" })
+                                                @Html.ValidationMessageFor(model => model.trangThai, "", new { @class = "form-select", @value = "1" })
+                                        </table>
+                                    </form>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="text-center " style="margin-top:20px">
+                            <a class="genric-btn primary radius" href="#">Đồng ý</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+

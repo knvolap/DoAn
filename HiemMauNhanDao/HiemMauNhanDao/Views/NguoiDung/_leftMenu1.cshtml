@@ -1,0 +1,170 @@
+﻿
+
+<div class="blog_right_sidebar">
+    @{
+        var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+    }
+    @if (session.AuthorID == "Q03")
+    {<aside class="single_sidebar_widget post_category_widget">
+            <h4 class="widget_title">Đơn vị</h4>
+            <ul class="list cat-list">
+
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Cập nhật thông đơn vị</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Đăng ký đợt hiến máu</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Đăng bài</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Xác nhận yêu cầu</p>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <aside class="single_sidebar_widget post_category_widget">
+            <h4 class="widget_title">Cá nhân</h4>
+            <ul class="list cat-list">
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Xem lịch sử</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Tình trạng sức khỏe</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Đổi mật khẩu</p>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    }
+    @if (session.AuthorID == "Q04")
+    {<aside class="single_sidebar_widget post_category_widget">
+            <h4 class="widget_title">Bệnh viện</h4>
+            <ul class="list cat-list">
+                <li>
+                    <a href="/NhanVienYTe/EditBV" class="d-flex">
+                        <p>Cập nhật thông đơn vị</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/NhanVienYTe/Index" class="d-flex">
+                        <p>Cập nhật nhân viên</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/NhanVienYTe/DangKyDHM" class="d-flex">
+                        <p>Đăng ký đợt hiến máu</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/NhanVienYTe/DangBai" class="d-flex">
+                        <p>Đăng bài</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Xác nhận yêu cầu</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/NhanVienYTe/EditKQHM" class="d-flex">
+                        <p>Cập nhật Kết quả hiến máu</p>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+    }
+    @if (session.AuthorID == "Q05")
+    {
+        <aside class="single_sidebar_widget post_category_widget">
+            <h4 class="widget_title">Nhân viên y tế</h4>
+            <ul class="list cat-list">
+
+                <li>
+                    <a href="/NhanVienYTe/Index" class="d-flex">
+                        <p>Cập nhật Kết quả hiến máu</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Xem nhiệm vụ</p>
+                    </a>
+                </li>
+
+            </ul>
+        </aside>
+        <aside class="single_sidebar_widget post_category_widget">
+            <h4 class="widget_title">Cá nhân</h4>
+            <ul class="list cat-list">
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Cập nhật thông tin</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Xem lịch sử</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Tình trạng sức khỏe</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Đổi mật khẩu</p>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    }
+    @if (session.AuthorID == "Q06")
+    {
+        <aside class="single_sidebar_widget post_category_widget">
+            <h4 class="widget_title">Cá nhân</h4>
+            <ul class="list cat-list">
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Cập nhật thông tin</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Xem lịch sử</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Xem tình trạng sức khỏe</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Đổi mật khẩu</p>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    }
+
+</div>
+
+

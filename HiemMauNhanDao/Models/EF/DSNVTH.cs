@@ -17,6 +17,10 @@ namespace Models.EF
         [StringLength(20)]
         public string idNVYT { get; set; }
 
+        [Required]
+        [StringLength(50)]
+        public string nhiemVu { get; set; }
+
         public virtual NhanVienYTe NhanVienYTe { get; set; }
         public virtual DotToChucHM DotToChucHM { get; set; }
     }

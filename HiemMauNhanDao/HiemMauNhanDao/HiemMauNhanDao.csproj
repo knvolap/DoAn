@@ -201,6 +201,7 @@
     <Content Include="Assets\client\img\elements\a.jpg" />
     <Content Include="Assets\client\img\elements\a2.jpg" />
     <Content Include="Assets\client\img\elements\d.jpg" />
+    <Content Include="Assets\client\img\elements\dh.jpg" />
     <Content Include="Assets\client\img\elements\disabled-check.png" />
     <Content Include="Assets\client\img\elements\disabled-radio.png" />
     <Content Include="Assets\client\img\elements\f1.jpg" />
@@ -334,9 +335,6 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Areas\Admin\Views\Shared\_LeftMenu.cshtml" />
-    <Content Include="Areas\Client\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Client\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Client\Views\Home\Index.cshtml" />
     <Content Include="Assets\client\css\style.map" />
     <Content Include="Assets\client\fonts\Flaticon.eot" />
     <Content Include="Assets\client\fonts\Flaticon.ttf" />
@@ -382,22 +380,6 @@
     <Content Include="Areas\Admin\Views\DKDHM\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DKDHM\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
-    <Content Include="Areas\Client\Views\LoginClient\Index.cshtml" />
-    <Content Include="Areas\Client\Views\DotHienMauClient\Index.cshtml" />
-    <Content Include="Areas\Client\Views\LoginClient\Mgs.cshtml" />
-    <Content Include="Areas\Client\Views\DangKyTK\NguoiDung.cshtml" />
-    <Content Include="Areas\Client\Views\DangKyTK\DonVi.cshtml" />
-    <Content Include="Areas\Client\Views\DangKyTK\BenhVien.cshtml" />
-    <Content Include="Areas\Client\Views\DotHienMauClient\DangKyHiemMau.cshtml" />
-    <Content Include="Areas\Client\Views\DotHienMauClient\ChiTietDKHM.cshtml" />
-    <Content Include="Areas\Client\Views\NguoiDung\Index.cshtml" />
-    <Content Include="Areas\Client\Views\NhanVienYTe\Index.cshtml" />
-    <Content Include="Areas\Client\Views\NhanVienYTe\EditKQHM.cshtml" />
-    <Content Include="Areas\Client\Views\NguoiDung\_leftMenu1.cshtml" />
-    <Content Include="Areas\Client\Views\NhanVienYTe\EditBV.cshtml" />
-    <Content Include="Areas\Client\Views\NhanVienYTe\ViewNVYT.cshtml" />
-    <Content Include="Areas\Client\Views\NhanVienYTe\CreateNVYT.cshtml" />
-    <Content Include="Areas\Client\Views\NhanVienYTe\DangBai.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyTK\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyTK\CreateTK.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyTK\EditTK.cshtml" />
@@ -427,18 +409,17 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLyTKController.cs" />
-    <Compile Include="Areas\Client\Controllers\DangKyTKController.cs" />
-    <Compile Include="Areas\Client\Controllers\DotTCHMController.cs" />
-    <Compile Include="Areas\Client\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Client\Controllers\LoginClientController.cs" />
-    <Compile Include="Areas\Client\Controllers\NguoiDungController.cs" />
-    <Compile Include="Areas\Client\Controllers\NhanVienYTeController.cs" />
     <Compile Include="Common\CommonConstant.cs" />
     <Compile Include="Common\Encryptor.cs" />
-    <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Common\HasCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
-    <Compile Include="Controllers\admin\HomeController.cs" />
+    <Compile Include="Controllers\DangKyTKController.cs" />
+    <Compile Include="Controllers\DotHienMauController.cs" />
+    <Compile Include="Controllers\DotTCHMController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginClientController.cs" />
+    <Compile Include="Controllers\NguoiDungController.cs" />
+    <Compile Include="Controllers\NhanVienYTeController.cs" />
     <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -450,7 +431,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Client\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
@@ -464,8 +444,27 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\DangKyTK\NguoiDung.cshtml" />
+    <Content Include="Views\DangKyTK\DonVi.cshtml" />
+    <Content Include="Views\DangKyTK\BenhVien.cshtml" />
+    <Content Include="Views\DotHienMau\Index.cshtml" />
+    <Content Include="Views\DotHienMau\DangKyHiemMau.cshtml" />
+    <Content Include="Views\DotHienMau\ChiTietDKHM.cshtml" />
+    <Content Include="Views\DotTCHM\Index.cshtml" />
+    <Content Include="Views\LoginClient\Index.cshtml" />
+    <Content Include="Views\LoginClient\Mgs.cshtml" />
+    <Content Include="Views\NguoiDung\Index.cshtml" />
+    <Content Include="Views\NguoiDung\_leftMenu1.cshtml" />
+    <Content Include="Views\NhanVienYTe\Index.cshtml" />
+    <Content Include="Views\NhanVienYTe\ViewNVYT.cshtml" />
+    <Content Include="Views\NhanVienYTe\CreateNVYT.cshtml" />
+    <Content Include="Views\NhanVienYTe\DangBai.cshtml" />
+    <Content Include="Views\NhanVienYTe\DangKyDHM.cshtml" />
+    <Content Include="Views\NhanVienYTe\_leftMenu2.cshtml" />
+    <Content Include="Views\NhanVienYTe\EditKQHM.cshtml" />
+    <Content Include="Views\NhanVienYTe\EditBV.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -477,14 +476,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Areas\Client\Data\" />
-    <Folder Include="Areas\Client\Views\DotHienMau\" />
-    <Folder Include="Areas\Client\Views\DotTCHM\" />
     <Folder Include="Assets\Admin\File\" />
-    <Folder Include="Controllers\client\" />
     <Folder Include="FileUpLoad\" />
-    <Folder Include="Views\admin\Home\" />
-    <Folder Include="Views\client\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

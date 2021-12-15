@@ -34,6 +34,8 @@ namespace Models.Services
             return model.OrderByDescending(x => x.idQuyen= "Q05").ToPagedList(page, pageSize);
         }
 
+
+
         public void addNVYT(TaiKhoan taiKhoan)
         {
             var id = db.TaiKhoans.Max(x => x.IdTK);

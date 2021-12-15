@@ -1,0 +1,108 @@
+﻿@model Models.EF.BenhVien
+@{
+    ViewBag.Title = "EditBV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Thông tin bệnh viện</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                @RenderPage("_leftMenu2.cshtml")
+            </div>
+
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <h3 class="mb-30">Cập nhật thông đơn vị</h3>
+                    <div class="section-top-border">
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-8">
+
+                                <form action="#">
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <table class="mt-10">
+                                            <th style="width:400px">
+                                                <div>
+                                                    <label>Id bệnh viện</label>
+                                                    @Html.ValidationSummary(true, "", new { @class = "form-control" })
+                                                    @Html.HiddenFor(model => model.IdBenhVien)
+
+
+                                                </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                <div>
+                                                    <label>Tên bệnh viện</label>
+                                                    @Html.EditorFor(model => model.TenBenhVien, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.TenBenhVien, "", new { @class = "text-danger" })
+                                                </div>
+                                            </th>
+                                        </table>
+                                        <table class="mt-10">
+                                            <th style="width:400px">
+                                                <div>
+                                                    <label>Email</label>
+                                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                <div>
+                                                    <label>Số điện thoại</label>
+                                                    @Html.EditorFor(model => model.soDTBV, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.soDTBV, "", new { @class = "text-danger" })
+                                                </div>
+                                            </th>
+                                        </table>
+                                        <div class="mt-10">
+                                            <label>Địa chỉ</label>
+                                            <input type="email" name="EMAIL" placeholder=" Địa chỉ tạm trú"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = ' Địa chỉ '" required
+                                                   class="single-input">
+                                        </div>
+
+                                        <div class="mt-10">
+                                            <label>Minh chứng</label>
+                                            <input type="file" name="file" placeholder="Minh chứng"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Minh chứng'" required
+                                                   class="single-input">
+                                        </div>
+                                    }
+                                </form>
+                            </div>
+                        </div>
+                        <div class="text-center " style="margin-top:20px">
+                            <a class="genric-btn primary-border radius" href="#">Cập nhật</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

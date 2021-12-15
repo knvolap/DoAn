@@ -55,21 +55,14 @@ namespace Models.Services
 
         public void EditBV(BenhVien benhVien, string fileName)
         {
-            try
-            {
-                BenhVien bv = GetByIdBenhVien(benhVien.IdBenhVien);
-                bv.TenBenhVien = benhVien.TenBenhVien;
-                bv.Email = benhVien.Email;
-                bv.diaChi = benhVien.diaChi;
-                bv.minhChung = fileName;
-                bv.soDTBV = benhVien.soDTBV;
-                bv.trangThai = benhVien.trangThai;
-                db.SaveChanges();
-            }
-            catch
-            {
-                Console.WriteLine("Cập nhật thất bại");
-            }
+             BenhVien bv = GetByIdBenhVien(benhVien.IdBenhVien);
+             bv.TenBenhVien = benhVien.TenBenhVien;
+             bv.Email = benhVien.Email;
+             bv.diaChi = benhVien.diaChi;
+             bv.minhChung = fileName;
+             bv.soDTBV = benhVien.soDTBV;
+             bv.trangThai = benhVien.trangThai;
+             db.SaveChanges();        
         }
        
         public bool Delete(string id)

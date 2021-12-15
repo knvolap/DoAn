@@ -1,0 +1,151 @@
+﻿@model PagedList.IPagedList<Models.EF.TaiKhoan>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ViewNVYT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Nhân viên y tế</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!--================Blog Area =================-->
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4">
+                @RenderPage("_leftMenu2.cshtml")
+            </div>
+
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="col-lg-12 col-md-8">
+                    <h3 class="mb-30">Danh sách đợt hiến máu</h3>
+
+                    <hr>
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tìm kiếm</h5>
+                            <form class="">
+                                <div class="form-row">
+                                    <table class="mt-10">
+                                        <th style="width:400px">
+                                            <input type="email" name="EMAIL" placeholder="Nội dung"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung '" required
+                                                   class="single-input">
+                                            @*<input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">*@
+                                        </th>
+                                        @*<th class="col-lg-6">
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value=" 1">Đợt tổ chức</option>
+                                                            <option value="1">Chưa chọn</option>
+                                                            <option value="1">Hiến máu nhân đạo tháng 10</option>
+                                                            <option value="1">Hiến máu nhân đạo tháng 11</option>
+                                                            <option value="1">Hiến máu nhân đạo tháng 12</option>
+                                                            <option value="1">Hiến máu nhân đạo tháng 01</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </th>*@
+                                    </table>
+
+                                </div>
+                                <div>
+                                    <button type="submit" class="mt-2 btn btn-primary">
+                                        <i class="fa fa-search"></i> Tìm kiếm
+                                    </button>
+
+                                    <button class="mb-2  btn btn-outline-danger" style="margin-top:18px"><i class="fa fa-times-circle"></i> Huỷ</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <table class="mb-0 table table-hover table table-bordered">
+                                <tr>
+                                    <th>
+                                        STT
+                                    </th>
+
+                                    <th>
+                                        Tên nhân viên
+                                    </th>
+                                    <th>
+                                        Tài khoản
+                                    </th>
+                                    <th>
+                                        Chức vụ
+                                    </th>
+                                    <th>
+                                        Nhiệm vụ
+                                    </th>
+                                    <th>
+                                        Trạng thái
+                                    </th>
+                                    @*<th>
+                                            Chức năng
+                                        </th>*@
+                                </tr>
+                                @{ var i = 1;}
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @item.idQuyen
+                                        </td>
+                                        <td>
+                                            @item.userName
+                                        </td>
+                                        <td>
+                                            @*@item.password*@
+                                        </td>
+                                        <td>
+                                            @*  @item.tgBatDau*@
+                                        </td>
+                                        <td>
+                                            @*  @item.tgKetThuc*@
+                                        </td>
+                                        <td>
+                                            <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                                @(item.trangThai == true ? "Active" : "Blocked")
+                                            </button>
+                                        </td>
+                                        <td>
+                                            @*@Html.ActionLink("Chỉnh sửa", "EditDHM", new { id = item.IdDHM }) |
+                                                @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDHM }) |
+                                                @Html.ActionLink("Xóa", "DeleteDHM", new { id = item.IdDHM })*@
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                            <ul></ul>
+                            @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center " style="margin-top:20px">
+                    <a href="/Client/NhanVienYTe/EditKQHM" class="genric-btn primary-border radius" href="#">Chi tiết cập nhật</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

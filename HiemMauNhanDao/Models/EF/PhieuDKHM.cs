@@ -34,8 +34,6 @@ namespace Models.EF
         [StringLength(50)]
         public string trangThai { get; set; }
 
-        [StringLength(100)]
-        public string ghiChu { get; set; }
 
         public DateTime? tgDuKien { get; set; }
 

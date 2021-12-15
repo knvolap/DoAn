@@ -9,7 +9,7 @@ using System.IO;
 
 namespace HiemMauNhanDao.Areas.Admin.Controllers
 {
-    public class BenhVienController : Controller
+    public class BenhVienController : BaseController
     {
         BenhVienServices _benhVien = new BenhVienServices();
         // GET: Admin/BenhVien
@@ -32,12 +32,12 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _benhVien.AddBV(benhVien);
-                //SetAlert("Thêm thành công", "success");
+                SetAlert("Thêm thành công", "success");
                 return RedirectToAction("Index");
             }
             else
             {
-                //SetAlert("Thêm thất bại", "error");
+                SetAlert("Thêm thất bại", "error");
                 return RedirectToAction("Index");
             }
             return View(benhVien);
@@ -51,20 +51,40 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditBV(BenhVien benhVien, HttpPostedFileBase file)
         {
-            string duongDan = Server.MapPath("~/FileUpLoad");
-            string fileName = Path.GetFileName(file.FileName);
-            string fullDuongDan = Path.Combine(duongDan, fileName);
+            if (ModelState.IsValid)
+            {
+                string duongDan = Server.MapPath("~/FileUpLoad");
+                string fileName = Path.GetFileName(file.FileName);
+                string fullDuongDan = Path.Combine(duongDan, fileName);
 
-            file.SaveAs(fullDuongDan);
+                file.SaveAs(fullDuongDan);
 
-            _benhVien.EditBV(benhVien, fileName);
-            return RedirectToAction("Index");
+                _benhVien.EditBV(benhVien, fileName);
+              
+                SetAlert("Cập nhật thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Cập nhật thất bại", "error");
+                return RedirectToAction("Index");
+            }
+            return View(benhVien);
         }
 
         public ActionResult Delete(string id)
         {
-            _benhVien.Delete(id);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _benhVien.Delete(id);
+                SetAlert("Xóa thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Xóa thất bại", "error");
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Details(string id)

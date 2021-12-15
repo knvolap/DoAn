@@ -29,12 +29,7 @@ namespace Models.EF
 
         [Required]
         [StringLength(20)]
-        public string khoa { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string nhiemVu { get; set; }
-
+        public string khoa { get; set; }    
         [Required]
         [StringLength(50)]
         public string trinhDo { get; set; }

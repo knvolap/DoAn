@@ -4795,7 +4795,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   width: 100%;
   line-height: 40px;
-  border: none;
+  border:1px solid #dbdbdb;
   outline: none;
   background: #f9f9ff;
   padding: 0 20px;

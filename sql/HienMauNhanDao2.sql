@@ -90,13 +90,11 @@ CREATE TABLE NhanVienYTe(
 	idTK		VARCHAR(20) FOREIGN KEY REFERENCES dbo.TaiKhoan(IdTK)  ON DELETE CASCADE ON UPDATE CASCADE ,
 	idBenhVien	 VARCHAR(20)FOREIGN KEY REFERENCES dbo.BenhVien(IdBenhVien)  ON DELETE CASCADE ON UPDATE CASCADE ,
 	idChucVu	VARCHAR(20)   null,
-	khoa		NVARCHAR(20)   null, --  Khoa Huyết học - Khoa Lọc máu - Khoa Truyền máu 
-	nhiemVu		NVARCHAR (50)  null,	
+	khoa		NVARCHAR(20)   null, --  Khoa Huyết học - Khoa Lọc máu - Khoa Truyền máu 	
 	trinhDo		NVARCHAR (50)  null,	
 	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
-
 
 
 --Table 8 DonViLienKet
@@ -151,7 +149,6 @@ CREATE TABLE DotToChucHM(
 	ngayBatDauDK	DATE not null,	
 	ngayKetThucDK	DATE not null,
 	ngayToChuc		DATETIME not null,
-	tgCapNhat		DATETIME DEFAULT GETDATE()null,
 	trangThai		NVARCHAR(50) 
 )
 GO
@@ -164,7 +161,6 @@ CREATE TABLE PhieuDKHM(
 	idTTCN			VARCHAR(20) NOT NULL,
 	benhKhac		NVARCHAR(100) null,
 	trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: thất bại, 1: Thành công
-	ghiChu			NVARCHAR(100) null,
 	tgDuKien		DATETIME null,
 	sutCan			BIT NOT NULL,
 	noiHach			BIT NOT NULL,
@@ -226,7 +222,8 @@ GO
 --Table 15 DanhSachNhanVienThucHien
 CREATE TABLE DSNVTH(
 	idDTCHM		VARCHAR(20) ,
-	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null
+	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,
+	nhiemVu		NVARCHAR (50)  null ----Lấy máu , khám lâm sàn , xét nghiệm
 )
 GO
 
@@ -294,6 +291,7 @@ ALTER TABLE NhanVienYTe
 		CONSTRAINT CK_NVYT_nhiemVu check(nhiemVu in ( N'Lấy máu' , N'Khám sức khỏe',N'Xét nghiệm máu','Thêm nhân viên'))
 		--CONSTRAINT CK_NVYT_TrangThai check(trangThai in ( N'Hoạt động' , N'Nghỉ',N'Đã phân công'))
 GO
+
 
 -- BẢNG 8--DonViLienKet
 ALTER TABLE DonViLienKet
@@ -416,9 +414,9 @@ GO
 --B5
 INSERT INTO dbo.BenhVien
 		(IdBenhVien, TenBenhVien,diaChi,Email,soDTBV,minhChung,trangThai)
-VALUES	('BV01',N'Đa Khoa Đà Nẵng',N'50 Cao Thắng - Hải Châu - Đà Nẵng','bvdakhoa@gmail.com','0900944488','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA',''),
+VALUES	('BV01',N'Chưa có'  ,N'Đà Nẵng' ,'demobv0@gmail.com','0900944488','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA',''),
 		('BV02',N'Ung Bướu Đà Nẵng',N'28 Đường Hoàng Thị Loan- Liên Chiểu - Hòa Khánh - Đà Nẵng','benhvienungbuou@gmail.com','0888004468','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA',''),
-		('BV03',N'Chưa có',N'Đà Nẵng','demobv1@gmail.com','0888004499','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','')
+		('BV03',N'Đa Khoa Đà Nẵng',N'50 Cao Thắng - Hải Châu - Đà Nẵng' ,'bvdakhoa@gmail.com','0888004499','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','')
 GO
 
 --B6
@@ -432,12 +430,16 @@ GO
 
 --B7
 INSERT INTO dbo.NhanVienYTe
-		(IdNVYT,idTK,idBenhVien,idChucVu,khoa,nhiemVu,trinhDo,trangThai )
-VALUES	('NV01','TK04','BV01','CV01',N'Khoa Truyền máu',N'Khám sức khỏe',N'Giáo sư ','1'),
-		('NV02','TK05','BV01','CV02',N'Khoa Truyền máu',N'Lấy máu',N'Đại học','1'),
-		('NV03','TK11','BV02','CV03',N'Khoa Truyền máu',N'Lấy máu',N'Đại học','1')
-		
+		(IdNVYT,idTK,idBenhVien,idChucVu,khoa,,trinhDo,trangThai )
+VALUES	('NV01','TK04','BV01','CV01',N'Khoa Truyền máu',N'Giáo sư ','1'),
+		('NV02','TK05','BV01','CV02',N'Khoa Truyền máu',N'Đại học','1'),
+		('NV03','TK11','BV02','CV03',N'Khoa Truyền máu',N'Đại học','1')	
 GO
+
+Select  TenBenhVien,IdNVYT,idTK,trinhDo
+from NhanVienYTe nv ,  BenhVien bv
+where nv.idBenhVien=bv.IdBenhVien
+
 
 --B8
 INSERT INTO dbo.DonViLienKet
@@ -455,16 +457,16 @@ GO
 
 --B11
 INSERT INTO dbo.DotToChucHM
-		(IdDTCHM, idDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,tgCapNhat,trangThai)
-VALUES	('TCHM01','DHM04',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021','15/11/2021',N'Chờ Duyệt'),
-		('TCHM02','DHM04',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021','15/12/2021',N'Chờ Duyệt')	
+		(IdDTCHM, idDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai)
+VALUES	('TCHM01','DHM04',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021',N'Chờ Duyệt'),
+		('TCHM02','DHM04',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021',N'Chờ Duyệt')	
 GO
 
 --B12
 INSERT INTO dbo.PhieuDKHM
-		( idPDKHM,idTTCN,idDTCHM,benhKhac,trangThai,ghiChu,tgDuKien)
-VALUES	('PDK01','TT02','TCHM01',N'không có','',N'k có','20/11/2021'),
-		('PDK02','TT03','TCHM01',N'không có','',N'k có','20/11/2021')
+		( idPDKHM,idTTCN,idDTCHM,benhKhac,trangThai,,tgDuKien)
+VALUES	('PDK01','TT02','TCHM01',N'không có','','20/11/2021'),
+		('PDK02','TT03','TCHM01',N'không có','','20/11/2021')
 GO
 
 --B13
