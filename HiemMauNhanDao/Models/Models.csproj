@@ -76,12 +76,12 @@
     <Compile Include="EF\PhieuDKHM.cs" />
     <Compile Include="EF\PhieuYCNM.cs" />
     <Compile Include="EF\Quyen.cs" />
-    <Compile Include="EF\TaiKhoan.cs" />
     <Compile Include="EF\ThongTinCaNhan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BenhVienServices.cs" />
     <Compile Include="Services\DKDHMServices.cs" />
     <Compile Include="Services\DotHiemMauServices.cs" />
+    <Compile Include="Services\NguoiDungServices.cs" />
     <Compile Include="Services\NhanVienYTeServices.cs" />
     <Compile Include="Services\QuanLyTKServices.cs" />
     <Compile Include="ViewModel\DotHiemMauView.cs" />

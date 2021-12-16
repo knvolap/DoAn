@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Areas.Admin.Controllers
 {
-    public class DotHiemMauController : Controller
+    public class DotHiemMauController : BaseController
     {
         DotHiemMauServices _DHM = new DotHiemMauServices();
         private DbContextHM db = new DbContextHM();
@@ -42,7 +42,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _DHM.ThemDHM(dotHienMau);
-               // SetAlert("Thêm thành công", "success");
+                SetAlert("Thêm thành công", "success");
                 return RedirectToAction("Index");
             }
             return View(dotHienMau);
@@ -55,7 +55,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         public ActionResult EditDHM(DotHienMau dotHienMau)
         {
             _DHM.SuaDHM(dotHienMau);
-            // SetAlert("Sử thành công", "success");
+            SetAlert("Sửa thành công", "success");
             return RedirectToAction("Index");
         }
 
@@ -70,7 +70,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         public ActionResult DeleteDHM(string id)
         {
             _DHM.XoaDHM(id);
-           // SetAlert("Xoá thành công", "success");
+           SetAlert("Xoá thành công", "success");
             return RedirectToAction("Index");
         }
     

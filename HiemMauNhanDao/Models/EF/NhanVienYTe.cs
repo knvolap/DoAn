@@ -20,7 +20,7 @@ namespace Models.EF
         public string IdNVYT { get; set; }
 
         [StringLength(20)]
-        public string idTK { get; set; }
+        public string idTTCN { get; set; }
         [StringLength(20)]
         public string idBenhVien  { get; set; }
 
@@ -37,12 +37,13 @@ namespace Models.EF
         [StringLength(50)]
         public string trangThai { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
+      
 
         public virtual ChucVu ChucVu { get; set; }
         public virtual BenhVien BenhVien { get; set; }
+        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
 
-        public virtual TaiKhoan TaiKhoan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
     }
 }

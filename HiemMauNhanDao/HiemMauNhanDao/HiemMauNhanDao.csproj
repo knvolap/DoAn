@@ -465,6 +465,7 @@
     <Content Include="Views\NhanVienYTe\_leftMenu2.cshtml" />
     <Content Include="Views\NhanVienYTe\EditKQHM.cshtml" />
     <Content Include="Views\NhanVienYTe\EditBV.cshtml" />
+    <Content Include="Views\NguoiDung\EditTTCN.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

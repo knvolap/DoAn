@@ -25,7 +25,7 @@ namespace Models.DAO
             // return 1: đăng nhập thành cônh
             //return -1: tài khoản bị khoá
             //retunrn -2: Không có quyền truy cập
-            var result = db.TaiKhoans.SingleOrDefault(x => x.userName == UserName);
+            var result = db.ThongTinCaNhans.SingleOrDefault(x => x.userName == UserName);
             if (result == null)
             {
                 return 0;
@@ -61,7 +61,7 @@ namespace Models.DAO
             // return 1: đăng nhập thành cônh
             //return -1: tài khoản bị khoá
             //retunrn -2: Không có quyền truy cập
-            var result = db.TaiKhoans.SingleOrDefault(x => x.userName == UserName);
+            var result = db.ThongTinCaNhans.SingleOrDefault(x => x.userName == UserName);
             if (result == null)
             {
                 return 0;
@@ -89,9 +89,9 @@ namespace Models.DAO
             }
         }
 
-        public TaiKhoan GetById(string UserName)
+        public ThongTinCaNhan GetById(string UserName)
         {
-            return db.TaiKhoans.SingleOrDefault(x => x.userName == UserName);
+            return db.ThongTinCaNhans.SingleOrDefault(x => x.userName == UserName);
         }
         public Quyen GetByIdQuyen(string id)
         {

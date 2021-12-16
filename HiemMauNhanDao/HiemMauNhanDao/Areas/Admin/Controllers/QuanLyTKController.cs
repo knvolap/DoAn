@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Areas.Admin.Controllers
 {
-    public class QuanLyTKController : Controller
+    public class QuanLyTKController : BaseController
     {
         private DbContextHM db = new DbContextHM();
         QuanLyTKServices _taiKhoan = new QuanLyTKServices();
@@ -29,19 +29,19 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTK(TaiKhoan taiKhoan)
+        public ActionResult CreateTK(ThongTinCaNhan taiKhoan)
         {
             if (ModelState.IsValid)
             {            
-                _taiKhoan.themTK(taiKhoan);
                 var encryptedMd5Pas = Encryptor.MD5Hash(taiKhoan.password);
                 taiKhoan.password = encryptedMd5Pas;
-                //SetAlert("Thêm thành công", "success");
+                _taiKhoan.themTK(taiKhoan);
+                SetAlert("Thêm thành công", "success");
                 return RedirectToAction("Index");
             }
             else
             {
-                //SetAlert("Thêm thất bại", "error");
+                SetAlert("Thêm thất bại", "error");
                 return RedirectToAction("Index");
             }
             return View(taiKhoan);
@@ -54,16 +54,39 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditTK(TaiKhoan taiKhoan )
-        {
-            _taiKhoan.SuaTk(taiKhoan);
-            return RedirectToAction("Index");
+        public ActionResult EditTK(ThongTinCaNhan taiKhoan )
+        {                
+            if (ModelState.IsValid)
+            {
+                var encryptedMd5Pas = Encryptor.MD5Hash(taiKhoan.password);
+                taiKhoan.password = encryptedMd5Pas;
+                _taiKhoan.SuaTk(taiKhoan);
+                SetAlert("Cập nhật thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Cập nhật thất bại", "error");
+                return RedirectToAction("Index");
+            }
+          
         }
 
         public ActionResult Delete(string id)
         {
-            _taiKhoan.xoaTK(id);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+
+                _taiKhoan.xoaTK(id);
+                SetAlert("Xóa thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Xóathất bại", "error");
+                return RedirectToAction("Index");
+            }
+                
         }
 
         public ActionResult Details(string id)

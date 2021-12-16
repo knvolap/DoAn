@@ -21,7 +21,7 @@ namespace Models.EF
 
         [Required]
         [StringLength(20)]
-        public string idTK { get; set; }
+        public string idTTCN{ get; set; }
 
         [Required]
         [StringLength(50)]
@@ -38,15 +38,16 @@ namespace Models.EF
         [StringLength(10)]
         public string soDT { get; set; }
 
-        [Column(TypeName = "image")]
+    
         [Required]
-        public byte[] minhChung { get; set; }
+        [StringLength(50)]
+        public string minhChung { get; set; }
 
         public bool? trangThai { get; set; }
+      
+        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
-
-        public virtual TaiKhoan TaiKhoan { get; set; }
     }
 }

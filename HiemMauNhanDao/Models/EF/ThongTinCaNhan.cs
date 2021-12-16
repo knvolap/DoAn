@@ -13,16 +13,26 @@ namespace Models.EF
 
         public ThongTinCaNhan()
         {
+            DonViLienKets = new HashSet<DonViLienKet>();
+            NhanVienYTes = new HashSet<NhanVienYTe>();
             PhieuDKHMs = new HashSet<PhieuDKHM>();
         }
         [Key]
         [StringLength(20)]
-        public string idTTCN { get; set; }
-
+        public string IdTTCN { get; set; }
+       
         [Required]
         [StringLength(20)]
-        public string idTK { get; set; }
+        public string idQuyen { get; set; }
 
+        [Required]
+        [StringLength(50)]
+        public string userName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string password { get; set; }
+  
         [Required]
         [StringLength(100)]
         public string hoTen { get; set; }
@@ -42,8 +52,8 @@ namespace Models.EF
         [Column(TypeName = "date")]
         public DateTime ngaySinh { get; set; }
 
-        [StringLength(1)]
-        public string gioiTinh { get; set; }
+
+        public bool? gioiTinh { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -55,6 +65,9 @@ namespace Models.EF
         [StringLength(50)]
         public string trinhDo { get; set; }
 
+        [StringLength(50)]
+        public string coQuanTH { get; set; }
+
         public int? soLanHM { get; set; }
 
         [StringLength(2)]
@@ -62,9 +75,18 @@ namespace Models.EF
 
         public bool? trangThai { get; set; }
 
-        public virtual TaiKhoan TaiKhoan { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual Quyen Quyen { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuDKHM> PhieuDKHMs { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DonViLienKet> DonViLienKets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LichSuHienMau> LichSuHienMaus { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanVienYTe> NhanVienYTes { get; set; }
+
     }
 }

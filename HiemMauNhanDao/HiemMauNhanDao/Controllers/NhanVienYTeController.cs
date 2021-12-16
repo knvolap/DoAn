@@ -1,4 +1,6 @@
-﻿using Models.EF;
+﻿using HiemMauNhanDao.Areas.Admin.Controllers;
+using HiemMauNhanDao.Common;
+using Models.EF;
 using Models.Services;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class NhanVienYTeController : Controller
+    public class NhanVienYTeController : BaseController
     {
         NhanVienYTeServices _nhanvien = new NhanVienYTeServices();
         BenhVienServices _BenhVien = new BenhVienServices();
@@ -38,12 +40,20 @@ namespace HiemMauNhanDao.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateNVYT(TaiKhoan taiKhoanNV)
-        {
+        public ActionResult CreateNVYT(ThongTinCaNhan taiKhoanNV)
+        {         
             if (ModelState.IsValid)
             {
+                var encryptedMd5Pas = Encryptor.MD5Hash(taiKhoanNV.password);
+                taiKhoanNV.password = encryptedMd5Pas;
+              
                 _nhanvien.addNVYT(taiKhoanNV);
-                // SetAlert("Thêm thành công", "success");
+                SetAlert("Thêm thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Thêm thất bại", "error");
                 return RedirectToAction("Index");
             }
             return View(taiKhoanNV);

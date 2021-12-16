@@ -1,4 +1,4 @@
-﻿@model Models.EF.TaiKhoan
+﻿@model Models.EF.ThongTinCaNhan
 
 @{
     ViewBag.Title = "Details";
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.password)
+      @*      @Html.DisplayNameFor(model => model.password)*@
         </dt>
 
         <dd>
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdTK }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdTTCN }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

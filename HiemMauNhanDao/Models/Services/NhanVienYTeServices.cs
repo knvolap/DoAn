@@ -1,4 +1,5 @@
 ﻿using Models.EF;
+using Models.ViewModel;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -18,48 +19,81 @@ namespace Models.Services
         {
             db = new DbContextHM();
         }
-        public List<TaiKhoan> ListTKNV()
+        public List<ThongTinCaNhan> ListTKNV()
         {
-            return db.TaiKhoans.ToList();
+            return db.ThongTinCaNhans.ToList();
+        }
+        public List<NhanVienYTe> ListNV()
+        {
+            return db.NhanVienYTes.ToList();
         }
 
         //DanhSachTK
-        public IEnumerable<TaiKhoan>ListAllPageTKNV (string searchString1, int page, int pageSize)
+        public IEnumerable<ThongTinCaNhan>ListAllPageTKNV (string searchString1, int page, int pageSize)
         {
-            IEnumerable<TaiKhoan> model = db.TaiKhoans;
+            IEnumerable<ThongTinCaNhan> model = db.ThongTinCaNhans;
             if(!string.IsNullOrEmpty(searchString1))
             {
-                model = model.Where(x => x.IdTK.Contains(searchString1) || x.userName.Contains(searchString1));
+                model = model.Where(x => x.IdTTCN.Contains(searchString1) || x.userName.Contains(searchString1));
             }
             return model.OrderByDescending(x => x.idQuyen= "Q05").ToPagedList(page, pageSize);
         }
 
+        public void addNVYT2(NhanVienView nhanVienView)
+        {           
+            var id1= db.ThongTinCaNhans.Max(x => x.IdTTCN);
+            string phanDau1 = id1.Substring(0, 2);
+            int so1 = Convert.ToInt32(id1.Substring(2, 2)) + 1;       
+            var nhanvien2 = new NhanVienView()
+            {
+                IdTTCN = so1 > 9 ? phanDau1 + so1 : phanDau1 + "0" + so1,               
+                idQuyen = nhanVienView.idQuyen = "Q05",
+                userName = nhanVienView.userName,
+                password = nhanVienView.password,
+                trangThai = nhanVienView.trangThai               
+            };
+            var id2 = db.NhanVienYTes.Max(x => x.IdNVYT);
+            string phanDau2 = id2.Substring(0, 2);
+            int so2 = Convert.ToInt32(id2.Substring(2, 2)) + 1;
+            var nhanvien3 = new NhanVienView()
+            {
+                IdNVYT = so1 > 9 ? phanDau2 + so2 : phanDau2 + "0" + so2,
+                IdTTCN = nhanVienView.IdTTCN,
+                idBenhVien = nhanVienView.idBenhVien ,
+                idChucVu = nhanVienView.idChucVu,
+                khoa = nhanVienView.khoa,
+                trinhDo = nhanVienView.trinhDo
+            };
+            //db.ThongTinCaNhans.Add(nhanvien2);
+            //db.NhanVienYTes.Add(nhanvien3);
+            db.SaveChanges();
+        }
 
 
-        public void addNVYT(TaiKhoan taiKhoan)
+        public void addNVYT(ThongTinCaNhan taiKhoan)
         {
-            var id = db.TaiKhoans.Max(x => x.IdTK);
+            var id = db.ThongTinCaNhans.Max(x => x.IdTTCN);
             string phanDau = id.Substring(0, 2);
             int so = Convert.ToInt32(id.Substring(2, 2)) + 1;
-            var nhanvien = new TaiKhoan()
+            var nhanvien = new ThongTinCaNhan()
             {
-                IdTK = so > 9 ? phanDau + so : phanDau + "0" + so,
+                IdTTCN = so > 9 ? phanDau + so : phanDau + "0" + so,
                 idQuyen = taiKhoan.idQuyen = "Q05",
                 userName = taiKhoan.userName,
                 password = taiKhoan.password,
                 trangThai = taiKhoan.trangThai
             };
-            db.TaiKhoans.Add(nhanvien);
+            db.ThongTinCaNhans.Add(nhanvien);
             db.SaveChanges();
         }
-        public TaiKhoan GetByIdNVYT(string id)
+        public ThongTinCaNhan GetByIdNVYT(string id)
         {
-            return db.TaiKhoans.Where(s => s.IdTK.CompareTo(id) == 0).SingleOrDefault();
+            return db.ThongTinCaNhans.Where(s => s.IdTTCN.CompareTo(id) == 0).SingleOrDefault();
         }
 
-        public void editNVYT(TaiKhoan taiKhoan)
+        public void editNVYT(ThongTinCaNhan taiKhoan)
         {
-            TaiKhoan nvyt = GetByIdNVYT(taiKhoan.IdTK);
+            ThongTinCaNhan nvyt = GetByIdNVYT(taiKhoan.IdTTCN);
             nvyt.password = taiKhoan.password;
 
             db.SaveChanges();
@@ -70,8 +104,8 @@ namespace Models.Services
         {
             try
             {
-                var xoaNVYT = db.TaiKhoans.Find(id);
-                db.TaiKhoans.Remove(xoaNVYT);
+                var xoaNVYT = db.ThongTinCaNhans.Find(id);
+                db.ThongTinCaNhans.Remove(xoaNVYT);
                 return true;
             }
             catch (Exception)

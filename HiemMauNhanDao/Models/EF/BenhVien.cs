@@ -43,7 +43,7 @@ namespace Models.EF
 
         public bool? trangThai { get; set; }
 
-
+        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhanVienYTe> NhanVienYTes { get; set; }

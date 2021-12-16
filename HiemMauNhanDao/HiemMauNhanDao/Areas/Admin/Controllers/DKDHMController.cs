@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Areas.Admin.Controllers
 {
-    public class DKDHMController : Controller
+    public class DKDHMController : BaseController
     {
         DKDHMServices _DKDHM = new DKDHMServices();
         // GET: Admin/DKDHM
@@ -32,12 +32,12 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _DKDHM.EditCTDHM(chiTietDHM);
-                // SetAlert("Chỉnh sửa thành công", "success");
+                 SetAlert("Chỉnh sửa thành công", "success");
                 return RedirectToAction("Index");
             }
             else
             {
-                //SetAlert("Chỉnh sửa thất bại", "warning");
+                SetAlert("Chỉnh sửa thất bại", "warning");
                 return RedirectToAction("Index");
             }
             return View(chiTietDHM);

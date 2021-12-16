@@ -20,17 +20,30 @@ CREATE TABLE Quyen(
 )
 GO
 
-
---Table 2 TaiKhoan
-CREATE TABLE TaiKhoan(
-	IdTK		VARCHAR(20) PRIMARY KEY,
-	idQuyen		VARCHAR(20)  not null,
-	userName	VARCHAR (50)UNIQUE not null,
-	password	VARCHAR(50) not null,
+--Table 2 ThongTinCaNhan
+CREATE TABLE ThongTinCaNhan(
+	IdTTCN		 VARCHAR(20) PRIMARY KEY,
+	idQuyen		 VARCHAR(20)  null,
+	userName	VARCHAR (50)UNIQUE  null,
+	password	VARCHAR(50)  null,
+	hoTen		 NVARCHAR(50)  NULL,
+	Email		 VARCHAR(50)   UNIQUE NULL,	
+	CCCD		 VARCHAR(12) UNIQUE  NULL,
+	soDT		 CHAR(11)  UNIQUE  NULL,
+	ngaySinh	 DATE  NULL,
+	gioiTinh	 bit DEFAULT '1' CHECK ( gioiTinh IN ( '0', '1' ) ), 
+	diaChi		 NVARCHAR(100)  NULL,
+	ngheNghiep	 NVARCHAR(100) NULL,
+	trinhDo		 NVARCHAR(50) NULL,
+	soLanHM		 int  null,
+	coQuanTH	 NVARCHAR(50) NULL,
+	nhomMau		 VARCHAR(2) null,
 	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
 
+
+--B4
 
 --Table 3 DotHienMau
 CREATE TABLE DotHienMau(
@@ -44,24 +57,6 @@ CREATE TABLE DotHienMau(
 GO
 
 
---Table 4 ThongTinCaNhan
-CREATE TABLE ThongTinCaNhan(
-	idTTCN		 VARCHAR(20) PRIMARY KEY,
-	idTK		 VARCHAR(20) not null,	
-	hoTen		 NVARCHAR(50)  NULL,
-	Email		 VARCHAR(50) UNIQUE  NULL,	
-	CCCD		 VARCHAR(12) UNIQUE  NULL,
-	soDT		 CHAR(11)  UNIQUE  NULL,
-	ngaySinh	 DATE  NULL,
-	gioiTinh	 bit DEFAULT '1' CHECK ( gioiTinh IN ( '0', '1' ) ), 
-	diaChi		 NVARCHAR(100)  NULL,
-	ngheNghiep	 NVARCHAR(100) NULL,
-	trinhDo		 NVARCHAR(50) NULL,
-	soLanHM		 int  null,
-	nhomMau		 VARCHAR(2) null,
-	trangThai	 NVARCHAR(50) null
-)
-GO
 
 --Table 5 BenhVien
 CREATE TABLE BenhVien(
@@ -87,7 +82,7 @@ GO
 --Table 7 NhanVienYTe
 CREATE TABLE NhanVienYTe(
 	IdNVYT		VARCHAR(20) PRIMARY KEY,
-	idTK		VARCHAR(20) FOREIGN KEY REFERENCES dbo.TaiKhoan(IdTK)  ON DELETE CASCADE ON UPDATE CASCADE ,
+	idTTCN		VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE ,
 	idBenhVien	 VARCHAR(20)FOREIGN KEY REFERENCES dbo.BenhVien(IdBenhVien)  ON DELETE CASCADE ON UPDATE CASCADE ,
 	idChucVu	VARCHAR(20)   null,
 	khoa		NVARCHAR(20)   null, --  Khoa Huyết học - Khoa Lọc máu - Khoa Truyền máu 	
@@ -100,7 +95,7 @@ GO
 --Table 8 DonViLienKet
 CREATE TABLE DonViLienKet(
 	IdDVLK			VARCHAR(20) PRIMARY KEY,
-	idTK			VARCHAR(20) FOREIGN KEY REFERENCES dbo.TaiKhoan(IdTK) ON DELETE CASCADE ON UPDATE CASCADE  not null,
+	idTTCN			VARCHAR(20) FOREIGN KEY REFERENCES  dbo.ThongTinCaNhan(IdTTCN) ON DELETE CASCADE ON UPDATE CASCADE  not null,
 	TenDonVi		NVARCHAR (50) not null,
 	diaChi			NVARCHAR(100)  NULL,
 	Email			VARCHAR(50) UNIQUE  NULL,	
@@ -227,48 +222,52 @@ CREATE TABLE DSNVTH(
 )
 GO
 
---Table 16 LichSuHienMau
+--Table 15 LichSuHienMau
 CREATE TABLE LichSuHienMau(
-	idTK			VARCHAR(20) FOREIGN KEY REFERENCES dbo.TaiKhoan(IdTK)  ON DELETE CASCADE ON UPDATE CASCADE not null,
+	idTTCN			VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE not null,
 	idKQHM			VARCHAR(20) FOREIGN KEY REFERENCES dbo.KetQuaHienMau(IdKQHM) not null,
 	quaTang			NVARCHAR(50),
-	anhChungNhan	IMAGE 
+	anhChungNhan  VARCHAR(50)  NULL,	 
 )
 GO
 
 --RÀNG BUỘC CÁC BẢNG--
 
---BẢNG 2---TaiKhoan
-ALTER TABLE TaiKhoan
+
+-- BẢNG 2--ThongTinCaNhan
+ALTER TABLE ThongTinCaNhan
 	ADD CONSTRAINT FK_TK_idRole FOREIGN KEY (idQuyen) REFERENCES Quyen(IdQuyen)ON DELETE CASCADE ON UPDATE CASCADE,
-		CONSTRAINT CK_TK_userNameL CHECK ( userName LIKE '[A-Za-z0-9]%@gmail.com'
-										OR userName LIKE '[A-Za-z0-9]%@yahoo.com.vn'
-										OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
-										OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.com' 
-									  OR userName LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com.vn'
-										OR userName LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
-	
+		CONSTRAINT CHECK_TTCN_NGAYSINH	CHECK (dateDiff(year, ngaySinh, getdate())>=18  ),
+		CONSTRAINT CHECK_PDKHM_soLanHM	CHECK (soLanHM >=0  or soLanHM <30  ),
+		CONSTRAINT CK_TTCN_userNameL CHECK ( userName LIKE '[A-Za-z0-9]%@gmail.com'
+											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
+											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%..[A-Za-z]%' 
+											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
+											OR userName LIKE '[A-Za-z0-9]%@sv.ute.udn.vn'
+											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com'
+											OR userName LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+
+		CONSTRAINT CHECK_TTCN_EMAIL		CHECK ( Email LIKE '[A-Za-z0-9]%@gmail.com' 											
+											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
+											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%..[A-Za-z]%' 
+											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
+											 OR Email LIKE '[A-Za-z0-9]%@sv.ute.udn.vn'
+											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com'
+											 OR Email LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+		
+		CONSTRAINT CHECK_TTCN1_soDT		CHECK ( soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+											or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'  ),
+		CONSTRAINT CHECK_TTCN_CCCD		CHECK ( CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+											 or CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+		
 GO
-
-
 
 ---- BẢNG 3--DotHienMau
 --ALTER TABLE DotHienMau
 --	ADD  CONSTRAINT CK_DHM_TrangThai check(trangThai in ( N'Hết hạn' , N'Đang diễn ra',N'Đủ số lượng'))
 --GO
 
--- BẢNG 4--ThongTinCaNhan
-ALTER TABLE ThongTinCaNhan
-	ADD CONSTRAINT FK_TTCN_IdTK			FOREIGN KEY (idTK) REFERENCES TaiKhoan(idTK)ON DELETE CASCADE ON UPDATE CASCADE,	
-		CONSTRAINT CHECK_TTCN_NGAYSINH	CHECK (dateDiff(year, ngaySinh, getdate())>=18  ),
-		CONSTRAINT CHECK_PDKHM_soLanHM	CHECK (soLanHM >=0  or soLanHM <30  ),
-		CONSTRAINT CHECK_TTCN_EMAIL		CHECK ( Email LIKE '[A-Za-z0-9]%@gmail.com' OR Email LIKE '[A-Za-z0-9]%@sv.ute.udn.vn'
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z].com.vn' OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'),
-		CONSTRAINT CHECK_TTCN1_soDT		CHECK ( soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
-											or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'  ),
-		CONSTRAINT CHECK_TTCN_CCCD		CHECK ( CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' or CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-		CONSTRAINT CHECK_TTCN_nhomMau	CHECK (nhomMau in ( 'A+','A-','B+','B-','AB+','AB-','O+','O-'))	
-GO
+
 
 -- BẢNG 5--BenhVien
 ALTER TABLE BenhVien
@@ -287,9 +286,8 @@ GO
 
 -- BẢNG 7--
 ALTER TABLE NhanVienYTe
-	ADD CONSTRAINT FK_NVYT_IdKChucVu FOREIGN KEY (idChucVu) REFERENCES ChucVu(IdChucVu)ON DELETE CASCADE ON UPDATE CASCADE,		
-		CONSTRAINT CK_NVYT_nhiemVu check(nhiemVu in ( N'Lấy máu' , N'Khám sức khỏe',N'Xét nghiệm máu','Thêm nhân viên'))
-		--CONSTRAINT CK_NVYT_TrangThai check(trangThai in ( N'Hoạt động' , N'Nghỉ',N'Đã phân công'))
+	ADD CONSTRAINT FK_NVYT_IdKChucVu FOREIGN KEY (idChucVu) REFERENCES ChucVu(IdChucVu)ON DELETE CASCADE ON UPDATE CASCADE
+
 GO
 
 
@@ -350,12 +348,10 @@ GO
 
 -- BẢNG 14--
 ALTER TABLE KetQuaHienMau
-	ADD CONSTRAINT FK_KQHM_idDotTC	FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM)ON DELETE CASCADE ON UPDATE CASCADE,		
-		CONSTRAINT CHECK_KQHM_nhomMau	CHECK (nhomMau in ( 'A+','A-','B+','B-','AB+','AB-','O+','O-')),
+	ADD CONSTRAINT FK_KQHM_idDotTC	FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM)ON DELETE CASCADE ON UPDATE CASCADE,			 
 		CONSTRAINT CHECK_KQHM_HST		CHECK (HST >=1 ),
 		CONSTRAINT CHECK_KQHM_HBV		CHECK (HBV >=1 ),
 		CONSTRAINT CHECK_KQHM_MSD		CHECK (MSD >=1 ),
-		CONSTRAINT CHECK_KQHM_luongMauHien	CHECK (luongMauHien in ( '250','350','450')),
 		CONSTRAINT CHECK_KQHM_hienMau		default 0 for hienMau	,
 		CONSTRAINT CHECK_KQHM_canNang		CHECK (canNang	 >=1 )
 	--	CONSTRAINT CK_KQHM_TrangThai	check(trangThai in ( N'Đang cập nhật' ,N'Đã cập nhật', N'Chưa cập nhật' ))		
@@ -377,22 +373,20 @@ VALUES  ( 'Q01', N'Admin'),
 		( 'Q05', N'Nhân viên y tế'),
 		( 'Q06', N'Người dùng')	
 GO
---B2
-INSERT INTO dbo.TaiKhoan
-        (IdTK,idQuyen, userName ,password)
-VALUES  ('TK01', 'Q01', 'admin@gmail.com','123123'),
-		('TK02', 'Q02', 'banchidao@gmail.com','123123'),
-		('TK03', 'Q03', 'donviLK@gmail.com','123123'),
-		('TK04', 'Q04', 'bvDaKhoa@gmail.com','123123'),
-		('TK05', 'Q05', 'nhanvien1@gmail.com','123123'),
-		('TK06', 'Q06', 'nguoidung1@gmail.com','123123'),
-		('TK07', 'Q06', 'nguoidung2@gmail.com','123123'),
-		('TK08', 'Q06', 'nguoidung3@gmail.com','123123'),
-		('TK09', 'Q06', 'nguoidung4@gmail.com','123123'),
-		('TK10', 'Q03', 'demodvlk@gmail.com','123123'),
-		('TK11', 'Q04', 'demobv@gmail.com','123123')
-GO
 
+--B2
+ INSERT INTO dbo.ThongTinCaNhan
+		(IdTTCN,idQuyen,userName,password,hoTen,Email,CCCD,soDT,ngaySinh,soLanHM,nhomMau,gioiTinh,trangThai,diaChi,ngheNghiep,trinhDo,coQuanTH )
+VALUES	('TT01','Q01', 'admin@gmail.com','123123',N'Trần Võ Lập','tvl@gmail.com','215496444111','0375163333','30/04/2000','','1','','1',N'diaChi',N'ngheNghiep',N'trinhDo',N'coQuanTH'),
+		('TT02','Q02', 'banchidao@gmail.com','123123',N'Ban chỉ đạo','bancd@gmail.com','215496444222','0375162222','','1','','','1',N'',N'',N'',N''),
+		('TT03','Q03', 'bvDaKhoa@gmail.com','123123',N'Thành Nam','bvDaKhoa@gmail.com','215496444433','0375164333','','1','','','1',N'',N'',N'',N''),
+		('TT04','Q04', 'donviLK@gmail.com','123123',N'Minh Nhật','donviLK@gmail.com','215496444221','0375167222','','1','','','1',N'',N'',N'',N''),
+		('TT05','Q05', 'nhanvien1@gmail.com','123123',N'Khắc Huy','nhanvien1@gmail.com','215496444423','0375564333','','1','','','1',N'',N'',N'',N''),
+		('TT06','Q06', 'nguoidung1@gmail.com','123123',N'Nam Cường','nguoidung1@gmail.com','215496644228','0375162522','','1','','','1',N'',N'',N'',N''),
+		('TT07','Q06', 'nguoidung2@gmail.com','123123',N'Tiến Đạt','nguoidung2@gmail.com','215496844439','0375164933','','1','','','1',N'',N'',N'',N''),
+		('TT08','Q03', 'bvDaKhoa2@gmail.com','123123',N'Trần Thành','bvDaKhoa2@gmail.com','215496544433','0775167333','','1','','','1',N'',N'',N'',N''),
+		('TT09','Q04', 'donviLK2@gmail.com','123123',N'Trường Giang','donviLK2@gmail.com','215496944221','0975164222','','0','','','1',N'',N'',N'',N'')
+GO		
 
 
 --B3
@@ -403,13 +397,7 @@ VALUES	('DHM01',N'Hiến máu nhân đạo quý 1 năm 2021',N'Bổ sung nguồn
 		('DHM03',N'Hiến máu nhân đạo quý 3 năm 2021',N'Bổ sung nguồn máu cho thành phố Đà Nẵng','07/07/2021','07/09/2021','0'),
 		('DHM04',N'Hiến máu nhân đạo quý 4 năm 2021',N'Bổ sung nguồn máu cho thành phố Đà Nẵng','07/10/2021','07/12/2021','1')
 GO
---B4
-INSERT INTO dbo.ThongTinCaNhan
-		(idTTCN,idTK,hoTen,Email,CCCD,soDT,ngaySinh,gioiTinh,diaChi,ngheNghiep,trinhDo,nhomMau,soLanHM,trangThai )
-VALUES	('TT01','TK06',N'Trần Võ Lập','knvolap@sv.ute.udn.vn','215496444222','0375163016','30/04/2000','',N'10 Thanh Sơn- Hải Châu - Đà Nẵng',N'Sinh Viên',N'Kỹ sư','A-','1',''),
-		('TT02','TK07',N'Nguyễn Ngọc Huy','ngochuy@gmail.com','215496444111','0375163333','16/06/2000','',N'40 Hải Hồ - Hải Châu - Đà Nẵng',N'Sinh Viên',N'Kỹ sư','A-','1',''),
-		('TT03','TK08',N'Minh Hiếu','minhhieu@sv.ute.udn.vn','215496444333','0375165555','20/04/1999','',N'10 Thanh Long- Hải Châu - Đà Nẵng',N'Sinh Viên',N'Kỹ sư','A-','1','')
-GO
+
 
 --B5
 INSERT INTO dbo.BenhVien
@@ -430,22 +418,22 @@ GO
 
 --B7
 INSERT INTO dbo.NhanVienYTe
-		(IdNVYT,idTK,idBenhVien,idChucVu,khoa,,trinhDo,trangThai )
-VALUES	('NV01','TK04','BV01','CV01',N'Khoa Truyền máu',N'Giáo sư ','1'),
-		('NV02','TK05','BV01','CV02',N'Khoa Truyền máu',N'Đại học','1'),
-		('NV03','TK11','BV02','CV03',N'Khoa Truyền máu',N'Đại học','1')	
+		(IdNVYT,idTTCN,idBenhVien,idChucVu,khoa,trinhDo,trangThai )
+VALUES	('NV01','TT03','BV01','CV01',N'Khoa Truyền máu',N'Giáo sư ','1'),
+		('NV02','TT05','BV01','CV02',N'Khoa Truyền máu',N'Đại học','1')	
 GO
 
-Select  TenBenhVien,IdNVYT,idTK,trinhDo
-from NhanVienYTe nv ,  BenhVien bv
-where nv.idBenhVien=bv.IdBenhVien
+--Select  TenBenhVien,IdNVYT,idTK,trinhDo
+--from NhanVienYTe nv ,  BenhVien bv
+--where nv.idBenhVien=bv.IdBenhVien
 
 
 --B8
 INSERT INTO dbo.DonViLienKet
-		(IdDVLK, idTK,TenDonVi,diaChi,Email,soDT,minhChung,trangThai)
-VALUES	('DV01','TK03',N'Đại học Sư Phạm Kỹ Thuật',N'48 Cao Thắng-Hải Châu-Đà Nẵng','SPKT@ute.udn.com','0900944499','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','1')	,	
-		('DV02','TK10',N'Chưa có',N'Đà Nẵng','demodv1@gmail.com','0900944411','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','1')
+		(IdDVLK, idTTCN,TenDonVi,diaChi,Email,soDT,minhChung,trangThai)
+VALUES	
+		('DV01','TT09',N'Chưa có',N'Đà Nẵng','demodv1@gmail.com','0900944411','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','1'),
+		('DV02','TT04',N'Đại học Sư Phạm Kỹ Thuật',N'48 Cao Thắng-Hải Châu-Đà Nẵng','SPKT@ute.udn.com','0900944499','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','1')		
 GO
 
 --B9
@@ -464,7 +452,7 @@ GO
 
 --B12
 INSERT INTO dbo.PhieuDKHM
-		( idPDKHM,idTTCN,idDTCHM,benhKhac,trangThai,,tgDuKien)
+		( idPDKHM,idTTCN,idDTCHM,benhKhac,trangThai,tgDuKien)
 VALUES	('PDK01','TT02','TCHM01',N'không có','','20/11/2021'),
 		('PDK02','TT03','TCHM01',N'không có','','20/11/2021')
 GO

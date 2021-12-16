@@ -1,4 +1,4 @@
-﻿@model Models.EF.TaiKhoan
+﻿@model Models.EF.ThongTinCaNhan
 
 @{
     ViewBag.Title = "EditTK";
@@ -15,7 +15,7 @@
 
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.IdTK)
+    @Html.HiddenFor(model => model.IdTTCN)
 
     <div class="form-group">
         <div class="col-md-10">

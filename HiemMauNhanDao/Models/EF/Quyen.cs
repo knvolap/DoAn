@@ -12,7 +12,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Quyen()
         {
-            TaiKhoans = new HashSet<TaiKhoan>();
+            ThongTinCaNhans = new HashSet<ThongTinCaNhan>();
         }
         [Key]
         [StringLength(20)]
@@ -23,6 +23,6 @@ namespace Models.EF
         public string tenQuyen { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
+        public virtual ICollection<ThongTinCaNhan> ThongTinCaNhans { get; set; }
     }
 }

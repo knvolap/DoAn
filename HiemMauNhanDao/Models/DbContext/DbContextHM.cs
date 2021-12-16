@@ -21,7 +21,6 @@ namespace Models.EF
         public virtual DbSet<PhieuDKHM> PhieuDKHMs { get; set; }
         public virtual DbSet<PhieuYCNM> PhieuYCNMs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
-        public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<ThongTinCaNhan> ThongTinCaNhans { get; set; }
         public virtual DbSet<chiTietDHM> chiTietDHMs { get; set; }
         public virtual DbSet<ChiTietPhanCong> ChiTietPhanCongs { get; set; }
@@ -55,7 +54,7 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<DonViLienKet>()
-                .Property(e => e.idTK)
+                .Property(e => e.idTTCN)
                 .IsUnicode(false);
 
             modelBuilder.Entity<DonViLienKet>()
@@ -135,7 +134,7 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<NhanVienYTe>()
-                .Property(e => e.idTK)
+                .Property(e => e.idTTCN)
                 .IsUnicode(false);
             modelBuilder.Entity<NhanVienYTe>()
                .Property(e => e.idBenhVien)
@@ -179,34 +178,15 @@ namespace Models.EF
                 .Property(e => e.IdQuyen)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.IdTK)
+            modelBuilder.Entity<ThongTinCaNhan>()
+                .Property(e => e.IdTTCN)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.idQuyen)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.userName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.password)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .HasMany(e => e.DonViLienKets)
-                .WithRequired(e => e.TaiKhoan)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .HasMany(e => e.ThongTinCaNhans)
-                .WithRequired(e => e.TaiKhoan)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<ThongTinCaNhan>()
+               .Property(e => e.userName)
+               .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
-                .Property(e => e.idTTCN)
+                .Property(e => e.password)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
@@ -215,7 +195,22 @@ namespace Models.EF
               .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
-                .Property(e => e.idTK)
+            .HasMany(e => e.LichSuHienMaus)
+            .WithRequired(e => e.ThongTinCaNhan)
+            .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ThongTinCaNhan>()
+                .HasMany(e => e.DonViLienKets)
+                .WithRequired(e => e.ThongTinCaNhan)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ThongTinCaNhan>()
+                .HasMany(e => e.NhanVienYTes)
+                .WithRequired(e => e.ThongTinCaNhan)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ThongTinCaNhan>()
+                .Property(e => e.idQuyen)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
@@ -230,12 +225,7 @@ namespace Models.EF
                 .Property(e => e.soDT)
                 .IsFixedLength()
                 .IsUnicode(false);
-
-            modelBuilder.Entity<ThongTinCaNhan>()
-                .Property(e => e.gioiTinh)
-                .IsFixedLength()
-                .IsUnicode(false);
-
+            
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.nhomMau)
                 .IsUnicode(false);
@@ -269,8 +259,9 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<LichSuHienMau>()
-                .Property(e => e.idTK)
+                .Property(e => e.idTTCN)
                 .IsUnicode(false);
+
 
             modelBuilder.Entity<LichSuHienMau>()
                 .Property(e => e.idKQHM)

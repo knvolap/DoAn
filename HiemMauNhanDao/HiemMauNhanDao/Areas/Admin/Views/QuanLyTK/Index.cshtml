@@ -1,5 +1,5 @@
 ﻿
-@model PagedList.IPagedList<Models.EF.TaiKhoan>
+@model PagedList.IPagedList<Models.EF.ThongTinCaNhan>
 @using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
@@ -100,7 +100,7 @@
                         @item.idQuyen
                     </td>
                     <td>
-                        @item.IdTK
+                        @item.IdTTCN
                     </td>
                     <td>
                         @item.userName
@@ -111,9 +111,9 @@
                         </button>
                     </td>
                     <td>
-                        @Html.ActionLink("Chỉnh sửa", "EditTK", new { id = item.IdTK }) |
-                         @Html.ActionLink("Chi tiết", "Details", new { id = item.IdTK }) |
-                        @Html.ActionLink("Xóa", "Delete", new { id = item.IdTK })
+                        @Html.ActionLink("Chỉnh sửa", "EditTK", new { id = item.IdTTCN }) |
+                         @Html.ActionLink("Chi tiết", "Details", new { id = item.IdTTCN }) |
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.IdTTCN })
                     </td>
                 </tr>
                 i++;

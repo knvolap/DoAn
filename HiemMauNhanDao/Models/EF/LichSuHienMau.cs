@@ -12,7 +12,7 @@ namespace Models.EF
         [Key]
         [Column(Order = 0)]
         [StringLength(20)]
-        public string idTK { get; set; }
+        public string idTTCN { get; set; }
 
         [Key]
         [Column(Order = 1)]
@@ -22,11 +22,11 @@ namespace Models.EF
         [StringLength(50)]
         public string quaTang { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] anhChungNhan { get; set; }
+        [StringLength(50)]
+        public string anhChungNhan { get; set; }
 
         public virtual KetQuaHienMau KetQuaHienMau { get; set; }
 
-        public virtual TaiKhoan TaiKhoan { get; set; }
+        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
     }
 }
