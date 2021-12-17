@@ -1,4 +1,4 @@
-﻿
+﻿@model Models.EF.ThongTinCaNhan
 @{
     ViewBag.Title = "NguoiDung";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,6 +18,20 @@
         </div>
     </div>
 </section>
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
+<div class="panel-body">
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
+</div>
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
@@ -27,17 +41,17 @@
                         <h4 class="widget_title">Đăng ký</h4>
                         <ul class="list cat-list">
                             <li>
-                                <a href="/Client/DangKyTK/NguoiDung" class="d-flex">
+                                <a href="/DangKyTK/NguoiDung" class="d-flex">
                                     <p>Thành viên</p>
                                 </a>
                             </li>
                             <li>
-                                <a href="/Client/DangKyTK/DonVi" class="d-flex">
+                                <a href="/DangKyTK/DonVi" class="d-flex">
                                     <p>Đơn vị liên kết</p>
                                 </a>
                             </li>
                             <li>
-                                <a href="/Client/DangKyTK/BenhVien" class="d-flex">
+                                <a href="/DangKyTK/BenhVien" class="d-flex">
                                     <p>Bệnh viện</p>
                                 </a>
                             </li>
@@ -49,41 +63,79 @@
 
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="blog_left_sidebar">
-                    <div class="section-top-border">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-8">
-                                <h3 class="mb-30">Vui lòng điền đầy đủ thông tin</h3>
-                                <form action="#">
-                                    <div class="mt-10">
-                                        <input type="text" name="first_name" placeholder="Họ và tên"
-                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'" required
-                                               class="single-input">
-                                    </div>
-                                    <div class="mt-10">
-                                        <input type="text" name="last_name" placeholder="Số điện thoại"
-                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại'" required
-                                               class="single-input">
-                                    </div>
-                                    <div class="mt-10">
-                                        <input type="email" name="EMAIL" placeholder="Email "
-                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tài khoản '" required
-                                               class="single-input">
-                                    </div>
-
-                                    <div class="mt-10">
-                                        <input type="password" name="last_name" placeholder="Mật khẩu"
-                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'" required
-                                               class="single-input" id="inputPassword5">
-                                    </div>
-
-                                </form>
+                    <h3 class="mb-10">Vui lòng điền đầy đủ thông tin</h3>
+                    <hr />
+                    <div>
+                        @using (Html.BeginForm("NguoiDung", "DangKyTK", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div style="font-weight: bold; text-align: center; color: red">
+                                @if (@ViewBag.ThongBao != null)
+                                {
+                                    <label>@ViewBag.ThongBao </label>
+                                }
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-8">
+                                    <form action="#">
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <a>Họ và tên </a>
+                                                        @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <a>Số điện thoại</a>
+                                                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <a>Email</a>
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <a>CCCD / CMND</a>
+                                                        @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
 
-                        </div>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <a>Tài khoản</a>
+                                                        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <a>Mật khẩu</a>
+                                                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "single-input", @type = "password", @name = "txtXacNhanMK" } })
+
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="text-center " style="margin-top:20px">
+                                <input class="genric-btn info radius" type="submit" value="Đăng Ký" />
+                            </div>
+                        }
+
                     </div>
-                    <div class="text-center ">
-                        <a class="genric-btn info radius" href="#">Đăng ký</a>
-                    </div>
+
                 </div>
             </div>
 

@@ -204,17 +204,18 @@ CREATE TABLE KetQuaHienMau(
 	luongMauHien	int  null,
 	hienMau			BIT  null,
 	noiDung			NVARCHAR(150)  NULL,
-	HST				int,
-	HBV				int,
-	MSD				int,
+	HST				int NULL,
+	HBV				int NULL,
+	MSD				int NULL,
 	phanUng			NVARCHAR (50) ,	
-	thoiGianLayMau	DATETIME  DEFAULT GETDATE()not null,
+	thoiGianLayMau	DATETIME null,
 	ghiChu			NVARCHAR (50) ,
 	trangThai		NVARCHAR(50) 
 )
 GO
 
---Table 15 DanhSachNhanVienThucHien
+
+--Table 14 DanhSachNhanVienThucHien
 CREATE TABLE DSNVTH(
 	idDTCHM		VARCHAR(20) ,
 	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,

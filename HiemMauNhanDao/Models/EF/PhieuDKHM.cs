@@ -19,7 +19,6 @@ namespace Models.EF
         [StringLength(20)]
         public string idPDKHM { get; set; }
 
-
         [Required]
         [StringLength(20)]
         public string idDTCHM { get; set; }
@@ -31,9 +30,7 @@ namespace Models.EF
         [StringLength(100)]
         public string benhKhac { get; set; }
 
-        [StringLength(50)]
-        public string trangThai { get; set; }
-
+        public bool? trangThai { get; set; }
 
         public DateTime? tgDuKien { get; set; }
 
@@ -64,9 +61,10 @@ namespace Models.EF
         public bool dangMangThai { get; set; }
 
         public virtual DotToChucHM DotToChucHM { get; set; }
-        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KetQuaHienMau> KetQuaHienMaus { get; set; }
+
+        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
     }
 }

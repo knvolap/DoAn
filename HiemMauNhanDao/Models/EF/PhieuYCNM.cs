@@ -9,6 +9,12 @@ namespace Models.EF
     [Table("PhieuYCNM")]
     public partial class PhieuYCNM
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PhieuYCNM()
+        {
+            ChiTietPhanCongs = new HashSet<ChiTietPhanCong>();
+        }
+
         [Key]
         [StringLength(20)]
         public string IdPhieuYCNM { get; set; }
@@ -21,13 +27,13 @@ namespace Models.EF
         [StringLength(20)]
         public string idDHM { get; set; }
 
-        public int soLuong { get; set; }
+        public int? soLuong { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime tgBatDau { get; set; }
+        public DateTime? tgBatDau { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime tgKetThuc { get; set; }
+        public DateTime? tgKetThuc { get; set; }
 
         public DateTime? tgCapnhat { get; set; }
 
@@ -38,5 +44,10 @@ namespace Models.EF
         public string trangThai { get; set; }
 
         public virtual DotHienMau DotHienMau { get; set; }
+
+        public virtual NhanVienYTe NhanVienYTe { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietPhanCong> ChiTietPhanCongs { get; set; }
     }
 }

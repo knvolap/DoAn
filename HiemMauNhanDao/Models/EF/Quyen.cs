@@ -14,6 +14,7 @@ namespace Models.EF
         {
             ThongTinCaNhans = new HashSet<ThongTinCaNhan>();
         }
+
         [Key]
         [StringLength(20)]
         public string IdQuyen { get; set; }

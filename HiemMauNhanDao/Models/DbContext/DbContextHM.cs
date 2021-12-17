@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
@@ -7,7 +7,8 @@ namespace Models.EF
 {
     public partial class DbContextHM : DbContext
     {
-        public DbContextHM() : base("name=DbContextHM")
+        public DbContextHM()
+            : base("name=DbContextHm")
         {
         }
 
@@ -21,12 +22,12 @@ namespace Models.EF
         public virtual DbSet<PhieuDKHM> PhieuDKHMs { get; set; }
         public virtual DbSet<PhieuYCNM> PhieuYCNMs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ThongTinCaNhan> ThongTinCaNhans { get; set; }
         public virtual DbSet<chiTietDHM> chiTietDHMs { get; set; }
         public virtual DbSet<ChiTietPhanCong> ChiTietPhanCongs { get; set; }
         public virtual DbSet<DSNVTH> DSNVTHs { get; set; }
         public virtual DbSet<LichSuHienMau> LichSuHienMaus { get; set; }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -43,11 +44,23 @@ namespace Models.EF
                 .IsFixedLength()
                 .IsUnicode(false);
 
+            modelBuilder.Entity<BenhVien>()
+                .Property(e => e.minhChung)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BenhVien>()
+                .HasMany(e => e.NhanVienYTes)
+                .WithOptional(e => e.BenhVien)
+                .WillCascadeOnDelete();
+
             modelBuilder.Entity<ChucVu>()
                 .Property(e => e.IdChucVu)
                 .IsUnicode(false);
 
-       
+            modelBuilder.Entity<ChucVu>()
+                .HasMany(e => e.NhanVienYTes)
+                .WithOptional(e => e.ChucVu)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<DonViLienKet>()
                 .Property(e => e.IdDVLK)
@@ -64,6 +77,10 @@ namespace Models.EF
             modelBuilder.Entity<DonViLienKet>()
                 .Property(e => e.soDT)
                 .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<DonViLienKet>()
+                .Property(e => e.minhChung)
                 .IsUnicode(false);
 
             modelBuilder.Entity<DonViLienKet>()
@@ -85,12 +102,6 @@ namespace Models.EF
                 .WithRequired(e => e.DotHienMau)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<DotHienMau>()
-                .HasMany(e => e.DotToChucHMs)
-                .WithRequired(e => e.DotHienMau)
-                .WillCascadeOnDelete(false);
-
-
             modelBuilder.Entity<DotToChucHM>()
                 .Property(e => e.IdDTCHM)
                 .IsUnicode(false);
@@ -100,9 +111,9 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<DotToChucHM>()
-              .HasMany(e => e.PhieuDKHMs)
-              .WithRequired(e => e.DotToChucHM)
-              .WillCascadeOnDelete(false);
+                .HasMany(e => e.DSNVTHs)
+                .WithOptional(e => e.DotToChucHM)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<KetQuaHienMau>()
                 .Property(e => e.IdKQHM)
@@ -110,6 +121,10 @@ namespace Models.EF
 
             modelBuilder.Entity<KetQuaHienMau>()
                 .Property(e => e.idDTCHM)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<KetQuaHienMau>()
+                .Property(e => e.idPDKHM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<KetQuaHienMau>()
@@ -136,9 +151,10 @@ namespace Models.EF
             modelBuilder.Entity<NhanVienYTe>()
                 .Property(e => e.idTTCN)
                 .IsUnicode(false);
+
             modelBuilder.Entity<NhanVienYTe>()
-               .Property(e => e.idBenhVien)
-               .IsUnicode(false);
+                .Property(e => e.idBenhVien)
+                .IsUnicode(false);
 
             modelBuilder.Entity<NhanVienYTe>()
                 .Property(e => e.idChucVu)
@@ -148,6 +164,14 @@ namespace Models.EF
                 .HasMany(e => e.chiTietDHMs)
                 .WithRequired(e => e.NhanVienYTe)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<NhanVienYTe>()
+                .HasOptional(e => e.DSNVTH)
+                .WithRequired(e => e.NhanVienYTe);
+
+            modelBuilder.Entity<PhieuDKHM>()
+                .Property(e => e.idPDKHM)
+                .IsUnicode(false);
 
             modelBuilder.Entity<PhieuDKHM>()
                 .Property(e => e.idDTCHM)
@@ -174,43 +198,34 @@ namespace Models.EF
                 .Property(e => e.idDHM)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<PhieuYCNM>()
+                .HasMany(e => e.ChiTietPhanCongs)
+                .WithRequired(e => e.PhieuYCNM)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Quyen>()
                 .Property(e => e.IdQuyen)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Quyen>()
+                .HasMany(e => e.ThongTinCaNhans)
+                .WithOptional(e => e.Quyen)
+                .WillCascadeOnDelete();
+
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.IdTTCN)
                 .IsUnicode(false);
-            modelBuilder.Entity<ThongTinCaNhan>()
-               .Property(e => e.userName)
-               .IsUnicode(false);
-
-            modelBuilder.Entity<ThongTinCaNhan>()
-                .Property(e => e.password)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ThongTinCaNhan>()
-              .HasMany(e => e.PhieuDKHMs)
-              .WithRequired(e => e.ThongTinCaNhan)
-              .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ThongTinCaNhan>()
-            .HasMany(e => e.LichSuHienMaus)
-            .WithRequired(e => e.ThongTinCaNhan)
-            .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ThongTinCaNhan>()
-                .HasMany(e => e.DonViLienKets)
-                .WithRequired(e => e.ThongTinCaNhan)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ThongTinCaNhan>()
-                .HasMany(e => e.NhanVienYTes)
-                .WithRequired(e => e.ThongTinCaNhan)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.idQuyen)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinCaNhan>()
+                .Property(e => e.userName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinCaNhan>()
+                .Property(e => e.password)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
@@ -225,10 +240,15 @@ namespace Models.EF
                 .Property(e => e.soDT)
                 .IsFixedLength()
                 .IsUnicode(false);
-            
+
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.nhomMau)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinCaNhan>()
+                .HasMany(e => e.NhanVienYTes)
+                .WithOptional(e => e.ThongTinCaNhan)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<chiTietDHM>()
                 .Property(e => e.idDHM)
@@ -262,28 +282,13 @@ namespace Models.EF
                 .Property(e => e.idTTCN)
                 .IsUnicode(false);
 
-
             modelBuilder.Entity<LichSuHienMau>()
                 .Property(e => e.idKQHM)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<LichSuHienMau>()
+                .Property(e => e.anhChungNhan)
+                .IsUnicode(false);
         }
-
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-
-        //    // Configure relationships  
-        //    //liên kết 1 vs N
-        //    //modelBuilder.Entity<TaiKhoan>().HasOne(b => b.Quyens).WithMany(b => b.TaiKhoans).HasForeignKey(p => p.idQuyen).OnDelete(DeleteBehavior.NoAction);
-        //    //modelBuilder.Entity<Room>().HasOne(b => b.Floors).WithMany(b => b.Rooms).HasForeignKey(p => p.floorId).OnDelete(DeleteBehavior.NoAction);
-        //    //modelBuilder.Entity<BookRoom>().HasOne(b => b.Users).WithMany(b => b.BookRooms).HasForeignKey(p => p.personBookingId).OnDelete(DeleteBehavior.NoAction);
-        //    //modelBuilder.Entity<User>().HasOne(b => b.Roles).WithMany(b => b.Users).HasForeignKey(p => p.roleId).OnDelete(DeleteBehavior.NoAction);
-
-        //    //liên kết  N vs 1
-        //    //modelBuilder.Entity<Room>().HasMany<BookRoom>(s => s.BookRooms)
-        //    //        .WithOne(ad => ad.Rooms).HasForeignKey(ad => ad.roomId);
-        //    //Data seeding -- nhập dữ liệu có sẵn ở file "ModelBuilderExtensions"
-        //    //modelBuilder.Seed();
-        //}
     }
 }

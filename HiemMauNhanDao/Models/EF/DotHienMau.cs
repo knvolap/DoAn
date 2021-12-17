@@ -25,31 +25,24 @@ namespace Models.EF
         [StringLength(50)]
         public string TenDHM { get; set; }
 
-        [Required]
         [StringLength(150)]
         public string noiDung { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime? tgBatDau { get; set; }
 
         [Column(TypeName = "date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime tgBatDau { get; set; }
+        public DateTime? tgKetThuc { get; set; }
 
-        [Column(TypeName = "date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime tgKetThuc { get; set; }
-
-        [Required]
         public bool? trangThai { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DotToChucHM> DotToChucHMs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuYCNM> PhieuYCNMs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DotToChucHM> DotToChucHMs { get; set; }
     }
 }

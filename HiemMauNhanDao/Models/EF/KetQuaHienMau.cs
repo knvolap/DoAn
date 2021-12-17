@@ -23,40 +23,36 @@ namespace Models.EF
         [StringLength(20)]
         public string idDTCHM { get; set; }
 
-        public int idPDKHM { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string idPDKHM { get; set; }
 
         [StringLength(10)]
         public string nhomMau { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string nguoiKham { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string nguoiXN { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string nguoiLayMau { get; set; }
 
-        public double canNang { get; set; }
+        public double? canNang { get; set; }
 
-        [Required]
         [StringLength(10)]
         public string machMau { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string tinhTrangLS { get; set; }
 
-        [Required]
         [StringLength(10)]
         public string huyetAp { get; set; }
 
-        public int luongMauHien { get; set; }
+        public int? luongMauHien { get; set; }
 
-        public bool hienMau { get; set; }
+        public bool? hienMau { get; set; }
 
         [StringLength(150)]
         public string noiDung { get; set; }
@@ -70,9 +66,7 @@ namespace Models.EF
         [StringLength(50)]
         public string phanUng { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime thoiGianLayMau { get; set; }
+        public DateTime? thoiGianLayMau { get; set; }
 
         [StringLength(50)]
         public string ghiChu { get; set; }
@@ -81,6 +75,7 @@ namespace Models.EF
         public string trangThai { get; set; }
 
         public virtual DotToChucHM DotToChucHM { get; set; }
+
         public virtual PhieuDKHM PhieuDKHM { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -13,6 +13,7 @@ namespace Models.EF
         public NhanVienYTe()
         {
             chiTietDHMs = new HashSet<chiTietDHM>();
+            PhieuYCNMs = new HashSet<PhieuYCNM>();
         }
 
         [Key]
@@ -21,29 +22,33 @@ namespace Models.EF
 
         [StringLength(20)]
         public string idTTCN { get; set; }
+
         [StringLength(20)]
-        public string idBenhVien  { get; set; }
+        public string idBenhVien { get; set; }
 
         [StringLength(20)]
         public string idChucVu { get; set; }
 
-        [Required]
         [StringLength(20)]
-        public string khoa { get; set; }    
-        [Required]
+        public string khoa { get; set; }
+
         [StringLength(50)]
         public string trinhDo { get; set; }
 
-        [StringLength(50)]
-        public string trangThai { get; set; }
+        public bool? trangThai { get; set; }
 
-      
+        public virtual BenhVien BenhVien { get; set; }
 
         public virtual ChucVu ChucVu { get; set; }
-        public virtual BenhVien BenhVien { get; set; }
-        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
+
+        public virtual DSNVTH DSNVTH { get; set; }
+
+        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhieuYCNM> PhieuYCNMs { get; set; }
     }
 }

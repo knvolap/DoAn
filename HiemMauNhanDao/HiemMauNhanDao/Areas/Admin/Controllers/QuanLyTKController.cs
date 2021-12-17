@@ -32,7 +32,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         public ActionResult CreateTK(ThongTinCaNhan taiKhoan)
         {
             if (ModelState.IsValid)
-            {            
+            {
                 var encryptedMd5Pas = Encryptor.MD5Hash(taiKhoan.password);
                 taiKhoan.password = encryptedMd5Pas;
                 _taiKhoan.themTK(taiKhoan);

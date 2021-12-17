@@ -30,5 +30,9 @@ namespace Models.EF
 
         [StringLength(50)]
         public string trangThai { get; set; }
+
+        public virtual DonViLienKet DonViLienKet { get; set; }
+
+        public virtual PhieuYCNM PhieuYCNM { get; set; }
     }
 }

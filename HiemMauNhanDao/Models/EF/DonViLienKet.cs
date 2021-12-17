@@ -13,6 +13,7 @@ namespace Models.EF
         public DonViLienKet()
         {
             chiTietDHMs = new HashSet<chiTietDHM>();
+            ChiTietPhanCongs = new HashSet<ChiTietPhanCong>();
         }
 
         [Key]
@@ -21,33 +22,32 @@ namespace Models.EF
 
         [Required]
         [StringLength(20)]
-        public string idTTCN{ get; set; }
+        public string idTTCN { get; set; }
 
         [Required]
         [StringLength(50)]
         public string TenDonVi { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string diaChi { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Email { get; set; }
 
-        [StringLength(10)]
+        [StringLength(11)]
         public string soDT { get; set; }
 
-    
-        [Required]
         [StringLength(50)]
         public string minhChung { get; set; }
 
         public bool? trangThai { get; set; }
-      
-        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
+
+        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietPhanCong> ChiTietPhanCongs { get; set; }
     }
 }

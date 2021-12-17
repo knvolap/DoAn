@@ -41,7 +41,45 @@ namespace Models.Services
         {
             return db.ThongTinCaNhans.Where(x => x.IdTTCN.CompareTo(id) == 0).SingleOrDefault();
         }
-        
+
+        public bool isExistTaiKhoan(string userName)
+        {
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.userName == userName).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistSDT(string soDT)
+        {
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.soDT == soDT).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistEmail(string email)
+        {
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.Email == email).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistCCCD(string cccd)
+        {
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.CCCD == cccd).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
         //Them
         public void ThemTTCN(ThongTinCaNhan thongTinCaNhan)
         {
@@ -71,6 +109,28 @@ namespace Models.Services
             db.ThongTinCaNhans.Add(ttcn);
             db.SaveChanges();
         }
+        //Them
+        public void ThemTTCN2(ThongTinCaNhan thongTinCaNhan)
+        {
+            var id = db.ThongTinCaNhans.Max(x => x.IdTTCN);
+            string phanDau = id.Substring(0, 2);
+            int so = Convert.ToInt32(id.Substring(2, 2)) + 1;
+            var ttcn = new ThongTinCaNhan()
+            {
+                IdTTCN = so > 9 ? phanDau + so : phanDau + "0" + so,
+                idQuyen = thongTinCaNhan.idQuyen ="Q06",
+                userName = thongTinCaNhan.userName,
+                password = thongTinCaNhan.password,
+                hoTen = thongTinCaNhan.hoTen,
+                Email = thongTinCaNhan.Email,
+                CCCD = thongTinCaNhan.CCCD,
+                soDT = thongTinCaNhan.soDT,              
+                trangThai = thongTinCaNhan.trangThai
+            };
+            db.ThongTinCaNhans.Add(ttcn);
+            db.SaveChanges();
+        }
+
 
         public void SuaTTCN (ThongTinCaNhan thongTinCaNhan)
         {

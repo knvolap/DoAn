@@ -12,8 +12,9 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BenhVien()
         {
-            NhanVienYTes  = new HashSet<NhanVienYTe >();
+            NhanVienYTes = new HashSet<NhanVienYTe>();
         }
+
         [Key]
         [StringLength(20)]
         public string IdBenhVien { get; set; }
@@ -31,19 +32,13 @@ namespace Models.EF
         public string Email { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(11)]
         public string soDTBV { get; set; }
 
-       
-        [Required]
         [StringLength(50)]
         public string minhChung { get; set; }
 
-        [Required]
-
         public bool? trangThai { get; set; }
-
-        public virtual ThongTinCaNhan ThongTinCaNhan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhanVienYTe> NhanVienYTes { get; set; }
