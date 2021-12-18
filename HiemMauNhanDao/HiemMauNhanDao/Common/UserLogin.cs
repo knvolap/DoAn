@@ -11,9 +11,12 @@ namespace HiemMauNhanDao.Common
     {
   
         public string UserID { set; get; }
+        public string AuthorID { set; get; }
+       
+        public string Name { set; get; }
         public string Accounts { set; get; }
         public string Password { set; get; }
-        public string AuthorID { set; get; }
+        
 
     }
 }

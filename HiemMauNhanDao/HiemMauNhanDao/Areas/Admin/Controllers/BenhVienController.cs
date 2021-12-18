@@ -27,6 +27,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateBV(BenhVien benhVien )
         {           
             if (ModelState.IsValid)
@@ -49,6 +50,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditBV(BenhVien benhVien, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)

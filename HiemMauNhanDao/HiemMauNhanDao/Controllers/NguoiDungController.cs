@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class NguoiDungController : BaseController
+    public class NguoiDungController : BaseController2
     {
         NguoiDungServices _NguoiDung = new NguoiDungServices();
         private DbContextHM db = new DbContextHM();
@@ -24,31 +24,35 @@ namespace HiemMauNhanDao.Controllers
         public ActionResult Index(ThongTinCaNhan thongTinCaNhan)
         {
             if (ModelState.IsValid)
-            {            
-                if (_NguoiDung.isExistTaiKhoan(thongTinCaNhan.CCCD))
+            {
+                if (_NguoiDung.isExistTaiKhoan(thongTinCaNhan.userName))
                 {
-                    ViewBag.ThongBao = "CCCD/ CMND đã tồn tại!";
+                    ViewBag.ThongBao = "Tài khoản đã tồn tại!";
                 }
-                else if (_NguoiDung.isExistTaiKhoan(thongTinCaNhan.soDT))
+                else if (_NguoiDung.isExistSDT(thongTinCaNhan.soDT))
                 {
                     ViewBag.ThongBao = "Số điện thoại đã tồn tại!";
                 }
-                else if (_NguoiDung.isExistTaiKhoan(thongTinCaNhan.Email))
+                else if (_NguoiDung.isExistEmail(thongTinCaNhan.Email))
                 {
                     ViewBag.ThongBao = "Email đã tồn tại!";
-                }                           
+                }
+                else if (_NguoiDung.isExistCCCD(thongTinCaNhan.CCCD))
+                {
+                    ViewBag.ThongBao = "CCCD/ CMND đã tồn tại!";
+                }
                 else
-                {                 
-                    _NguoiDung.ThemTTCN(thongTinCaNhan);
-                    SetAlert("Tạo tài khoản thành công", "success");
+                {
+                    _NguoiDung.SuaTTCN(thongTinCaNhan);
+                    SetAlert("Cập nhật thông tin thành công", "success");
                     return RedirectToAction("Index");
-                }    
+                }
             }
             else
             {
-                SetAlert("Tạo tài khoản thất bại công", "success");
+                SetAlert("Cập nhật thông tin  thất bại ", "error");
                 return RedirectToAction("Index");
-            }    
+            }
             return View(thongTinCaNhan);
         }
 

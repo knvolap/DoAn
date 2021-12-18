@@ -24,14 +24,7 @@
         $('#AlertBox').delay(5000).slideUp(500);
     });
 </script>
-<div class="panel-body">
-    @if (TempData["AlertMessage"] != null)
-    {
-        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
-            @TempData["AlertMessage"]
-        </div>
-    }
-</div>
+
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
@@ -65,12 +58,20 @@
                 <div class="blog_left_sidebar">
                     <h3 class="mb-10">Vui lòng điền đầy đủ thông tin</h3>
                     <hr />
+                    <div class="panel-body">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+                    </div>
                     <div>
-                        @using (Html.BeginForm("NguoiDung", "DangKyTK", FormMethod.Post))
+                        @using (Html.BeginForm("NguoiDung", "DangKyTK", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true)
-                            <div style="font-weight: bold; text-align: center; color: red">
+
+                            <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
                                 @if (@ViewBag.ThongBao != null)
                                 {
                                     <label>@ViewBag.ThongBao </label>
@@ -78,7 +79,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-8">
-                                    <form action="#">
+                                    <form action="@Url.Action("NguoiDung")" method="post">
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
@@ -94,6 +95,9 @@
                                                     </div>
                                                 </th>
                                             </tr>
+
+                                        </table>
+                                        <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
@@ -109,6 +113,9 @@
                                                     </div>
                                                 </th>
                                             </tr>
+                                        </table>
+                                        <table class="mt-10">
+
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
@@ -120,26 +127,22 @@
                                                     <div>
                                                         <a>Mật khẩu</a>
                                                         @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "single-input", @type = "password", @name = "txtXacNhanMK" } })
-
                                                     </div>
                                                 </th>
                                             </tr>
                                         </table>
                                     </form>
+                                    <div class="text-center" style="margin-top:20px">
+                                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                                    </div>
                                 </div>
-
-                            </div>
-                            <div class="text-center " style="margin-top:20px">
-                                <input class="genric-btn info radius" type="submit" value="Đăng Ký" />
                             </div>
                         }
 
                     </div>
-
                 </div>
             </div>
 
         </div>
     </div>
 </section>
-

@@ -53,26 +53,27 @@
         </aside>
     }
     @if (session.AuthorID == "Q04")
-    {<aside class="single_sidebar_widget post_category_widget">
+    {
+        <aside class="single_sidebar_widget post_category_widget">
             <h4 class="widget_title">Bệnh viện</h4>
             <ul class="list cat-list">
                 <li>
-                    <a href="/NhanVienYTe/EditBV" class="d-flex">
+                    <a href="@Url.Action("EditBV","NhanVienYTe")" class="d-flex">
                         <p>Cập nhật thông đơn vị</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/NhanVienYTe/Index" class="d-flex">
+                    <a href="@Url.Action("Index","NhanVienYTe") " class="d-flex">
                         <p>Cập nhật nhân viên</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/NhanVienYTe/DangKyDHM" class="d-flex">
+                    <a href="@Url.Action("DangKyDHM","NhanVienYTe")" class="d-flex">
                         <p>Đăng ký đợt hiến máu</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/NhanVienYTe/DangBai" class="d-flex">
+                    <a href="@Url.Action("DangBai","NhanVienYTe") " class="d-flex">
                         <p>Đăng bài</p>
                     </a>
                 </li>
@@ -82,8 +83,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/NhanVienYTe/EditKQHM" class="d-flex">
+                    <a href="@Url.Action("EditKQHM","NhanVienYTe")  " class="d-flex">
                         <p>Cập nhật Kết quả hiến máu</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex">
+                        <p>Cập nhật thông tin</p>
                     </a>
                 </li>
             </ul>

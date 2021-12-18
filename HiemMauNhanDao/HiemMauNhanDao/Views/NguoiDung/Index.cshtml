@@ -26,14 +26,7 @@
         $('#AlertBox').delay(5000).slideUp(500);
     });
 </script>
-<div class="panel-body">
-    @if (TempData["AlertMessage"] != null)
-    {
-        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
-            @TempData["AlertMessage"]
-        </div>
-    }
-</div>
+
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
@@ -45,12 +38,20 @@
                 <div class="blog_left_sidebar">
                     <h3 class="mb-10">Vui lòng điền đầy đủ thông tin</h3>
                     <hr />
-                    <div  >
+                    <div class="panel-body">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+                    </div>
+                    <div>
 
                         @using (Html.BeginForm("Index", "NguoiDung", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
-                            <div>
+                            <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
                                 @if (@ViewBag.ThongBao != null)
                                 {
                                     <label>@ViewBag.ThongBao </label>
@@ -71,7 +72,7 @@
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>Số điện thoại</a>
-                                                      
+
                                                         @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
                                                     </div>
                                                 </th>
@@ -83,17 +84,15 @@
                                                     <div>
                                                         <a>Email</a>
                                                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
-                                                        <a>CMND / CCCD </a>                                                    
+                                                        <a>CMND / CCCD </a>
                                                         @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
                                                     </div>
                                                 </th>
                                             </tr>
-
                                         </table>
                                         <table class="mt-10">
                                             <tr>
@@ -107,167 +106,68 @@
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <a>Ngày sinh </a>
-                                                   
                                                     @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "single-input", @type = "date", @for = "datepicker" } })
-
                                                 </th>
                                             </tr>
-
                                         </table>
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Lần hiến máu </a>
-                                                        @*<input type="number" name="first_name" placeholder="0" onfocus="this.placeholder = ''"
-                        onblur="this.placeholder = '0'" required="" class="single-input">*@
+
                                                         @Html.EditorFor(model => model.soLanHM, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>Nhóm máu </a>
-                                                        @*<div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                                                <div class="form-select" id="default-select_1">
-                                                                    <select>
-                                                                        <option value="1">Chưa biết</option>
-                                                                        <option value="1">A</option>
-                                                                        <option value="1">B</option>
-                                                                        <option value="1">AB</option>
-                                                                        <option value="1">0</option>
-                                                                    </select>
-                                                                </div>*@
                                                         @Html.DropDownListFor(model => model.nhomMau, new[] { new SelectListItem { Text = "Chưa biết"},
                                                                               new SelectListItem { Text = "A +"} , new SelectListItem { Text = "A -" } ,
                                                                               new SelectListItem { Text = "B +" } , new SelectListItem { Text = "B -" } ,
                                                                               new SelectListItem { Text = "AB +" } ,  new SelectListItem { Text = "AB -" } ,
                                                                               new SelectListItem { Text = "O +" } ,  new SelectListItem { Text = "O -" } },
-                                                                               new { @class = "single-input" })
-
+                                                                              new { @class = "single-input" })
                                                     </div>
                                                 </th>
                                             </tr>
-
                                         </table>
-
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
                                                     <a>Trình độ học vấn </a>
-                                                  
                                                     @Html.EditorFor(model => model.trinhDo, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <a>Nghề nghiệp </a>
-                                                  
                                                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-
                                                 </th>
                                             </tr>
-
                                         </table>
-
-
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:735px">
                                                     <a>Cơ quan / Trường lớp </a>
                                                     @Html.EditorFor(model => model.coQuanTH, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-
                                                 </th>
-
                                             </tr>
-                                            <tr >
+                                            <tr>
                                                 <th style="width:735px">
                                                     <a>Địa chỉ tạm trú</a>
                                                     @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-
                                                 </th>
-
                                             </tr>
                                         </table>
                                     </form>
-
+                                    <div class="text-center" style="margin-top:20px">
+                                        <button type="submit" class="genric-btn primary-border radius">Cập nhật</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="text-center " style="margin-top:20px">
-                                <a class="genric-btn primary-border radius" href="#">Cập nhật</a>
                             </div>
                         }
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </div>
 </section>
-
-
-
-@*<ul class="list cat-list">
-        <li>
-            <a href="#" class="d-flex">
-                <p>Cập nhật thông tin</p>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="d-flex">
-                <p>Xem lịch sử</p>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="d-flex">
-                <p>Xem tình trạng sức khỏe</p>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="d-flex">
-                <p>Đổi mật khẩu</p>
-            </a>
-        </li>
-    </ul>*@
-
-@*<div class="input-group-icon mt-10">
-        <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-        <div class="form-select" id="default-select_1">
-            <select>
-                <option value=" 1">Nhóm máu</option>
-                <option value="1">Chưa biết</option>
-                <option value="1">A</option>
-                <option value="1">B</option>
-                <option value="1">AB</option>
-                <option value="1">0</option>
-            </select>
-        </div>
-    </div>*@
-
-@*<div class="mt-10">
-        <input type="text" name="first_name" placeholder="Họ và tên"
-               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'" required
-               class="single-input">
-    </div>
-    <div class="mt-10">
-        <input type="text" name="last_name" placeholder="Số điện thoại"
-               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại '" required
-               class="single-input">
-    </div>
-    <div class="mt-10">
-        <input type="email" name="EMAIL" placeholder="Email address"
-               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email '" required
-               class="single-input">
-    </div>
-    <div class="mt-10">
-        <input type="text" name="last_name" placeholder="CMND / CCCD"
-               onfocus="this.placeholder = ''" onblur="this.placeholder = ' CMND / CCCD'" required
-               class="single-input">
-    </div>
-    <div class="mt-10">
-        <input type="date" name="last_name" placeholder="CMND / CCCD"
-               onfocus="this.placeholder = ''" onblur="this.placeholder = ' Ngày sinh'" required
-               class="single-input" for="datepicker">
-    </div>*@
-
-

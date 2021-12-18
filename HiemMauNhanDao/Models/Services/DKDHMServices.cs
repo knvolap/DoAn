@@ -40,8 +40,17 @@ namespace Models.Services
                 idDVLK = x.c.idDVLK,
                 idNVYT = x.c.idNVYT,
                 ngayDK = x.c.ngayDK,
-            }).OrderBy(x => x.tgKetThuc).ThenByDescending(q => q.ngayDK).ToPagedList(page, pageSize);
+            }).OrderByDescending(x => x.IdDHM).ThenBy(q => q.ngayDK).ToPagedList(page, pageSize);
             return result;
+        }
+        public IEnumerable<DotHienMau> ListAllDKDHM2(string keysearch, int page, int pageSize)
+        {
+            IEnumerable<DotHienMau> model = db.DotHienMaus;
+            if (!string.IsNullOrEmpty(keysearch))
+            {
+                model = model.Where(x => x.IdDHM.Contains(keysearch) || x.TenDHM.Contains(keysearch)  || x.noiDung.Contains(keysearch));
+            }
+            return model.OrderByDescending(x => x.IdDHM).ThenBy(x => x.TenDHM).ToPagedList(page, pageSize);
         }
 
         public List<chiTietDHM> ListAllChiTietDHM()

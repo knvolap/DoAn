@@ -39,16 +39,13 @@
 
         [StringLength(50)]
         public string Email { get; set; }
-
-        
+       
       
-        [StringLength(12)]
-        [Required(ErrorMessage = "Số CMND không được để trống.")]
+        [StringLength(12)]     
         public string CCCD { get; set; }
-
-      
+     
         [StringLength(11)]
-        [Required(ErrorMessage = "Số điện thoại không được để trống.")]
+        
         public string soDT { get; set; }
 
         [Column(TypeName = "date")]

@@ -27,6 +27,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditDKHM(chiTietDHM chiTietDHM)
         {
             if (ModelState.IsValid)

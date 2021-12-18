@@ -415,8 +415,8 @@
     <Compile Include="Common\HasCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\DangKyTKController.cs" />
-    <Compile Include="Controllers\DotHienMauController.cs" />
-    <Compile Include="Controllers\DotTCHMController.cs" />
+    <Compile Include="Controllers\DTCHMController.cs" />
+    <Compile Include="Controllers\DkDHMController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginClientController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
@@ -450,10 +450,9 @@
     <Content Include="Views\DangKyTK\NguoiDung.cshtml" />
     <Content Include="Views\DangKyTK\DonVi.cshtml" />
     <Content Include="Views\DangKyTK\BenhVien.cshtml" />
-    <Content Include="Views\DotHienMau\Index.cshtml" />
-    <Content Include="Views\DotHienMau\DangKyHiemMau.cshtml" />
-    <Content Include="Views\DotHienMau\ChiTietDKHM.cshtml" />
-    <Content Include="Views\DotTCHM\Index.cshtml" />
+    <Content Include="Views\DTCHM\Index.cshtml" />
+    <Content Include="Views\DTCHM\DangKyHiemMau.cshtml" />
+    <Content Include="Views\DTCHM\ChiTietDKHM.cshtml" />
     <Content Include="Views\LoginClient\Index.cshtml" />
     <Content Include="Views\LoginClient\Mgs.cshtml" />
     <Content Include="Views\NguoiDung\Index.cshtml" />
@@ -467,6 +466,11 @@
     <Content Include="Views\NhanVienYTe\EditKQHM.cshtml" />
     <Content Include="Views\NhanVienYTe\EditBV.cshtml" />
     <Content Include="Views\NguoiDung\EditTTCN.cshtml" />
+    <Content Include="Views\DangKyTK\Index.cshtml" />
+    <Content Include="Views\DkDHM\Index.cshtml" />
+    <Content Include="Views\DkDHM\DKTC.cshtml" />
+    <Content Include="Views\DkDHM\_RightMenu.cshtml" />
+    <Content Include="Views\DTCHM\_RightMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -480,6 +484,7 @@
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Assets\Admin\File\" />
     <Folder Include="FileUpLoad\" />
+    <Folder Include="Views\DotHienMau\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

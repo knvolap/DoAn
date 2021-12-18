@@ -122,11 +122,12 @@
                         <td>
                             @item.noiDung
                         </td>
-                        <td>
-                            @item.tgBatDau
+                        <td>  
+                            @Html.DisplayFor(model => item.tgBatDau  )
                         </td>
                         <td>
-                            @item.tgKetThuc
+                            @Html.DisplayFor(model => item.tgKetThuc)
+                        
                         </td>
                         <td>
                             <button class="mb-2 mr-2 btn-transition btn btn-outline-info">

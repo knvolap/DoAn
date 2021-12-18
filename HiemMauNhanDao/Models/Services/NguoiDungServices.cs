@@ -89,7 +89,7 @@ namespace Models.Services
             var ttcn = new ThongTinCaNhan()
             {
                 IdTTCN = so > 9 ? phanDau + so : phanDau + "0" + so,
-                idQuyen = thongTinCaNhan.idQuyen,
+                idQuyen = thongTinCaNhan.idQuyen ,
                 userName = thongTinCaNhan.userName,
                 password = thongTinCaNhan.password,
                 hoTen =thongTinCaNhan.hoTen,
@@ -118,7 +118,7 @@ namespace Models.Services
             var ttcn = new ThongTinCaNhan()
             {
                 IdTTCN = so > 9 ? phanDau + so : phanDau + "0" + so,
-                idQuyen = thongTinCaNhan.idQuyen ="Q06",
+                idQuyen = thongTinCaNhan.idQuyen ,
                 userName = thongTinCaNhan.userName,
                 password = thongTinCaNhan.password,
                 hoTen = thongTinCaNhan.hoTen,
@@ -136,6 +136,8 @@ namespace Models.Services
         {
             ThongTinCaNhan ttcn2 = GetByIdTTCN(thongTinCaNhan.IdTTCN);
             ttcn2.hoTen = thongTinCaNhan.hoTen;
+            ttcn2.userName = thongTinCaNhan.userName;
+            ttcn2.password = thongTinCaNhan.password;
             ttcn2.Email = thongTinCaNhan.Email;
             ttcn2.CCCD = thongTinCaNhan.CCCD;
             ttcn2.soDT = thongTinCaNhan.soDT;

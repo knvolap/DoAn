@@ -85,6 +85,7 @@
     <Compile Include="Services\NguoiDungServices.cs" />
     <Compile Include="Services\NhanVienYTeServices.cs" />
     <Compile Include="Services\QuanLyTKServices.cs" />
+    <Compile Include="Services\TCDHMServices.cs" />
     <Compile Include="ViewModel\DotHiemMauView.cs" />
     <Compile Include="ViewModel\NhanVienView.cs" />
   </ItemGroup>

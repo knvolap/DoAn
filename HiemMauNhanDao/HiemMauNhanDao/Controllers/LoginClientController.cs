@@ -42,7 +42,8 @@ namespace HiemMauNhanDao.Controllers
                     {
                         var user = dao.GetById(model.UserName);
                         userSession.AuthorID = user.idQuyen;
-                        userSession.Accounts = user.userName;
+                        userSession.Name = user.hoTen;
+                        userSession.UserID = user.IdTTCN;
                         Session.Add(CommonConstant.USER_SESSION, userSession);
                         return RedirectToAction("Index", "Home");
                     }
