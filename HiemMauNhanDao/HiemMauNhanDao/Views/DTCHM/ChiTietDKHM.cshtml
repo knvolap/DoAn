@@ -1,4 +1,6 @@
-﻿
+﻿@using PagedList;
+@using PagedList.Mvc
+@*@model Models.EF.DotToChucHM*@
 @{
     ViewBag.Title = "ChiTietDKHM";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,9 +30,9 @@
                         <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="">
                     </div>
                     <div class="blog_details">
-                        <h2>
-                            Hiến máu nhân đạo lần thứ 10
-                        </h2>
+                        <p>
+                           Hiến máu nhân đạo lần thứ 10
+                        </p>
                         <ul class="blog-info-link mt-3 mb-4">
                             <li><a href="#"><i class="far fa-user"></i> Thời gian tổ chức</a></li>
                             <li><a href="#"><i class="far fa-comments"></i> Ngày đếm ngược</a></li>

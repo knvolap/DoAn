@@ -12,7 +12,7 @@ namespace HiemMauNhanDao.Controllers
 {
     public class DangKyTKController : BaseController2
     {
-        NguoiDungServices _DKTK = new NguoiDungServices();
+        DKTKServices _DKTK = new DKTKServices();
         private DbContextHM db = new DbContextHM();
 
         // GET: DangKyTK

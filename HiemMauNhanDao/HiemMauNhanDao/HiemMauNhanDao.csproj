@@ -471,6 +471,7 @@
     <Content Include="Views\DkDHM\DKTC.cshtml" />
     <Content Include="Views\DkDHM\_RightMenu.cshtml" />
     <Content Include="Views\DTCHM\_RightMenu.cshtml" />
+    <Content Include="Views\DTCHM\ChiTietDTCHM.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

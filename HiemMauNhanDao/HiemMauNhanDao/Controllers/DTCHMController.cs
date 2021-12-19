@@ -1,4 +1,5 @@
-﻿using Models.EF;
+﻿using HiemMauNhanDao.Areas.Admin.Controllers;
+using Models.EF;
 using Models.Services;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class DTCHMController : Controller
+    public class DTCHMController : BaseController2
     {
         TCDHMServices _DkDHM = new TCDHMServices();
         // GET: DotHienMau
@@ -27,13 +28,17 @@ namespace HiemMauNhanDao.Controllers
             return View();
         }
 
-
-        public ActionResult ChiTietDKHM()
+        public ActionResult ChiTietDTCHM(string id)
         {
-            return View();
+            var model = _DkDHM.GetByIdTCHM(id);
+            return View(model);
         }
 
-     
-
+        public ActionResult ChiTietDKHM(string id)
+        {
+            var model = _DkDHM.GetByIdTCHM(id);
+            return View(model);
+        }
+      
     }
 }

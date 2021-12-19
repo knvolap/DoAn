@@ -81,13 +81,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BenhVienServices.cs" />
     <Compile Include="Services\DKDHMServices.cs" />
+    <Compile Include="Services\DKTKServices.cs" />
     <Compile Include="Services\DotHiemMauServices.cs" />
     <Compile Include="Services\NguoiDungServices.cs" />
     <Compile Include="Services\NhanVienYTeServices.cs" />
+    <Compile Include="Services\PhieuDKHMServices.cs" />
     <Compile Include="Services\QuanLyTKServices.cs" />
     <Compile Include="Services\TCDHMServices.cs" />
     <Compile Include="ViewModel\DotHiemMauView.cs" />
     <Compile Include="ViewModel\NhanVienView.cs" />
+    <Compile Include="ViewModel\PhieuDKHMView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

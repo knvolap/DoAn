@@ -30,6 +30,11 @@ namespace Models.Services
         {
             return db.DotToChucHMs.ToList();
         }
-  
+
+        public DotToChucHM GetByIdTCHM(string id)
+        {
+            return db.DotToChucHMs.Where(b => b.IdDTCHM.CompareTo(id) == 0).FirstOrDefault();
+        }
+
     }
 }

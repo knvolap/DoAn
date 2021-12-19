@@ -157,22 +157,23 @@ CREATE TABLE PhieuDKHM(
 	benhKhac		NVARCHAR(100) null,
 	trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: thất bại, 1: Thành công
 	tgDuKien		DATETIME null,
-	sutCan			BIT NOT NULL,
-	noiHach			BIT NOT NULL,
-	chamCu			BIT NOT NULL,
-	xamMinh			BIT NOT NULL,
-	duocTruyenMau	BIT NOT NULL,
-	suDungMatuy		BIT NOT NULL,
-	NguyCoHIV		BIT NOT NULL,
-	QHTD			BIT NOT NULL,
-	tiemVacXin		BIT NOT NULL,
-	dungTKS			BIT NOT NULL,
-	biSot			BIT NOT NULL,
-	dTTT			BIT NOT NULL,
-	dangMangThai	BIT NOT NULL
+	sutCan			BIT  not null,
+	noiHach			BIT  not null,
+	chamCu			BIT  not null,
+	xamMinh			BIT  not null,
+	duocTruyenMau	BIT  not null,
+	suDungMatuy		BIT  not null,
+	NguyCoHIV		BIT  not null,
+	QHTD			BIT  not null,
+	tiemVacXin		BIT  not null,
+	dungTKS			BIT  not null,
+	biSot			BIT  not null,
+	dTTT			BIT  not null,
+	dangMangThai	BIT  not null,
+	xacNhan			BIT  not null
+
 )
 GO
-
 
 
 
@@ -231,6 +232,7 @@ CREATE TABLE LichSuHienMau(
 	anhChungNhan  VARCHAR(50)  NULL,	 
 )
 GO
+
 
 --RÀNG BUỘC CÁC BẢNG--
 
@@ -342,12 +344,14 @@ ALTER TABLE PhieuDKHM
 		CONSTRAINT CHECK_PDKHM_tiemVC	default 0 for tiemVacXin,		
 		CONSTRAINT CHECK_PDKHM_dungTKS	default 0 for dungTKS,			
 		CONSTRAINT CHECK_PDKHM_biSot	default 0 for biSot	,		
-		CONSTRAINT CHECK_PDKHM_dTTT		default 0 for dTTT	,		
+		CONSTRAINT CHECK_PDKHM_dTTT		default 0 for dTTT	,	
+		CONSTRAINT CHECK_PDKHM_xn		default 1 for xacNhan	,		
 		CONSTRAINT CHECK_PDKHM_DMT		default 0 for dangMangThai	
 	--	CONSTRAINT CK_PDKHM_TrangThai	check(trangThai in ( N'Chờ Duyệt' ,N'Đăng ký thành công', N'Hủy' ))	
 GO
 
--- BẢNG 14--
+
+-- BẢNG 13--
 ALTER TABLE KetQuaHienMau
 	ADD CONSTRAINT FK_KQHM_idDotTC	FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM)ON DELETE CASCADE ON UPDATE CASCADE,			 
 		CONSTRAINT CHECK_KQHM_HST		CHECK (HST >=1 ),
@@ -357,7 +361,7 @@ ALTER TABLE KetQuaHienMau
 		CONSTRAINT CHECK_KQHM_canNang		CHECK (canNang	 >=1 )
 	--	CONSTRAINT CK_KQHM_TrangThai	check(trangThai in ( N'Đang cập nhật' ,N'Đã cập nhật', N'Chưa cập nhật' ))		
 GO
--- BẢNG 15--
+-- BẢNG 14--
 ALTER TABLE DSNVTH
 	ADD CONSTRAINT FK_DSNVTH_idDotHienMau	FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM)ON DELETE CASCADE ON UPDATE CASCADE		
 GO

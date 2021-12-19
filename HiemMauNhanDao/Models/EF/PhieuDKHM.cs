@@ -60,6 +60,8 @@ namespace Models.EF
 
         public bool dangMangThai { get; set; }
 
+        public bool xacNhan { get; set; }
+
         public virtual DotToChucHM DotToChucHM { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
