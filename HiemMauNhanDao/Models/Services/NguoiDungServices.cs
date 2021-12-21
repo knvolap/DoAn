@@ -92,10 +92,10 @@ namespace Models.Services
                 idQuyen = thongTinCaNhan.idQuyen ,
                 userName = thongTinCaNhan.userName,
                 password = thongTinCaNhan.password,
-                hoTen =thongTinCaNhan.hoTen,
-                Email = thongTinCaNhan.Email,
-                CCCD = thongTinCaNhan.CCCD,
-                soDT = thongTinCaNhan.soDT,
+                hoTen   =thongTinCaNhan.hoTen,
+                Email   = thongTinCaNhan.Email,
+                CCCD    = thongTinCaNhan.CCCD,
+                soDT    = thongTinCaNhan.soDT,
                 ngaySinh = thongTinCaNhan.ngaySinh,
                 ngheNghiep = thongTinCaNhan.ngheNghiep,
                 gioiTinh = thongTinCaNhan.gioiTinh,
@@ -136,8 +136,6 @@ namespace Models.Services
         {
             ThongTinCaNhan ttcn2 = GetByIdTTCN(thongTinCaNhan.IdTTCN);
             ttcn2.hoTen = thongTinCaNhan.hoTen;
-            ttcn2.userName = thongTinCaNhan.userName;
-            ttcn2.password = thongTinCaNhan.password;
             ttcn2.Email = thongTinCaNhan.Email;
             ttcn2.CCCD = thongTinCaNhan.CCCD;
             ttcn2.soDT = thongTinCaNhan.soDT;
@@ -150,8 +148,6 @@ namespace Models.Services
             ttcn2.nhomMau = thongTinCaNhan.nhomMau;
             ttcn2.coQuanTH = thongTinCaNhan.coQuanTH;
             ttcn2.trangThai = thongTinCaNhan.trangThai;
-            ttcn2.userName = thongTinCaNhan.userName;
-            ttcn2.password = thongTinCaNhan.password;
             db.SaveChanges();
         }
         public void SuaTTCN2(ThongTinCaNhan thongTinCaNhan)

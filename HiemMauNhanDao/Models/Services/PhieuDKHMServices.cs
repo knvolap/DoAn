@@ -26,7 +26,8 @@ namespace Models.Services
         {
             var query = from pdk in db.PhieuDKHMs
                         join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
-                        select new { pdk, tt };
+                        join dtc in db.DotToChucHMs on pdk.idDTCHM equals dtc.IdDTCHM
+                        select new { pdk, tt,dtc };
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
             {
@@ -41,7 +42,7 @@ namespace Models.Services
                 gioiTinh = x.tt.gioiTinh,
 
                 idPDKHM = x.pdk.idPDKHM,
-                idDTCHM = x.pdk.idDTCHM,
+                idDTCHM = x.dtc.IdDTCHM,
                 tgDuKien = x.pdk.tgDuKien,
                 trangThai = x.pdk.trangThai,             
             }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
