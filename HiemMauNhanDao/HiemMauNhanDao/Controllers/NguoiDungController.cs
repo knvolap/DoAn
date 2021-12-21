@@ -69,6 +69,7 @@ namespace HiemMauNhanDao.Controllers
             {
                 ThongTinCaNhan ttcn = _NguoiDung.GetByIdTTCN(model.IdTTCN);
                 userSession.UserID = ttcn.IdTTCN;
+
                 Session.Add(CommonConstant.USER_SESSION, userSession);
                 ttcn.hoTen = model.hoTen;
                 ttcn.Email = model.Email;
