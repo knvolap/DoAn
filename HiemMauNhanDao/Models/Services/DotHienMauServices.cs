@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Models.Services
 {
-    public class DotHiemMauServices
+    public class DotHienMauServices
     {
         private DbContextHM db = null;
 
-        public DotHiemMauServices()
+        public DotHienMauServices()
         {
             db = new DbContextHM();
         }

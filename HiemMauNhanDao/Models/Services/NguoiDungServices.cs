@@ -2,6 +2,7 @@
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace Models.Services
             if (!string.IsNullOrEmpty(searchString1))
             {
                 model = model.Where(x => x.IdTTCN.Contains(searchString1) || x.hoTen.Contains(searchString1) || x.soDT.Contains(searchString1) 
-                                    || x.Email.Contains(searchString1) ||  x.CCCD.Contains(searchString1) );
+                                    || x.userName.Contains(searchString1) ||  x.CCCD.Contains(searchString1) );
             }
             //if (!string.IsNullOrEmpty(searchString2))
             //{
@@ -60,19 +61,20 @@ namespace Models.Services
             }
             return false;
         }
-        public bool isExistEmail(string email)
+      
+        public bool isExistCCCD(string cccd)
         {
-            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.Email == email).FirstOrDefault();
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.CCCD == cccd).FirstOrDefault();
             if (kh != null)
             {
                 return true;
             }
             return false;
         }
-        public bool isExistCCCD(string cccd)
+        public bool isExistHotTen(string hoten)
         {
-            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.CCCD == cccd).FirstOrDefault();
-            if (kh != null)
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.hoTen == hoten).FirstOrDefault();
+            if (kh == null)
             {
                 return true;
             }
@@ -93,7 +95,6 @@ namespace Models.Services
                 userName = thongTinCaNhan.userName,
                 password = thongTinCaNhan.password,
                 hoTen   =thongTinCaNhan.hoTen,
-                Email   = thongTinCaNhan.Email,
                 CCCD    = thongTinCaNhan.CCCD,
                 soDT    = thongTinCaNhan.soDT,
                 ngaySinh = thongTinCaNhan.ngaySinh,
@@ -109,34 +110,12 @@ namespace Models.Services
             db.ThongTinCaNhans.Add(ttcn);
             db.SaveChanges();
         }
-        //Them
-        public void ThemTTCN2(ThongTinCaNhan thongTinCaNhan)
-        {
-            var id = db.ThongTinCaNhans.Max(x => x.IdTTCN);
-            string phanDau = id.Substring(0, 2);
-            int so = Convert.ToInt32(id.Substring(2, 2)) + 1;
-            var ttcn = new ThongTinCaNhan()
-            {
-                IdTTCN = so > 9 ? phanDau + so : phanDau + "0" + so,
-                idQuyen = thongTinCaNhan.idQuyen ,
-                userName = thongTinCaNhan.userName,
-                password = thongTinCaNhan.password,
-                hoTen = thongTinCaNhan.hoTen,
-                Email = thongTinCaNhan.Email,
-                CCCD = thongTinCaNhan.CCCD,
-                soDT = thongTinCaNhan.soDT,              
-                trangThai = thongTinCaNhan.trangThai
-            };
-            db.ThongTinCaNhans.Add(ttcn);
-            db.SaveChanges();
-        }
 
 
         public void SuaTTCN (ThongTinCaNhan thongTinCaNhan)
         {
             ThongTinCaNhan ttcn2 = GetByIdTTCN(thongTinCaNhan.IdTTCN);
-            ttcn2.hoTen = thongTinCaNhan.hoTen;
-            ttcn2.Email = thongTinCaNhan.Email;
+            ttcn2.hoTen = thongTinCaNhan.hoTen;          
             ttcn2.CCCD = thongTinCaNhan.CCCD;
             ttcn2.soDT = thongTinCaNhan.soDT;
             ttcn2.ngaySinh = thongTinCaNhan.ngaySinh;
@@ -147,16 +126,27 @@ namespace Models.Services
             ttcn2.soLanHM = thongTinCaNhan.soLanHM;
             ttcn2.nhomMau = thongTinCaNhan.nhomMau;
             ttcn2.coQuanTH = thongTinCaNhan.coQuanTH;
+            ttcn2.idQuyen = thongTinCaNhan.idQuyen;
+            ttcn2.userName = thongTinCaNhan.userName;
+            ttcn2.password = thongTinCaNhan.password;          
             ttcn2.trangThai = thongTinCaNhan.trangThai;
             db.SaveChanges();
         }
-        public void SuaTTCN2(ThongTinCaNhan thongTinCaNhan)
+
+        public void CapNhatTTCN(ThongTinCaNhan thongTinCaNhan)
         {
-            ThongTinCaNhan ttcn2 = GetByIdTTCN(thongTinCaNhan.IdTTCN);
-            ttcn2.userName = thongTinCaNhan.userName;          
-            ttcn2.password = thongTinCaNhan.password;
+            db.ThongTinCaNhans.AddOrUpdate(thongTinCaNhan);
             db.SaveChanges();
         }
+
+
+        //public void SuaTTCN2(ThongTinCaNhan thongTinCaNhan)
+        //{
+        //    ThongTinCaNhan ttcn2 = GetByIdTTCN(thongTinCaNhan.IdTTCN);
+        //    ttcn2.userName = thongTinCaNhan.userName;          
+        //    ttcn2.password = thongTinCaNhan.password;
+        //    db.SaveChanges();
+        //}
 
 
         public bool XoaTTCN(string id)

@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class NhanVienYTeController : BaseController
+    public class NhanVienYTeController : BaseController2
     {
         NhanVienYTeServices _nhanvien = new NhanVienYTeServices();
         BenhVienServices _BenhVien = new BenhVienServices();

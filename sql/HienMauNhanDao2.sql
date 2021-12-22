@@ -1,14 +1,14 @@
 ﻿USE master
 GO
-IF EXISTS(SELECT name FROM sysdatabases WHERE name ='HiemMauNhanDao')
-DROP DATABASE HiemMauNhanDao
+IF EXISTS(SELECT name FROM sysdatabases WHERE name ='HienMauNhanDao')
+DROP DATABASE HienMauNhanDao
 go
 
 ----Bắt đầu ----
 
-CREATE DATABASE HiemMauNhanDao
+CREATE DATABASE HienMauNhanDao
 GO
-USE HiemMauNhanDao
+USE HienMauNhanDao
 GO
 
 SET DATEFORMAT dmy
@@ -27,7 +27,6 @@ CREATE TABLE ThongTinCaNhan(
 	userName	VARCHAR (50)UNIQUE  null,
 	password	VARCHAR(50)  null,
 	hoTen		 NVARCHAR(50)  NULL,
-	Email		 VARCHAR(50)   UNIQUE NULL,	
 	CCCD		 VARCHAR(12) UNIQUE  NULL,
 	soDT		 CHAR(11)  UNIQUE  NULL,
 	ngaySinh	 DATE  NULL,
@@ -37,7 +36,7 @@ CREATE TABLE ThongTinCaNhan(
 	trinhDo		 NVARCHAR(50) NULL,
 	soLanHM		 int  null,
 	coQuanTH	 NVARCHAR(50) NULL,
-	nhomMau		 VARCHAR(2) null,
+	nhomMau		 VARCHAR(5) null,
 	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
@@ -240,30 +239,21 @@ GO
 -- BẢNG 2--ThongTinCaNhan
 ALTER TABLE ThongTinCaNhan
 	ADD CONSTRAINT FK_TK_idRole FOREIGN KEY (idQuyen) REFERENCES Quyen(IdQuyen)ON DELETE CASCADE ON UPDATE CASCADE,
-		CONSTRAINT CHECK_TTCN_NGAYSINH	CHECK (dateDiff(year, ngaySinh, getdate())>=18  ),
 		CONSTRAINT CHECK_PDKHM_soLanHM	CHECK (soLanHM >=0  or soLanHM <30  ),
 		CONSTRAINT CK_TTCN_userNameL CHECK ( userName LIKE '[A-Za-z0-9]%@gmail.com'
 											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
 											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%..[A-Za-z]%' 
 											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
 											OR userName LIKE '[A-Za-z0-9]%@sv.ute.udn.vn'
-											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com'
-											OR userName LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-
-		CONSTRAINT CHECK_TTCN_EMAIL		CHECK ( Email LIKE '[A-Za-z0-9]%@gmail.com' 											
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%..[A-Za-z]%' 
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
-											 OR Email LIKE '[A-Za-z0-9]%@sv.ute.udn.vn'
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com'
-											 OR Email LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com'),	
 		
 		CONSTRAINT CHECK_TTCN1_soDT		CHECK ( soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 											or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'  ),
 		CONSTRAINT CHECK_TTCN_CCCD		CHECK ( CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
-											 or CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
-		
+											 or CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')		
 GO
+
+
 
 ---- BẢNG 3--DotHienMau
 --ALTER TABLE DotHienMau
@@ -381,16 +371,16 @@ GO
 
 --B2
  INSERT INTO dbo.ThongTinCaNhan
-		(IdTTCN,idQuyen,userName,password,hoTen,Email,CCCD,soDT,ngaySinh,soLanHM,nhomMau,gioiTinh,trangThai,diaChi,ngheNghiep,trinhDo,coQuanTH )
-VALUES	('TT01','Q01', 'admin@gmail.com','123123',N'Trần Võ Lập','tvl@gmail.com','215496444111','0375163333','30/04/2000','','1','','1',N'diaChi',N'ngheNghiep',N'trinhDo',N'coQuanTH'),
-		('TT02','Q02', 'banchidao@gmail.com','123123',N'Ban chỉ đạo','bancd@gmail.com','215496444222','0375162222','','1','','','1',N'',N'',N'',N''),
-		('TT03','Q03', 'bvDaKhoa@gmail.com','123123',N'Thành Nam','bvDaKhoa@gmail.com','215496444433','0375164333','','1','','','1',N'',N'',N'',N''),
-		('TT04','Q04', 'donviLK@gmail.com','123123',N'Minh Nhật','donviLK@gmail.com','215496444221','0375167222','','1','','','1',N'',N'',N'',N''),
-		('TT05','Q05', 'nhanvien1@gmail.com','123123',N'Khắc Huy','nhanvien1@gmail.com','215496444423','0375564333','','1','','','1',N'',N'',N'',N''),
-		('TT06','Q06', 'nguoidung1@gmail.com','123123',N'Nam Cường','nguoidung1@gmail.com','215496644228','0375162522','','1','','','1',N'',N'',N'',N''),
-		('TT07','Q06', 'nguoidung2@gmail.com','123123',N'Tiến Đạt','nguoidung2@gmail.com','215496844439','0375164933','','1','','','1',N'',N'',N'',N''),
-		('TT08','Q03', 'bvDaKhoa2@gmail.com','123123',N'Trần Thành','bvDaKhoa2@gmail.com','215496544433','0775167333','','1','','','1',N'',N'',N'',N''),
-		('TT09','Q04', 'donviLK2@gmail.com','123123',N'Trường Giang','donviLK2@gmail.com','215496944221','0975164222','','0','','','1',N'',N'',N'',N'')
+		(IdTTCN,idQuyen,userName,password,hoTen,CCCD,soDT,ngaySinh,soLanHM,nhomMau,gioiTinh,trangThai,diaChi,ngheNghiep,trinhDo,coQuanTH )
+VALUES	('TT01','Q01', 'admin@gmail.com','123123',N'Trần Võ Lập','215496444111','0375163333','30/04/2000','','1','','1',N'diaChi',N'ngheNghiep',N'trinhDo',N'coQuanTH'),
+		('TT02','Q02', 'banchidao@gmail.com','123123',N'Ban chỉ đạo','215496444222','0375162222','','1','','','1',N'',N'',N'',N''),
+		('TT03','Q03', 'bvDaKhoa@gmail.com','123123',N'Thành Nam','215496444433','0375164333','','1','','','1',N'',N'',N'',N''),
+		('TT04','Q04', 'donviLK@gmail.com','123123',N'Minh Nhật','215496444221','0375167222','','1','','','1',N'',N'',N'',N''),
+		('TT05','Q05', 'nhanvien1@gmail.com','123123',N'Khắc Huy','215496444423','0375564333','','1','','','1',N'',N'',N'',N''),
+		('TT06','Q06', 'nguoidung1@gmail.com','123123',N'Nam Cường','215496644228','0375162522','','1','','','1',N'',N'',N'',N''),
+		('TT07','Q06', 'nguoidung2@gmail.com','123123',N'Tiến Đạt','215496844439','0375164933','','1','','','1',N'',N'',N'',N''),
+		('TT08','Q03', 'bvDaKhoa2@gmail.com','123123',N'Trần Thành','215496544433','0775167333','','1','','','1',N'',N'',N'',N''),
+		('TT09','Q04', 'donviLK2@gmail.com','123123',N'Trường Giang','215496944221','0975164222','','0','','','1',N'',N'',N'',N'')
 GO		
 
 

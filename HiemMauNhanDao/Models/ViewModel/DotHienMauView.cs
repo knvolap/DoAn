@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.ViewModel
 {
-     public class DotHiemMauView
+     public class DotHienMauView
     {
         public string IdDHM { get; set; }
         public string TenDHM { get; set; }

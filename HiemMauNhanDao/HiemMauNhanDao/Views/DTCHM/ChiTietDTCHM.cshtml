@@ -28,7 +28,7 @@
                     <div class="feature-img">
                         <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="">
                     </div>
-                    <div class="blog_details">
+                    <div class="blog_details">Đợt tổ chức
                         <a>
                             @Html.DisplayFor(model => model.tenDotHienMau)
                         </a>
@@ -98,18 +98,18 @@
                                 <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
                             </li>
                         }
-                        @if (session7.AuthorID == "Q04")
-                        {
-                            <li>
-                                <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Tài khoản không hợp lệ</a> (vui lòng sử dụng tài khoản cá nhân)
-                            </li>
-                        }
                         else
                         {
                             <li>
                                 <a class="genric-btn info radius" href="@Url.Action("DangKyHiemMau", "DTCHM")">Đăng ký</a>
                             </li>
                         }
+                        @*@if (session7.AuthorID == "Q04")
+                        {
+                            <li>
+                                <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Tài khoản không hợp lệ</a> (vui lòng sử dụng tài khoản cá nhân)
+                            </li>
+                        }*@
                     </ul>
                    @* <a href="  @Url.Action("DangKyHiemMau","DTCHM")/" class="genric-btn info radius">Đăng ký</a>*@
                 </div>
@@ -144,99 +144,3 @@
     </div>
 </section>
 @Html.ActionLink("Back to List", "Index")
-
-@*<a>Số lượng:  @Html.DisplayFor(model => model.soLuong) </a>
-
-    <p>Nội dung:  @Html.DisplayFor(model => model.noiDung) </p>
-    <p>Địa chỉ tổ chức:  @Html.DisplayFor(model => model.diaChiToChuc) </p>*@
-
-<!--<div>
-    <h4>DotToChucHM</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.idDHM)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idDHM)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tenDotHienMau)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tenDotHienMau)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.noiDung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.noiDung)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.doiTuongThamGia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.doiTuongThamGia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.diaChiToChuc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.diaChiToChuc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.soLuong)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.soLuong)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ngayBatDauDK)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngayBatDauDK)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ngayKetThucDK)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngayKetThucDK)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ngayToChuc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngayToChuc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.trangThai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.trangThai)
-        </dd>
-
-    </dl>
-</div>
-<p>-->
-@* @Html.ActionLink("Edit", "Edit", new { id = Model.IdDTCHM }) |*@
-<!--
-</p>-->

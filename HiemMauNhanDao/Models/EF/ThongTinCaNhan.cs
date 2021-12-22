@@ -26,7 +26,6 @@
         public string idQuyen { get; set; }
 
         [StringLength(50, ErrorMessage = "Tên đăng nhập không được để trống.")]
-        [Required(ErrorMessage = "Bạn chưa nhập tên đăng nhập")]
         public string userName { get; set; }
 
 
@@ -37,22 +36,20 @@
         [StringLength(50), Required(ErrorMessage = "Họ và Tên không được để trống.")]
         public string hoTen { get; set; }
 
-        [StringLength(50)]
-        public string Email { get; set; }
-       
-      
-        [StringLength(12)]     
+        [StringLength(12)]
         public string CCCD { get; set; }
-     
+
         [StringLength(11)]
-        
         public string soDT { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd /MM / yyyy}")]
+        [Required(ErrorMessage = "Ngày sinh phải hơn 18 tuổi")]
         public DateTime? ngaySinh { get; set; }
 
         public bool? gioiTinh { get; set; }
 
+      
         [StringLength(100)]
         public string diaChi { get; set; }
 
@@ -62,12 +59,13 @@
         [StringLength(50)]
         public string trinhDo { get; set; }
 
+    
         public int? soLanHM { get; set; }
 
         [StringLength(50)]
         public string coQuanTH { get; set; }
 
-        [StringLength(2)]
+        [StringLength(5)]
         public string nhomMau { get; set; }
 
         public bool? trangThai { get; set; }

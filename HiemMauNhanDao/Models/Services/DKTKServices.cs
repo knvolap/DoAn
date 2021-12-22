@@ -28,7 +28,7 @@ namespace Models.Services
             if (!string.IsNullOrEmpty(searchString1))
             {
                 model = model.Where(x => x.IdTTCN.Contains(searchString1) || x.hoTen.Contains(searchString1) || x.soDT.Contains(searchString1)
-                                    || x.Email.Contains(searchString1) || x.CCCD.Contains(searchString1));
+                                    || x.userName.Contains(searchString1) || x.CCCD.Contains(searchString1));
             }
             //if (!string.IsNullOrEmpty(searchString2))
             //{
@@ -60,19 +60,20 @@ namespace Models.Services
             }
             return false;
         }
-        public bool isExistEmail(string email)
+       
+        public bool isExistCCCD(string cccd)
         {
-            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.Email == email).FirstOrDefault();
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.CCCD == cccd).FirstOrDefault();
             if (kh != null)
             {
                 return true;
             }
             return false;
         }
-        public bool isExistCCCD(string cccd)
+        public bool isExistHotTen(string hoten)
         {
-            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.CCCD == cccd).FirstOrDefault();
-            if (kh != null)
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.hoTen == hoten).FirstOrDefault();
+            if (kh == null)
             {
                 return true;
             }
@@ -93,7 +94,6 @@ namespace Models.Services
                 userName = thongTinCaNhan.userName,
                 password = thongTinCaNhan.password,
                 hoTen = thongTinCaNhan.hoTen,
-                Email = thongTinCaNhan.Email,
                 CCCD = thongTinCaNhan.CCCD,
                 soDT = thongTinCaNhan.soDT,
                 ngaySinh = thongTinCaNhan.ngaySinh,
@@ -122,7 +122,7 @@ namespace Models.Services
                 userName = thongTinCaNhan.userName,
                 password = thongTinCaNhan.password,
                 hoTen = thongTinCaNhan.hoTen,
-                Email = thongTinCaNhan.Email,
+                ngaySinh = thongTinCaNhan.ngaySinh,
                 CCCD = thongTinCaNhan.CCCD,
                 soDT = thongTinCaNhan.soDT,
                 trangThai = thongTinCaNhan.trangThai
@@ -132,28 +132,7 @@ namespace Models.Services
         }
 
 
-        public void SuaTTCN(ThongTinCaNhan thongTinCaNhan)
-        {
-            ThongTinCaNhan ttcn2 = GetByIdTTCN(thongTinCaNhan.IdTTCN);
-            ttcn2.hoTen = thongTinCaNhan.hoTen;
-            ttcn2.userName = thongTinCaNhan.userName;
-            ttcn2.password = thongTinCaNhan.password;
-            ttcn2.Email = thongTinCaNhan.Email;
-            ttcn2.CCCD = thongTinCaNhan.CCCD;
-            ttcn2.soDT = thongTinCaNhan.soDT;
-            ttcn2.ngaySinh = thongTinCaNhan.ngaySinh;
-            ttcn2.ngheNghiep = thongTinCaNhan.ngheNghiep;
-            ttcn2.gioiTinh = thongTinCaNhan.gioiTinh;
-            ttcn2.diaChi = thongTinCaNhan.diaChi;
-            ttcn2.trinhDo = thongTinCaNhan.trinhDo;
-            ttcn2.soLanHM = thongTinCaNhan.soLanHM;
-            ttcn2.nhomMau = thongTinCaNhan.nhomMau;
-            ttcn2.coQuanTH = thongTinCaNhan.coQuanTH;
-            ttcn2.trangThai = thongTinCaNhan.trangThai;
-            ttcn2.userName = thongTinCaNhan.userName;
-            ttcn2.password = thongTinCaNhan.password;
-            db.SaveChanges();
-        }
+    
         public void SuaTTCN2(ThongTinCaNhan thongTinCaNhan)
         {
             ThongTinCaNhan ttcn2 = GetByIdTTCN(thongTinCaNhan.IdTTCN);

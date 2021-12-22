@@ -8,15 +8,15 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Areas.Admin.Controllers
 {
-    public class DotHiemMauController : BaseController
+    public class DotHienMauController : BaseController
     {
-        DotHiemMauServices _DHM = new DotHiemMauServices();
+        DotHienMauServices _DHM = new DotHienMauServices();
         private DbContextHM db = new DbContextHM();
         // GET: Admin/DotHiemMau
         public ActionResult Index(string searchString1, string searchString2, int page = 1, int pageSize = 5)
         {
-            var services = new DotHiemMauServices();
-            //  var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var services = new DotHienMauServices();
+            //  var session = (HienMauNhanDao.Common.UserLogin)Session[HienMauNhanDao.Common.CommonConstant.USER_SESSION];
 
             var model = services.ListAllPagingDHM(searchString1, searchString2,page, pageSize);
 

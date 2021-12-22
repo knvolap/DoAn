@@ -8,7 +8,7 @@ namespace Models.EF
     public partial class DbContextHM : DbContext
     {
         public DbContextHM()
-            : base("name=DbContextHm")
+            : base("name=DbContextHM1")
         {
         }
 
@@ -22,7 +22,6 @@ namespace Models.EF
         public virtual DbSet<PhieuDKHM> PhieuDKHMs { get; set; }
         public virtual DbSet<PhieuYCNM> PhieuYCNMs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ThongTinCaNhan> ThongTinCaNhans { get; set; }
         public virtual DbSet<chiTietDHM> chiTietDHMs { get; set; }
         public virtual DbSet<ChiTietPhanCong> ChiTietPhanCongs { get; set; }
@@ -226,10 +225,6 @@ namespace Models.EF
 
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.password)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ThongTinCaNhan>()
-                .Property(e => e.Email)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()

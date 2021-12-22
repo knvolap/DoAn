@@ -53,7 +53,6 @@ namespace Models.Services
                 userName = thongTinCaNhan.userName,
                 password = thongTinCaNhan.password,
                 hoTen = thongTinCaNhan.hoTen,
-                Email = thongTinCaNhan.Email,
                 soDT = thongTinCaNhan.soDT,
                 CCCD = thongTinCaNhan.CCCD,
                 trangThai = thongTinCaNhan.trangThai
@@ -71,7 +70,6 @@ namespace Models.Services
             tk.userName = thongTinCaNhan.userName;
             tk.password = thongTinCaNhan.password;
             tk.hoTen = thongTinCaNhan.hoTen;
-            tk.Email = thongTinCaNhan.Email;
             tk.soDT = thongTinCaNhan.soDT;
             tk.CCCD = thongTinCaNhan.CCCD;
             tk.trangThai = thongTinCaNhan.trangThai;

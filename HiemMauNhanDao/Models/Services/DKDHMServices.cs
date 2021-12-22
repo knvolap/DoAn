@@ -18,7 +18,7 @@ namespace Models.Services
             db = new DbContextHM();
         }
         //danh sach DK DHM
-        public IEnumerable<DotHiemMauView> ListAllDKDHM(string searchString1 , int page, int pageSize)
+        public IEnumerable<DotHienMauView> ListAllDKDHM(string searchString1 , int page, int pageSize)
         {
             var query = from c in db.chiTietDHMs
                         join dhm in db.DotHienMaus on c.idDHM equals dhm.IdDHM
@@ -30,7 +30,7 @@ namespace Models.Services
                 query = query.Where(x => x.c.idDHM.Contains(searchString1) || x.c.idNVYT.Contains(searchString1)
                                      || x.c.idDVLK.Contains(searchString1) || x.dhm.TenDHM.Contains(searchString1));
             }
-            var result = query.Select(x => new DotHiemMauView()
+            var result = query.Select(x => new DotHienMauView()
             {
                 IdDHM = x.dhm.IdDHM,
                 TenDHM = x.dhm.TenDHM,

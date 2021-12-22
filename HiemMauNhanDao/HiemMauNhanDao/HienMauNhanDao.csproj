@@ -370,13 +370,13 @@
     <Content Include="Assets\client\sass\_review.scss" />
     <Content Include="Assets\client\sass\_single_blog.scss" />
     <Content Include="Assets\client\sass\_variables.scss" />
-    <Content Include="Areas\Admin\Views\DotHiemMau\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\DotHiemMau\EditDHM.cshtml" />
+    <Content Include="Areas\Admin\Views\DotHienMau\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DotHienMau\EditDHM.cshtml" />
     <Content Include="Areas\Admin\Views\BenhVien\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BenhVien\EditBV.cshtml" />
     <Content Include="Areas\Admin\Views\BenhVien\Details.cshtml" />
     <Content Include="Areas\Admin\Views\BenhVien\CreateBV.cshtml" />
-    <Content Include="Areas\Admin\Views\DotHiemMau\CreateDHM.cshtml" />
+    <Content Include="Areas\Admin\Views\DotHienMau\CreateDHM.cshtml" />
     <Content Include="Areas\Admin\Views\DKDHM\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DKDHM\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
@@ -406,7 +406,7 @@
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\BenhVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\DKDHMController.cs" />
-    <Compile Include="Areas\Admin\Controllers\DotHiemMauController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DotHienMauController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLyTKController.cs" />
@@ -465,7 +465,6 @@
     <Content Include="Views\NhanVienYTe\_leftMenu2.cshtml" />
     <Content Include="Views\NhanVienYTe\EditKQHM.cshtml" />
     <Content Include="Views\NhanVienYTe\EditBV.cshtml" />
-    <Content Include="Views\NguoiDung\EditTTCN.cshtml" />
     <Content Include="Views\DangKyTK\Index.cshtml" />
     <Content Include="Views\DkDHM\Index.cshtml" />
     <Content Include="Views\DkDHM\DKTC.cshtml" />
@@ -486,7 +485,6 @@
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Assets\Admin\File\" />
     <Folder Include="FileUpLoad\" />
-    <Folder Include="Views\DotHienMau\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

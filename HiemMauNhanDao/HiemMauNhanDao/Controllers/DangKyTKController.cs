@@ -37,16 +37,12 @@ namespace HiemMauNhanDao.Controllers
                 }
                 else if (_DKTK.isExistSDT(thongTinCaNhan.soDT))
                 {
-                    ViewBag.ThongBao = "Số điện thoại đã tồn tại!";
-                }
-                else if (_DKTK.isExistEmail(thongTinCaNhan.Email))
-                {
-                    ViewBag.ThongBao = "Email đã tồn tại!";
+                    ViewBag.ThongBao = "Số điện thoại đã tồn tại!";               
                 }
                 else if (_DKTK.isExistCCCD(thongTinCaNhan.CCCD))
                 {
                     ViewBag.ThongBao = "CCCD/ CMND đã tồn tại!";
-                }
+                }              
                 //else if (fc["txtXacNhanMK"] != thongTinCaNhan.password)
                 //{
                 //    ViewBag.ThongBao = "Vui lòng nhập mật khẩu dài hơn!";
