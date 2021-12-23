@@ -232,9 +232,8 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
-                .Property(e => e.soDT)
-                .IsFixedLength()
-                .IsUnicode(false);
+                 .Property(e => e.soDT)
+                 .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.nhomMau)

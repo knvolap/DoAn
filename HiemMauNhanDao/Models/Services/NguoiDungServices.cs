@@ -3,6 +3,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,6 @@ namespace Models.Services
     public class NguoiDungServices
     {
         private DbContextHM db = null;
-
         public NguoiDungServices ()
         {
             db = new DbContextHM();
@@ -111,11 +111,10 @@ namespace Models.Services
             db.SaveChanges();
         }
 
-
-        public void SuaTTCN (ThongTinCaNhan thongTinCaNhan)
+        public void SuaTTCN2(ThongTinCaNhan thongTinCaNhan)
         {
             ThongTinCaNhan ttcn2 = GetByIdTTCN(thongTinCaNhan.IdTTCN);
-            ttcn2.hoTen = thongTinCaNhan.hoTen;          
+            ttcn2.hoTen = thongTinCaNhan.hoTen;
             ttcn2.CCCD = thongTinCaNhan.CCCD;
             ttcn2.soDT = thongTinCaNhan.soDT;
             ttcn2.ngaySinh = thongTinCaNhan.ngaySinh;
@@ -126,18 +125,66 @@ namespace Models.Services
             ttcn2.soLanHM = thongTinCaNhan.soLanHM;
             ttcn2.nhomMau = thongTinCaNhan.nhomMau;
             ttcn2.coQuanTH = thongTinCaNhan.coQuanTH;
-            ttcn2.idQuyen = thongTinCaNhan.idQuyen;
             ttcn2.userName = thongTinCaNhan.userName;
-            ttcn2.password = thongTinCaNhan.password;          
+            ttcn2.password = thongTinCaNhan.password;
+            ttcn2.idQuyen = thongTinCaNhan.idQuyen;
             ttcn2.trangThai = thongTinCaNhan.trangThai;
-            db.SaveChanges();
+            try
+            {
+                // Your code...
+                // Could also be before try if you know the exception occurs in SaveChanges
+
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+        }
+
+        public bool XoaTTCN(string id)
+        {
+            var XoaTTCN = db.ThongTinCaNhans.Find(id);
+            db.ThongTinCaNhans.Remove(XoaTTCN);
+            return true;
         }
 
         public void CapNhatTTCN(ThongTinCaNhan thongTinCaNhan)
         {
-            db.ThongTinCaNhans.AddOrUpdate(thongTinCaNhan);
-            db.SaveChanges();
+           
+                db.ThongTinCaNhans.AddOrUpdate(thongTinCaNhan);
+                db.SaveChanges();
+          
         }
+        //public void CapNhatTTCN(ThongTinCaNhan thongTinCaNhan)
+        //{
+
+        //    try
+        //    {
+        //        db.ThongTinCaNhans.AddOrUpdate(thongTinCaNhan);
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbEntityValidationException dbEx)
+        //    {
+        //        foreach (var validationErrors in dbEx.EntityValidationErrors)
+        //        {
+        //            foreach (var validationError in validationErrors.ValidationErrors)
+        //            {
+        //                System.Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+        //            }
+        //        }
+        //    }
+        //}
 
 
         //public void SuaTTCN2(ThongTinCaNhan thongTinCaNhan)
@@ -149,11 +196,6 @@ namespace Models.Services
         //}
 
 
-        public bool XoaTTCN(string id)
-        {
-            var XoaTTCN = db.ThongTinCaNhans.Find(id);
-            db.ThongTinCaNhans.Remove(XoaTTCN);
-            return true;
-        }
+
     }
 }

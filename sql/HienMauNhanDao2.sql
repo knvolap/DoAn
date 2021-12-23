@@ -28,7 +28,7 @@ CREATE TABLE ThongTinCaNhan(
 	password	VARCHAR(50)  null,
 	hoTen		 NVARCHAR(50)  NULL,
 	CCCD		 VARCHAR(12) UNIQUE  NULL,
-	soDT		 CHAR(11)  UNIQUE  NULL,
+	soDT		 VARCHAR(12)   NULL,
 	ngaySinh	 DATE  NULL,
 	gioiTinh	 bit DEFAULT '1' CHECK ( gioiTinh IN ( '0', '1' ) ), 
 	diaChi		 NVARCHAR(100)  NULL,
@@ -245,15 +245,15 @@ ALTER TABLE ThongTinCaNhan
 											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%..[A-Za-z]%' 
 											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
 											OR userName LIKE '[A-Za-z0-9]%@sv.ute.udn.vn'
-											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com'),	
-		
+											OR userName LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com'),		
 		CONSTRAINT CHECK_TTCN1_soDT		CHECK ( soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+											or soDT LIKE '[+][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+											or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+											or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 											or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'  ),
 		CONSTRAINT CHECK_TTCN_CCCD		CHECK ( CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 											 or CCCD LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')		
 GO
-
-
 
 ---- BẢNG 3--DotHienMau
 --ALTER TABLE DotHienMau
@@ -264,15 +264,20 @@ GO
 
 -- BẢNG 5--BenhVien
 ALTER TABLE BenhVien
-	ADD CONSTRAINT CHECK_BV_EMAILBV CHECK ( Email LIKE '[A-Za-z0-9]%@gmail.com' OR Email LIKE '[A-Za-z0-9]%@yahoo.com.vn'
+	ADD CONSTRAINT CHECK_BV_EMAILBV CHECK ( Email LIKE '[A-Za-z0-9]%@gmail.com' 
+											 OR Email LIKE '[A-Za-z0-9]%@yahoo.com.vn'
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
+											  OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.com' 
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.com' 
+											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com.vn'),
 		CONSTRAINT CHECK_BV_sdt2 CHECK ( soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 									or  soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 									or  soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 									or  soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')	
 GO
+
+
 
 -- BẢNG 6--ChucVu
 
@@ -286,16 +291,19 @@ GO
 
 -- BẢNG 8--DonViLienKet
 ALTER TABLE DonViLienKet
-	ADD CONSTRAINT CHECK_DV_EMAILBV CHECK ( Email LIKE '[A-Za-z0-9]%@gmail.com' OR Email LIKE '[A-Za-z0-9]%@yahoo.com.vn'
+	ADD CONSTRAINT CHECK_DV_EMAILBV CHECK (  Email LIKE '[A-Za-z0-9]%@gmail.com' 
+											 OR Email LIKE '[A-Za-z0-9]%@yahoo.com.vn'
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.vn'
+											  OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.com' 
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.com' 
+											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com.vn'),
 		CONSTRAINT  CHECK_DV_SODIENTHOAIBV CHECK (	soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 												or  soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 												or  soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 												or  soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')	
 GO
+
 
 -- BẢNG 9 PhieuYCNM
 ALTER TABLE PhieuYCNM
@@ -473,3 +481,18 @@ GO
 
 --Mật khẩu mã hóa -> copy bỏ vào mật khẩu của sql sau khi run file
 ---  4297f44b13955235245b2497399d7a93
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+

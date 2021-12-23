@@ -36,10 +36,10 @@
         [StringLength(50), Required(ErrorMessage = "Họ và Tên không được để trống.")]
         public string hoTen { get; set; }
 
-        [StringLength(12)]
+        [StringLength(12), Required(ErrorMessage = "Chỉ nhập tối đa 12 số")]
         public string CCCD { get; set; }
 
-        [StringLength(11)]
+        [StringLength(12), Required(ErrorMessage = "Chỉ nhập tối đa 12 số")]
         public string soDT { get; set; }
 
         [Column(TypeName = "date")]
@@ -51,20 +51,25 @@
 
       
         [StringLength(100)]
+        [Required(ErrorMessage = "Không được bỏ trống")]
         public string diaChi { get; set; }
 
         [StringLength(100)]
+        [Required(ErrorMessage = "Không được bỏ trống")]
         public string ngheNghiep { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Không được bỏ trống")]
         public string trinhDo { get; set; }
 
-    
+        [Range(0, Int32.MaxValue, ErrorMessage = "vui lòng nhập số từ 0")]
         public int? soLanHM { get; set; }
 
+       
         [StringLength(50)]
+        [Required(ErrorMessage = "Không được bỏ trống")]
         public string coQuanTH { get; set; }
-
+        
         [StringLength(5)]
         public string nhomMau { get; set; }
 
