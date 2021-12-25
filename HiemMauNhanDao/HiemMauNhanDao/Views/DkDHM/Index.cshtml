@@ -76,9 +76,13 @@
                                         {
                                             <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
                                         }
-                                        else
+                                        else if (session5.AuthorID == "Q04" || session5.AuthorID == "Q03")
                                         {
                                             <a class="genric-btn info radius" href="@Url.Action("DKTC", "DkDHM")">Đăng ký</a>
+                                        }
+                                        else
+                                        {
+                                        <a class="genric-btn info radius" href="@Url.Action("NotFound", "LoginClient")">Không có quyền đăng ký</a>
                                         }
                                     </ul>
                                 </div>

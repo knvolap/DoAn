@@ -55,83 +55,102 @@
                         <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
                             <form action="#">
                                 <table class="mt-10">
-                                    <th style="width:400px">
-                                        <div>
-                                            <input type="text" name="first_name" placeholder="Cân nặng (kg)"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Cân nặng'" required
-                                                   class="single-input">
-                                        </div>
-                                    </th>
-                                    <th class="col-lg-6">
-                                        <div>
-                                            <input type="text" name="last_name" placeholder="Mạch máu (lần / phút)"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mạch '" required
-                                                   class="single-input">
-                                        </div>
-                                    </th>
+                                    <tr>
+                                        <th style="width:400px">
+                                            <div>
+                                                <input type="text" name="first_name" placeholder="Cân nặng (kg)"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Cân nặng'" required
+                                                       class="single-input">
+                                            </div>
+                                        </th>
+                                        <th class="col-lg-6">
+                                            <div>
+                                                <input type="text" name="last_name" placeholder="Mạch máu (lần / phút)"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mạch '" required
+                                                       class="single-input">
+                                            </div>
+                                        </th>
+                                    </tr>
                                 </table>
                                 <table class="mt-10">
-                                    <th style="width:400px">
-                                        <div>
-                                            <input type="text" name="first_name" placeholder="Huyết áp (mm/Hg)"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Huyết áp'"
-                                                   required class="single-input">
-                                        </div>
-                                    </th>
-                                    <th class="col-lg-6">
-                                        <div>
-                                            <input type="text" name="first_name" placeholder="Tình trạng lâm sàn"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tình trạng lâm sàn'"
-                                                   required class="single-input">
-                                        </div>
-                                    </th>
+                                    <tr>
+                                        <th style="width:400px">
+                                            <div>
+                                                <input type="text" name="first_name" placeholder="Huyết áp (mm/Hg)"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Huyết áp'"
+                                                       required class="single-input">
+                                            </div>
+                                        </th>
+                                        <th class="col-lg-6">
+                                            <div>
+                                                <input type="text" name="first_name" placeholder="Tình trạng lâm sàn"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tình trạng lâm sàn'"
+                                                       required class="single-input">
+                                            </div>
+                                        </th>
+                                    </tr>
+
                                 </table>
                                 <table class="mt-10">
-                                    <th class="col-lg-4">
-                                        <div class="switch-wrap d-flex justify-content-between">
-                                            <p>Hiến máu</p>
+                                    <tr>
+                                        <th style="width:400px">
+                                            <p>
+                                                <b style="color:rgb(0, 0, 0);">Hiến máu        </b>
+                                            </p>
+                                        </th>
+                                        <th style="width:400px">
                                             <div class="primary-checkbox" style="margin-top:5px ;">
                                                 <input type="checkbox" id="primary-checkbox" checked="">
                                                 <label for="primary-checkbox"></label>
                                             </div>
-                                        </div>
+                                        </th>
+                                        <th class="col-lg-6">
+                                            <div>
+                                                <input type="text" name="first_name" placeholder="Lý do không hiến máu được"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Lý do không hiến máu được'"
+                                                       required class="single-input">
+                                            </div>
+                                        </th>
+                                    </tr>
 
-                                    </th>
-                                    <th style="width:400px">
-                                        <div>
-
-                                        </div>
-                                    </th>
 
                                 </table>
-                                <div class="form-group">
-                                    <label class="col-md-3 ">
-                                        <p>Thể tích (ml)</p>
-                                    </label>
-                                    <label class="col-lg-2">
-
-                                        <div>
-                                            <input class="primary-radio" type="radio" name="r27"> 250
-                                        </div>
-
-                                    </label>
-                                    <label class="col-md-2">
-                                        <div>
-                                            <input class="primary-radio" type="radio" name="r27"> 350
-                                        </div>
-
-                                    </label>
-                                    <label class="col-md-2">
-                                        <div>
-                                            <input class="primary-radio" type="radio" name="r27"> 450
-                                        </div>
-
-                                    </label>
-                                </div>
 
                                 <table class="mt-10">
-                                    <th style="width:400px">
-                                        <div>
+                                    <tr>
+                                        <th style="width:400px">
+                                            <p>
+                                                <b style="color:rgb(0, 0, 0);">Thể tích (ml)         </b>
+                                            </p>
+                                        </th>
+
+                                        <th style="width:400px">
+
+                                            <input class="primary-radio" type="radio" name="r1" style="height: 16px; width: 16px;vertical-align: middle" value="250"> 250
+
+                                        </th>
+                                        <th style="width:400px">
+
+                                            <input class="primary-radio" type="radio" name="r1" style="height: 16px; width: 16px;vertical-align: middle" value="350"> 350
+
+                                        </th>
+                                        <th class="col-lg-6">
+                                            @*<div>
+                                                <input type="text" name="first_name" placeholder="Lý do không hiến máu được"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Lý do không hiến máu được'"
+                                                       required class="single-input">
+                                            </div>*@
+                                        </th>
+                                    </tr>
+
+
+                                </table>
+
+
+                                <table class="mt-10">
+                                    <tr>
+                                        <th style="width:400px">
+
                                             <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
                                             <div class="form-select" id="default-select_1">
                                                 <select>
@@ -143,12 +162,19 @@
                                                     <option>4</option>
                                                 </select>
                                             </div>
-                                    </th>
-                                    <th class="col-lg-6">
-                                        <input type="date" name="last_name" placeholder="ngaySinh"
-                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' Ngày sinh'" required
-                                               class="single-input" for="datepicker">
-                                    </th>
+                                        </th>
+                                        <th class="col-lg-6">
+                                            <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                            <div class="form-select" id="default-select_1">
+                                                <select>
+                                                    <option value="">Trạng thái </option>
+                                                    <option>Đang cập nhật</option>
+                                                    <option>Chưa cập nhật</option>
+
+                                                </select>
+                                            </div>
+                                        </th>
+                                    </tr>
                                 </table>
                             </form>
                             <div class="text-center " style="margin-top: 20px;">
@@ -158,32 +184,44 @@
 
                         <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel">
                             <form action="#">
-                                <div class="mt-10">
+                                <div class="mt-10"  style="width: 705px">
                                     <input type="text" name="first_name" placeholder="HTS"
-                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'HTS'"
                                            required class="single-input">
                                 </div>
-                                <div class="mt-10">
+                                <div class="mt-10" style="width: 705px">
                                     <input type="text" name="last_name" placeholder="HBV"
-                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại '"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'HBV '"
                                            required class="single-input">
                                 </div>
                                 <table class="mt-10">
-                                    <th>
-                                        <div>
-                                            <div class="icon">
-                                                <i class="fa fa-plane" aria-hidden="true"></i>
-                                            </div>
+                                    <tr>
+                                        <th style="width:400px">
+
+                                            <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
                                             <div class="form-select" id="default-select_1">
                                                 <select>
-                                                    <option value=" 1">Người xét nghiệm</option>
-                                                    <option value="1">Nam</option>
-                                                    <option value="1">Nữ</option>
-                                                    <option value="1">Khác</option>
+                                                    <option value="">Người khám  </option>
+                                                    <option>Võ Lập</option>
+                                                    <option>Quang Nhã</option>
+                                                    <option>Ngọc Huy</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                    </th>
+                                        </th>
+                                        <th class="col-lg-6">
+                                            <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                            <div class="form-select" id="default-select_1">
+                                                <select>
+                                                    <option value="">Trạng thái </option>
+                                                    <option>Đang cập nhật</option>
+                                                    <option>Chưa cập nhật</option>
+
+                                                </select>
+                                            </div>
+                                        </th>
+                                    </tr>
                                 </table>
                             </form>
                             <div class="text-center " style="margin-top: 20px;">
@@ -196,67 +234,55 @@
                                 <table class="mt-10">
                                     <th style="width:400px">
                                         <input type="text" name="first_name" placeholder="MSD"
-                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'MSD'"
                                                required class="single-input">
                                     </th>
                                     <th class="col-lg-6">
                                         <input type="date" name="last_name" placeholder="Thời gian lấy máu"
-                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' Ngày sinh'" required
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' thời gian'" required
                                                class="single-input" for="datepicker">
                                     </th>
                                 </table>
-                                <div class="mt-10">
-                                    <div class="form-group">
-                                        <label class="col-md-4 ">
-                                            <p>Lượng máu hiến (ml)</p>
-                                        </label>
-                                        <label class="col-lg-2">
-
-                                            <div>
-                                                <input class="primary-radio" type="radio" name="r30"> 250
-                                            </div>
-
-                                        </label>
-                                        <label class="col-md-2">
-                                            <div>
-                                                <input class="primary-radio" type="radio" name="r30"> 350
-                                            </div>
-
-                                        </label>
-                                        <label class="col-md-2">
-                                            <div>
-                                                <input class="primary-radio" type="radio" name="r30"> 450
-                                            </div>
-
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="mt-10">
+                               
+                 
+                                <div class="mt-10" style="width: 705px">
                                     <input type="text" name="first_name" placeholder="Phản ứng"
-                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'" required
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phản ứng'" required
                                            class="single-input">
                                 </div>
-                                <div class="mt-10">
-                                    <input type="text" name="last_name" placeholder="Xử trí"
-                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại '" required
+                                <div class="mt-10"  style="width: 705px">
+                                    <input type="text" name="last_name" placeholder="Xử lý"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Xử lý'" required
                                            class="single-input">
                                 </div>
                                 <table class="mt-10">
-                                    <th>
-                                        <div>
-                                            <div class="icon">
-                                                <i class="fa fa-plane" aria-hidden="true"></i>
-                                            </div>
+                                    <tr>
+                                        <th style="width:400px">
+
+                                            <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
                                             <div class="form-select" id="default-select_1">
                                                 <select>
-                                                    <option value=" 1">Người lấy máu</option>
-                                                    <option value="1">Nam</option>
-                                                    <option value="1">Nữ</option>
-                                                    <option value="1">Khác</option>
+                                                    <option value="">Người khám  </option>
+                                                    <option>Võ Lập</option>
+                                                    <option>Quang Nhã</option>
+                                                    <option>Ngọc Huy</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                    </th>
+                                        </th>
+                                        <th class="col-lg-6">
+                                            <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                            <div class="form-select" id="default-select_1">
+                                                <select>
+                                                    <option value="">Trạng thái </option>
+                                                    <option>Đang cập nhật</option>
+                                                    <option>Chưa cập nhật</option>
+                                                    <option>Cập nhật xong</option>
+                                                </select>
+                                            </div>
+                                        </th>
+                                    </tr>
                                 </table>
                             </form>
                             <div class="text-center " style="margin-top: 20px;">

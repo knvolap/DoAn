@@ -129,27 +129,8 @@ namespace Models.Services
             ttcn2.password = thongTinCaNhan.password;
             ttcn2.idQuyen = thongTinCaNhan.idQuyen;
             ttcn2.trangThai = thongTinCaNhan.trangThai;
-            try
-            {
-                // Your code...
-                // Could also be before try if you know the exception occurs in SaveChanges
-
-                db.SaveChanges();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
+         db.SaveChanges();
+           
         }
 
         public bool XoaTTCN(string id)
@@ -161,9 +142,8 @@ namespace Models.Services
 
         public void CapNhatTTCN(ThongTinCaNhan thongTinCaNhan)
         {
-           
-                db.ThongTinCaNhans.AddOrUpdate(thongTinCaNhan);
-                db.SaveChanges();
+            db.ThongTinCaNhans.AddOrUpdate(thongTinCaNhan);
+            db.SaveChanges();
           
         }
         //public void CapNhatTTCN(ThongTinCaNhan thongTinCaNhan)

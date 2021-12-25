@@ -69,8 +69,16 @@ namespace HiemMauNhanDao.Controllers
             return View();
         }
 
+        public ActionResult LienKetNV()
+        {
+            return View();
+        }
 
         public ActionResult EditKQHM()
+        {
+            return View();
+        }
+        public ActionResult XemNV()
         {
             return View();
         }
@@ -89,7 +97,7 @@ namespace HiemMauNhanDao.Controllers
 
             file.SaveAs(fullDuongDan);
 
-            _BenhVien.EditBV(benhVien, fileName);
+            _BenhVien.EditBV2(benhVien, fileName);
             return RedirectToAction("Index");
         }
     }

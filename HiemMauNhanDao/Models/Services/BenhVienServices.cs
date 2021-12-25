@@ -1,7 +1,9 @@
-﻿using Models.EF;
+﻿using Microsoft.AspNetCore.Hosting;
+using Models.EF;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ namespace Models.Services
    public class BenhVienServices
     {
         private DbContextHM db = null;
+
         public BenhVienServices()
         {
             db = new DbContextHM();
@@ -53,18 +56,36 @@ namespace Models.Services
             db.SaveChanges();
         }
 
-        public void EditBV(BenhVien benhVien, string fileName)
+        public void EditBV(BenhVien benhVien)
         {
              BenhVien bv = GetByIdBenhVien(benhVien.IdBenhVien);
              bv.TenBenhVien = benhVien.TenBenhVien;
              bv.Email = benhVien.Email;
              bv.diaChi = benhVien.diaChi;
-             bv.minhChung = fileName;
+             bv.minhChung = benhVien.minhChung;
              bv.soDTBV = benhVien.soDTBV;
              bv.trangThai = benhVien.trangThai;
              db.SaveChanges();        
         }
-       
+        public void EditBV2(BenhVien benhVien, string fileName)
+        {
+            try
+            {
+                BenhVien bv = GetByIdBenhVien(benhVien.IdBenhVien);
+                bv.TenBenhVien = benhVien.TenBenhVien;
+                bv.Email = benhVien.Email;
+                bv.diaChi = benhVien.diaChi;
+                bv.minhChung = fileName;
+                bv.soDTBV = benhVien.soDTBV;
+                bv.trangThai = benhVien.trangThai;
+                db.SaveChanges();
+            }
+            catch
+            {
+                Console.WriteLine("Cập nhật thất bại");
+            }
+        }
+
         public bool Delete(string id)
          {
             try
@@ -81,7 +102,22 @@ namespace Models.Services
             }
 
         }
+        //public string ProcessUploadedFile(BenhVien model)
+        //{
+        //    string uniqueFileName = null;
 
+        //    if (model.Photo != null)
+        //    {
+        //        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+        //        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+        //        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        //        {
+        //            model.Photo.CopyTo(fileStream);
+        //        }
+        //    }
+        //    return uniqueFileName;
+        //}
         public object ListAllBenhVien(string searchString, int page)
         {
             throw new System.NotImplementedException();

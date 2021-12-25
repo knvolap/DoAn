@@ -17,12 +17,13 @@ namespace HiemMauNhanDao.Controllers
         {
             var hienthiDTCHM = new TCDHMServices();
             var model = hienthiDTCHM.ListAlldTCHM(searchString, page, pageSize);
+            ViewBag.BenhVien = new TCDHMServices().ListAllLLeftMenuBV();
             ViewBag.SearchString = searchString;
             ViewBag.listDTCHM = hienthiDTCHM.GetListDTCHM();
             return View(model);
         }
 
-
+       
         public ActionResult DangKyHiemMau()
         {
             return View();
@@ -39,6 +40,12 @@ namespace HiemMauNhanDao.Controllers
             var model = _DkDHM.GetByIdTCHM(id);
             return View(model);
         }
-      
+
+        [ChildActionOnly]
+        public PartialViewResult _RightMenu()
+        {
+            var model = new TCDHMServices().ListAllLLeftMenuBV();
+            return PartialView(model);
+        }
     }
 }

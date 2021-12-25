@@ -1,4 +1,5 @@
-﻿
+﻿@*@model List<Models.EF.BenhVien>*@
+
 <aside class="single_sidebar_widget post_category_widget">
     <h4 class="widget_title">Đợt hiến máu</h4>
     <ul class="list cat-list">
@@ -31,10 +32,10 @@
 </aside>
 
 
- 
+
 <aside class="single_sidebar_widget popular_post_widget" style="height:500px ; overflow-y:auto">
     <h3 class="widget_title">Đơn vị liên kết</h3>
-    <div class="media post_item" >
+    <div class="media post_item">
         <img src="~/Assets/client/img/post/post_9.png" alt="post">
         <div class="media-body">
             <a href="single-blog.html">
@@ -46,8 +47,8 @@
             <div>
                 ĐT: <a>0511 3822 571</a>
             </div>
-            <div >
-                ĐC: <a style="width: 100px;  width: 50px;text-overflow: ellipsis">48 Cao thắng - Hải Châu </a>
+            <div>
+                ĐC: <a >48 Cao thắng - Hải Châ </a>
             </div>
         </div>
     </div>
@@ -91,31 +92,40 @@
             <div>
                 ĐT: <a>0511 3822 571</a>
             </div>
+            <div>
+                ĐC: <a   >aaa </a>
+            </div>
         </div>
     </div>
 </aside>
 
 <aside class="single_sidebar_widget popular_post_widget" style="height:500px ; overflow-y:auto">
     <h3 class="widget_title">Bệnh viện </h3>
+    @*<div class="media post_item">
+        @foreach (var item in Model)
+        {
+            <img src="~/Assets/client/img/post/post_9.png" alt="post">
+            <div class="media-body"  >
+                <a href="@item.IdBenhVien">
+                    <h3>@item.TenBenhVien  </h3>
+                </a>
+                <div>
+                    Email: <a>@item.Email </a>
+                </div>
+                <div>
+                    ĐT: <a>@item.soDTBV</a>
+                </div>
+                <div>
+                    ĐC: <a >@item.diaChi </a>
+                </div>
+            </div>
+        }
+    </div>*@
     <div class="media post_item">
         <img src="~/Assets/client/img/post/post_9.png" alt="post">
         <div class="media-body">
             <a href="single-blog.html">
-                <h3>Bệnh Viện Đa Khoa</h3>
-            </a>
-            <div>
-                Email: <a>spkt@udn.vn</a>
-            </div>
-            <div>
-                ĐT: <a>0511 3822 571</a>
-            </div>
-        </div>
-    </div>
-    <div class="media post_item">
-        <img src="~/Assets/client/img/post/post_9.png" alt="post">
-        <div class="media-body">
-            <a href="single-blog.html">
-                <h3>Bệnh viên Ung Bứu</h3>
+                <h3>Bệnh viên Ung Bứu2</h3>
             </a>
             <div>
                 Email: <a>kt@udn.vn</a>

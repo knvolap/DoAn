@@ -16,6 +16,7 @@ namespace HiemMauNhanDao.Controllers
         {
             var hienthiDHM = new DKDHMServices();
             var model = hienthiDHM.ListAllDKDHM2(searchString, page, pageSize);
+            ViewBag.BenhVien = new DKDHMServices().ListAllLLeftMenuBV();
             ViewBag.SearchString = searchString;
             ViewBag.listDHM = hienthiDHM.GetDotHienMaus();     
             return View(model);
@@ -26,5 +27,11 @@ namespace HiemMauNhanDao.Controllers
             return View();
         }
 
+        [ChildActionOnly]
+        public PartialViewResult _RightMenu()
+        {
+            var model = new TCDHMServices().ListAllLLeftMenuBV();
+            return PartialView(model);
+        }
     }
 }

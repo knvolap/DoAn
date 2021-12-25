@@ -18,6 +18,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         {
             var taikhoan = new QuanLyTKServices();
             var model = taikhoan.ListAllTaiKhoan(searchString, page, pageSize);
+            ViewBag.IdQuyen = new SelectList(db.Quyens, "IdQuyen", "tenQuyen");
             ViewBag.SearchStringTK = searchString;
             return View(model);
         }

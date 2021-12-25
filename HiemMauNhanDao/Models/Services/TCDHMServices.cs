@@ -35,6 +35,15 @@ namespace Models.Services
         {
             return db.DotToChucHMs.Where(b => b.IdDTCHM.CompareTo(id) == 0).FirstOrDefault();
         }
+        public List<BenhVien> ListAllLLeftMenuBV()
+        {
+            return db.BenhViens.ToList();
+        }
+        public BenhVien ListAllLLeftMenuBV(string id)
+        {
+            return db.BenhViens.Where(s => s.IdBenhVien.CompareTo(id) == 0).FirstOrDefault();
+
+        }
 
     }
 }

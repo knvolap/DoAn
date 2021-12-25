@@ -1,10 +1,13 @@
 namespace Models.EF
 {
     using System;
+    using System.Web;
+    using System.ComponentModel;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using Microsoft.AspNetCore.Http;
 
     [Table("BenhVien")]
     public partial class BenhVien
@@ -42,5 +45,8 @@ namespace Models.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhanVienYTe> NhanVienYTes { get; set; }
+
+        public IEnumerable<HttpPostedFileBase> files { get; set; }
+
     }
 }

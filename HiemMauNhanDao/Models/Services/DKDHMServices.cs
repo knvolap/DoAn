@@ -107,6 +107,14 @@ namespace Models.Services
             db.chiTietDHMs.Remove(nd);
             db.SaveChanges();
         }
+        public List<BenhVien> ListAllLLeftMenuBV()
+        {
+            return db.BenhViens.ToList();
+        }
+        public BenhVien ListAllLLeftMenuBV(string id)
+        {
+            return db.BenhViens.Where(s => s.IdBenhVien.CompareTo(id) == 0).FirstOrDefault();
 
+        }
     }
 }

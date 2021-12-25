@@ -19,7 +19,7 @@ namespace Models.DAO
         //Đăng nhập
         public int Login(string UserName, string PassWord)
         {
-           // var Session= db.Quyens.SingleOrDefault(x => x.IdQuyen == id);
+            // var Session= db.Quyens.SingleOrDefault(x => x.IdQuyen == id);
 
             // return 0: Tài khoản hoặc mật khẩu không chính xác
             // return 1: đăng nhập thành cônh
@@ -32,7 +32,7 @@ namespace Models.DAO
             }
             else
             {
-                if(result.idQuyen.Contains("Q01") || result.idQuyen.Contains("Q02"))
+                if (result.idQuyen.Contains("Q01") || result.idQuyen.Contains("Q02"))
                 {
                     if (result.trangThai == false) { return -1; }
                     else

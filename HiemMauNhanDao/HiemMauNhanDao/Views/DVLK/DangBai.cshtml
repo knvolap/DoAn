@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "DangBai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Đơn vị liên kết</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                @RenderPage("_leftMenu2.cshtml")
+            </div>
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <h3 class="mb-30">Đăng bài</h3>
+                    <div class=" ">
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-12 col-md-8">
+
+                                <form action="#">
+                                    <table class="mt-10">
+                                        <th style="width:400px">
+                                            <div>
+                                                <a>Tên đợt tổ chức </a>
+                                                <input type="text" name="first_name" placeholder="Tên đợt tổ chức "
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tên đợt tổ chức'" required
+                                                       class="single-input">
+                                            </div>
+                                        </th>
+                                        <th class="col-lg-6">
+                                            <a>Ngày bắt đầu</a>
+                                            <input type="date" name="last_name" placeholder="Thời gian bắt đầu "
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = ' Thời gian kết thúc'" required
+                                                   class="single-input" for="datepicker">
+                                        </th>
+                                    </table>
+                                    <table class="mt-10">
+                                        <th style="width:400px">
+                                            <div>
+                                                <a>Số lượng </a>
+                                                <input type="number" name="first_name" placeholder="Số lượng"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = '0'" required
+                                                       class="single-input">
+                                            </div>
+                                        </th>
+                                        <th class="col-lg-6">
+                                            <a>Ngày kết thúc</a>
+                                            <input type="date" name="last_name" placeholder="Thời gian kết thúc "
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = ' Thời gian bắt đầu'" required
+                                                   class="single-input" for="datepicker">
+                                        </th>
+                                    </table>
+                                    <table class="mt-10">
+                                        <tr>
+                                            <th style="width:400px">
+                                                <div>
+                                                    <a>Đối tượng tham gia</a>
+                                                    <input type="text" name="first_name" placeholder="Đối tượng tham gia"
+                                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Đối tượng tham gia'" required
+                                                           class="single-input">
+                                                </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                <a>Ngày triển khai </a>
+                                                <input type="datetime-local" name="datetimepicker2" id="datetimepicker2" placeholder="Thời gian bắt đầu "
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = ' Thời gian bắt đầu'" required
+                                                       class="single-input" for="datepicker">
+                                            </th>
+                                        </tr>
+                                    </table>
+
+
+                                    <table class="mt-10">
+                                        <tr>
+                                            <th style="width:400px">
+                                                <a>Bệnh viện tổ chức </a>
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value="">Bệnh viện tổ chức </option>
+                                                            <option>Bệnh viện Đa Khoa</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                        </select>
+                                                    </div>
+                                            </th>
+                                            <th class="col-lg-6">
+                                                <a>Đơn vị liên kết</a>
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value=" 1">Đơn vị liên kết</option>
+                                                            <option value="1">Chưa biết</option>
+                                                            <option value="1">A</option>
+                                                            <option value="1">B</option>
+                                                            <option value="1">AB</option>
+                                                            <option value="1">0</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                    <div class="mt-10" style="margin-right:15px">
+                                        <a>Nội dung</a>
+                                        <textarea class="single-textarea" placeholder="Nội dung" onfocus="this.placeholder = ''"
+                                                  onblur="this.placeholder = 'Nội dung'" required></textarea>
+                                    </div>
+                                    <div class="mt-10" style="margin-right:15px">
+                                        <a>Địa chỉ tổ chức</a>
+                                        <input type="email" name="EMAIL" placeholder=" Địa chỉ tổ chức"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = ' Địa chỉ tổ chức'" required
+                                               class="single-input">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="text-center " style="margin-top:20px">
+                            <a class="genric-btn primary-border radius" href="#">Cập nhật</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+

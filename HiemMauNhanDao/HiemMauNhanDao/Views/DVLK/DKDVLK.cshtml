@@ -1,0 +1,144 @@
+﻿@model Models.EF.DonViLienKet
+@{
+    ViewBag.Title = "DKDVLK";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Thông tin bệnh viện</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                @RenderPage("_leftMenu2.cshtml")
+            </div>
+
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div>
+                    <h3 class="mb-30">Cập nhật thông đơn vị</h3>
+                    <hr />
+                    <div class="panel-body">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+                    </div>
+                    
+                    <div>
+                        @using (Html.BeginForm("DKDVLK", "DVLK", new { @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
+                                @if (@ViewBag.ThongBao != null)
+                                {
+                                    <label>@ViewBag.ThongBao </label>
+                                }
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-8">
+                                    <form action="#">
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <label>Mã người dùng</label>
+                                                        @Html.EditorFor(model => model.idTTCN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <label>Tên đơn vị</label>
+                                                        @Html.EditorFor(model => model.TenDonVi, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.TenDonVi, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <label>Email</label>
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <label>Số điện thoại</label>
+                                                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.soDT, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <th style="width:735px">
+                                                    <label>Địa chỉ</label>
+                                                    @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.diaChi, "", new { @class = "text-danger" })
+                                                 
+                                                </th>
+                                            </tr
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <th style="width:735px">
+                                                    <label>Minh chứng</label>
+                                                    @Html.EditorFor(model => model.minhChung, new
+                                               { htmlAttributes = new { @class = "form-control", @name = "file", @id = "exampleFile", @type = "file" } })
+
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <div class="mt-10">
+                                        </div>
+                                        <div class="mt-10">
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="text-center " style="margin-top:20px">
+                                <a class="genric-btn primary-border radius" href="#">Cập nhật</a>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+

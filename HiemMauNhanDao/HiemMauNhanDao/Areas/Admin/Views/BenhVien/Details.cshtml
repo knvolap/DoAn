@@ -9,7 +9,7 @@
 
 <div class="card-body">
     <hr />
-    <dl class="dl-horizontal">
+    <div class="dl-horizontal">
         <div class="row">
             <div class="col-md-6">
                 <dl class="dl-horizontal">
@@ -63,16 +63,17 @@
                     </dt>
                     <dd>
                         <ul>
-                            <li> <img style="width:500px;height: 600px ; object-fit: cover" src="~/FileUpLoad/@Model.minhChung" /></li>
+                            <li> <img style="width:500px;height: 600px ; object-fit: cover" src="~/FileUpLoad/benhvien/@Model.minhChung" /></li>
                             <li> @Html.DisplayFor(model => model.minhChung) </li>
                         </ul>
                     </dd>
+                    @Html.ActionLink("Download", "Download", new { fileName = @Model.minhChung })
 
                 </dl>
             </div>
         </div>
 
-    </dl>
+    </div>
     <button class="mb-2 mr-2 btn-transition btn btn-success">
         @Html.ActionLink("Chỉnh sửa", "EditBV", new { id = Model.IdBenhVien })
     </button>

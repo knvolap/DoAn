@@ -50,8 +50,9 @@ namespace HiemMauNhanDao.Controllers
             return View(thongTinCaNhan);
         }
 
+        
 
-
+        //cập nhật thành công. nhưng k check được lỗi
         [HttpPost]
         public ActionResult CapnhatTTCN(ThongTinCaNhan model)
         {
@@ -74,39 +75,115 @@ namespace HiemMauNhanDao.Controllers
             return RedirectToAction("Index", "NguoiDung");
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CapnhatTTCN(ThongTinCaNhan model)
-        //{
-        //    var dao = new NguoiDungServices();
-        //    if (ModelState.IsValid)
-        //    {
-        //        ThongTinCaNhan ttcn = dao.GetByIdTTCN(model.IdTTCN);
-        //        ttcn.IdTTCN = model.IdTTCN;
-        //        ttcn.hoTen = model.hoTen;
-        //        ttcn.gioiTinh = model.gioiTinh;
-        //        ttcn.soDT = model.soDT;
-        //        ttcn.soLanHM = model.soLanHM;
-        //        ttcn.CCCD = model.CCCD;
-        //        ttcn.ngheNghiep = model.ngheNghiep;
-        //        ttcn.diaChi = model.diaChi;
-        //        ttcn.nhomMau = model.nhomMau;
-        //        ttcn.soLanHM = model.soLanHM;
-        //        ttcn.trinhDo = model.trinhDo;
-        //        ttcn.coQuanTH = model.coQuanTH;
-        //        dao.CapNhatTTCN(ttcn);
-        //        SetAlert("Cập nhật thành công", "success");
-        //        return RedirectToAction("Index", "NguoiDung");
-        //    }
-        //    else
-        //    {
-        //        SetAlert("Cập nhật thất bại", "error");
-        //        return RedirectToAction("CapnhatTTCN", "NguoiDung");
-        //    }
-        //    return View(model);
-        //}
+        //tình trạng sức khỏe
+        public ActionResult TTSK()
+        {         
+            return View();
+        }
+
+        public ActionResult DoiMK()
+        {
+            return View();
+        }
+     
+     
+
+      
 
 
 
     }
 }
+
+////cập nhật thành công. nhưng k check được lỗi
+//[HttpPost]
+//public ActionResult CapnhatTTCN(ThongTinCaNhan model)
+//{
+//    if (!ModelState.IsValid)
+//    {
+//        var dao = new NguoiDungServices();
+//        var ttcn = dao.GetByIdTTCN(model.IdTTCN);
+//        ttcn.IdTTCN = model.IdTTCN;
+//        ttcn.hoTen = model.hoTen;
+//        ttcn.gioiTinh = model.gioiTinh;
+//        ttcn.soDT = model.soDT;
+//        ttcn.soLanHM = model.soLanHM;
+//        ttcn.CCCD = model.CCCD;
+//        ttcn.ngheNghiep = model.ngheNghiep;
+//        ttcn.diaChi = model.diaChi;
+//        ttcn.nhomMau = model.nhomMau;
+//        ttcn.soLanHM = model.soLanHM;
+//        ttcn.trinhDo = model.trinhDo;
+//        ttcn.coQuanTH = model.coQuanTH;
+//        ttcn.password = ttcn.password;
+//        ttcn.idQuyen = ttcn.idQuyen;
+//        ttcn.PhieuDKHMs = ttcn.PhieuDKHMs;
+//        ttcn.Quyen = ttcn.Quyen;
+//        ttcn.LichSuHienMaus = ttcn.LichSuHienMaus;
+//        ttcn.NhanVienYTes = ttcn.NhanVienYTes;
+//        ttcn.trangThai = ttcn.trangThai;
+
+//        dao.CapNhatTTCN(ttcn);
+//        SetAlert("Cập nhật thành công", "success");
+//        return RedirectToAction("Index", "NguoiDung");
+//    }
+//    return View();
+//}
+
+
+
+
+//check được lỗi nhưng cập nhật không được
+//[HttpPost]
+//[ValidateAntiForgeryToken]
+//public ActionResult CapnhatTTCN(ThongTinCaNhan model)
+//{
+//    var dao = new NguoiDungServices();
+//    if (ModelState.IsValid)
+//    {
+//        ThongTinCaNhan ttcn = dao.GetByIdTTCN(model.IdTTCN);
+//        ttcn.IdTTCN = model.IdTTCN;
+//        ttcn.hoTen = model.hoTen;
+//        ttcn.gioiTinh = model.gioiTinh;
+//        ttcn.soDT = model.soDT;
+//        ttcn.soLanHM = model.soLanHM;
+//        ttcn.CCCD = model.CCCD;
+//        ttcn.ngheNghiep = model.ngheNghiep;
+//        ttcn.diaChi = model.diaChi;
+//        ttcn.nhomMau = model.nhomMau;
+//        ttcn.soLanHM = model.soLanHM;
+//        ttcn.trinhDo = model.trinhDo;
+//        ttcn.coQuanTH = model.coQuanTH;
+//        dao.CapNhatTTCN(ttcn);
+//        SetAlert("Cập nhật thành công", "success");
+//        return RedirectToAction("Index", "NguoiDung");
+//    }
+//    else
+//    {
+//        SetAlert("Cập nhật thất bại", "error");
+//        return RedirectToAction("CapnhatTTCN", "NguoiDung");
+//    }
+//    return View(model);
+//}
+
+
+//[HttpGet]
+//public ActionResult CapnhatTTCN2(string id)
+//{
+//    ThongTinCaNhan thongTinCaNhan = db.ThongTinCaNhans.Find(id);
+//    return View(thongTinCaNhan);
+//}
+//[HttpGet]
+//public ActionResult CapnhatTTCN2(ThongTinCaNhan model)
+//{
+//    if (!ModelState.IsValid)
+//    {
+//        var dao = new NguoiDungServices();
+//        var ttcn = dao.GetByIdTTCN(model.IdTTCN);
+//        _NguoiDung.SuaTTCN2(model);
+//    SetAlert("Sửa thành công", "success");
+//    return RedirectToAction("Index");
+//    }
+//    return View(model);
+//}
+

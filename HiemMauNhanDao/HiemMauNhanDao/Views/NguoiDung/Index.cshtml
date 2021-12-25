@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-8">
                                     <form action="#">
-                                         
+
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
@@ -85,7 +85,7 @@
                                                         <label>Tài khoản</label>
                                                         @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </div>
-                                                </th>   
+                                                </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <label>CMND / CCCD </label>
@@ -100,7 +100,7 @@
                                                     <div>
                                                         <label>Giới tính </label>
                                                         @Html.DropDownListFor(model => model.gioiTinh, new[] { new SelectListItem { Text = "Nam", Value = "1" },
-                                                       new SelectListItem { Text = "Nữ", Value = "0" } }, new { @class = "single-input", @readonly = "readonly" })
+                                                        new SelectListItem { Text = "Nữ", Value = "0" } }, new { @class = "single-input", @disabled = "disabled" })
 
                                                     </div>
                                                 </th>
@@ -122,11 +122,11 @@
                                                     <div>
                                                         <label>Nhóm máu </label>
                                                         @*@Html.DropDownListFor(model => model.nhomMau, new[] { new SelectListItem { Text = "Chưa biết"},
-                                                            new SelectListItem { Text = "A +"} , new SelectListItem { Text = "A -" } ,
-                                                            new SelectListItem { Text = "B +" } , new SelectListItem { Text = "B -" } ,
-                                                            new SelectListItem { Text = "AB +" } ,  new SelectListItem { Text = "AB -" } ,
-                                                            new SelectListItem { Text = "O +" } ,  new SelectListItem { Text = "O -" } },
-                                                            new { @class = "single-input" })*@
+                                        new SelectListItem { Text = "A +"} , new SelectListItem { Text = "A -" } ,
+                                        new SelectListItem { Text = "B +" } , new SelectListItem { Text = "B -" } ,
+                                        new SelectListItem { Text = "AB +" } ,  new SelectListItem { Text = "AB -" } ,
+                                        new SelectListItem { Text = "O +" } ,  new SelectListItem { Text = "O -" } },
+                                        new { @class = "single-input" })*@
                                                         @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </div>
                                                 </th>
@@ -163,6 +163,9 @@
                                         <a href="@Url.Action("CapnhatTTCN", "NguoiDung", new { id = Model.IdTTCN })  " class="genric-btn primary-border radius">Hãy cập nhật thông tin</a>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="text-center" style="margin-top:20px">
+                                <a href="@Url.Action("Edit", "NguoiDung", new { id = Model.IdTTCN })  " class="genric-btn primary-border radius">Hãy cập nhật thông tin2</a>
                             </div>
                         }
                     </div>
