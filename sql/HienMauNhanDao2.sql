@@ -97,8 +97,8 @@ CREATE TABLE DonViLienKet(
 	idTTCN			VARCHAR(20) FOREIGN KEY REFERENCES  dbo.ThongTinCaNhan(IdTTCN) ON DELETE CASCADE ON UPDATE CASCADE  not null,
 	TenDonVi		NVARCHAR (50) not null,
 	diaChi			NVARCHAR(100)  NULL,
-	Email			VARCHAR(50) UNIQUE  NULL,	
-	soDT			CHAR(11) UNIQUE NULL,
+	Email			VARCHAR(50)   NULL,	
+	soDT			VARCHAR(12)    NULL,
 	minhChung		VARCHAR(50)  NULL,	
 	trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
@@ -264,17 +264,17 @@ GO
 
 -- BẢNG 5--BenhVien
 ALTER TABLE BenhVien
-	ADD CONSTRAINT CHECK_BV_EMAILBV CHECK ( Email LIKE '[A-Za-z0-9]%@gmail.com' 
-											 OR Email LIKE '[A-Za-z0-9]%@yahoo.com.vn'
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
-											  OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.com' 
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.com' 
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
-											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com.vn'),
-		CONSTRAINT CHECK_BV_sdt2 CHECK ( soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
-									or  soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
-									or  soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
-									or  soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')	
+	ADD CONSTRAINT CHECK_BV_EMAILBV CHECK ( Email LIKE '[A-Za-z0-9]%@gmail.com'
+											OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
+											OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%..[A-Za-z]%' 
+											OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%.vn'
+											OR Email LIKE '[A-Za-z0-9]%@sv.ute.udn.vn'
+											OR Email LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com'),		
+		CONSTRAINT CHECK_BV_sdt2 CHECK ( soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+									 or soDTBV LIKE '[+][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+									 or soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+									 or soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+									 or soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'  )
 GO
 
 
@@ -298,10 +298,11 @@ ALTER TABLE DonViLienKet
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.com' 
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z]%.[A-Za-z]%.[A-Za-z]%' 
 											 OR Email LIKE '[A-Za-z0-9]%@[A-Za-z0-9]%.[A-Za-z]%.com.vn'),
-		CONSTRAINT  CHECK_DV_SODIENTHOAIBV CHECK (	soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
-												or  soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
-												or  soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
-												or  soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')	
+		CONSTRAINT  CHECK_DV_SODIENTHOAIBV CHECK (	 soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+												  or soDT LIKE '[+][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+												  or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+												  or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+												  or soDT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'  )
 GO
 
 

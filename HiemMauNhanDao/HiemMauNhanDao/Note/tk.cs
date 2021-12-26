@@ -16,7 +16,7 @@ namespace HiemMauNhanDao.Note
 		//('TK07', 'Q06', 'nguoidung2@gmail.com','123123'),
 		//('TK08', 'Q06', 'nguoidung3@gmail.com','123123'),
 		//('TK09', 'Q06', 'nguoidung4@gmail.com','123123')	
-
+		///nguoidung30@gmail.com 
 		// 4297f44b13955235245b2497399d7a93
 
 		////Bệnh viện 

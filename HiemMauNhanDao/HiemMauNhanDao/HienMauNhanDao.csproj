@@ -529,7 +529,6 @@
     <Content Include="Views\NhanVienYTe\XemNV.cshtml" />
     <Content Include="Views\DVLK\CapNhatTTDV.cshtml" />
     <Content Include="Views\DVLK\DangBai.cshtml" />
-    <Content Include="Views\NguoiDung\CapnhatTTCN2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

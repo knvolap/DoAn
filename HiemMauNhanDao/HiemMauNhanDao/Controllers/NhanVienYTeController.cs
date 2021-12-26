@@ -71,7 +71,36 @@ namespace HiemMauNhanDao.Controllers
 
         public ActionResult LienKetNV()
         {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            string id = session.UserID;
+            ViewBag.IdUser = id;
+            ViewBag.IdBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien");
+            ViewBag.IdChucVu = new SelectList(db.ChucVus, "IdChucVu", "TenChucVu");
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LienKetNV([Bind(Include = "IdNVYT,idTTCN,trangThai,idChucVu,idBenhVien,khoa,trinhDo,")]NhanVienYTe nhanVienYTe)
+        {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            ViewBag.IdBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien", nhanVienYTe.idBenhVien);
+            ViewBag.IdChucVu = new SelectList(db.ChucVus, "IdChucVu", "TenChucVu", nhanVienYTe.idChucVu);
+            if (ModelState.IsValid)
+            {
+                nhanVienYTe.IdNVYT = "NV" + (db.DonViLienKets.Count() + 1).ToString();
+                nhanVienYTe.idTTCN = session.UserID;
+                nhanVienYTe.trangThai = false;                         
+                db.NhanVienYTes.Add(nhanVienYTe);
+                db.SaveChanges();
+                SetAlert("Đăng ký thành công", "success");
+                return RedirectToAction("DKDVLK", "DVLK");
+            }
+            else
+            {
+                SetAlert("Đăng ký thất bại", "error");
+                return RedirectToAction("DKDVLK", "DVLK");
+            }        
+            return View(nhanVienYTe);
         }
 
         public ActionResult EditKQHM()

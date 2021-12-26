@@ -25,33 +25,34 @@ namespace HiemMauNhanDao.Controllers
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             string id = session.UserID;
-            DonViLienKet IdTTCN = db.DonViLienKets.Find(id);
-            return View(IdTTCN);
+            ViewBag.IdUser = id;
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DKDVLK(DonViLienKet donViLienKet)
+        public ActionResult DKDVLK([Bind(Include = "IdDVLK,idTTCN,trangThai,TenDonVi,Email,soDT,minhChung,diaChi")] DonViLienKet donViLienKet)
         {
-            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-            string id = session.UserID;
-             donViLienKet = db.DonViLienKets.Find(id);
-
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];        
             if (ModelState.IsValid)
             {
-                donViLienKet.idTTCN = id;
-                _dvlk.AddDVLK(donViLienKet);
+                donViLienKet.IdDVLK = "DV" + (db.DonViLienKets.Count() + 1).ToString();
+                donViLienKet.idTTCN = session.UserID;                
+                donViLienKet.trangThai = false;
+                db.DonViLienKets.Add(donViLienKet);
+                db.SaveChanges();
                 SetAlert("Đăng ký thành công", "success");
                 return RedirectToAction("DKDVLK", "DVLK");
             }
             else
             {
-                SetAlert("Đăng ký  thất bại", "error");
+                SetAlert("Đăng ký thất bại", "error");
                 return RedirectToAction("DKDVLK", "DVLK");
             }
             return View(donViLienKet);
-        }
 
+        }
+       
 
         public ActionResult DangBai()
         {
@@ -64,3 +65,25 @@ namespace HiemMauNhanDao.Controllers
         }
     }
 }
+
+
+//[HttpPost]
+//[ValidateAntiForgeryToken]
+//public ActionResult DKDVLK(DonViLienKet donViLienKet)
+//{
+//    var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+//    if (ModelState.IsValid)
+//    {
+//        donViLienKet.idTTCN = session.UserID;
+//        donViLienKet.trangThai = false;
+//        _dvlk.AddDVLK(donViLienKet);
+//        SetAlert("Đăng ký thành công", "success");
+//        return RedirectToAction("DKDVLK", "DVLK");
+//    }
+//    else
+//    {
+//        SetAlert("Đăng ký  thất bại", "error");
+//        return RedirectToAction("DKDVLK", "DVLK");
+//    }
+
+//}

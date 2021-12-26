@@ -99,11 +99,12 @@
                                                 <th style="width:400px">
                                                     <div>
                                                         <label>Giới tính </label>
-                                                        @Html.DropDownListFor(model => model.gioiTinh, new[] { new SelectListItem { Text = "Nam", Value = "1" },
-                                                        new SelectListItem { Text = "Nữ", Value = "0" } }, new { @class = "single-input", @disabled = "disabled" })
+                                                     
+                                                        @Html.DropDownListFor(model => model.gioiTinh, new[] { new SelectListItem { Text = "Nam", Value = "1" }, new SelectListItem { Text = "Nữ", Value = "0" } },
+                                                       new { @class = "single-input", @disabled = "disabled" })
 
                                                     </div>
-                                                </th>
+                                                </th>   
                                                 <th class="col-lg-6">
                                                     <label>Ngày sinh </label>
                                                     @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
@@ -164,9 +165,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-center" style="margin-top:20px">
-                                <a href="@Url.Action("Edit", "NguoiDung", new { id = Model.IdTTCN })  " class="genric-btn primary-border radius">Hãy cập nhật thông tin2</a>
-                            </div>
+                         
                         }
                     </div>
                 </div>

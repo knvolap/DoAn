@@ -140,12 +140,7 @@ namespace Models.Services
             return true;
         }
 
-        public void CapNhatTTCN(ThongTinCaNhan thongTinCaNhan)
-        {
-            db.ThongTinCaNhans.AddOrUpdate(thongTinCaNhan);
-            db.SaveChanges();
-          
-        }
+
         //public void CapNhatTTCN(ThongTinCaNhan thongTinCaNhan)
         //{
 

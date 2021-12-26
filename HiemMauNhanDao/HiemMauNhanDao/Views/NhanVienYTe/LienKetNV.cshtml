@@ -48,9 +48,11 @@
                     </div>
 
                     <div>
-                        @using (Html.BeginForm("DKDVLK", "DVLK", new { @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("LienKetNV", "NhanVienYTe", new { @enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                             <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
                                 @if (@ViewBag.ThongBao != null)
                                 {
@@ -65,13 +67,14 @@
                                                 <th style="width:400px">
                                                     <div>
                                                         <label>Mã người dùng</label>
-                                                        @Html.EditorFor(model => model.idTTCN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        @Html.EditorFor(model => model.idTTCN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = ViewBag.IdUser } })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <label>Tên bệnh viện</label>
-                                                        @Html.EditorFor(model => model.idBenhVien, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @*@Html.DropDownList("IdBenhVien", null, " ", htmlAttributes: new { @class = "form-control" })*@
+                                                        @Html.DropDownList("IdBenhVien", ViewBag.IdBenhVien as SelectList, htmlAttributes: new { @class = "single-input" })
                                                         @Html.ValidationMessageFor(model => model.idBenhVien, "", new { @class = "text-danger" })
                                                     </div>
                                                 </th>
@@ -81,16 +84,21 @@
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
-                                                        <label>Chức vụ</label>
-                                                        @Html.EditorFor(model => model.idChucVu, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => model.idChucVu, "", new { @class = "text-danger" })
+                                                        <label>khoa</label>
+
+                                                        @Html.DropDownListFor(model => model.khoa, new[] { new SelectListItem { Text = "Chưa biết"},
+                                                                           new SelectListItem { Text = "Khoa Truyền máu"} , new SelectListItem { Text = "Khoa Lọc máu" }},
+                                                                           new { @class = "single-input" })
+                                                        @Html.ValidationMessageFor(model => model.khoa, "", new { @class = "text-danger" })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
-                                                        <label>khoa</label>
-                                                        @Html.EditorFor(model => model.khoa, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => model.khoa, "", new { @class = "text-danger" })
+                                                        <label>Chức vụ</label>
+
+                                                        @*@Html.DropDownList("IdChucVu", null, "", new { htmlAttributes = new { @class = "form-control" } })*@
+                                                        @Html.DropDownList("IdChucVu", ViewBag.IdChucVu as SelectList, htmlAttributes: new { @class = "single-input" })
+                                                        @Html.ValidationMessageFor(model => model.idChucVu, "", new { @class = "text-danger" })
                                                     </div>
                                                 </th>
                                             </tr>
@@ -99,20 +107,24 @@
                                             <tr>
                                                 <th style="width:735px">
                                                     <label>Trình độ chuyên môn</label>
-                                                    @Html.EditorFor(model => model.trinhDo, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.DropDownListFor(model => model.trinhDo, new[] { new SelectListItem { Text = "Chưa biết"},
+                                                                            new SelectListItem { Text = "Bác sĩ"} , new SelectListItem { Text = "Bác sĩ dự phòng" } ,
+                                                                            new SelectListItem { Text = "Điều dưỡng" } , new SelectListItem { Text = "Y tá" } , new SelectListItem { Text = "Y tế công cộng" } },
+                                                                            new { @class = "single-input" })                                                   
                                                     @Html.ValidationMessageFor(model => model.trinhDo, "", new { @class = "text-danger" })
 
                                                 </th>
                                             </tr>
                                         </table>
-                                        
-                                   
+                                        @Html.HiddenFor(model => model.IdNVYT)
+                                        @Html.HiddenFor(model => model.trangThai)
                                     </form>
+                                    <div class="text-center" style="margin-top:20px">
+                                        <button type="submit" class="genric-btn primary-border radius"> Đăng ký thành viên</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="text-center " style="margin-top:20px">
-                                <a class="genric-btn primary-border radius" href="#">Cập nhật</a>
-                            </div>
+                           
                         }
                     </div>
 

@@ -54,25 +54,36 @@ namespace HiemMauNhanDao.Controllers
 
         //cập nhật thành công. nhưng k check được lỗi
         [HttpPost]
-        public ActionResult CapnhatTTCN(ThongTinCaNhan model)
-        {
-            var dao = new NguoiDungServices();
-            ThongTinCaNhan ttcn = dao.GetByIdTTCN(model.IdTTCN);
-            ttcn.IdTTCN = model.IdTTCN;
-            ttcn.hoTen = model.hoTen;
-            ttcn.gioiTinh = model.gioiTinh;
-            ttcn.soDT = model.soDT;
-            ttcn.soLanHM = model.soLanHM;
-            ttcn.CCCD = model.CCCD;
-            ttcn.ngheNghiep = model.ngheNghiep;
-            ttcn.diaChi = model.diaChi;
-            ttcn.nhomMau = model.nhomMau;
-            ttcn.soLanHM = model.soLanHM;
-            ttcn.trinhDo = model.trinhDo;
-            ttcn.coQuanTH = model.coQuanTH;
-            dao.CapNhatTTCN(ttcn);
-            SetAlert("Cập nhật thành công", "success");
-            return RedirectToAction("Index", "NguoiDung");
+        [ValidateAntiForgeryToken]
+        public ActionResult CapnhatTTCN([Bind(Include= "IdTTCN,hoTen,gioiTinh,soDT,soLanHM,ngheNghiep,nhomMau,trinhDo,coQuanTH,diaChi,userName,ngaySinh,CCCD,idQuyen,trangThai,password")] ThongTinCaNhan model)
+        {        
+            if (ModelState.IsValid)
+            {
+                if (_NguoiDung.isExistSDT(model.soDT))
+                {
+                    SetAlert("Số điện thoại đã tồn tại", "error");
+                }
+                var ttcn = _NguoiDung.GetByIdTTCN(model.IdTTCN);
+                ttcn.IdTTCN = ttcn.IdTTCN;
+                ttcn.CCCD = ttcn.CCCD;
+                ttcn.userName = ttcn.userName;
+                ttcn.ngaySinh = ttcn.ngaySinh;
+                ttcn.idQuyen = ttcn.idQuyen;
+                ttcn.trangThai = ttcn.trangThai;
+                ttcn.password = ttcn.password;
+
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                SetAlert("Cập nhật thành công", "success");
+                return RedirectToAction("Index", "NguoiDung");
+            }
+            else
+            {
+                SetAlert("Cập nhật thất bại", "error");
+                return RedirectToAction("CapnhaTTCN", "NguoiDung");
+            }    
+         
+            return View(model);
         }
 
         //tình trạng sức khỏe
@@ -85,12 +96,8 @@ namespace HiemMauNhanDao.Controllers
         {
             return View();
         }
-     
-     
 
       
-
-
 
     }
 }
