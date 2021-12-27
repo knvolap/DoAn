@@ -13,5 +13,13 @@ namespace HiemMauNhanDao.Controllers
         {
             return View();
         }
+        public ActionResult HuongDan()
+        {
+            return View();
+        }
+        public ActionResult LienHe()
+        {
+            return View();
+        }
     }
 }

@@ -71,12 +71,12 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
         <table class="mb-0 table table-hover table table-bordered">
-            <tr>
+            <tr class="text-center">
                 <th>
                     STT
                 </th>
                 <th>
-                    ID Bệnh viện
+                    Mã BV
                 </th>
                 <th>
                     Tên bệnh viện
@@ -85,7 +85,7 @@
                     Email
                 </th>
                 <th>
-                    Số điện thoại
+                    Số ĐT
                 </th>
                 <th>
                     Địa chỉ
@@ -117,7 +117,7 @@
                     <td>
                         @item.diaChi
                     </td>
-                    <td>
+                    <td class ="text-center">
                         @if (@item.trangThai == true)
                         {
                             <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
@@ -130,15 +130,15 @@
                                 @(item.trangThai == false ? "Khóa": "Hoạt động"  )
                             </button>
                         }
-                    </td>
-                    <td>
+                        </td>
+                    <td class ="text-center">
                         <div class="mb-2 mr-2 dropright btn-group">
                             <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                             <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
                                 <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "EditBV", new { id = item.IdBenhVien })</button>
                                 <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdBenhVien })</button>
                                 <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdBenhVien })</button>
-                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink("Download", "Download", new { fileName = item.minhChung })</button>
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-cloud-download  "> @Html.ActionLink("Download", "Download", new { fileName = item.minhChung })</button>
 
                             </div>
                         </div>
@@ -146,8 +146,8 @@
                         @*  @Html.ActionLink("Chi tiết", "Details", new { id = item.IdBenhVien })*@
                         @*         @Html.ActionLink("Xóa", "Delete", new { id = item.IdBenhVien })*@
 
-                    </td>
-                </tr>
+                        </td>
+</tr>
                 i++;
             }
         </table>

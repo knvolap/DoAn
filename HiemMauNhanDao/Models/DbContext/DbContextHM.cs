@@ -30,6 +30,10 @@ namespace Models.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<chiTietDHM>()
+                 .Property(e => e.IdChiTietDHM)
+                 .IsUnicode(false);
+
             modelBuilder.Entity<BenhVien>()
                 .Property(e => e.IdBenhVien)
                 .IsUnicode(false);
@@ -82,6 +86,7 @@ namespace Models.EF
                 .Property(e => e.minhChung)
                 .IsUnicode(false);
 
+           
             modelBuilder.Entity<DonViLienKet>()
                 .HasMany(e => e.chiTietDHMs)
                 .WithRequired(e => e.DonViLienKet)

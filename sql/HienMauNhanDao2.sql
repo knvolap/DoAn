@@ -62,13 +62,12 @@ CREATE TABLE BenhVien(
 	IdBenhVien	 VARCHAR(20) PRIMARY KEY,
 	TenBenhVien	 NVARCHAR (50) not null,
 	diaChi		 NVARCHAR(100) NOT NULL,
-	Email		 VARCHAR(50) UNIQUE NOT NULL,	
-	soDTBV		 CHAR(11) UNIQUE NOT NULL,	
+	Email		 VARCHAR(50)  NOT NULL,	
+	soDTBV		 CHAR(11)  NOT NULL,	
 	minhChung	 VARCHAR(50)  NULL,	
 	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
- 
 
 
 --Table 6 ChucVu
@@ -179,6 +178,7 @@ GO
 
 --Table 13 
 CREATE TABLE chiTietDHM(
+    IdChiTietDHM	VARCHAR(20) PRIMARY KEY NOT NULL,
 	idDHM		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DotHienMau(IdDHM) not null,
 	idDVLK		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DonViLienKet(IdDVLK) not null,
 	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,
@@ -186,6 +186,8 @@ CREATE TABLE chiTietDHM(
 	trangThai	NVARCHAR(50)  null
 )
 GO
+
+
 
 
 --Table 14 KetQuaHienMau
@@ -500,9 +502,9 @@ GO
 
 --B13
 INSERT INTO dbo.chiTietDHM
-		( idDHM,idDVLK,idNVYT,ngayDK,trangThai)
-VALUES	('DHM03','DV01','NV01' ,'20/7/2021',N'Đăng ký thành công' ),
-		('DHM04','DV01','NV01','20/11/2021',N'Đăng ký thành công' )
+		( IdChiTietDHM,idDHM,idDVLK,idNVYT,ngayDK,trangThai)
+VALUES	('CT01','DHM03','DV01','NV01' ,'20/7/2021',N'Đăng ký thành công' ),
+		('CT02','DHM04','DV01','NV01','20/11/2021',N'Đăng ký thành công' )
 GO
 
 

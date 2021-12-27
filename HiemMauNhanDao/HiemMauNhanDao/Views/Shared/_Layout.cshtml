@@ -56,8 +56,8 @@
                                     <a class="nav-link" href="@Url.Action("Index","Home") ">Trang chủ</a>
                                 </li>
                                 @*<li class="nav-item">
-                                    <a class="nav-link" href="/DotHienMau/Index">Đợt hiến máu</a>
-                                </li>*@
+            <a class="nav-link" href="/DotHienMau/Index">Đợt hiến máu</a>
+        </li>*@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="@Url.Action("Index","DTCHM") " id="navbarDropdown_1"
                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,26 +66,19 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                         <a class="dropdown-item" href="@Url.Action("Index","DTCHM") ">Tham gia</a>
                                         <a class="dropdown-item" href="@Url.Action("Index","DkDHM")  ">Tổ chức</a>
-                                       
+
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="donViLienKet.html">Đơn vị liên kết</a>
+                                    <a class="nav-link" href="@Url.Action("HuongDan","Home")">Hướng dẫn</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index","NguoiDung") ">Liên hệ</a>
+                                    <a class="nav-link" href="@Url.Action("LienHe","Home") ">Liên hệ</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="@Url.Action("NguoiDung","DangKyTK") " id="navbarDropdown_1"
-                                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Đăng ký
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="@Url.Action("NguoiDung","DangKyTK") ">Đăng ký thành viên</a>
-                                        @*<a class="dropdown-item" href="/DangKyTK/DonVi">Đăng ký đối tác</a>
-                <a class="dropdown-item" href="/DangKyTK/BenhVien">Đăng ký bệnh viện</a>*@
-                                    </div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("NguoiDung","DangKyTK") ">Đăng ký</a>
                                 </li>
+                              
                             </ul>
                         </div>
 

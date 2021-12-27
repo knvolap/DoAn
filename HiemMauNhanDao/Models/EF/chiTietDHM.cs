@@ -10,25 +10,24 @@ namespace Models.EF
     public partial class chiTietDHM
     {
         [Key]
-        [Column(Order = 0)]
+        [StringLength(20)]
+        public string IdChiTietDHM { get; set; }
+     
         [StringLength(20)]
         public string idDHM { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+ 
         [StringLength(20)]
         public string idDVLK { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
         [StringLength(20)]
         public string idNVYT { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? ngayDK { get; set; }
 
-        [StringLength(50)]
-        public string trangThai { get; set; }
+        
+        public bool? trangThai { get; set; }
 
         public virtual DonViLienKet DonViLienKet { get; set; }
 
