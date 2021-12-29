@@ -116,5 +116,14 @@ namespace Models.Services
             return db.BenhViens.Where(s => s.IdBenhVien.CompareTo(id) == 0).FirstOrDefault();
 
         }
+
+        //duuyet
+        public bool ChangeStatus(string id)
+        {
+            var chiTiet = db.chiTietDHMs.Find(id);
+            chiTiet.trangThai = !chiTiet.trangThai;
+            db.SaveChanges();
+            return chiTiet.trangThai;
+        }
     }
 }

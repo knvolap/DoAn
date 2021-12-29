@@ -1,0 +1,152 @@
+﻿@model IEnumerable<Models.EF.chiTietDHM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-heading">
+        <div class="page-title-icon">
+            <i class="pe-7s-menu icon-gradient bg-ripe-malin"></i>
+        </div>
+        <div>
+            Danh sách đăng ký đợt hiến máu
+            <div class="page-title-subheading">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
+<div class="panel-body">
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
+</div>
+
+@using (Html.BeginForm("Index", "BenhVien", FormMethod.Get))
+{
+    @*Tìm Kiếm nhân viên*@
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">Tìm kiếm</h5>
+            <form class="">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
+                            <label for="exampleCity" class="">Nội dung</label>
+                            <input name="SearchString" value="@ViewBag.SearchStringBV" id="exampleCity" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <button class="mt-2 btn btn-primary"> <i class="fa fa-search"></i> Tìm kiếm</button>
+            </form>
+        </div>
+    </div>
+}
+
+
+@*Thêm đợt*@
+<!--<ul></ul>
+<div class="app-header-left">
+    <ul class="header-menu nav">
+        <li class="btn btn-success">
+            <a href="@Url.Action("CreateBV", "BenhVien")" style="color:white">
+                <i class="nav-link-icon fa fa-edit">   Thêm bệnh viện</i>
+            </a>
+        </li>
+    </ul>
+</div>-->
+
+<ul></ul>
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <table class="mb-0 table table-hover table table-bordered">
+            <tr class="text-center">
+                <th>
+                    STT
+                </th>
+                <th>
+                    Tên bệnh viện
+                </th>
+                <th>
+                    Tên đơn vị liên kết
+                </th>
+                <th>
+                    Tên đợt tổ chức
+                </th>
+                <th>
+                    Ngày đăng ký
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th>Chức năng</th>
+            </tr>
+            @{ var i = 1;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @i
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NhanVienYTe.BenhVien.TenBenhVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DonViLienKet.TenDonVi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DotHienMau.TenDHM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ngayDK)
+                    </td>
+                    <td class="text-center"  >
+                        <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
+
+                        @*@if (@item.trangThai == true )
+                        {
+                            <button class="mb-2 mr-2 btn-transition btn btn-outline-info" data-id= "@item.IdChiTietDHM">
+                               @Html.Raw(item.trangThai == true ? "Đã duyệt" : "Chưa duyệt")
+                            </button>
+                        }
+                        @if (@item.trangThai == false)
+                        {
+                            <button class="mb-2 mr-2 btn-transition btn btn-outline-danger" data-id = "@item.IdChiTietDHM">
+                               @Html.Raw(item.trangThai == false ? "Chưa duyệt" : "Đã duyệt"  )
+                            </button>
+                        }*@
+
+                    </td>
+                    <td class="text-center">
+                        <div class="mb-2 mr-2 dropright btn-group">
+                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdChiTietDHM })</button>
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdChiTietDHM })</button>
+                                @* <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "EditBV", new { id = item.IdBenhVien })</button>*@
+                                @* <button type="button" tabindex="0" class="dropdown-item pe-7s-cloud-download  "> @Html.ActionLink("Download", "Download", new { fileName = item.minhChung })</button>*@
+
+                           </div>
+                        </div>                     
+                    </td>
+                </tr>
+                i++;
+            }
+        </table>
+        <ul></ul>
+        @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV }))*@
+    </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="~/Assets/Admin/scripts/duyetDHMController.js"></script>

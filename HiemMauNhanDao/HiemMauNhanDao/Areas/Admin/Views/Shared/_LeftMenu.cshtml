@@ -3,53 +3,59 @@
         <ul class="vertical-nav-menu">
             <li class="app-sidebar__heading">Hệ thống</li>
             <li>
-                <a href="@Url.Action("index","Home")"  >
+                <a href="@Url.Action("index","Home")">
                     <i class="metismenu-icon pe-7s-portfolio"></i>
                     Trang Chủ
                 </a>
             </li>
             <li class="app-sidebar__heading">Chức Năng Chính</li>
             <li>
-                <a href="@Url.Action("Index","QuanLyTK")" >
+                <a href="@Url.Action("Index","QuanLyTK")">
                     <i class="metismenu-icon pe-7s-users"> </i>
                     Quản lý người dùng
                 </a>
             </li>
             <li>
-                <a href="@Url.Action("Index","DotHienMau")" >
+                <a href="@Url.Action("Index","DotHienMau")">
                     <i class="metismenu-icon pe-7s-note2"></i>
                     Đợt hiến máu
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
                 <ul>
                     <li>
-                        <a href="@Url.Action("Index","DotHienMau")" >
+                        <a href="@Url.Action("Index","DotHienMau")">
                             <i class="metismenu-icon"></i>
                             Đăng bài
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","DVTG")" >
+                        <a href="@Url.Action("Index","chiTietDHM")">
                             <i class="metismenu-icon">
                             </i>Đơn vị tham gia
                         </a>
                     </li>
                 </ul>
             </li>
+            @*<li>
+                <a href="/Admin/chiTietDHM/Index">
+                    <i class="metismenu-icon pe-7s-cloud"> </i>
+                    Đợt tổ chức hiến máu
+                </a>
+            </li>*@
             <li>
-                <a  href="@Url.Action("Index","BenhVien")" >
+                <a href="@Url.Action("Index","BenhVien")">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Bệnh viện
                 </a>
             </li>
             <li>
-                <a href="@Url.Action("Index","DVLK")">
+                <a href="@Url.Action("Index","DonViLK")">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Đơn vị liên kết
                 </a>
             </li>
             <li class="app-sidebar__heading">Chức năng khác</li>
-            <li>             
+            <li>
                 <a href="/LoginClient/Index">
                     <i class="metismenu-icon pe-7s-user"></i>
                     Trang người dùng

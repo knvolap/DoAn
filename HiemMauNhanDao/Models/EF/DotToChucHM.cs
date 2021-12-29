@@ -23,7 +23,7 @@ namespace Models.EF
 
         [Required]
         [StringLength(20)]
-        public string idDHM { get; set; }
+        public string idChiTietDHM { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -58,7 +58,7 @@ namespace Models.EF
         [StringLength(50)]
         public string trangThai { get; set; }
 
-        public virtual DotHienMau DotHienMau { get; set; }
+        public virtual chiTietDHM ChiTietDHM { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DSNVTH> DSNVTHs { get; set; }

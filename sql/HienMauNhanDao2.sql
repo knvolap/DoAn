@@ -24,7 +24,7 @@ GO
 CREATE TABLE ThongTinCaNhan(
 	IdTTCN		 VARCHAR(20) PRIMARY KEY,
 	idQuyen		 VARCHAR(20)  null,
-	userName	VARCHAR (50)UNIQUE  null,
+	userName	VARCHAR (50) UNIQUE  null,
 	password	VARCHAR(50)  null,
 	hoTen		 NVARCHAR(50)  NULL,
 	CCCD		 VARCHAR(12) UNIQUE  NULL,
@@ -130,10 +130,21 @@ CREATE TABLE ChiTietPhanCong(
 )
 GO
 
---Table 11 DotToChucHM
+--Table 11 
+CREATE TABLE chiTietDHM(
+    IdChiTietDHM	VARCHAR(20) PRIMARY KEY NOT NULL,
+	idDHM		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DotHienMau(IdDHM) not null,
+	idDVLK		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DonViLienKet(IdDVLK) not null,
+	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,
+	ngayDK		DATE  DEFAULT GETDATE()null,
+	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) )
+)
+GO
+
+--Table 13 DotToChucHM
 CREATE TABLE DotToChucHM(
 	IdDTCHM			VARCHAR(20) PRIMARY KEY,
-	idDHM			VARCHAR(20)  not null,
+	idChiTietDHM	VARCHAR(20)  not null,
 	tenDotHienMau	NVARCHAR (100) not null,
 	noiDung			NVARCHAR(300) NOT NULL,
 	doiTuongThamGia	NVARCHAR (100) not null,
@@ -145,6 +156,7 @@ CREATE TABLE DotToChucHM(
 	trangThai		NVARCHAR(50) 
 )
 GO
+
 
 
 --Table 12 PhieuDKHM
@@ -172,23 +184,6 @@ CREATE TABLE PhieuDKHM(
 
 )
 GO
-
-
-
-
---Table 13 
-CREATE TABLE chiTietDHM(
-    IdChiTietDHM	VARCHAR(20) PRIMARY KEY NOT NULL,
-	idDHM		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DotHienMau(IdDHM) not null,
-	idDVLK		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DonViLienKet(IdDVLK) not null,
-	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,
-	ngayDK		DATE  DEFAULT GETDATE()null,
-	trangThai	NVARCHAR(50)  null
-)
-GO
-
-
-
 
 --Table 14 KetQuaHienMau
 CREATE TABLE KetQuaHienMau(
@@ -325,7 +320,7 @@ GO
 -- BẢNG 11 DotToChucHM
 ALTER TABLE DotToChucHM
 	ADD 
-		CONSTRAINT FK_DTCHM_IdDHM		FOREIGN KEY (idDHM) REFERENCES DotHienMau(IdDHM)ON DELETE CASCADE ON UPDATE CASCADE,
+		CONSTRAINT FK_DTCHM_IdDHM		FOREIGN KEY (idChiTietDHM) REFERENCES chiTietDHM(IdChiTietDHM)ON DELETE CASCADE ON UPDATE CASCADE,
 		CONSTRAINT CHECK_DTCHM_soLuong	CHECK (soLuong >=1 or soLuong <=1000)
 	--	CONSTRAINT CK_DTCHM_TrangThai	check(trangThai in ( N'Chờ duyệt' , N'Đã duyệt',N'Đã tiếp nhận', N'Hủy' ))	
 GO
@@ -383,40 +378,40 @@ GO
 --B2
  INSERT INTO dbo.ThongTinCaNhan
 		(IdTTCN,idQuyen,userName,password,hoTen,CCCD,soDT,ngaySinh,soLanHM,nhomMau,gioiTinh,trangThai,diaChi,ngheNghiep,trinhDo,coQuanTH )
-VALUES	('TT01','Q01', 'admin@gmail.com','123123',N'Trần Võ Lập','215496444111','0375163333','30/04/2000','','1','','1',N'diaChi',N'ngheNghiep',N'trinhDo',N'coQuanTH'),
-		('TT02','Q02', 'banchidao@gmail.com','123123',N'Ban chỉ đạo','215496444222','0375162222','','1','','','1',N'',N'',N'',N''),
-		('TT03','Q03', 'bvDaKhoa@gmail.com','123123',N'Thành Nam','215496444433','0375164333','','1','','','1',N'',N'',N'',N''),
-		('TT04','Q04', 'donviLK@gmail.com','123123',N'Minh Nhật','215496444221','0375167222','','1','','','1',N'',N'',N'',N''),
-		('TT05','Q05', 'nhanvien1@gmail.com','123123',N'Khắc Huy','215496444423','0375564333','','1','','','1',N'',N'',N'',N''),
-		('TT06','Q06', 'nguoidung1@gmail.com','123123',N'Nam Cường','215496644228','0375162522','','1','','','1',N'',N'',N'',N''),
-		('TT07','Q06', 'nguoidung2@gmail.com','123123',N'Tiến Đạt','215496844439','0375164933','','1','','','1',N'',N'',N'',N''),
-		('TT08','Q04', 'bvUngBuu@gmail.com','123123',N'Trần Thành','215496544433','0775167333','','1','','','1',N'',N'',N'',N''),
-		('TT09','Q03', 'donviLK2@gmail.com','123123',N'Trường Giang','215496944221','0975164222','','0','','','1',N'',N'',N'',N''),
-		('TT10','Q05', 'nhanVienBVDK1@gmail.com','123123',N'Nhân viên BVDK1','215496944281','0915164222','01/01/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT12','Q05', 'nhanVienBVDK3@gmail.com','123123',N'Nhân viên BVDK3','215496944253','0935164222','12/03/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT11','Q05', 'nhanVienBVDK2@gmail.com','123123',N'Nhân viên BVDK2','215496944262','0925164222','20/05/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT13','Q05', 'nhanVienBVDK4@gmail.com','123123',N'Nhân viên BVDK4','215496944244','0945164222','13/07/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT14','Q05', 'nhanVienBVDK5@gmail.com','123123',N'Nhân viên BVDK5','215496944214','0955164222','23/09/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT15','Q05', 'nhanVienBVUB1@gmail.com','123123',N'Nhân viên BVUB1','215416944221','0972164222','21/02/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT16','Q05', 'nhanVienBVUB2@gmail.com','123123',N'Nhân viên BVUB2','215426944221','0973164222','24/04/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT17','Q05', 'nhanVienBVUB3@gmail.com','123123',N'Nhân viên BVUB3','215436944221','0974164222','21/06/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT18','Q05', 'nhanVienBVUB4@gmail.com','123123',N'Nhân viên BVUB4','215446944221','0975164222','16/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT19','Q05', 'nhanVienBVYH1@gmail.com','123123',N'Nhân viên BVYH1','215491944221','0976164222','16/01/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT20','Q05', 'nhanVienBVYH2@gmail.com','123123',N'Nhân viên BVYH2','215492944221','0975764222','17/04/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT21','Q06', 'nhanVienBVYH3@gmail.com','123123',N'Nhân viên BVYH3','215493944221','0975864222','17/06/1998','0','','1','1',N'',N'',N'',N''),	   
-	    ('TT22','Q06', 'nguoidung22@gmail.com','123123',N'nguoi dung22 ','215490944221','0915964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT23','Q06', 'nguoidung23@gmail.com','123123',N'nguoi dung23 ','215490144221','0925964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT24','Q06', 'nguoidung24@gmail.com','123123',N'nguoi dung24 ','215490124221','0973964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT25','Q06', 'nguoidung25@gmail.com','123123',N'nguoi dung25 ','215490124521','0945964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT26','Q06', 'nguoidung26@gmail.com','123123',N'nguoi dung26 ','215490123221','0975964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT27','Q06', 'nguoidung27@gmail.com','123123',N'nguoi dung27 ','215490123421','0976964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT28','Q06', 'nguoidung28@gmail.com','123123',N'nguoi dung28 ','215490123621','0977964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT29','Q06', 'nguoidung29@gmail.com','123123',N'nguoi dung29 ','215490123671','0975984222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT30','Q06', 'nguoidung30@gmail.com','123123',N'nguoi dung30 ','215490123676','0975994222','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT31','Q06', 'nguoidung31@gmail.com','123123',N'nguoi dung31 ','215490123677','0975964421','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT32','Q06', 'nguoidung32@gmail.com','123123',N'nguoi dung32 ','215490123678','0975966522','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT33','Q06', 'nguoidung33@gmail.com','123123',N'nguoi dung33 ','215490123672','0971964322','18/08/1998','0','','1','1',N'',N'',N'',N''),
-	    ('TT34','Q06', 'nguoidung34@gmail.com','123123',N'nguoi dung34 ','215490183672','0972964232','18/08/1998','0','','1','1',N'',N'',N'',N'')
+VALUES	('TT01','Q01', 'admin@gmail.com','4297f44b13955235245b2497399d7a93',N'Trần Võ Lập','215496444111','0375163333','30/04/2000','','1','','1',N'diaChi',N'ngheNghiep',N'trinhDo',N'coQuanTH'),
+		('TT02','Q02', 'banchidao@gmail.com','4297f44b13955235245b2497399d7a93',N'Ban chỉ đạo','215496444222','0375162222','','1','','','1',N'',N'',N'',N''),
+		('TT03','Q03', 'bvDaKhoa@gmail.com','4297f44b13955235245b2497399d7a93',N'Thành Nam','215496444433','0375164333','','1','','','1',N'',N'',N'',N''),
+		('TT04','Q04', 'donviLK@gmail.com','4297f44b13955235245b2497399d7a93',N'Minh Nhật','215496444221','0375167222','','1','','','1',N'',N'',N'',N''),
+		('TT05','Q05', 'nhanvien1@gmail.com','4297f44b13955235245b2497399d7a93',N'Khắc Huy','215496444423','0375564333','','1','','','1',N'',N'',N'',N''),
+		('TT06','Q06', 'nguoidung1@gmail.com','4297f44b13955235245b2497399d7a93',N'Nam Cường','215496644228','0375162522','','1','','','1',N'',N'',N'',N''),
+		('TT07','Q06', 'nguoidung2@gmail.com','4297f44b13955235245b2497399d7a93',N'Tiến Đạt','215496844439','0375164933','','1','','','1',N'',N'',N'',N''),
+		('TT08','Q04', 'bvUngBuu@gmail.com','4297f44b13955235245b2497399d7a93',N'Trần Thành','215496544433','0775167333','','1','','','1',N'',N'',N'',N''),
+		('TT09','Q03', 'donviLK2@gmail.com','4297f44b13955235245b2497399d7a93',N'Trường Giang','215496944221','0975164222','','0','','','1',N'',N'',N'',N''),
+		('TT10','Q05', 'nhanVienBVDK1@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVDK1','215496944281','0915164222','01/01/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT12','Q05', 'nhanVienBVDK3@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVDK3','215496944253','0935164222','12/03/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT11','Q05', 'nhanVienBVDK2@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVDK2','215496944262','0925164222','20/05/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT13','Q05', 'nhanVienBVDK4@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVDK4','215496944244','0945164222','13/07/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT14','Q05', 'nhanVienBVDK5@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVDK5','215496944214','0955164222','23/09/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT15','Q05', 'nhanVienBVUB1@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVUB1','215416944221','0972164222','21/02/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT16','Q05', 'nhanVienBVUB2@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVUB2','215426944221','0973164222','24/04/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT17','Q05', 'nhanVienBVUB3@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVUB3','215436944221','0974164222','21/06/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT18','Q05', 'nhanVienBVUB4@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVUB4','215446944221','0975164222','16/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT19','Q05', 'nhanVienBVYH1@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVYH1','215491944221','0976164222','16/01/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT20','Q05', 'nhanVienBVYH2@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVYH2','215492944221','0975764222','17/04/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT21','Q06', 'nhanVienBVYH3@gmail.com','4297f44b13955235245b2497399d7a93',N'Nhân viên BVYH3','215493944221','0975864222','17/06/1998','0','','1','1',N'',N'',N'',N''),	   
+	    ('TT22','Q06', 'nguoidung22@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung22 ','215490944221','0915964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT23','Q06', 'nguoidung23@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung23 ','215490144221','0925964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT24','Q06', 'nguoidung24@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung24 ','215490124221','0973964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT25','Q06', 'nguoidung25@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung25 ','215490124521','0945964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT26','Q06', 'nguoidung26@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung26 ','215490123221','0975964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT27','Q06', 'nguoidung27@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung27 ','215490123421','0976964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT28','Q06', 'nguoidung28@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung28 ','215490123621','0977964222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT29','Q06', 'nguoidung29@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung29 ','215490123671','0975984222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT30','Q06', 'nguoidung30@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung30 ','215490123676','0975994222','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT31','Q06', 'nguoidung31@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung31 ','215490123677','0975964421','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT32','Q06', 'nguoidung32@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung32 ','215490123678','0975966522','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT33','Q06', 'nguoidung33@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung33 ','215490123672','0971964322','18/08/1998','0','','1','1',N'',N'',N'',N''),
+	    ('TT34','Q06', 'nguoidung34@gmail.com','4297f44b13955235245b2497399d7a93',N'nguoi dung34 ','215490183672','0972964232','18/08/1998','0','','1','1',N'',N'',N'',N'')
 
 GO		
 
@@ -435,7 +430,7 @@ GO
 INSERT INTO dbo.BenhVien
 		(IdBenhVien, TenBenhVien,diaChi,Email,soDTBV,minhChung,trangThai)
 VALUES	('BV01',N'Chưa có'  ,N'Đà Nẵng' ,'demobv0@gmail.com','0900944488','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA',''),
-		('BV02',N'Ung Bướu Đà Nẵng',N'28 Đường Hoàng Thị Loan- Liên Chiểu - Hòa Khánh - Đà Nẵng','benhvienungbuou@gmail.com','0888004468','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA',''),
+		('BV02',N'Ung Bướu Đà Nẵng',N'28  Hoàng Thị Loan  - Hòa Khánh - Đà Nẵng','benhvienungbuou@gmail.com','0888004468','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA',''),
 		('BV03',N'Đa Khoa Đà Nẵng',N'50 Cao Thắng - Hải Châu - Đà Nẵng' ,'bvdakhoa@gmail.com','0888004499','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','')
 GO
 
@@ -444,9 +439,10 @@ INSERT INTO dbo.ChucVu
 		(IdChucVu,TenChucVu )
 VALUES	('CV01',N'Giám Đốc'),
 		('CV02',N'Trưởng Khoa'),
-		('CV03',N'Y tá'),	
+		('CV03',N'Phó khoa'),
 		('CV04',N'Bác sĩ'),
-		('CV07',N'Chưa có')
+		('CV05',N'Y tá'),			
+		('CV06',N'Chưa có')
 GO
 
 --B7
@@ -486,26 +482,27 @@ VALUES	('PYC01','NV01','DHM04','10','15/11/2021','18/11/2021','07:30 19/11/2021'
 		('PYC02','NV01','DHM04','10','15/12/2021','18/12/2021','07:30 19/12/2021',N'Cần nguồn máu hiếm. Nhóm máu AB+',N'Chờ Duyệt')
 GO
 
+--B13
+INSERT INTO dbo.chiTietDHM
+		( IdChiTietDHM,idDHM,idDVLK,idNVYT,ngayDK,trangThai)
+VALUES	('CT01','DHM03','DV01','NV01' ,'20/7/2021','1' ),
+		('CT02','DHM04','DV01','NV01','20/11/2021','1' )
+GO
+
 --B11
 INSERT INTO dbo.DotToChucHM
-		(IdDTCHM, idDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai)
-VALUES	('TCHM01','DHM04',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021',N'Chờ Duyệt'),
-		('TCHM02','DHM04',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021',N'Chờ Duyệt')	
+		(IdDTCHM, idChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai)
+VALUES	('DTC01','CT01',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021',N'Chờ Duyệt'),
+		('DTC02','CT02',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021',N'Chờ Duyệt')	
 GO
 
 --B12
 INSERT INTO dbo.PhieuDKHM
 		( idPDKHM,idTTCN,idDTCHM,benhKhac,trangThai,tgDuKien)
-VALUES	('PDK01','TT02','TCHM01',N'không có','','20/11/2021'),
-		('PDK02','TT03','TCHM01',N'không có','','20/11/2021')
+VALUES	('PDK01','TT02','DTC01',N'không có','','20/11/2021'),
+		('PDK02','TT03','DTC02',N'không có','','20/11/2021')
 GO
 
---B13
-INSERT INTO dbo.chiTietDHM
-		( IdChiTietDHM,idDHM,idDVLK,idNVYT,ngayDK,trangThai)
-VALUES	('CT01','DHM03','DV01','NV01' ,'20/7/2021',N'Đăng ký thành công' ),
-		('CT02','DHM04','DV01','NV01','20/11/2021',N'Đăng ký thành công' )
-GO
 
 
 

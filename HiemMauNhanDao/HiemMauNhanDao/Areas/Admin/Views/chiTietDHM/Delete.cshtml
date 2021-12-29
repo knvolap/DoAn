@@ -1,0 +1,64 @@
+﻿@model Models.EF.chiTietDHM
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Tên đơn vị liên kết
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonViLienKet.TenDonVi)
+        </dd>
+
+        <dt>
+            Tên đợt hiến máu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DotHienMau.TenDHM)
+        </dd>
+
+        <dt>
+            Tên bệnh viện
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhanVienYTe.BenhVien.TenBenhVien)
+        </dd>
+
+        <dt>
+            Ngày đăng ký
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngayDK)
+        </dd>
+
+        <dt>
+            Trạng thái
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangThai)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Trở về", "Index") |
+            <input type="submit" value="Xoá" class="btn btn-danger" />
+
+        </div>
+    }
+</div>

@@ -7,7 +7,6 @@
     var listDHM = (List<Models.EF.DotHienMau>)ViewBag.listDHM;
 }
 
-
 <section class="breadcrumb_part breadcrumb_bg">
     <div class="container">
         <div class="row">
@@ -21,7 +20,6 @@
         </div>
     </div>
 </section>
-
 @using (Html.BeginForm("Index", "DKDHM", FormMethod.Get))
 {
     <section class="blog_area section_padding">
@@ -49,7 +47,6 @@
                                             <th>
                                                 <a>@item.noiDung</a>
                                             </th>
-
                                         </tr>
                                     </table>
                                     <table>
@@ -67,7 +64,6 @@
                                             </th>
                                         </tr>
                                     </table>
-
                                     <ul class="blog-info-link" style="margin-top:10px">
                                         @{
                                             var session5 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
@@ -82,7 +78,7 @@
                                         }
                                         else
                                         {
-                                        <a class="genric-btn info radius" href="@Url.Action("NotFound", "LoginClient")">Không có quyền đăng ký</a>
+                                            <a class="genric-btn info radius" href="@Url.Action("NotFound", "LoginClient")">Không có quyền đăng ký</a>
                                         }
                                     </ul>
                                 </div>
@@ -93,9 +89,7 @@
                     <ul class="pagination">
                         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString, @class = "page-item" }))
                     </ul>
-
                 </div>
-
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
@@ -117,11 +111,9 @@
                             </form>
                         </aside>
                         @RenderPage("_RightMenu.cshtml")
-
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 }

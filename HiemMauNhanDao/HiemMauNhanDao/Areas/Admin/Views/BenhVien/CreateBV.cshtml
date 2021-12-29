@@ -62,10 +62,10 @@
         <div class="form-group">
             <div class="col-md-10">
                 <label for="exampleFile" class="">Minh chứng</label>
-                @Html.EditorFor(model => model.minhChung, new{ htmlAttributes = new { @class = "form-control-file", @name = "upfile", @id = "exampleFile", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.minhChung, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.minhChung, new{ htmlAttributes = new { @class = "form-control-file", @name = "upfile", @id = "exampleFile", @type = "file" } })
+                @Html.ValidationMessageFor(model => model.minhChung, "", new { @class = "text-danger" })*@
 
-                 @* <input name="upfile" id="file" type="file" class="form-control-file" required>*@
+                  <input name="file" id="exampleFile" type="file" class="form-control-file"  >
 
             </div>
         </div>

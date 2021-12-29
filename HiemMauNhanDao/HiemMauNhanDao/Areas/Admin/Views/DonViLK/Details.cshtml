@@ -1,12 +1,12 @@
-﻿@model Models.EF.BenhVien
+﻿@model Models.ViewModel.NhanVienvaDVLKView
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Thông tin bệnh viện</h2>
 
+<h2>Thông tin Đơn vị liên kết</h2>
 <div class="card-body">
     <hr />
     <div class="dl-horizontal">
@@ -14,16 +14,40 @@
             <div class="col-md-6">
                 <dl class="dl-horizontal">
                     <dt>
-                        Mã bệnh viện
+                        Mã mã người dùng
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.IdBenhVien)
+                        @Html.DisplayFor(model => model.IdTTCN)
                     </dd>
                     <dt>
-                        Tên bệnh viện
+                        Tên người đăng ký
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.TenBenhVien)
+                        @Html.DisplayFor(model => model.hoTen)
+                    </dd>
+                    <dt>
+                        CCCD
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CCCD)
+                    </dd>
+                    <dt>
+                        Quyền
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.idQuyen)
+                    </dd>
+                    <dt>
+                        Mã đơn vị
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IdDVLK)
+                    </dd>
+                    <dt>
+                        Tên đơn vị
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TenDonVi)
                     </dd>
                     <dt>
                         Email
@@ -32,10 +56,10 @@
                         @Html.DisplayFor(model => model.Email)
                     </dd>
                     <dt>
-                        Số điện thoại
+                        Số điện thoại đơn vị
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.soDTBV)
+                        @Html.DisplayFor(model => model.soDT)
                     </dd>
                     <dt>
                         Địa chỉ
@@ -47,13 +71,12 @@
                         Trạng thái
                     </dt>
                     <dd>
-                      @*  @Html.DisplayFor(model => model.Status)*@
+                        @*@Html.DisplayFor(model => model.Status)*@
                         @Html.DropDownListFor(modelItem => modelItem.trangThai, new[] {
                        new SelectListItem { Text = "Hoạt động", Value = "True" },
                        new SelectListItem { Text = "Không hoạt động", Value = "False" } },
                        new { @disabled = "disabled" })
                     </dd>
-
                 </dl>
             </div>
             <div class="col-md-6">
@@ -63,7 +86,7 @@
                     </dt>
                     <dd>
                         <ul>
-                            <li> <img style="width:500px;height: 600px ; object-fit: cover" src="~/FileUpLoad/benhvien/@Model.minhChung" /></li>
+                            <li> <img style="width:500px;height: 600px ; object-fit: cover" src="~/FileUpLoad/dvlk/@Model.minhChung" /></li>
                             <li> @Html.DisplayFor(model => model.minhChung) </li>
                         </ul>
                     </dd>
@@ -75,12 +98,11 @@
 
     </div>
     <button class="mb-2 mr-2 btn-transition btn btn-success">
-        @Html.ActionLink("Chỉnh sửa", "EditBV", new { id = Model.IdBenhVien })
+        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IdDVLK })
     </button>
     <ul></ul>
     <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
         @Html.ActionLink("Quay lại danh sách", "Index", new { @class = "mb-2 mr-2 btn btn-success" })
     </button>
 </div>
-
 

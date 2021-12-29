@@ -37,7 +37,7 @@ namespace Models.Services
             return model.OrderByDescending(x => x.IdBenhVien).ThenBy(x => x.TenBenhVien).ToPagedList(page, pageSize);
         }
 
-        public void AddBV(BenhVien benhVien)
+        public void AddBV(BenhVien benhVien, string fileName)
         {
             var id = db.BenhViens.Max(x => x.IdBenhVien);
             string phanDau = id.Substring(0, 2);
@@ -48,7 +48,7 @@ namespace Models.Services
                 TenBenhVien = benhVien.TenBenhVien,
                 diaChi = benhVien.diaChi,
                 Email = benhVien.Email,
-                minhChung = benhVien.minhChung,
+                minhChung = fileName,
                 soDTBV = benhVien.soDTBV,
                 trangThai = benhVien.trangThai
             };

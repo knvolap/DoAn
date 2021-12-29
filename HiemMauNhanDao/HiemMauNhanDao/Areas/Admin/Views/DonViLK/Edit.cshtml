@@ -1,0 +1,105 @@
+﻿@model Models.ViewModel.NhanVienvaDVLKView
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="dl-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Mã mã người dùng
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IdTTCN)
+                    </dd>
+                    <dt>
+                        Tên người đăng ký
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.hoTen)
+                    </dd>
+                    <dt>
+                        Quyền
+                    </dt>
+                    <dd>
+                        @Html.DropDownList("IdQuyen", ViewBag.IdQuyen as SelectList, htmlAttributes: new { @class = "form-control" })
+                    </dd>
+                    <dt>
+                        Mã đơn vị
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IdDVLK)
+                    </dd>
+                    <dt>
+                        Tên đơn vị
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TenDonVi)
+                    </dd>
+                    <dt>
+                        Email
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt>
+                        Số điện thoại đơn vị
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.soDT)
+                    </dd>
+                    <dt>
+                        Địa chỉ
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.diaChi)
+                    </dd>
+                    <dt>
+                        Trạng thái
+                    </dt>
+                    <dd>
+                        @*@Html.DisplayFor(model => model.Status)*@
+                        @Html.DropDownListFor(modelItem => modelItem.trangThai, new[] {
+                       new SelectListItem { Text = "Hoạt động", Value = "True" },
+                       new SelectListItem { Text = "Không hoạt động", Value = "False" } })
+
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Minh chứng
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li> <img style="width:500px;height: 600px ; object-fit: cover" src="~/FileUpLoad/dvlk/@Model.minhChung" /></li>
+                            <li> @Html.DisplayFor(model => model.minhChung) </li>
+                        </ul>
+                    </dd>
+                    @Html.ActionLink("Download", "Download", new { fileName = @Model.minhChung })
+                    <lable>Tải file về để xem rõ hơn</lable>
+                </dl>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="mt-2 btn btn-primary"> <i class="fa fa-save" type="submit"></i> Lưu</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

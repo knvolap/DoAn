@@ -34,6 +34,7 @@ namespace Models.Services
                IdTTCN      = x.nv.IdTTCN,
                idQuyen     = x.nv.idQuyen,
                hoTen       = x.nv.hoTen,
+               CCCD       = x.nv.CCCD,
                IdDVLK      = x.dv.IdDVLK,
                TenDonVi    =x.dv.TenDonVi,
                diaChi      =x.dv.diaChi,
@@ -57,6 +58,77 @@ namespace Models.Services
         public DonViLienKet GetByIdDVLK(string id)
         {
             return db.DonViLienKets.Where(s => s.IdDVLK.CompareTo(id) == 0).SingleOrDefault();
+        }
+        //Sửa
+        public void SuaTKDVLK(NhanVienvaDVLKView thongTinCaNhan, string id)
+        {
+            ThongTinCaNhan tk = GetByIdTTCN(thongTinCaNhan.IdTTCN);
+            var query = from dv in db.DonViLienKets
+                        join nv in db.ThongTinCaNhans on dv.idTTCN equals nv.IdTTCN
+                        where nv.IdTTCN == id
+                        select new { dv, nv };
+            var result = query.Select(x => new NhanVienvaDVLKView()
+            {
+                IdTTCN = x.nv.IdTTCN,
+                idQuyen = x.nv.idQuyen,
+                hoTen = x.nv.hoTen,
+                CCCD = x.nv.CCCD,
+                IdDVLK = x.dv.IdDVLK,
+                TenDonVi = x.dv.TenDonVi,
+                diaChi = x.dv.diaChi,
+                Email = x.dv.Email,
+                soDT = x.dv.soDT,
+                minhChung = x.dv.minhChung,
+                trangThai = x.dv.trangThai
+            }).SingleOrDefault();         
+            db.SaveChanges();
+        }
+        public NhanVienvaDVLKView GetByIdTTCN1(string id)
+        {
+            var query = from dv in db.DonViLienKets
+                        join nv in db.ThongTinCaNhans on dv.idTTCN equals nv.IdTTCN
+                        where nv.IdTTCN == id
+                        select new { dv, nv };
+            var result = query.Select(x => new NhanVienvaDVLKView()
+            {
+                IdTTCN = x.nv.IdTTCN,
+                idQuyen = x.nv.idQuyen,
+                hoTen = x.nv.hoTen,
+                CCCD = x.nv.CCCD,
+                IdDVLK = x.dv.IdDVLK,
+                TenDonVi = x.dv.TenDonVi,
+                diaChi = x.dv.diaChi,
+                Email = x.dv.Email,
+                soDT = x.dv.soDT,
+                minhChung = x.dv.minhChung,
+                trangThai = x.dv.trangThai
+            }).SingleOrDefault();
+            return result;
+        }
+
+
+
+        public NhanVienvaDVLKView GetByIdDVLK2(string id)
+        {
+            var query = from dv in db.DonViLienKets
+                        join nv in db.ThongTinCaNhans on dv.idTTCN equals nv.IdTTCN
+                        where dv.IdDVLK == id
+                        select new { dv, nv };       
+            var result = query.Select(x => new NhanVienvaDVLKView()
+            {
+                IdTTCN = x.nv.IdTTCN,
+                idQuyen = x.nv.idQuyen,
+                hoTen = x.nv.hoTen,
+                CCCD = x.nv.CCCD,
+                IdDVLK = x.dv.IdDVLK,
+                TenDonVi = x.dv.TenDonVi,
+                diaChi = x.dv.diaChi,
+                Email = x.dv.Email,
+                soDT = x.dv.soDT,
+                minhChung = x.dv.minhChung,
+                trangThai = x.dv.trangThai
+            }).SingleOrDefault();
+            return result;
         }
 
         public void AddDVLK(DonViLienKet donViLienKet)

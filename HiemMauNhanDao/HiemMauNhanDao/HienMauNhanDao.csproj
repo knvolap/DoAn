@@ -181,7 +181,8 @@
     <Content Include="Assets\Admin\images\logo3.png" />
     <Content Include="Assets\Admin\scripts\main.js" />
     <Content Include="Assets\Admin\scripts\userController.js" />
-    <Content Include="Assets\Admin\scripts\userCTL.js" />
+    <Content Include="Assets\Admin\scripts\userCTL - Copy.js" />
+    <Content Include="Assets\Admin\scripts\duyetDHMController.js" />
     <Content Include="Assets\client\css\animate.css" />
     <Content Include="Assets\client\css\aos.css" />
     <Content Include="Assets\client\css\bootstrap.min.css" />
@@ -430,6 +431,13 @@
     <Content Include="Areas\Admin\Views\QuanLyTK\CreateTK.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyTK\EditTK.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyTK\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\chiTietDHM\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\chiTietDHM\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\chiTietDHM\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\chiTietDHM\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DonViLK\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DonViLK\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DonViLK\Edit.cshtml" />
     <None Include="Scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.0.js" />
     <Content Include="Scripts\jquery-1.8.0.min.js" />
@@ -451,7 +459,9 @@
     <Compile Include="Areas\Admin\Controllers\BaseController2.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\BenhVienController.cs" />
+    <Compile Include="Areas\Admin\Controllers\chiTietDHMController.cs" />
     <Compile Include="Areas\Admin\Controllers\DKDHMController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DonViLKController.cs" />
     <Compile Include="Areas\Admin\Controllers\DotHienMauController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
@@ -460,6 +470,7 @@
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\HasCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Controllers\chiTietDHMController.cs" />
     <Compile Include="Controllers\DangKyTKController.cs" />
     <Compile Include="Controllers\DTCHMController.cs" />
     <Compile Include="Controllers\DkDHMController.cs" />
@@ -531,6 +542,9 @@
     <Content Include="Views\DVLK\DangBai.cshtml" />
     <Content Include="Views\Home\HuongDan.cshtml" />
     <Content Include="Views\Home\LienHe.cshtml" />
+    <Content Include="Views\chiTietDHM\Create.cshtml" />
+    <Content Include="Views\chiTietDHM\_RightMenu.cshtml" />
+    <Content Include="Views\chiTietDHM\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

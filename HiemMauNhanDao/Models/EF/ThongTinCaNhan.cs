@@ -30,7 +30,7 @@
         public string userName { get; set; }
 
 
-        [StringLength(50, MinimumLength = 9, ErrorMessage = "Độ dài mật khẩu ít nhất 9 kí tự")]
+        [StringLength(maximumLength:40, MinimumLength = 9, ErrorMessage = "Độ dài mật khẩu ít nhất 9 kí tự")]
         [Required(ErrorMessage = "Mật khẩu không được để trống.")]
         public string password { get; set; }
 
@@ -38,11 +38,11 @@
         [Required(ErrorMessage = " không được để trống.")]
         public string hoTen { get; set; }
 
-        [StringLength(12 ,ErrorMessage = "Chỉ nhập tối đa 12 số")]
+        [StringLength(12, MinimumLength = 9, ErrorMessage = "Chỉ nhập tối đa 9 - 12 số")]
         [Required(ErrorMessage = " không được để trống.")]
         public string CCCD { get; set; }
 
-        [StringLength(12,ErrorMessage = "Chỉ nhập tối đa 12 số")]
+        [StringLength(12, MinimumLength = 8, ErrorMessage = "Chỉ nhập từ 8 - 12 số")]
         [Required(ErrorMessage = " không được để trống.")]
         public string soDT { get; set; }
 

@@ -8,11 +8,12 @@ namespace Models.EF
     public partial class DbContextHM : DbContext
     {
         public DbContextHM()
-            : base("name=DbContextHM1")
+            : base("name=DbContextHM2")
         {
         }
 
         public virtual DbSet<BenhVien> BenhViens { get; set; }
+        public virtual DbSet<chiTietDHM> chiTietDHMs { get; set; }
         public virtual DbSet<ChucVu> ChucVus { get; set; }
         public virtual DbSet<DonViLienKet> DonViLienKets { get; set; }
         public virtual DbSet<DotHienMau> DotHienMaus { get; set; }
@@ -23,17 +24,12 @@ namespace Models.EF
         public virtual DbSet<PhieuYCNM> PhieuYCNMs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<ThongTinCaNhan> ThongTinCaNhans { get; set; }
-        public virtual DbSet<chiTietDHM> chiTietDHMs { get; set; }
         public virtual DbSet<ChiTietPhanCong> ChiTietPhanCongs { get; set; }
         public virtual DbSet<DSNVTH> DSNVTHs { get; set; }
         public virtual DbSet<LichSuHienMau> LichSuHienMaus { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<chiTietDHM>()
-                 .Property(e => e.IdChiTietDHM)
-                 .IsUnicode(false);
-
             modelBuilder.Entity<BenhVien>()
                 .Property(e => e.IdBenhVien)
                 .IsUnicode(false);
@@ -55,6 +51,22 @@ namespace Models.EF
                 .HasMany(e => e.NhanVienYTes)
                 .WithOptional(e => e.BenhVien)
                 .WillCascadeOnDelete();
+
+            modelBuilder.Entity<chiTietDHM>()
+                .Property(e => e.IdChiTietDHM)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<chiTietDHM>()
+                .Property(e => e.idDHM)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<chiTietDHM>()
+                .Property(e => e.idDVLK)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<chiTietDHM>()
+                .Property(e => e.idNVYT)
+                .IsUnicode(false);
 
             modelBuilder.Entity<ChucVu>()
                 .Property(e => e.IdChucVu)
@@ -79,14 +91,12 @@ namespace Models.EF
 
             modelBuilder.Entity<DonViLienKet>()
                 .Property(e => e.soDT)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<DonViLienKet>()
                 .Property(e => e.minhChung)
                 .IsUnicode(false);
 
-           
             modelBuilder.Entity<DonViLienKet>()
                 .HasMany(e => e.chiTietDHMs)
                 .WithRequired(e => e.DonViLienKet)
@@ -111,7 +121,7 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<DotToChucHM>()
-                .Property(e => e.idDHM)
+                .Property(e => e.idChiTietDHM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<DotToChucHM>()
@@ -237,8 +247,8 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
-                 .Property(e => e.soDT)
-                 .IsUnicode(false);
+                .Property(e => e.soDT)
+                .IsUnicode(false);
 
             modelBuilder.Entity<ThongTinCaNhan>()
                 .Property(e => e.nhomMau)
@@ -248,18 +258,6 @@ namespace Models.EF
                 .HasMany(e => e.NhanVienYTes)
                 .WithOptional(e => e.ThongTinCaNhan)
                 .WillCascadeOnDelete();
-
-            modelBuilder.Entity<chiTietDHM>()
-                .Property(e => e.idDHM)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<chiTietDHM>()
-                .Property(e => e.idDVLK)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<chiTietDHM>()
-                .Property(e => e.idNVYT)
-                .IsUnicode(false);
 
             modelBuilder.Entity<ChiTietPhanCong>()
                 .Property(e => e.idDVLK)

@@ -47,37 +47,21 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateBV(BenhVien benhVien1, HttpPostedFileBase upfile )
-        {
-            if (ModelState.IsValid)
+        public ActionResult CreateBV(BenhVien benhVien1, HttpPostedFileBase file)
+        {      
+            if (ModelState.IsValid & file != null & file.ContentLength > 0)
             {
-                //upload image
-                if (upfile != null && upfile.ContentLength > 0)
-                {
-                    try
-                    {
-                        //string fileName = Path.Combine(Server.MapPath("~/FileUpLoad/benhvien/"), Path.GetFileName(upfile.FileName));
-                        //upfile.SaveAs(fileName);
-                        //benhVien1.minhChung = fileName;
-
-                        //Here, I create a custom name for uploaded image
-                        string file_name = Path.GetExtension(upfile.FileName);
-                        string path = Path.Combine(Server.MapPath("~/FileUpLoad/benhvien/"), file_name);
-                        upfile.SaveAs(path);
-                        // image_path is nvarchar type db column. We save the name of the file in that column. 
-                        benhVien1.minhChung = file_name;
-                    }
-                    catch (Exception ex)
-                    {
-                        SetAlert("Thêm nhật thất bại", "error");
-                    }
-                }
-                _benhVien.AddBV(benhVien1);
-                db.SaveChanges();
-                SetAlert("Thêm thành công", "success");
-                return RedirectToAction("Index");
-            }
-            return View(benhVien1);          
+               string duongDan = Server.MapPath("~/FileUpLoad/benvien/");
+               string fileName = Path.GetFileName(file.FileName);
+               string fullDuongDan = Path.Combine(duongDan, fileName);
+               file.SaveAs(fullDuongDan);
+                
+               _benhVien.AddBV(benhVien1, fileName);
+               db.SaveChanges();
+               SetAlert("Thêm thành công", "success");
+               return RedirectToAction("Index");
+            }         
+            return View(benhVien1);
         }
 
      
