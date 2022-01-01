@@ -1,4 +1,4 @@
-﻿@model Models.ViewModel.NhanVienvaDVLKView
+﻿@model Models.EF.ThongTinCaNhan
 
 @{
     ViewBag.Title = "Edit";
@@ -7,99 +7,138 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-    <div class="dl-horizontal">
-        <div class="row">
-            <div class="col-md-6">
-                <dl class="dl-horizontal">
-                    <dt>
-                        Mã mã người dùng
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.IdTTCN)
-                    </dd>
-                    <dt>
-                        Tên người đăng ký
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.hoTen)
-                    </dd>
-                    <dt>
-                        Quyền
-                    </dt>
-                    <dd>
-                        @Html.DropDownList("IdQuyen", ViewBag.IdQuyen as SelectList, htmlAttributes: new { @class = "form-control" })
-                    </dd>
-                    <dt>
-                        Mã đơn vị
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.IdDVLK)
-                    </dd>
-                    <dt>
-                        Tên đơn vị
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.TenDonVi)
-                    </dd>
-                    <dt>
-                        Email
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Email)
-                    </dd>
-                    <dt>
-                        Số điện thoại đơn vị
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.soDT)
-                    </dd>
-                    <dt>
-                        Địa chỉ
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.diaChi)
-                    </dd>
-                    <dt>
-                        Trạng thái
-                    </dt>
-                    <dd>
-                        @*@Html.DisplayFor(model => model.Status)*@
-                        @Html.DropDownListFor(modelItem => modelItem.trangThai, new[] {
-                       new SelectListItem { Text = "Hoạt động", Value = "True" },
-                       new SelectListItem { Text = "Không hoạt động", Value = "False" } })
-
-                    </dd>
-                </dl>
-            </div>
-            <div class="col-md-6">
-                <dl class="dl-horizontal">
-                    <dt>
-                        Minh chứng
-                    </dt>
-                    <dd>
-                        <ul>
-                            <li> <img style="width:500px;height: 600px ; object-fit: cover" src="~/FileUpLoad/dvlk/@Model.minhChung" /></li>
-                            <li> @Html.DisplayFor(model => model.minhChung) </li>
-                        </ul>
-                    </dd>
-                    @Html.ActionLink("Download", "Download", new { fileName = @Model.minhChung })
-                    <lable>Tải file về để xem rõ hơn</lable>
-                </dl>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button class="mt-2 btn btn-primary"> <i class="fa fa-save" type="submit"></i> Lưu</button>
-            </div>
-        </div>
-    </div>
-}
-
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <h4>ThongTinCaNhan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã người dùng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdTTCN)
+        </dd>
+        <dt>
+            Quyền hạn
+        </dt>
+
+        <dd>
+            @Html.DropDownList("IdQuyen", ViewBag.IdQuyen as SelectList, htmlAttributes: new { @class = "form-control" })
+        </dd>
+        <dt>
+            Tên người đăng ký
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.hoTen)
+        </dd>
+        <dt>
+            Tài khoản
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCCD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCCD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngheNghiep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngheNghiep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trinhDo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trinhDo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soLanHM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soLanHM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.coQuanTH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coQuanTH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nhomMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nhomMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangThai)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
 </div>

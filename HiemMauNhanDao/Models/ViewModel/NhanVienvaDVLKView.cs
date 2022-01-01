@@ -19,7 +19,7 @@ namespace Models.ViewModel
         public string Email { get; set; }
         public string soDT { get; set; }
         public string minhChung { get; set; }
-        public bool? trangThai { get; set; }
+        public bool trangThai { get; set; }
 
     }
 }

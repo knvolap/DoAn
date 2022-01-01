@@ -19,7 +19,7 @@
                     Mã bệnh viện
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.IdBenhVien)
+                    @Html.EditorFor(model => model.IdBenhVien, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
                 </dd>
                 <dt>
                     Tên bệnh viện
@@ -56,8 +56,8 @@
                     @*@Html.DisplayFor(model => model.Status)*@
                     @Html.DropDownListFor(modelItem => modelItem.trangThai, new[] {
                    new SelectListItem { Text = "Hoạt động", Value = "True" },
-                   new SelectListItem { Text = "Không hoạt động", Value = "False" } },
-                   new { @disabled = "disabled" })
+                   new SelectListItem { Text = "Không hoạt động", Value = "False" } })
+                 
                 </dd>
 
             </dl>
@@ -74,13 +74,12 @@
                     </ul>
                 </dd>
 
-                <div class="form-group">
+                <dd class="form-group">
                     <div class="col-md-10">
                         <label for="exampleFile" class="">Minh chứng</label>
-                        <input name="file" id="exampleFile" type="file" class="form-control-file">
-                    </div>
-                 
-                </div>
+                        <input name="file" id="file" type="file" class="form-control-file">
+                    </div>            
+                </dd>
 
 
 

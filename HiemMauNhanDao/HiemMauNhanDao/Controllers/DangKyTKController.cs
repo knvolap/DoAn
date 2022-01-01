@@ -33,15 +33,15 @@ namespace HiemMauNhanDao.Controllers
             {
                 if (_DKTK.isExistTaiKhoan(thongTinCaNhan.userName))
                 {
-                    ViewBag.ThongBao = "Tài khoản đã tồn tại!";
+                    SetAlert("Tài khoản đã tồn tại!", "error");                   
                 }
                 else if (_DKTK.isExistSDT(thongTinCaNhan.soDT))
                 {
-                    ViewBag.ThongBao = "Số điện thoại đã tồn tại!";               
+                    SetAlert("Số điện thoại đã tồn tại!", "error");             
                 }
                 else if (_DKTK.isExistCCCD(thongTinCaNhan.CCCD))
                 {
-                    ViewBag.ThongBao = "CCCD/ CMND đã tồn tại!";
+                    SetAlert("CCCD/ CMND đã tồn tại!!", "error");
                 }              
                 //else if (fc["txtXacNhanMK"] != thongTinCaNhan.password)
                 //{

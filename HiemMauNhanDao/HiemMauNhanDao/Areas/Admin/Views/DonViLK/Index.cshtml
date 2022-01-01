@@ -117,20 +117,22 @@
                     </td>
                     <td>
                         @item.soDT
-                    </td>                    
+                    </td>
                     <td class="text-center">
-                        @if (@item.trangThai == true)
-                        {
-                            <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                @(item.trangThai == true ? "Hoạt động" : "Khóa")
-                            </button>
-                        }
-                        @if (@item.trangThai == false)
-                        {
-                            <button class="mb-2 mr-2 btn-transition btn btn-outline-danger">
-                                @(item.trangThai == false ? "Khóa": "Hoạt động"  )
-                            </button>
-                        }
+                        <a href="#" class="btn-active" data-id="@item.IdDVLK">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
+
+                        @*@if (@item.trangThai == true)
+                            {
+                                <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                    @(item.trangThai == true ? "Hoạt động" : "Khóa")
+                                </button>
+                            }
+                            @if (@item.trangThai == false)
+                            {
+                                <button class="mb-2 mr-2 btn-transition btn btn-outline-danger">
+                                    @(item.trangThai == false ? "Khóa": "Hoạt động"  )
+                                </button>
+                            }*@
                     </td>
                     <td class="text-center">
                         <div class="mb-2 mr-2 dropright btn-group">
@@ -143,7 +145,7 @@
 
                             </div>
                         </div>
-                       
+
                     </td>
                 </tr>
                 i++;
@@ -154,4 +156,5 @@
     </div>
 </div>
 
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="~/Assets/Admin/scripts/duyetDVLK.js"></script>

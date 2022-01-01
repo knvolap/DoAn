@@ -4,6 +4,7 @@ using Models.EF;
 using Models.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,6 @@ namespace HiemMauNhanDao.Controllers
     public class DVLKController : BaseController
     {
         DonViLienKetServices _dvlk = new DonViLienKetServices();
-        public UserLogin userSession = new UserLogin();
         private DbContextHM db = new DbContextHM();
         // GET: DVLK
         public ActionResult Index()
@@ -31,18 +31,44 @@ namespace HiemMauNhanDao.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DKDVLK([Bind(Include = "IdDVLK,idTTCN,trangThai,TenDonVi,Email,soDT,minhChung,diaChi")] DonViLienKet donViLienKet)
+        public ActionResult DKDVLK(DonViLienKet donViLienKet, HttpPostedFileBase file)
         {
-            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];        
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             if (ModelState.IsValid)
             {
-                donViLienKet.IdDVLK = "DV" + (db.DonViLienKets.Count() + 1).ToString();
-                donViLienKet.idTTCN = session.UserID;                
-                donViLienKet.trangThai = false;
-                db.DonViLienKets.Add(donViLienKet);
-                db.SaveChanges();
-                SetAlert("Đăng ký thành công", "success");
-                return RedirectToAction("DKDVLK", "DVLK");
+                if (_dvlk.isExistDVLK(donViLienKet.IdDVLK))
+                {
+                    SetAlert("Bạn đã đăng ký rồi", "error");
+                }
+                else if (_dvlk.isExistIDTK(donViLienKet.idTTCN))
+                {
+                    SetAlert("Bạn đã đăng ký rồi", "error");
+                }
+                else if (_dvlk.isExistSDT(donViLienKet.soDT))
+                {
+                    SetAlert("Số điện thoại đã tồn tại", "error");
+                }
+                else if (_dvlk.isExistEmail(donViLienKet.Email))
+                {
+                    SetAlert("Email đã tồn tại", "error");
+                }
+                else if (_dvlk.isExistMinhChung(donViLienKet.minhChung))
+                {
+                    SetAlert("Minh chứng đã tồn tại", "error");
+                }
+                else
+                {                  
+                    donViLienKet.idTTCN = session.UserID;
+                    string duongDan = Server.MapPath("~/FileUpLoad/benhvien/");
+                    string fileName = Path.GetFileName(file.FileName);
+                    string fullDuongDan = Path.Combine(duongDan, fileName);
+                    file.SaveAs(fullDuongDan);
+
+                    _dvlk.AddDVLK(donViLienKet, fileName);
+                    db.SaveChanges();
+                    SetAlert("Đăng ký thành công", "success");
+                    return RedirectToAction("DKDVLK", "DVLK");
+                }
             }
             else
             {
@@ -50,9 +76,8 @@ namespace HiemMauNhanDao.Controllers
                 return RedirectToAction("DKDVLK", "DVLK");
             }
             return View(donViLienKet);
-
         }
-       
+
 
         public ActionResult DangBai()
         {
@@ -85,5 +110,41 @@ namespace HiemMauNhanDao.Controllers
 //        SetAlert("Đăng ký  thất bại", "error");
 //        return RedirectToAction("DKDVLK", "DVLK");
 //    }
+
+//}
+
+//[HttpPost]
+//[ValidateAntiForgeryToken]
+//public ActionResult DKDVLK([Bind(Include = "IdDVLK,idTTCN,trangThai,TenDonVi,Email,soDT,minhChung,diaChi")] DonViLienKet donViLienKet)
+//{
+//    var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+//    if (ModelState.IsValid)
+//    {
+//        if (_dvlk.isExistDVLK(donViLienKet.IdDVLK))
+//        {
+//            SetAlert("Bạn đã đăng ký rồi", "error");
+//        }
+//        else if (_dvlk.isExistIDTK(donViLienKet.idTTCN))
+//        {
+//            SetAlert("Bạn đã đăng ký rồi", "error");
+//        }
+//        else
+//        {
+//            donViLienKet.IdDVLK = "DV" + (db.DonViLienKets.Count() + 1).ToString();
+//            donViLienKet.idTTCN = session.UserID;
+//            donViLienKet.trangThai = !false;
+//            db.DonViLienKets.Add(donViLienKet);
+
+//            db.SaveChanges();
+//            SetAlert("Đăng ký thành công", "success");
+//            return RedirectToAction("DKDVLK", "DVLK");
+//        }
+//    }
+//    else
+//    {
+//        SetAlert("Đăng ký thất bại", "error");
+//        return RedirectToAction("DKDVLK", "DVLK");
+//    }
+//    return View(donViLienKet);
 
 //}

@@ -78,6 +78,9 @@
 
         public bool? trangThai { get; set; }
 
+        public virtual Quyen Quyen { get; set; }
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonViLienKet> DonViLienKets { get; set; }
 
@@ -86,8 +89,6 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuDKHM> PhieuDKHMs { get; set; }
-
-        public virtual Quyen Quyen { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LichSuHienMau> LichSuHienMaus { get; set; }

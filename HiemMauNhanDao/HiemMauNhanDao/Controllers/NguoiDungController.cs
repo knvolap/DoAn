@@ -62,7 +62,7 @@ namespace HiemMauNhanDao.Controllers
                 if (_NguoiDung.isExistSDT(model.soDT))
                 {
                     SetAlert("Số điện thoại đã tồn tại", "error");
-                }
+                }              
                 var ttcn = _NguoiDung.GetByIdTTCN(model.IdTTCN);
                 ttcn.IdTTCN = ttcn.IdTTCN;
                 ttcn.CCCD = ttcn.CCCD;
@@ -83,7 +83,7 @@ namespace HiemMauNhanDao.Controllers
                 return RedirectToAction("CapnhaTTCN", "NguoiDung");
             }    
          
-            return View(model);
+        
         }
 
         //tình trạng sức khỏe

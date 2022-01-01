@@ -47,24 +47,64 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateBV(BenhVien benhVien1, HttpPostedFileBase file)
-        {      
-            if (ModelState.IsValid & file != null & file.ContentLength > 0)
+        public ActionResult CreateBV(BenhVien benhVien, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
             {
-               string duongDan = Server.MapPath("~/FileUpLoad/benvien/");
-               string fileName = Path.GetFileName(file.FileName);
-               string fullDuongDan = Path.Combine(duongDan, fileName);
-               file.SaveAs(fullDuongDan);
-                
-               _benhVien.AddBV(benhVien1, fileName);
-               db.SaveChanges();
-               SetAlert("Thêm thành công", "success");
-               return RedirectToAction("Index");
-            }         
-            return View(benhVien1);
+                if (_benhVien.isExistEmailBV(benhVien.Email))
+                {
+                    SetAlert("Email đã được đăng ký ", "error");
+                    return RedirectToAction("CreateBV", "BenhVien");
+                }
+                else if (_benhVien.isExistSDTlBV(benhVien.soDTBV))
+                {
+                    SetAlert("Số điện thoại đã được đăng ký ", "error");
+                    return RedirectToAction("CreateBV", "BenhVien");
+                }
+                else if (_benhVien.isExistMinhChungBV(benhVien.minhChung))
+                {
+                    SetAlert("Minh chứng bị trùng ", "error");
+                    return RedirectToAction("CreateBV", "BenhVien");
+                }
+                else
+                {
+                    string duongDan = Server.MapPath("~/FileUpLoad/benhvien/");
+                    string fileName = Path.GetFileName(file.FileName);
+                    string fullDuongDan = Path.Combine(duongDan, fileName);
+                    file.SaveAs(fullDuongDan);
+
+                    _benhVien.AddBV(benhVien, fileName);
+                    db.SaveChanges();
+                    SetAlert("Thêm thành công", "success");
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                SetAlert("Thêm thất bại!! Vui lòng kiểm tra lại thông tin nhập", "error");
+                return RedirectToAction("CreateBV","BenhVien");
+            }
+            //return View(benhVien);
         }
 
-     
+
+        public ActionResult EditBV(string id)
+        {
+            return View(_benhVien.GetByIdBenhVien1(id));
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditBV(BenhVien benhVien, HttpPostedFileBase file)
+        {            
+           benhVien = _benhVien.GetByIdBenhVien1(benhVien.IdBenhVien);
+           string duongDan = Server.MapPath("~/FileUpLoad/benhvien/");
+           string fileName = Path.GetFileName(file.FileName);
+           string fullDuongDan = Path.Combine(duongDan, fileName);
+           file.SaveAs(fullDuongDan);
+           _benhVien.EditBV(benhVien, fileName);
+           SetAlert("Cập nhật thành công", "success");
+           return RedirectToAction("Index");  
+        }
 
         private string GetFileTypeByExtension(string fileExtension)
         {
@@ -98,10 +138,6 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
 
 
 
-        public ActionResult EditBV(string id)
-        {
-            return View(_benhVien.GetByIdBenhVien(id));
-        }
       
 
         public ActionResult Delete(string id)
@@ -121,36 +157,13 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
 
         public ActionResult Details(string id)
         {
-            var model = _benhVien.GetByIdBenhVien(id);
+            var model = _benhVien.GetByIdBenhVien1(id);
            
             return View(model);
         }
        
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditBV(BenhVien benhVien, HttpPostedFileBase file)
-        {
-            if (ModelState.IsValid)
-            {
-                string duongDan = Server.MapPath("~/FileUpLoad/benhvien");
-                string fileName = Path.GetFileName(file.FileName);
-                string fullDuongDan = Path.Combine(duongDan, fileName);
-
-                file.SaveAs(fullDuongDan);
-
-                _benhVien.EditBV2(benhVien, fileName);
-
-                SetAlert("Cập nhật thành công", "success");
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                SetAlert("Cập nhật thất bại", "error");
-                return RedirectToAction("Index");
-            }
-            return View(benhVien);
-        }
+      
     }
 }
 

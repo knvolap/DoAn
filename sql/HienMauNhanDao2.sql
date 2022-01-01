@@ -24,8 +24,8 @@ GO
 CREATE TABLE ThongTinCaNhan(
 	IdTTCN		 VARCHAR(20) PRIMARY KEY,
 	idQuyen		 VARCHAR(20)  null,
-	userName	VARCHAR (50) UNIQUE  null,
-	password	VARCHAR(50)  null,
+	userName	 VARCHAR (50) UNIQUE  null,
+	password	 VARCHAR(50)  null,
 	hoTen		 NVARCHAR(50)  NULL,
 	CCCD		 VARCHAR(12) UNIQUE  NULL,
 	soDT		 VARCHAR(12)   NULL,
@@ -47,8 +47,8 @@ GO
 --Table 3 DotHienMau
 CREATE TABLE DotHienMau(
 	IdDHM		VARCHAR(20) PRIMARY KEY,
-	TenDHM		NVARCHAR (50) UNIQUE not null,
-	noiDung		NVARCHAR (150) null,
+	TenDHM		NVARCHAR (150) UNIQUE not null,
+	noiDung		NVARCHAR (max) null,
 	tgBatDau	DATE  null,	
 	tgKetThuc	DATE  null,
 	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: Hết hạn, 1: Đang diễn ra
@@ -146,16 +146,17 @@ CREATE TABLE DotToChucHM(
 	IdDTCHM			VARCHAR(20) PRIMARY KEY,
 	idChiTietDHM	VARCHAR(20)  not null,
 	tenDotHienMau	NVARCHAR (100) not null,
-	noiDung			NVARCHAR(300) NOT NULL,
+	noiDung			NVARCHAR(max) NOT NULL,
 	doiTuongThamGia	NVARCHAR (100) not null,
 	diaChiToChuc	NVARCHAR (150) not null,
 	soLuong			int  not null,
 	ngayBatDauDK	DATE not null,	
 	ngayKetThucDK	DATE not null,
 	ngayToChuc		DATETIME not null,
-	trangThai		NVARCHAR(50) 
+    trangThai	   bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
+
 
 
 
@@ -188,7 +189,6 @@ GO
 --Table 14 KetQuaHienMau
 CREATE TABLE KetQuaHienMau(
 	IdKQHM			VARCHAR(20) PRIMARY KEY,
-	idDTCHM			VARCHAR(20)  NOT NULL,
 	idPDKHM			VARCHAR(20)  FOREIGN KEY REFERENCES dbo.PhieuDKHM(IdPDKHM) not null,
 	nhomMau			VARCHAR(10)  NULL,
 	nguoiKham		NVARCHAR (50)  null,
@@ -207,7 +207,7 @@ CREATE TABLE KetQuaHienMau(
 	phanUng			NVARCHAR (50) ,	
 	thoiGianLayMau	DATETIME null,
 	ghiChu			NVARCHAR (50) ,
-	trangThai		NVARCHAR(50) 
+	trangThai		NVARCHAR(50) ---Cập nhật xong, đang cập nhật , chưa cập nhật
 )
 GO
 
@@ -224,8 +224,8 @@ GO
 CREATE TABLE LichSuHienMau(
 	idTTCN			VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE not null,
 	idKQHM			VARCHAR(20) FOREIGN KEY REFERENCES dbo.KetQuaHienMau(IdKQHM) not null,
-	quaTang			NVARCHAR(50),
-	anhChungNhan  VARCHAR(50)  NULL,	 
+	quaTang			NVARCHAR(150),
+	anhChungNhan    VARCHAR(50)  NULL,	 
 )
 GO
 
@@ -349,8 +349,7 @@ GO
 
 -- BẢNG 13--
 ALTER TABLE KetQuaHienMau
-	ADD CONSTRAINT FK_KQHM_idDotTC	FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM)ON DELETE CASCADE ON UPDATE CASCADE,			 
-		CONSTRAINT CHECK_KQHM_HST		CHECK (HST >=1 ),
+	ADD CONSTRAINT CHECK_KQHM_HST		CHECK (HST >=1 ),
 		CONSTRAINT CHECK_KQHM_HBV		CHECK (HBV >=1 ),
 		CONSTRAINT CHECK_KQHM_MSD		CHECK (MSD >=1 ),
 		CONSTRAINT CHECK_KQHM_hienMau		default 0 for hienMau	,
@@ -492,8 +491,8 @@ GO
 --B11
 INSERT INTO dbo.DotToChucHM
 		(IdDTCHM, idChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai)
-VALUES	('DTC01','CT01',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021',N'Chờ Duyệt'),
-		('DTC02','CT02',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021',N'Chờ Duyệt')	
+VALUES	('DTC01','CT01',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021','1'),
+		('DTC02','CT02',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021','1')	
 GO
 
 --B12

@@ -38,28 +38,72 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
 
         [HttpGet]
         public ActionResult Edit(string id)
-        {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
+        {            
             var model = _donvi.GetByIdTTCN1(id);           
             ViewBag.IdQuyen = new SelectList(db.Quyens, "IdQuyen", "tenQuyen");
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "IdTTCN,idQuyen,CCCD,hoTen,IdDVLK,TenDonVi,diaChi,Email,soDT,minhChung,trangThai")] NhanVienvaDVLKView thongTinCaNhan)
+        public ActionResult Edit([Bind(Include = "IdTTCN,hoTen,gioiTinh,soDT,soLanHM,ngheNghiep,nhomMau,trinhDo,coQuanTH,diaChi,userName,ngaySinh,CCCD,idQuyen,trangThai,password")] ThongTinCaNhan thongTinCaNhan)
         {
             if (ModelState.IsValid)
             {
+                var ttcn = _donvi.GetByIdTTCN(thongTinCaNhan.IdTTCN);
+                ttcn.nhomMau = ttcn.nhomMau;
+                ttcn.trinhDo = ttcn.trinhDo;
+                ttcn.trangThai = ttcn.trangThai;
+                ttcn.userName = ttcn.userName;
+                ttcn.password = ttcn.password;
+                ttcn.diaChi = ttcn.diaChi;
+                ttcn.coQuanTH = ttcn.coQuanTH;
+                ttcn.CCCD = ttcn.CCCD;                
+                ttcn.soDT = ttcn.soDT;
+                ttcn.gioiTinh = ttcn.gioiTinh;
+                ttcn.ngaySinh = ttcn.ngaySinh;
+                ttcn.ngheNghiep = ttcn.ngheNghiep;
+                ttcn.hoTen = ttcn.hoTen;
+                ttcn.soLanHM = ttcn.soLanHM;
+
                 db.Entry(thongTinCaNhan).State = EntityState.Modified;
                 db.SaveChanges();
+                SetAlert("cập nhật thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("cập nhật thất bại", "error");
+                return RedirectToAction("Index");
+            }
+        }
+
+ 
+        public ActionResult Create( )
+        {          
+            return View( );
+        }
+        [HttpPost]
+        public ActionResult Create(DonViLienKet donViLienKet, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                string duongDan = Server.MapPath("~/FileUpLoad/benhvien/");
+                string fileName = Path.GetFileName(file.FileName);
+                string fullDuongDan = Path.Combine(duongDan, fileName);
+                file.SaveAs(fullDuongDan);
+                _donvi.AddDVLK(donViLienKet, fileName);
+                SetAlert("Thêm thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Thêm thất bại", "error");
                 return RedirectToAction("Index");
             }
            
-            return View(thongTinCaNhan);
         }
+
+
 
         private string GetFileTypeByExtension(string fileExtension)
         {
@@ -110,6 +154,26 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             var model = _donvi.GetByIdDVLK2(id);
 
             return View(model);
+        }
+
+        //xử lý duyệt = json
+        [HttpPost]
+        public JsonResult ChangeStatus2(string id)
+        {
+            var result = new DonViLienKetServices().ChangeStatus2(id);
+            return Json(new
+            {
+                tt = result
+            });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

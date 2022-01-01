@@ -58,7 +58,7 @@ namespace Models.EF
         [StringLength(50)]
         public string trangThai { get; set; }
 
-        public virtual chiTietDHM ChiTietDHM { get; set; }
+        public virtual chiTietDHM chiTietDHM { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DSNVTH> DSNVTHs { get; set; }

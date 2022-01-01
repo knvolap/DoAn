@@ -13,21 +13,21 @@ namespace Models.EF
         public chiTietDHM()
         {
             DotToChucHMs = new HashSet<DotToChucHM>();
-           
         }
+
         [Key]
         [StringLength(20)]
         public string IdChiTietDHM { get; set; }
 
-        [Column(Order = 0)]
+        [Required]
         [StringLength(20)]
         public string idDHM { get; set; }
 
-        [Column(Order = 1)]
+        [Required]
         [StringLength(20)]
         public string idDVLK { get; set; }
 
-        [Column(Order = 2)]
+        [Required]
         [StringLength(20)]
         public string idNVYT { get; set; }
 
@@ -35,10 +35,10 @@ namespace Models.EF
         public DateTime? ngayDK { get; set; }
 
         public bool trangThai { get; set; }
-         
-        public virtual DonViLienKet DonViLienKet { get; set; }
 
         public virtual DotHienMau DotHienMau { get; set; }
+
+        public virtual DonViLienKet DonViLienKet { get; set; }
 
         public virtual NhanVienYTe NhanVienYTe { get; set; }
 

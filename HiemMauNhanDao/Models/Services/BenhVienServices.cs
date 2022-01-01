@@ -18,7 +18,7 @@ namespace Models.Services
         {
             db = new DbContextHM();
         }
-        public BenhVien GetByIdBenhVien(string id)
+        public BenhVien GetByIdBenhVien1(string id)
         {
             return db.BenhViens.Where(b => b.IdBenhVien.CompareTo(id) == 0).FirstOrDefault();
         }
@@ -56,31 +56,21 @@ namespace Models.Services
             db.SaveChanges();
         }
 
-        public void EditBV(BenhVien benhVien)
+       
+        public void EditBV(BenhVien benhVien, string fileName)
         {
-             BenhVien bv = GetByIdBenhVien(benhVien.IdBenhVien);
+            try 
+            { 
+             BenhVien bv = GetByIdBenhVien1(benhVien.IdBenhVien);
              bv.TenBenhVien = benhVien.TenBenhVien;
              bv.Email = benhVien.Email;
              bv.diaChi = benhVien.diaChi;
-             bv.minhChung = benhVien.minhChung;
+             bv.minhChung = fileName;
              bv.soDTBV = benhVien.soDTBV;
              bv.trangThai = benhVien.trangThai;
-             db.SaveChanges();        
-        }
-        public void EditBV2(BenhVien benhVien, string fileName)
-        {
-            try
-            {
-                BenhVien bv = GetByIdBenhVien(benhVien.IdBenhVien);
-                bv.TenBenhVien = benhVien.TenBenhVien;
-                bv.Email = benhVien.Email;
-                bv.diaChi = benhVien.diaChi;
-                bv.minhChung = fileName;
-                bv.soDTBV = benhVien.soDTBV;
-                bv.trangThai = benhVien.trangThai;
-                db.SaveChanges();
+             db.SaveChanges();
             }
-            catch
+            catch  
             {
                 Console.WriteLine("Cập nhật thất bại");
             }
@@ -91,7 +81,6 @@ namespace Models.Services
             try
             {
                 var ls = db.BenhViens.Find(id);
-
                 db.BenhViens.Remove(ls);
                 db.SaveChanges();
                 return true;
@@ -102,26 +91,32 @@ namespace Models.Services
             }
 
         }
-        //public string ProcessUploadedFile(BenhVien model)
-        //{
-        //    string uniqueFileName = null;
-
-        //    if (model.Photo != null)
-        //    {
-        //        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-        //        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-        //        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            model.Photo.CopyTo(fileStream);
-        //        }
-        //    }
-        //    return uniqueFileName;
-        //}
-        public object ListAllBenhVien(string searchString, int page)
+        public bool isExistEmailBV(string email)
         {
-            throw new System.NotImplementedException();
+            BenhVien kh = db.BenhViens.Where(t => t.Email == email).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
         }
-
+        public bool isExistMinhChungBV(string mc)
+        {
+            BenhVien kh = db.BenhViens.Where(t => t.minhChung == mc).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistSDTlBV(string sdt)
+        {
+            BenhVien kh = db.BenhViens.Where(t => t.soDTBV == sdt).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

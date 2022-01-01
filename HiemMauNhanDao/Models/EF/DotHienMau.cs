@@ -14,7 +14,6 @@ namespace Models.EF
         {
             chiTietDHMs = new HashSet<chiTietDHM>();
             PhieuYCNMs = new HashSet<PhieuYCNM>();
-            DotToChucHMs = new HashSet<DotToChucHM>();
         }
 
         [Key]
@@ -36,7 +35,6 @@ namespace Models.EF
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? tgKetThuc { get; set; }
 
-
         public bool? trangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,8 +42,5 @@ namespace Models.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuYCNM> PhieuYCNMs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DotToChucHM> DotToChucHMs { get; set; }
     }
 }

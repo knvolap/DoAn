@@ -83,6 +83,13 @@ namespace Models.Services
             }).SingleOrDefault();         
             db.SaveChanges();
         }
+        public void UpdateDVLK(ThongTinCaNhan thongTinCaNhan)
+        {
+            ThongTinCaNhan tk = GetByIdTTCN(thongTinCaNhan.IdTTCN);
+            tk.idQuyen = thongTinCaNhan.idQuyen;           
+            db.SaveChanges();
+        }
+
         public NhanVienvaDVLKView GetByIdTTCN1(string id)
         {
             var query = from dv in db.DonViLienKets
@@ -131,18 +138,19 @@ namespace Models.Services
             return result;
         }
 
-        public void AddDVLK(DonViLienKet donViLienKet)
+        public void AddDVLK(DonViLienKet donViLienKet, string fileName)
         {
             var id = db.DonViLienKets.Max(x => x.IdDVLK);
             string phanDau = id.Substring(0, 2);
-            int so = Convert.ToInt32(id.Substring(2, 2)) + 1;
+            int so = Convert.ToInt32(id.Substring(2, 2)) + 1;          
             var dv1 = new DonViLienKet()
             {
-                IdDVLK = so > 9 ? phanDau + so : phanDau + "0" + so,
+                IdDVLK = so > 9 ? phanDau + so : phanDau + "0" + so,             
                 idTTCN = donViLienKet.idTTCN,
+                TenDonVi = donViLienKet.TenDonVi,
                 diaChi = donViLienKet.diaChi,
                 Email = donViLienKet.Email,
-                minhChung = donViLienKet.minhChung,
+                minhChung = fileName,
                 soDT = donViLienKet.soDT,
                 trangThai = donViLienKet.trangThai
             };
@@ -179,6 +187,59 @@ namespace Models.Services
         }
 
 
+        //duuyet
+        public bool ChangeStatus2(string id)
+        {
+            var chiTiet = db.DonViLienKets.Find(id);
+            chiTiet.trangThai = !chiTiet.trangThai;
+            db.SaveChanges();
+            return chiTiet.trangThai;
+        }
 
+        public bool isExistIDTK(string userName)
+        {
+            DonViLienKet kh = db.DonViLienKets.Where(t => t.idTTCN == userName).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistDVLK(string id)
+        {
+            DonViLienKet kh = db.DonViLienKets.Where(t => t.IdDVLK == id).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistSDT(string sdt)
+        {
+            DonViLienKet kh = db.DonViLienKets.Where(t => t.soDT == sdt).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistEmail(string email)
+        {
+            DonViLienKet kh = db.DonViLienKets.Where(t => t.Email == email).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistMinhChung(string mc)
+        {
+            DonViLienKet kh = db.DonViLienKets.Where(t => t.minhChung == mc).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

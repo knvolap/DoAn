@@ -27,7 +27,24 @@ namespace Models.Services
         {
             return db.NhanVienYTes.ToList();
         }
-
+        public bool isExistIDTK(string userName)
+        {
+            NhanVienYTe kh = db.NhanVienYTes.Where(t => t.idTTCN == userName).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExistNVYT(string id)
+        {
+            NhanVienYTe kh = db.NhanVienYTes.Where(t => t.IdNVYT == id).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
         //DanhSachTK
         public IEnumerable<ThongTinCaNhan>ListAllPageTKNV (string searchString1, int page, int pageSize)
         {

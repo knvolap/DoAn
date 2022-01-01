@@ -60,12 +60,11 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-8">
                                     <form action="#">
-
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
-                                                        @Html.HiddenFor(model => model.IdDVLK)
+                                             
                                                         <label>Mã người dùng</label>
                                                         @Html.EditorFor(model => model.idTTCN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = ViewBag.IdUser } })
                                                     </div>
@@ -112,17 +111,15 @@
                                             <tr>
                                                 <th style="width:735px">
                                                     <label>Minh chứng</label>
-                                                    @Html.EditorFor(model => model.minhChung, new
-                                               { htmlAttributes = new { @class = "form-control", @name = "file", @id = "exampleFile", @type = "file" } })
+                                                    <input name="file" id="exampleFile" type="file" class="form-control-file">
+                                                    @*@Html.EditorFor(model => model.minhChung, new
+                                               { htmlAttributes = new { @class = "form-control", @name = "file", @id = "exampleFile", @type = "file" } })*@
 
                                                 </th>
                                             </tr>
                                         </table>
                                         @Html.HiddenFor(model => model.trangThai)
-                                        <div class="mt-10">
-                                        </div>
-                                        <div class="mt-10">
-                                        </div>
+                          
                                     </form>
                                     <div class="text-center" style="margin-top:20px">
                                         <button type="submit" class="genric-btn primary-border radius"> Đăng ký liên kết</button>

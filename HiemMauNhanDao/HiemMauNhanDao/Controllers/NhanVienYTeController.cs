@@ -87,19 +87,30 @@ namespace HiemMauNhanDao.Controllers
             ViewBag.IdChucVu = new SelectList(db.ChucVus, "IdChucVu", "TenChucVu", nhanVienYTe.idChucVu);
             if (ModelState.IsValid)
             {
-                nhanVienYTe.IdNVYT = "NV" + (db.DonViLienKets.Count() + 1).ToString();
-                nhanVienYTe.idTTCN = session.UserID;
-                nhanVienYTe.trangThai = false;                         
-                db.NhanVienYTes.Add(nhanVienYTe);
-                db.SaveChanges();
-                SetAlert("Đăng ký thành công", "success");
-                return RedirectToAction("DKDVLK", "DVLK");
+                if (_nhanvien.isExistNVYT(nhanVienYTe.IdNVYT))
+                {
+                    SetAlert("Bạn đã đăng ký rồi", "error");                 
+                }
+                else if (_nhanvien.isExistIDTK(nhanVienYTe.idTTCN))
+                {
+                    SetAlert("Bạn đã đăng ký rồi", "error");                  
+                }
+                else
+                {
+                    nhanVienYTe.IdNVYT = "NV" + (db.NhanVienYTes.Count() + 1).ToString();
+                    nhanVienYTe.idTTCN = session.UserID;
+                    nhanVienYTe.trangThai = false;
+                    db.NhanVienYTes.Add(nhanVienYTe);
+                    db.SaveChanges();
+                    SetAlert("Đăng ký thành công", "success");
+                    return RedirectToAction("LienKetNV", "NhanVienYTe");
+                }                   
             }
             else
             {
                 SetAlert("Đăng ký thất bại", "error");
-                return RedirectToAction("DKDVLK", "DVLK");
-            }        
+                return RedirectToAction("LienKetNV", "NhanVienYTe");
+            }
             return View(nhanVienYTe);
         }
 
@@ -114,7 +125,7 @@ namespace HiemMauNhanDao.Controllers
 
         public ActionResult EditBV(string id)
         {
-            return View(_BenhVien.GetByIdBenhVien(id));
+            return View(_BenhVien.GetByIdBenhVien1(id));
         }
 
         [HttpPost]
@@ -126,7 +137,7 @@ namespace HiemMauNhanDao.Controllers
 
             file.SaveAs(fullDuongDan);
 
-            _BenhVien.EditBV2(benhVien, fileName);
+            _BenhVien.EditBV(benhVien, fileName);
             return RedirectToAction("Index");
         }
     }

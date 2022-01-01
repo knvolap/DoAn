@@ -8,7 +8,7 @@ namespace Models.EF
     public partial class DbContextHM : DbContext
     {
         public DbContextHM()
-            : base("name=DbContextHM2")
+            : base("name=DbContextHM4")
         {
         }
 
