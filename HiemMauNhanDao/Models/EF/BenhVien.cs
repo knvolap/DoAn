@@ -1,4 +1,4 @@
-﻿namespace Models.EF
+namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -19,29 +19,23 @@
         [StringLength(20)]
         public string IdBenhVien { get; set; }
 
-        
+        [Required]
         [StringLength(50)]
-        //[Required(ErrorMessage = "Tên bệnh viện không được để trống.")]
         public string TenBenhVien { get; set; }
 
-       
+        [Required]
         [StringLength(100)]
-        //[Required(ErrorMessage = "Địa chỉ không được để trống.")]
         public string diaChi { get; set; }
 
-   
+        [Required]
         [StringLength(50)]
-        //[Required(ErrorMessage = "Email không được để trống.")]
         public string Email { get; set; }
 
-        
+        [Required]
         [StringLength(11)]
-        //[Required(ErrorMessage = "SDT không được để trống.")]
         public string soDTBV { get; set; }
 
-       
         [StringLength(50)]
-        //[Required(ErrorMessage = "Minh chứng không được để trống.")]
         public string minhChung { get; set; }
 
         public bool? trangThai { get; set; }

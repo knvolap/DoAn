@@ -8,7 +8,7 @@ namespace Models.EF
     public partial class DbContextHM : DbContext
     {
         public DbContextHM()
-            : base("name=DbContextHM4")
+            : base("name=DbContextHM8")
         {
         }
 
@@ -131,10 +131,6 @@ namespace Models.EF
 
             modelBuilder.Entity<KetQuaHienMau>()
                 .Property(e => e.IdKQHM)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KetQuaHienMau>()
-                .Property(e => e.idDTCHM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<KetQuaHienMau>()

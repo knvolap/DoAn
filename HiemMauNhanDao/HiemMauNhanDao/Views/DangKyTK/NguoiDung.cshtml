@@ -1,6 +1,6 @@
 ﻿@model Models.EF.ThongTinCaNhan
 @{
-    ViewBag.Title = "NguoiDung";
+    ViewBag.Title = "Đăng ký tài khoản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -25,6 +25,10 @@
     });
 </script>
 
+@{ var txt1 = " [kytu]@gmail.com";}
+@{ var txt2 = " [kytu]@[kytu].com";}
+@{ var txt3 = " [kytu]@[kytu].[kytu]";}
+@{ var txt4 = " [kytu]@yahoo.com";}
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
@@ -85,13 +89,13 @@
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Họ và tên </a>
-                                                        @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
+                                                        @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "single-input", @type = "text", @placeholder = "Họ và tên" } })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>Số điện thoại</a>
-                                                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
+                                                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @type = "number", @placeholder = "nhập số điện thoại" } })
                                                     </div>
                                                 </th>
                                             </tr>
@@ -107,7 +111,7 @@
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>CCCD / CMND</a>
-                                                        @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
+                                                        @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "single-input", @type = "number", @placeholder = "CCCD / CMND" } })
 
                                                     </div>
                                                 </th>
@@ -119,13 +123,13 @@
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Tài khoản</a>
-                                                        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
+                                                        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @type = "text", @placeholder = "taikhoan@gmail.com" } })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>Mật khẩu</a>
-                                                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "single-input", @type = "password", @name = "txtXacNhanMK" } })
+                                                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "single-input", @type = "password", @name = "txtXacNhanMK", @placeholder = "độ dài trên 9 kí tự" } })
                                                     </div>
                                                 </th>
                                             </tr>
@@ -140,36 +144,38 @@
 
                     </div>
                 </div>
-                <hr/>
+                <hr />
                 <h2>Lưu ý</h2>
                 <table class="mt-10">
                     <tr>
                         <th style="width:400px">
                             <div>
-                                <a>Tài khoản thuộc các định dạng: [kitu]_gmail.com , [kitukitu]_[kitu]_.com </a>
+                                Tài khoản thuộc các định dạng: <a> @txt1,@txt2,@txt3,@txt4</a>
                             </div>
                         </th>
                         <th class="col-lg-6">
                             <div>
-                                <a>Số điện thoại : từ 8-12 số</a>
+                                Mật khẩu : <a>lớn hơn 9 ký tự </a>
                             </div>
                         </th>
+                        <th></th>
                     </tr>
                     <tr>
-                        <th style="width:400px">
+                        <th style ="width:400px">
                             <div>
-                                <a>Mật khẩu : lớn hơn 9 ký tự </a>
+                                Ngày sinh:  <a>phải đủ 18 tuổi</a>
                             </div>
-                        </th>
-                        <th class="col-lg-6">
-                            <div>
-                                <a>Ngày sinh: phải đủ 18 tuổi</a>
-                            </div>
-                        </th>
-                    </tr>
+                            </th>
+                            <th class="col-lg-6">
+                                <div>
+                                    Số điện thoại :<a> từ 8-12 số</a>
+                                </div>
+                            </th>
+
+</tr>
                 </table>
             </div>
-          
+
         </div>
     </div>
 </section>

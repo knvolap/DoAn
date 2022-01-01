@@ -1,0 +1,100 @@
+﻿@model Models.EF.DotToChucHM
+
+@{
+    ViewBag.Title = "Cập nhật";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdDTCHM)
+
+        <div class="form-group">
+            <label>Tên đợt hiến máu</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.tenDotHienMau, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>ID chi tiết ĐHM</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.idChiTietDHM, null, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.chiTietDHM, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>Nội dung</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.noiDung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.noiDung, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>ĐỐi tượng tham gia</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.doiTuongThamGia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.doiTuongThamGia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Địa chỉ tổ chức</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.diaChiToChuc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.diaChiToChuc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Sôs lượng</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.soLuong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.soLuong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Ngày bắt đầu DK</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ngayBatDauDK, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ngayBatDauDK, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Ngày kết thúc DK</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ngayKetThucDK, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ngayKetThucDK, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Ngày tổ chức</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ngayToChuc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ngayToChuc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Trở về", "Index")
+</div>

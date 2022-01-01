@@ -19,7 +19,7 @@ namespace Models.EF
         [StringLength(20)]
         public string idKQHM { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string quaTang { get; set; }
 
         [StringLength(50)]

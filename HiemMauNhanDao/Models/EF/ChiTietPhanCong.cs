@@ -28,8 +28,7 @@ namespace Models.EF
 
         public string phanHoi { get; set; }
 
-        [StringLength(50)]
-        public string trangThai { get; set; }
+        public bool? trangThai { get; set; }
 
         public virtual DonViLienKet DonViLienKet { get; set; }
 

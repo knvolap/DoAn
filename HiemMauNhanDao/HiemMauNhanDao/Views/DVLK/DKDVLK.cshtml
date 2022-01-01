@@ -1,6 +1,6 @@
 ﻿@model Models.EF.DonViLienKet
 @{
-    ViewBag.Title = "DKDVLK";
+    ViewBag.Title = "Đăng ký đơn vị liên kết";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -39,12 +39,12 @@
                     <div class="panel-body">
                         @if (TempData["AlertMessage"] != null)
                         {
-                         <div id="AlertBox" class="alert @TempData["AlertType"] hide">
-                             @TempData["AlertMessage"]
-                         </div>
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                @TempData["AlertMessage"]
+                            </div>
                         }
                     </div>
-                    
+
                     <div>
                         @using (Html.BeginForm("DKDVLK", "DVLK", new { @enctype = "multipart/form-data" }))
                         {
@@ -64,7 +64,7 @@
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
-                                             
+
                                                         <label>Mã người dùng</label>
                                                         @Html.EditorFor(model => model.idTTCN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = ViewBag.IdUser } })
                                                     </div>
@@ -113,37 +113,54 @@
                                                     <label>Minh chứng</label>
                                                     <input name="file" id="exampleFile" type="file" class="form-control-file">
                                                     @*@Html.EditorFor(model => model.minhChung, new
-                                               { htmlAttributes = new { @class = "form-control", @name = "file", @id = "exampleFile", @type = "file" } })*@
+                                            { htmlAttributes = new { @class = "form-control", @name = "file", @id = "exampleFile", @type = "file" } })*@
 
                                                 </th>
                                             </tr>
                                         </table>
                                         @Html.HiddenFor(model => model.trangThai)
-                          
+
                                     </form>
                                     <div class="text-center" style="margin-top:20px">
                                         <button type="submit" class="genric-btn primary-border radius"> Đăng ký liên kết</button>
                                     </div>
                                 </div>
                             </div>
-
-
                         }
                     </div>
-
                 </div>
-
+                <hr />
+                <h2>Lưu ý</h2>
+                <table class="mt-10">
+                    <tr>
+                        <th style="width:400px">
+                            <div>
+                                <a>Điền đẩy đủ các thông tin ở trên</a>
+                            </div>
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                <a>Số điện thoại : từ 8-12 số</a>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="width:400px">
+                            <div>
+                                <a>File minh chứng thuộc định dạng: pdf, doc, docx , png, jgp </a>
+                            </div>
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                <a>Địa chỉ: tại thành phố Đà Nẵng</a>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
 </section>
 
-
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-
-
+ 
 

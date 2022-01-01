@@ -126,7 +126,7 @@ CREATE TABLE ChiTietPhanCong(
 	tgXacNhan		DATE DEFAULT GETDATE()null,
 	tgThucHien		DATETIME not null,
 	phanHoi			NVARCHAR(MAX) ,
-	trangThai		NVARCHAR(50)
+	trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
 
@@ -137,9 +137,10 @@ CREATE TABLE chiTietDHM(
 	idDVLK		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DonViLienKet(IdDVLK) not null,
 	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,
 	ngayDK		DATE  DEFAULT GETDATE()null,
-	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) )
+	trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
+
 
 --Table 13 DotToChucHM
 CREATE TABLE DotToChucHM(
@@ -153,7 +154,7 @@ CREATE TABLE DotToChucHM(
 	ngayBatDauDK	DATE not null,	
 	ngayKetThucDK	DATE not null,
 	ngayToChuc		DATETIME not null,
-    trangThai	   bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
+    trangThai		NVARCHAR(50)
 )
 GO
 
@@ -379,8 +380,8 @@ GO
 		(IdTTCN,idQuyen,userName,password,hoTen,CCCD,soDT,ngaySinh,soLanHM,nhomMau,gioiTinh,trangThai,diaChi,ngheNghiep,trinhDo,coQuanTH )
 VALUES	('TT01','Q01', 'admin@gmail.com','4297f44b13955235245b2497399d7a93',N'Trần Võ Lập','215496444111','0375163333','30/04/2000','','1','','1',N'diaChi',N'ngheNghiep',N'trinhDo',N'coQuanTH'),
 		('TT02','Q02', 'banchidao@gmail.com','4297f44b13955235245b2497399d7a93',N'Ban chỉ đạo','215496444222','0375162222','','1','','','1',N'',N'',N'',N''),
-		('TT03','Q03', 'bvDaKhoa@gmail.com','4297f44b13955235245b2497399d7a93',N'Thành Nam','215496444433','0375164333','','1','','','1',N'',N'',N'',N''),
-		('TT04','Q04', 'donviLK@gmail.com','4297f44b13955235245b2497399d7a93',N'Minh Nhật','215496444221','0375167222','','1','','','1',N'',N'',N'',N''),
+		('TT03','Q04', 'bvDaKhoa@gmail.com','4297f44b13955235245b2497399d7a93',N'Thành Nam','215496444433','0375164333','','1','','','1',N'',N'',N'',N''),
+		('TT04','Q03', 'donviLK@gmail.com','4297f44b13955235245b2497399d7a93',N'Minh Nhật','215496444221','0375167222','','1','','','1',N'',N'',N'',N''),
 		('TT05','Q05', 'nhanvien1@gmail.com','4297f44b13955235245b2497399d7a93',N'Khắc Huy','215496444423','0375564333','','1','','','1',N'',N'',N'',N''),
 		('TT06','Q06', 'nguoidung1@gmail.com','4297f44b13955235245b2497399d7a93',N'Nam Cường','215496644228','0375162522','','1','','','1',N'',N'',N'',N''),
 		('TT07','Q06', 'nguoidung2@gmail.com','4297f44b13955235245b2497399d7a93',N'Tiến Đạt','215496844439','0375164933','','1','','','1',N'',N'',N'',N''),
@@ -491,8 +492,8 @@ GO
 --B11
 INSERT INTO dbo.DotToChucHM
 		(IdDTCHM, idChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai)
-VALUES	('DTC01','CT01',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021','1'),
-		('DTC02','CT02',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021','1')	
+VALUES	('DTC01','CT01',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021',N'Chờ duyệt'),
+		('DTC02','CT02',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021',N'Chờ duyệt')	
 GO
 
 --B12

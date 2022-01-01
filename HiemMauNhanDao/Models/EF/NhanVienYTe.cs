@@ -39,10 +39,10 @@ namespace Models.EF
 
         public virtual BenhVien BenhVien { get; set; }
 
-        public virtual ChucVu ChucVu { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
+
+        public virtual ChucVu ChucVu { get; set; }
 
         public virtual DSNVTH DSNVTH { get; set; }
 

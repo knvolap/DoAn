@@ -21,10 +21,9 @@ namespace Models.EF
         public string IdDHM { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(150)]
         public string TenDHM { get; set; }
 
-        [StringLength(150)]
         public string noiDung { get; set; }
 
         [Column(TypeName = "date")]

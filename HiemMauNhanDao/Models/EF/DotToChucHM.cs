@@ -1,4 +1,4 @@
-namespace Models.EF
+﻿namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,6 @@ namespace Models.EF
         public DotToChucHM()
         {
             DSNVTHs = new HashSet<DSNVTH>();
-            KetQuaHienMaus = new HashSet<KetQuaHienMau>();
             PhieuDKHMs = new HashSet<PhieuDKHM>();
         }
 
@@ -30,7 +29,6 @@ namespace Models.EF
         public string tenDotHienMau { get; set; }
 
         [Required]
-        [StringLength(300)]
         public string noiDung { get; set; }
 
         [Required]
@@ -41,6 +39,7 @@ namespace Models.EF
         [StringLength(150)]
         public string diaChiToChuc { get; set; }
 
+        [Range(1, Int32.MaxValue, ErrorMessage = "vui lòng nhập số từ 1")]
         public int soLuong { get; set; }
 
         [Column(TypeName = "date")]
@@ -55,6 +54,7 @@ namespace Models.EF
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime ngayToChuc { get; set; }
 
+
         [StringLength(50)]
         public string trangThai { get; set; }
 
@@ -62,9 +62,6 @@ namespace Models.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DSNVTH> DSNVTHs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KetQuaHienMau> KetQuaHienMaus { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuDKHM> PhieuDKHMs { get; set; }

@@ -1,7 +1,7 @@
 ﻿@model Models.EF.DotToChucHM
 
 @{
-    ViewBag.Title = "ChiTietDTCHM";
+    ViewBag.Title = "Chi tiết đợt tổ chức";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -38,7 +38,7 @@
                             <li><a href="#"><i class="far fa-comments"></i> Ngày đếm ngược</a></li>
                         </ul>
                         <div class="quote-wrapper">
-                            Nội dung
+                            Thông tin
                             <div class="quotes">
 
                                 <table>
@@ -62,6 +62,17 @@
                                             <a>Địa chỉ tổ chức: </a>  @Html.DisplayFor(model => model.diaChiToChuc)
                                         </th>
                                     </tr>
+
+                                    <tr>
+                                        <th>
+                                            <a>Đơn vị chịu trách nhiệm: </a> Bệnh viện Đa Khoa
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <a>Liên hệ: </a>0999 8000
+                                        </th>
+                                    </tr>
                                     <tr>
                                         <th>
                                             <a>Thời gian đăng ký: </a>
@@ -71,17 +82,6 @@
                                         <th>
                                             <a>Từ ngày: </a> @Html.DisplayFor(model => model.ngayBatDauDK)
                                             <a>- Đến ngày: </a> @Html.DisplayFor(model => model.ngayKetThucDK)
-                                        </th>
-
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <a>Đơn vị chịu trách nhiệm: </a> Bệnh viện Đa Khoa
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <a>Liên hệ: </a>0999 8000
                                         </th>
                                     </tr>
                                 </table>

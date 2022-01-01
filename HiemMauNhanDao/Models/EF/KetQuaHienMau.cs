@@ -21,10 +21,6 @@ namespace Models.EF
 
         [Required]
         [StringLength(20)]
-        public string idDTCHM { get; set; }
-
-        [Required]
-        [StringLength(20)]
         public string idPDKHM { get; set; }
 
         [StringLength(10)]
@@ -73,8 +69,6 @@ namespace Models.EF
 
         [StringLength(50)]
         public string trangThai { get; set; }
-
-        public virtual DotToChucHM DotToChucHM { get; set; }
 
         public virtual PhieuDKHM PhieuDKHM { get; set; }
 
