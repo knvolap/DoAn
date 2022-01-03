@@ -182,10 +182,14 @@ CREATE TABLE PhieuDKHM(
 	biSot			BIT  not null,
 	dTTT			BIT  not null,
 	dangMangThai	BIT  not null,
+	ungThu		bit DEFAULT '0' CHECK ( ungThu IN ( '0', '1' ) ),
+	hienMau		    BIT DEFAULT '1' CHECK ( hienMau IN ( '0', '1' ) )  not null,
 	xacNhan			BIT  not null
 
 )
 GO
+
+ 
 
 --Table 14 KetQuaHienMau
 CREATE TABLE KetQuaHienMau(
@@ -202,16 +206,15 @@ CREATE TABLE KetQuaHienMau(
 	luongMauHien	int  null,
 	hienMau			BIT  null,
 	noiDung			NVARCHAR(150)  NULL,
-	HST				int NULL,
-	HBV				int NULL,
-	MSD				int NULL,
+	HST				NVARCHAR (20) ,
+	HBV				NVARCHAR (20) ,
+	MSD				NVARCHAR (20) ,
 	phanUng			NVARCHAR (50) ,	
 	thoiGianLayMau	DATETIME null,
 	ghiChu			NVARCHAR (50) ,
 	trangThai		NVARCHAR(50) ---Cập nhật xong, đang cập nhật , chưa cập nhật
 )
 GO
-
 
 --Table 14 DanhSachNhanVienThucHien
 CREATE TABLE DSNVTH(
@@ -350,13 +353,15 @@ GO
 
 -- BẢNG 13--
 ALTER TABLE KetQuaHienMau
-	ADD CONSTRAINT CHECK_KQHM_HST		CHECK (HST >=1 ),
-		CONSTRAINT CHECK_KQHM_HBV		CHECK (HBV >=1 ),
-		CONSTRAINT CHECK_KQHM_MSD		CHECK (MSD >=1 ),
+	ADD 
 		CONSTRAINT CHECK_KQHM_hienMau		default 0 for hienMau	,
 		CONSTRAINT CHECK_KQHM_canNang		CHECK (canNang	 >=1 )
 	--	CONSTRAINT CK_KQHM_TrangThai	check(trangThai in ( N'Đang cập nhật' ,N'Đã cập nhật', N'Chưa cập nhật' ))		
 GO
+
+
+
+
 -- BẢNG 14--
 ALTER TABLE DSNVTH
 	ADD CONSTRAINT FK_DSNVTH_idDotHienMau	FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM)ON DELETE CASCADE ON UPDATE CASCADE		

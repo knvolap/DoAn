@@ -36,6 +36,8 @@ namespace Models.EF
 
         public bool sutCan { get; set; }
 
+        public bool hienMau { get; set; }
+
         public bool noiHach { get; set; }
 
         public bool chamCu { get; set; }
@@ -58,6 +60,7 @@ namespace Models.EF
 
         public bool dTTT { get; set; }
 
+        public bool ungThu { get; set; }
         public bool dangMangThai { get; set; }
 
         public bool xacNhan { get; set; }

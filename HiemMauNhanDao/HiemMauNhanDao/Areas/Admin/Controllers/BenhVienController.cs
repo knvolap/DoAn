@@ -31,11 +31,8 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
                 {
                     filesBV.Add(new BenhVien { minhChung = Path.GetFileName(strfile) });
 
-                }
-                //return View(filesBV);
-            } 
-              
-
+                }            
+            }             
             return View(model);
         }
 

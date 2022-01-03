@@ -479,9 +479,11 @@
     <Compile Include="Controllers\DkDHMController.cs" />
     <Compile Include="Controllers\DVLKController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KetQuaHienMauController.cs" />
     <Compile Include="Controllers\LoginClientController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\NhanVienYTeController.cs" />
+    <Compile Include="Controllers\PhieuDKHMController.cs" />
     <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -552,6 +554,11 @@
     <Content Include="Views\DotToChucHM\Create.cshtml" />
     <Content Include="Views\DotToChucHM\Edit.cshtml" />
     <Content Include="Views\DotToChucHM\_leftMenu2.cshtml" />
+    <Content Include="Views\KetQuaHienMau\Index.cshtml" />
+    <Content Include="Views\PhieuDKHM\Create.cshtml" />
+    <Content Include="Views\KetQuaHienMau\_leftMenu2.cshtml" />
+    <Content Include="Views\KetQuaHienMau\Create.cshtml" />
+    <Content Include="Views\KetQuaHienMau\TTDK.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

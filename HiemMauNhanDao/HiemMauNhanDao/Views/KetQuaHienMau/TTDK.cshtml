@@ -1,0 +1,419 @@
+﻿@model Models.ViewModel.ChiTietPDKHvsKQHMView
+
+@{
+    ViewBag.Title = "TTDK";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TTDK</h2>
+
+<div>
+    <h4>ChiTietPDKHvsKQHMView</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdTTCN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdTTCN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCCD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCCD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngheNghiep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngheNghiep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trinhDo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trinhDo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soLanHM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soLanHM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.coQuanTH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coQuanTH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idPDKHM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idPDKHM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idDTCHM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idDTCHM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.benhKhac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.benhKhac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tgDuKien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tgDuKien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sutCan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sutCan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hienMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hienMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.noiHach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.noiHach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chamCu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chamCu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.xamMinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.xamMinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.duocTruyenMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duocTruyenMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.suDungMatuy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.suDungMatuy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NguyCoHIV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguyCoHIV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QHTD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QHTD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tiemVacXin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tiemVacXin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dungTKS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dungTKS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.biSot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.biSot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dTTT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dTTT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dangMangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dangMangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.xacNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.xacNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdKQHM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdKQHM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nhomMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nhomMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nguoiKham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoiKham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nguoiXN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoiXN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nguoiLayMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoiLayMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.canNang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.canNang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.machMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.machMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tinhTrangLS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tinhTrangLS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.huyetAp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.huyetAp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.luongMauHien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.luongMauHien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.xnhienMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.xnhienMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.noiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.noiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HST)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HST)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HBV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HBV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phanUng)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phanUng)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.thoiGianLayMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.thoiGianLayMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ghiChu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ghiChu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trangThai2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangThai2)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

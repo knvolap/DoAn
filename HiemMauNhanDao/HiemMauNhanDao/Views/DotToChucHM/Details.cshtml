@@ -5,98 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>chi tieets</h2>
-<p>Chưa set chỉ được chỉnh sửa trướckhi được duyệt</p>
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            id DHM
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.chiTietDHM.idDHM)
-        </dd>
-
-        <dt>
-            ten dot hien mau
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tenDotHienMau)
-        </dd>
-
-        <dt>
-            noi dung
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.noiDung)
-        </dd>
-
-        <dt>
-            doi tuong tham gia
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.doiTuongThamGia)
-        </dd>
-
-        <dt>
-            dia chi to chuc
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.diaChiToChuc)
-        </dd>
-
-        <dt>
-            so luong
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.soLuong)
-        </dd>
-
-        <dt>
-            ngay bat dau dang ky
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngayBatDauDK)
-        </dd>
-
-        <dt>
-            ngay ket thuc dang ky
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngayKetThucDK)
-        </dd>
-
-        <dt>
-            ngay to chuc
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngayToChuc)
-        </dd>
-
-        <dt>
-            trang thai
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.trangThai)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Trở về", "Index") |
-    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IdDTCHM })
-
-</p>
-
 <section class="breadcrumb_part breadcrumb_bg">
     <div class="container">
         <div class="row">
@@ -128,13 +36,14 @@
                                 <div class="col-lg-12 col-md-8">
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.IdDTCHM)
                                     <form action="#">
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Tên đợt hiến máu </a>
-                                                        @Html.EditorFor(model => model.chiTietDHM.idDHM, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+                                                        @Html.EditorFor(model => model.tenDotHienMau, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
                                                         @*  @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
 
                                                     </div>
@@ -151,7 +60,7 @@
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Số lượng </a>
-                                                        @Html.EditorFor(model => model.soLuong, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })                                                 
+                                                        @Html.EditorFor(model => model.soLuong, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
@@ -181,13 +90,13 @@
 
                                         <div class="mt-10" style="margin-right:15px">
                                             <a>Nội dung</a>
-                                            @Html.EditorFor(model => model.noiDung, new { htmlAttributes = new { @class = "single-textarea", @readonly = "readonly" } })                                                                              
+                                            @Html.EditorFor(model => model.noiDung, new { htmlAttributes = new { @class = "single-textarea", @readonly = "readonly" } })
                                         </div>
                                         <div class="mt-10" style="margin-right:15px">
                                             <a>Địa chỉ tổ chức</a>
-                                            @Html.EditorFor(model => model.diaChiToChuc, new { htmlAttributes = new { @class = "single-input" } })                                           
+                                            @Html.EditorFor(model => model.diaChiToChuc, new { htmlAttributes = new { @class = "single-input" } })
                                         </div>
-                                    </form>                                     
+                                    </form>
                                 </div>
                             </div>
                             <table class="mt-10">

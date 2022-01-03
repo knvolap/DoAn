@@ -36,6 +36,8 @@
                                 <div class="col-lg-12 col-md-8">
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                                    @* @Html.EditorFor(model => model.idChiTietDHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })*@
                                     <form action="#">
                                         <table class="mt-10">
                                             <tr>
@@ -76,9 +78,9 @@
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
-                                                        <a>Đối tượng tham gia</a>
-                                                        @Html.EditorFor(model => model.doiTuongThamGia, new { htmlAttributes = new { @class = "single-input" } })
-                                                        @* @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
+                                                        <a>Mã chi tiết</a>
+                                                        @Html.DropDownList("IdChiTietDHM", ViewBag.IdChiTietDHM as SelectList, htmlAttributes: new { @class = "single-input" })
+                                                        @*  @Html.DropDownListFor(model => model.idChiTietDHM, null, new { htmlAttributes = new { @class = "single-input" } })*@
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
@@ -87,7 +89,11 @@
                                                 </th>
                                             </tr>
                                         </table>
-
+                                        <div class="mt-10" style="margin-right:15px">
+                                            <a>Đối tượng tham gia</a>
+                                            @Html.EditorFor(model => model.doiTuongThamGia, new { htmlAttributes = new { @class = "single-input" } })
+                                            @* @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
+                                        </div>
                                         <div class="mt-10" style="margin-right:15px">
                                             <a>Nội dung</a>
                                             <textarea class="single-textarea" @Html.TextBoxFor(model => model.noiDung)></textarea>
@@ -99,27 +105,50 @@
                                             @*@Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
                                         </div>
                                     </form>
-                                    <div class="text-center " style="margin-top:20px">
-                                        <input type="submit" value="Đăng bài" class="genric-btn info-border radius" />
-                                    </div>
+                                    @{
+                                        var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+                                    }
+                                    @if (session.AuthorID == "Q03" || session.AuthorID == "Q04")
+                                    {
+                                        <div class="text-center " style="margin-top:20px">
+                                            <input type="submit" value="Đăng bài" class="genric-btn info-border radius" />
+                                        </div>
+                                    }
+
                                 </div>
-                            </div>
-                            <table class="mt-10">
-                                <tr>
-                                    <th style="width:400px">
-                                        <a>SA: giờ buổi sáng </a>
-                                        
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th style="width:400px">                                     
-                                        <a>CH: giờ buổi chiều</a>
-                                    </th>
-                                </tr>
-                            </table>
+                            </div>                          
                         }
                     </div>
                 </div>
+                <hr />
+                <h2>Lưu ý</h2>
+                <table class="mt-10">
+                    <tr>
+                        <th style="width:400px">
+                            <div>
+                                SA: <a> giờ buổi sáng</a>
+                            </div>
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                Ngày bắt đầu < ngày kết thúc < Ngày triển khai
+                            </div>
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="width:400px">
+                            <div>
+                                CH : <a>giờ buổi chiều </a>                             
+                            </div>
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                Chỉ được chỉnh sửa trước ngày triển khai  
+                            </div>
+                        </th>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

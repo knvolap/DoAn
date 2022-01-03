@@ -5,96 +5,146 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IdDTCHM)
-
-        <div class="form-group">
-            <label>Tên đợt hiến máu</label>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.tenDotHienMau, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>ID chi tiết ĐHM</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.idChiTietDHM, null, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.chiTietDHM, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label>Nội dung</label>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.noiDung, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.noiDung, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>ĐỐi tượng tham gia</label>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.doiTuongThamGia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.doiTuongThamGia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Địa chỉ tổ chức</label>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.diaChiToChuc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.diaChiToChuc, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Sôs lượng</label>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.soLuong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.soLuong, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Ngày bắt đầu DK</label>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ngayBatDauDK, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ngayBatDauDK, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Ngày kết thúc DK</label>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ngayKetThucDK, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ngayKetThucDK, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Ngày tổ chức</label>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ngayToChuc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ngayToChuc, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-success" />
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Bệnh viện</h2>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
+</section>
 
-<div>
-    @Html.ActionLink("Trở về", "Index")
-</div>
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                @RenderPage("_leftMenu2.cshtml")
+            </div>
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <h3 class="mb-30">Cập nhật đợt tổ chức</h3>
+                    <div class=" ">
+                        <hr />
+                        @using (Html.BeginForm())
+                        {
+                            <div class="row">
+                                <div class="col-lg-12 col-md-8">
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.IdDTCHM)
+                                    @Html.HiddenFor(model => model.idChiTietDHM)
+                                   
+                                    <form action="#">
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <a>Cập nhật đợt tổ chức</a>
+                                                        @Html.EditorFor(model => model.tenDotHienMau, new { htmlAttributes = new { @class = "form-control " } })
+                                                        @*  @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
+
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <a>Ngày bắt đầu</a>
+                                                    @Html.EditorFor(model => model.ngayBatDauDK, new { htmlAttributes = new { @class = "form-control " } })
+                                                </th>
+                                            </tr>
+
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <a>Số lượng </a>
+                                                        @Html.EditorFor(model => model.soLuong, new { htmlAttributes = new { @class = "form-control " } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <a>Ngày kết thúc</a>
+                                                    @Html.EditorFor(model => model.ngayKetThucDK, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+
+                                                </th>
+                                            </tr>
+
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <a>Mã chi tiết</a>
+                                                        @Html.DropDownList("IdChiTietDHM", ViewBag.IdChiTietDHM as SelectList, htmlAttributes: new { @class = "single-input" })
+                                                        @*  @Html.DropDownListFor(model => model.idChiTietDHM, null, new { htmlAttributes = new { @class = "single-input" } })*@
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <a>Ngày triển khai </a>
+                                                    @Html.EditorFor(model => model.ngayToChuc, new { htmlAttributes = new { @class = "single-input", @type = "datetime-local", @for = "datepicker", @name = "ngayToChuc" } })
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <div class="mt-10" style="margin-right:15px">
+                                            <a>Đối tượng tham gia</a>
+                                            @Html.EditorFor(model => model.doiTuongThamGia, new { htmlAttributes = new { @class = "single-input" } })
+                                            @* @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
+                                        </div>
+                                        <div class="mt-10" style="margin-right:15px">
+                                            <a>Nội dung</a>
+                                            <textarea class="single-textarea" @Html.TextBoxFor(model => model.noiDung)></textarea>
+                                            @* @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
+                                        </div>
+                                        <div class="mt-10" style="margin-right:15px">
+                                            <a>Địa chỉ tổ chức</a>
+                                            @Html.EditorFor(model => model.diaChiToChuc, new { htmlAttributes = new { @class = "single-input" } })
+                                            @*@Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
+                                        </div>
+                                    </form>
+                                    <div class="text-center " style="margin-top:20px">
+                                        <input type="submit" value="Lưu" class="genric-btn info-border radius" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <hr />
+                <h2>Lưu ý</h2>
+                <table class="mt-10">
+                    <tr>
+                        <th style="width:400px">
+                            <div>
+                                SA: <a> giờ buổi sáng</a>
+                            </div>
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                Ngày bắt đầu < ngày kết thúc < Ngày triển khai
+                            </div>
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="width:400px">
+                            <div>
+                                CH : <a>giờ buổi chiều </a>
+                            </div>
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                Chỉ được chỉnh sửa trước ngày triển khai
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+

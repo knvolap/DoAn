@@ -1,5 +1,6 @@
-﻿
-@model IEnumerable<Models.EF.DotToChucHM>
+﻿@model PagedList.IPagedList<Models.EF.DotToChucHM>
+@using PagedList.Mvc
+@using System.Data;
 
 @{
     ViewBag.Title = "Đợt tổ chức";
@@ -19,6 +20,12 @@
         </div>
     </div>
 </section>
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
 
 <section class="blog_area section_padding">
     <div class="container">
@@ -31,7 +38,14 @@
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="col-lg-12 col-md-8">
                     <h3 class="mb-30">Danh sách đợt tổ chức </h3>
-
+                    <div class="panel-body">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+                    </div>
                     <hr>
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -45,20 +59,20 @@
                                                    class="single-input">
                                         </th>
                                         @*<th class="col-lg-6">
-                                                <div>
-                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                                    <div class="form-select" id="default-select_1">
-                                                        <select>
-                                                            <option value=" 1">Đợt tổ chức</option>
-                                                            <option value="1">Chưa chọn</option>
-                                                            <option value="1">Hiến máu nhân đạo tháng 10</option>
-                                                            <option value="1">Hiến máu nhân đạo tháng 11</option>
-                                                            <option value="1">Hiến máu nhân đạo tháng 12</option>
-                                                            <option value="1">Hiến máu nhân đạo tháng 01</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </th>*@
+                                <div>
+                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                    <div class="form-select" id="default-select_1">
+                                        <select>
+                                            <option value=" 1">Đợt tổ chức</option>
+                                            <option value="1">Chưa chọn</option>
+                                            <option value="1">Hiến máu nhân đạo tháng 10</option>
+                                            <option value="1">Hiến máu nhân đạo tháng 11</option>
+                                            <option value="1">Hiến máu nhân đạo tháng 12</option>
+                                            <option value="1">Hiến máu nhân đạo tháng 01</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </th>*@
                                     </table>
 
                                 </div>
@@ -73,91 +87,108 @@
                         </div>
                     </div>
                     <ul></ul>
-                    <div style="margin-bottom:10px">
-                        <a type="submit" class="genric-btn info radius" href="@Url.Action("Create","DotToChucHM")" style="color:azure">
-                            Đăng bài
-                        </a>
-                    </div>
+                    @{
+                        var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+                    }
+                    @if (session.AuthorID == "Q03" || session.AuthorID == "Q04")
+                    {
+                        <div style="margin-bottom:10px">
+                            <a type="submit" class="genric-btn info radius" href="@Url.Action("Create", "DotToChucHM")" style="color:azure">
+                                Đăng bài
+                            </a>
+                        </div>
+                    }
+                        <div class="main-card mb-3 card">
 
-                    <div class="main-card mb-3 card">
+                            <table class="mb-0 table table-hover table table-bordered">
+                                <tr class="text-center">
+                                    <th>
+                                        STT
+                                    </th>
+                                    <th>
+                                        Tên đợt tổ chức
+                                    </th>
 
-                        <table class="mb-0 table table-hover table table-bordered">
-                            <tr class="text-center">
-                                <th>
-                                    STT
-                                </th>
-                                <th>
-                                    Mã đợt
-                                </th>
-                                <th>
-                                    Tên đợt tổ chức
-                                </th>
-
-                                <th>
-                                    Địa chỉ
-                                </th>
-                                <th>
-                                    Số lượng
-                                </th>
-                                <th>
-                                    Trạng thái
-                                </th>
-                                <th>
-                                    Chức năng
-                                </th>
-                            </tr>
-                            @{ var i = 1;}
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @i
-                                    </td>
-                                    <td>
-                                        @item.IdDTCHM
-                                    </td>
-                                    <td>
-                                        @item.tenDotHienMau
-                                    </td>
-                                    <td>
-                                        @item.diaChiToChuc
-                                    </td>
-                                    <td>
-                                        @item.soLuong
-                                    </td>
-                                    <td>
-                                        @item.trangThai
-                                    </td>
-                                    @*<td>
-                                            <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                                @(item.trangThai == true ? "Active" : "Blocked")
-                                            </button>
-                                        </td>*@
-                                    @*  @item.tgKetThuc*@
-                                    <td>
-
-                                        <div>
-                                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "EditBV", new { id = item.IdDTCHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <th>
+                                        Địa chỉ
+                                    </th>
+                                    <th>
+                                        Số lượng
+                                    </th>
+                                    <th>
+                                        Trạng thái
+                                    </th>
+                                    <th>
+                                        Chức năng
+                                    </th>
                                 </tr>
-                                i++;
-                            }
-                        </table>
-                        <ul></ul>
-                        @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))*@
+                                @{ var i = 1;}
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @item.tenDotHienMau
+                                        </td>
+                                        <td>
+                                            @item.diaChiToChuc
+                                        </td>
+                                        <td>
+                                            @item.soLuong
+                                        </td>
+                                        <td>
+                                            @item.trangThai
+                                        </td>
+                                        @*<td>
+                                <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                    @(item.trangThai == true ? "Active" : "Blocked")
+                                </button>
+                            </td>*@
+                                        @*  @item.tgKetThuc*@
+                                        <td>
 
+                                            <div>
+                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdDTCHM })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                        </div>
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV, @class = "page-link" }))
+                            </ul>
+                        </nav>
+                        @*<nav class="blog-pagination justify-content-center d-flex">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a href="#" class="page-link" aria-label="Previous">
+                            <i class="ti-angle-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link">1</a>
+                    </li>
+                    <li class="page-item active">
+                        <a href="#" class="page-link">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link" aria-label="Next">
+                            <i class="ti-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>*@
                     </div>
-                </div>
-
-                <div class="text-center " style="margin-top:20px">
-                    <a href="/Client/NhanVienYTe/EditKQHM" class="genric-btn primary-border radius" href="#">Chi tiết cập nhật</a>
-                </div>
             </div>
         </div>
     </div>
@@ -165,32 +196,3 @@
 
 
 
-
-@*@foreach (var item in Model)
-    {
-        <table>
-            <tr>
-                <td>
-                    Đợt tổ chức:
-                    @Html.DisplayFor(modelItem => item.tenDotHienMau)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Nội dung:
-                    @Html.DisplayFor(modelItem => item.noiDung)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Địa chỉ tổ chức:
-                    @Html.DisplayFor(modelItem => item.diaChiToChuc)
-                </td>
-            </tr>
-            <tr><td>Thêm các thông tin khác vào bỏ bootstrap lại cho đẹp</td></tr>
-            <tr><td>@Html.ActionLink("Xem chi tiết", "Details", new { id = item.IdDTCHM })</td></tr>
-            <tr><td><a href="@Url.Action("Create","PhieuDKHM", new { id = item.IdDTCHM})">Đăng kýs</a></td></tr>
-            <tr><td>@Html.ActionLink("Đăng ký", "Create", new { id = item.IdDTCHM })</td></tr>
-        </table>
-        <br />
-    }*@

@@ -1,4 +1,6 @@
-﻿using Models.EF;
+﻿using HiemMauNhanDao.Areas.Admin.Controllers;
+using Models.EF;
+using Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,14 +11,21 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class DotToChucHMController : Controller
+    public class DotToChucHMController : BaseController
     {
         private DbContextHM db = new DbContextHM();
-
-        public ActionResult Index()
+        DotToChucHMServices _DTCHM = new DotToChucHMServices();
+        //public ActionResult Index()
+        //{
+        //    var dotToChucHMs = db.DotToChucHMs.Include(d => d.chiTietDHM);
+        //    return View(dotToChucHMs.ToList());
+        //}
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
-            var dotToChucHMs = db.DotToChucHMs.Include(d => d.chiTietDHM);
-            return View(dotToChucHMs.ToList());
+            var dotToChucHMs = new DotToChucHMServices();
+            var model = dotToChucHMs.ListAllDTCHM(searchString, page, pageSize);
+            ViewBag.SearchStringDTCHM = searchString;
+            return View(model);
         }
 
         public ActionResult Details(string id)
@@ -55,8 +64,7 @@ namespace HiemMauNhanDao.Controllers
 
                 return RedirectToAction("Index");
             }
-
-            ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "IdChiTietDHM", dotToChucHM.idChiTietDHM);
+            ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idChiTietDHM", dotToChucHM.idChiTietDHM);
             return View(dotToChucHM);
         }
 
@@ -71,7 +79,7 @@ namespace HiemMauNhanDao.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idDHM", dotToChucHM.idChiTietDHM);
+            ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idChiTietDHM", dotToChucHM.idChiTietDHM);
             return View(dotToChucHM);
         }
 
@@ -89,28 +97,20 @@ namespace HiemMauNhanDao.Controllers
             return View(dotToChucHM);
         }
 
+        
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                _DTCHM.Delete(id);
+                SetAlert("Xóa thành công", "success");
+                return RedirectToAction("Index");
             }
-            DotToChucHM dotToChucHM = db.DotToChucHMs.Find(id);
-            if (dotToChucHM == null)
+            else
             {
-                return HttpNotFound();
+                SetAlert("Xóa thất bại", "error");
+                return RedirectToAction("Index");
             }
-            return View(dotToChucHM);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            DotToChucHM dotToChucHM = db.DotToChucHMs.Find(id);
-            db.DotToChucHMs.Remove(dotToChucHM);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

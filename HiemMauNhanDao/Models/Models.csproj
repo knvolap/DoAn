@@ -151,11 +151,14 @@
     <Compile Include="Services\DKTKServices.cs" />
     <Compile Include="Services\DonViLienKetServices.cs" />
     <Compile Include="Services\DotHienMauServices.cs" />
+    <Compile Include="Services\DotToChucHMServices.cs" />
+    <Compile Include="Services\KetQuaHienMauServices.cs" />
     <Compile Include="Services\NguoiDungServices.cs" />
     <Compile Include="Services\NhanVienYTeServices.cs" />
     <Compile Include="Services\PhieuDKHMServices.cs" />
     <Compile Include="Services\QuanLyTKServices.cs" />
     <Compile Include="Services\TCDHMServices.cs" />
+    <Compile Include="ViewModel\ChiTietPDKHvsKQHMView.cs" />
     <Compile Include="ViewModel\DotHienMauView.cs" />
     <Compile Include="ViewModel\NhanVienvaDVLKView.cs" />
     <Compile Include="ViewModel\NhanVienView.cs" />

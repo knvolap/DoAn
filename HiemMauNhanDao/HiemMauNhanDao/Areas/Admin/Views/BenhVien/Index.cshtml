@@ -117,7 +117,7 @@
                     <td>
                         @item.diaChi
                     </td>
-                    <td class ="text-center">
+                    <td class="text-center">
                         @if (@item.trangThai == true)
                         {
                             <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
@@ -130,8 +130,8 @@
                                 @(item.trangThai == false ? "Khóa": "Hoạt động"  )
                             </button>
                         }
-                        </td>
-                    <td class ="text-center">
+                    </td>
+                    <td class="text-center">
                         <div class="mb-2 mr-2 dropright btn-group">
                             <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                             <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
@@ -146,11 +146,11 @@
                         @*  @Html.ActionLink("Chi tiết", "Details", new { id = item.IdBenhVien })*@
                         @*         @Html.ActionLink("Xóa", "Delete", new { id = item.IdBenhVien })*@
 
-                        </td>
-</tr>
+                    </td>
+                </tr>
                 i++;
             }
-        </table>
+        </table>       
         <ul></ul>
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV }))
     </div>
