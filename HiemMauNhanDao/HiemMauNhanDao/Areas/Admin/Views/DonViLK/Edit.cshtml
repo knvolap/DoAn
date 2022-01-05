@@ -5,140 +5,130 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ThongTinCaNhan</h4>
+<h2>Thông tin người đăng ký</h2>
+@using (Html.BeginForm("Edit", "DonViLK", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="card-body">
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Mã người dùng
-        </dt>
+    <div class="dl-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Mã mã người dùng
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.IdTTCN, new { htmlAttributes = new { @class = "form-control",  @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Tên người đăng ký
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        CCCD
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Số điện thoại
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Email
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Ngày sinh
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Địa chỉ tạm trú
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdTTCN)
-        </dd>
-        <dt>
-            Quyền hạn
-        </dt>
+                    <dt>
+                        Nâng cấp Quyền
+                    </dt>
+                    <dd>
+                        @Html.DropDownList("IdQuyen", ViewBag.IdQuyen as SelectList, htmlAttributes: new {   })
+                    </dd>
+                    <dt>
+                        Trạng thái
+                    </dt>
+                    <dd>
+                        @*@Html.DisplayFor(model => model.Status)*@
+                        @Html.DropDownListFor(modelItem => modelItem.trangThai, new[] {
+                       new SelectListItem { Text = "Hoạt động", Value = "True" },
+                       new SelectListItem { Text = "Không hoạt động", Value = "False" } },
+                        new { @disabled = "disabled" })
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Trình độ
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.trinhDo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Nghề nghiệp
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.ngheNghiep, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Cơ quan
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.coQuanTH, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
 
-        <dd>
-            @Html.DropDownList("IdQuyen", ViewBag.IdQuyen as SelectList, htmlAttributes: new { @class = "form-control" })
-        </dd>
-        <dt>
-            Tên người đăng ký
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.hoTen)
-        </dd>
-        <dt>
-            Tài khoản
-        </dt>
+                    <dt>
+                        Số lần hiến máu
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.soLanHM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Nhóm máu
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </dd>
+                    <dt>
+                        Minh chứng
+                    </dt>
+                    @Html.HiddenFor(model => model.password)
+                    @Html.HiddenFor(model => model.gioiTinh)
 
-        <dd>
-            @Html.DisplayFor(model => model.userName)
-        </dd>
-        <dd>
-            @Html.DisplayFor(model => model.password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CCCD)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CCCD)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.soDT)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.soDT)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ngaySinh)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngaySinh)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.gioiTinh)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gioiTinh)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.diaChi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.diaChi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ngheNghiep)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngheNghiep)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.trinhDo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.trinhDo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.soLanHM)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.soLanHM)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.coQuanTH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.coQuanTH)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nhomMau)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nhomMau)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.trangThai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.trangThai)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                    <lable>Tải file về để xem rõ hơn</lable>
+                </dl>
+            </div>
         </div>
-    }
+    </div>
+    <div class="form-group text-center">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="mt-2 btn btn-primary"> <i class="fa fa-save" type="submit"></i> Cấp quyền</button>
+        </div>
+    </div>
 </div>
+
+}
+<ul></ul>
+<button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+    @Html.ActionLink("Quay lại danh sách", "Index", new { @class = "mb-2 mr-2 btn btn-success" })
+</button>

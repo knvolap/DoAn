@@ -25,11 +25,13 @@ namespace HiemMauNhanDao.Controllers
         public ActionResult ViewNVYT(string searchString1, int page = 1, int pageSize = 10)
         {
             var viewNVYT = new NhanVienYTeServices();
-            var model = viewNVYT.ListAllPageTKNV(searchString1, page, pageSize);
+            var model = viewNVYT.GetListNVYT(searchString1, page, pageSize);
             if (!string.IsNullOrEmpty(searchString1))
             {
-                ViewBag.SearchString1 = searchString1;
+                ViewBag.SearchStringNV = searchString1;
             }
+            ViewBag.idChucVu = new SelectList(db.ChucVus, "IdChucVu", "TenChucVu");
+            ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien");
             return View(model);
         }
 

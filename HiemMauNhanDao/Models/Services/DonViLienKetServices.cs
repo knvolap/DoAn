@@ -60,26 +60,30 @@ namespace Models.Services
             return db.DonViLienKets.Where(s => s.IdDVLK.CompareTo(id) == 0).SingleOrDefault();
         }
         //Sửa
-        public void SuaTKDVLK(NhanVienvaDVLKView thongTinCaNhan, string id)
+        public void SuaTKDVLK(ThongTinCaNhan thongTinCaNhan, string id)
         {
             ThongTinCaNhan tk = GetByIdTTCN(thongTinCaNhan.IdTTCN);
             var query = from dv in db.DonViLienKets
                         join nv in db.ThongTinCaNhans on dv.idTTCN equals nv.IdTTCN
                         where nv.IdTTCN == id
                         select new { dv, nv };
-            var result = query.Select(x => new NhanVienvaDVLKView()
+            var result = query.Select(x => new ThongTinCaNhan()
             {
                 IdTTCN = x.nv.IdTTCN,
                 idQuyen = x.nv.idQuyen,
                 hoTen = x.nv.hoTen,
                 CCCD = x.nv.CCCD,
-                IdDVLK = x.dv.IdDVLK,
-                TenDonVi = x.dv.TenDonVi,
-                diaChi = x.dv.diaChi,
-                Email = x.dv.Email,
-                soDT = x.dv.soDT,
-                minhChung = x.dv.minhChung,
-                trangThai = x.dv.trangThai
+                gioiTinh=x.nv.gioiTinh,
+                diaChi=x.nv.diaChi,
+                userName=x.nv.userName,
+                ngaySinh=x.nv.ngaySinh,
+                coQuanTH=x.nv.coQuanTH,
+                trinhDo=x.nv.trinhDo,
+                soLanHM=x.nv.soLanHM,
+                nhomMau=x.nv.nhomMau,
+                ngheNghiep=x.nv.ngheNghiep,
+                soDT=x.nv.soDT
+               
             }).SingleOrDefault();         
             db.SaveChanges();
         }

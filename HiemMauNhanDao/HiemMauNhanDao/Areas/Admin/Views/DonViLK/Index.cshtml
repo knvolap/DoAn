@@ -56,17 +56,16 @@
 }
 
 
-@*Thêm đợt*@
-<!--<ul></ul>
+<ul></ul>
 <div class="app-header-left">
     <ul class="header-menu nav">
         <li class="btn btn-success">
-            <a href="@Url.Action("CreateBV", "BenhVien")" style="color:white">
-                <i class="nav-link-icon fa fa-edit">   Thêm bệnh viện</i>
+            <a href="@Url.Action("Create", "DonViLK")" style="color:white">
+                <i class="nav-link-icon fa fa-edit">   Thêm đơn vị</i>
             </a>
         </li>
     </ul>
-</div>-->
+</div>
 
 <ul></ul>
 <div class="main-card mb-3 card">
@@ -121,24 +120,13 @@
                     <td class="text-center">
                         <a href="#" class="btn-active" data-id="@item.IdDVLK">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
 
-                        @*@if (@item.trangThai == true)
-                            {
-                                <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                    @(item.trangThai == true ? "Hoạt động" : "Khóa")
-                                </button>
-                            }
-                            @if (@item.trangThai == false)
-                            {
-                                <button class="mb-2 mr-2 btn-transition btn btn-outline-danger">
-                                    @(item.trangThai == false ? "Khóa": "Hoạt động"  )
-                                </button>
-                            }*@
+                        
                     </td>
                     <td class="text-center">
                         <div class="mb-2 mr-2 dropright btn-group">
                             <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                             <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdTTCN })</button>
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Cấp quyền", "Edit", new { id = item.IdTTCN })</button>
                                 <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDVLK })</button>
                                 <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDVLK })</button>
                                 <button type="button" tabindex="0" class="dropdown-item pe-7s-cloud-download  "> @Html.ActionLink("Download", "Download", new { fileName = item.minhChung })</button>

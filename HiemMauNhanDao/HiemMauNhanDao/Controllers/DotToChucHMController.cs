@@ -15,11 +15,10 @@ namespace HiemMauNhanDao.Controllers
     {
         private DbContextHM db = new DbContextHM();
         DotToChucHMServices _DTCHM = new DotToChucHMServices();
-        //public ActionResult Index()
-        //{
-        //    var dotToChucHMs = db.DotToChucHMs.Include(d => d.chiTietDHM);
-        //    return View(dotToChucHMs.ToList());
-        //}
+
+
+        //chỉ hiển thị các đợt tổ chức của bệnh viện
+        //bệnh viện Đa khoa đăng bài thì hiển thị những bài đăng của nhân viên y tế thuộc bệnh viên đa khoa đăng
         public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
             var dotToChucHMs = new DotToChucHMServices();
@@ -28,25 +27,19 @@ namespace HiemMauNhanDao.Controllers
             return View(model);
         }
 
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DotToChucHM dotToChucHM = db.DotToChucHMs.Find(id);
-            if (dotToChucHM == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dotToChucHM);
-        }
+
+        // thời gian bắt đầu và kết thúc nằm trong khoảng tg của đợt hiến máu
+        // admin duyệt bài thì lên trang chủ nằm ở /DTCHM/Index và /DTCHM/ChiTietDTCHM/
+        // Khi hết hạn thì trạng thái tự chuyển thành hết hạn 
+        // hết hạn thì không ấn vào dăng ký được nữa
+        // 
 
         public ActionResult Create()
         {
             ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "IdChiTietDHM");
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -97,7 +90,20 @@ namespace HiemMauNhanDao.Controllers
             return View(dotToChucHM);
         }
 
-        
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DotToChucHM dotToChucHM = db.DotToChucHMs.Find(id);
+            if (dotToChucHM == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dotToChucHM);
+        }
+
         public ActionResult Delete(string id)
         {
             if (ModelState.IsValid)
@@ -123,3 +129,9 @@ namespace HiemMauNhanDao.Controllers
         }
     }
 }
+
+//public ActionResult Index()
+//{
+//    var dotToChucHMs = db.DotToChucHMs.Include(d => d.chiTietDHM);
+//    return View(dotToChucHMs.ToList());
+//}

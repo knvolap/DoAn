@@ -21,6 +21,7 @@ namespace HiemMauNhanDao.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult DKDVLK( )
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
@@ -34,48 +35,40 @@ namespace HiemMauNhanDao.Controllers
         public ActionResult DKDVLK(DonViLienKet donViLienKet, HttpPostedFileBase file)
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-            if (ModelState.IsValid)
-            {
-                if (_dvlk.isExistDVLK(donViLienKet.IdDVLK))
+            
+
+                if (_dvlk.isExistIDTK(donViLienKet.idTTCN))
                 {
                     SetAlert("Bạn đã đăng ký rồi", "error");
-                }
-                else if (_dvlk.isExistIDTK(donViLienKet.idTTCN))
-                {
-                    SetAlert("Bạn đã đăng ký rồi", "error");
-                }
+                    return RedirectToAction("DKDVLK", "DVLK");
+                }              
                 else if (_dvlk.isExistSDT(donViLienKet.soDT))
                 {
                     SetAlert("Số điện thoại đã tồn tại", "error");
+                    return RedirectToAction("DKDVLK", "DVLK");
                 }
                 else if (_dvlk.isExistEmail(donViLienKet.Email))
                 {
                     SetAlert("Email đã tồn tại", "error");
-                }
-                else if (_dvlk.isExistMinhChung(donViLienKet.minhChung))
-                {
-                    SetAlert("Minh chứng đã tồn tại", "error");
-                }
+                    return RedirectToAction("DKDVLK", "DVLK");
+                }               
                 else
                 {                  
                     donViLienKet.idTTCN = session.UserID;
-                    string duongDan = Server.MapPath("~/FileUpLoad/benhvien/");
+                    string duongDan = Server.MapPath("~/FileUpLoad/dvlk/");
                     string fileName = Path.GetFileName(file.FileName);
                     string fullDuongDan = Path.Combine(duongDan, fileName);
-                    file.SaveAs(fullDuongDan);
+                    file.SaveAs(fullDuongDan);                
 
                     _dvlk.AddDVLK(donViLienKet, fileName);
                     db.SaveChanges();
                     SetAlert("Đăng ký thành công", "success");
                     return RedirectToAction("DKDVLK", "DVLK");
                 }
-            }
-            else
-            {
-                SetAlert("Đăng ký thất bại", "error");
+           
+                SetAlert("Đăng ký thất bại!! Vui lòng kiểm tra lại thông tin nhập", "error");
                 return RedirectToAction("DKDVLK", "DVLK");
-            }
-            return View(donViLienKet);
+            
         }
 
 
@@ -110,7 +103,6 @@ namespace HiemMauNhanDao.Controllers
 //        SetAlert("Đăng ký  thất bại", "error");
 //        return RedirectToAction("DKDVLK", "DVLK");
 //    }
-
 //}
 
 //[HttpPost]

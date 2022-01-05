@@ -13,12 +13,23 @@ namespace Models.ViewModel
         public string idQuyen { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
+        public string hoTen { get; set; }     
+        public string CCCD { get; set; }      
+        public string soDT { get; set; }
+        public DateTime? ngaySinh { get; set; }
+        public bool? gioiTinh { get; set; }
+        public string diaChi { get; set; }
+        public string ngheNghiep { get; set; }       
+        public string trinhDo { get; set; }
+        public int? soLanHM { get; set; }    
+        public string coQuanTH { get; set; }     
+        public string nhomMau { get; set; }
 
         public string IdNVYT { get; set; }
         public string idBenhVien { get; set; }
         public string idChucVu { get; set; }
         public string khoa { get; set; }
-        public string trinhDo { get; set; }
+        public string trinhDo2 { get; set; }
         public bool? trangThai { get; set; }
 
     }

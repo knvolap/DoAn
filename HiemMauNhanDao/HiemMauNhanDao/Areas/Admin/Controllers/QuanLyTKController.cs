@@ -69,8 +69,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             {
                 SetAlert("Cập nhật thất bại", "error");
                 return RedirectToAction("Index");
-            }
-          
+            }         
         }
 
         public ActionResult Delete(string id)

@@ -60,7 +60,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
                 }
                 else if (_benhVien.isExistMinhChungBV(benhVien.minhChung))
                 {
-                    SetAlert("Minh chứng bị trùng ", "error");
+                    SetAlert("Minh chứng đã tồn tại", "error");
                     return RedirectToAction("CreateBV", "BenhVien");
                 }
                 else
@@ -93,14 +93,43 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditBV(BenhVien benhVien, HttpPostedFileBase file)
         {            
-           benhVien = _benhVien.GetByIdBenhVien1(benhVien.IdBenhVien);
-           string duongDan = Server.MapPath("~/FileUpLoad/benhvien/");
-           string fileName = Path.GetFileName(file.FileName);
-           string fullDuongDan = Path.Combine(duongDan, fileName);
-           file.SaveAs(fullDuongDan);
-           _benhVien.EditBV(benhVien, fileName);
-           SetAlert("Cập nhật thành công", "success");
-           return RedirectToAction("Index");  
+            benhVien = _benhVien.GetByIdBenhVien1(benhVien.IdBenhVien);
+            if (ModelState.IsValid)
+            {
+                if (_benhVien.isExistEmailBV(benhVien.Email))
+                {
+                    SetAlert("Email đã được đăng ký ", "error");
+                    return RedirectToAction("CreateBV", "BenhVien");
+                }
+                else if (_benhVien.isExistSDTlBV(benhVien.soDTBV))
+                {
+                    SetAlert("Số điện thoại đã được đăng ký ", "error");
+                    return RedirectToAction("CreateBV", "BenhVien");
+                }
+                else if (_benhVien.isExistMinhChungBV(benhVien.minhChung))
+                {
+                    SetAlert("Minh chứng đã tồn tại", "error");
+                    return RedirectToAction("CreateBV", "BenhVien");
+                }
+                else
+                {
+                    string duongDan = Server.MapPath("~/FileUpLoad/benhvien/");
+                    string fileName = Path.GetFileName(file.FileName);
+                    string fullDuongDan = Path.Combine(duongDan, fileName);
+                    file.SaveAs(fullDuongDan);
+
+                    _benhVien.EditBV(benhVien, fileName);
+                    db.SaveChanges();
+                    SetAlert("Thêm thành công", "success");
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                SetAlert("Thêm thất bại!! Vui lòng kiểm tra lại thông tin nhập", "error");
+                return RedirectToAction("CreateBV", "BenhVien");
+            }
+            
         }
 
         private string GetFileTypeByExtension(string fileExtension)

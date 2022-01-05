@@ -23,12 +23,12 @@ namespace Models.Services
             {
                 model = model.Where(x => x.IdDTCHM.Contains(keysearch) || x.tenDotHienMau.Contains(keysearch) || x.noiDung.Contains(keysearch));
             }
-            return model.OrderByDescending(x => x.IdDTCHM).ThenBy(x => x.tenDotHienMau).ToPagedList(page, pageSize);
+            return model.OrderBy(x => x.IdDTCHM).ThenByDescending(x => x.tenDotHienMau).ToPagedList(page, pageSize);
         }
 
         public List<DotToChucHM> GetListDTCHM()
         {
-            return db.DotToChucHMs.ToList();
+            return db.DotToChucHMs.OrderByDescending(x => x.IdDTCHM).ThenBy(x => x.tenDotHienMau).ToList( );             
         }
 
         public DotToChucHM GetByIdTCHM(string id)

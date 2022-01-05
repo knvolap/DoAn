@@ -7,10 +7,6 @@
 }
 
 
-<p>
-    @Html.ActionLink("Tạo mới", "Create")
-</p>
-
 
 
 <section class="breadcrumb_part breadcrumb_bg">
@@ -36,13 +32,13 @@
                 @RenderPage("_leftMenu2.cshtml")
             </div>
 
-            <div class="col-lg-8 mb-5 mb-lg-0">               
+            <div class="col-lg-8 mb-5 mb-lg-0">
                 <h2>Lưu ý</h2>
                 <table class="mt-10">
                     <tr>
                         <th style="width:400px">
                             <div>
-                               Tra cứu bằng thanh tìm kiếm  <a>  </a>
+                                Tra cứu bằng thanh tìm kiếm  <a>  </a>
                             </div>
                         </th>
                         <th class="col-lg-6">
@@ -66,6 +62,12 @@
 
                     </tr>
                 </table>
+                <hr />
+                <p class="genric-btn primary radius" >
+                    @Html.ActionLink("Tạo mới", "Create")
+                </p>
+               
+
             </div>
         </div>
 
@@ -189,11 +191,11 @@
                                         <div>
                                             <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                                             <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Cập nhật kết quả", "Create", new { id = item.idPDKHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Cập nhật kết quả", "Edit", new { id = item.idPDKHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.idPDKHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
+                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Tạo kết quả", "Create", new { id = item.idPDKHM })</button>
+                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Cập nhật kết quả", "Edit", new { id = item.idPDKHM })</button>
+                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.idPDKHM })</button>
+                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
+                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
                                             </div>
                                         </div>
                                     </td>

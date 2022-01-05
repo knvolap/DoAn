@@ -174,23 +174,23 @@
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:735px">
-                                                    <a>Quyền </a>
-                                                    @Html.EditorFor(model => model.idQuyen, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                  @*  <a>Quyền </a>*@
+                                                    @Html.HiddenFor(model => model.idQuyen, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
 
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th style="width:735px">
-                                                    <a>password</a>
-                                                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                   @* <a>password</a>*@
+                                                    @Html.HiddenFor(model => model.password, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
 
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th  >
-                                                    <a>trangThai</a>
-                                                    @Html.DropDownListFor(model => model.trangThai, new[] { new SelectListItem { Text = "Hoạt động", Value = "1" }, new SelectListItem { Text = "Khóa", Value = "0" } },
-                                                       new { @class = "single-input", @disabled = "disabled" })
+                                                   @* <a>trangThai</a>*@
+                                                    @Html.HiddenFor(model => model.trangThai)
+                                                    
                                                 </th>
                                             </tr>
                                         </table>

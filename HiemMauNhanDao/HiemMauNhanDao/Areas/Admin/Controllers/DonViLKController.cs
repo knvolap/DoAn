@@ -39,45 +39,45 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {            
-            var model = _donvi.GetByIdTTCN1(id);           
+            var model = _donvi.GetByIdTTCN(id);           
             ViewBag.IdQuyen = new SelectList(db.Quyens, "IdQuyen", "tenQuyen");
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "IdTTCN,hoTen,gioiTinh,soDT,soLanHM,ngheNghiep,nhomMau,trinhDo,coQuanTH,diaChi,userName,ngaySinh,CCCD,idQuyen,trangThai,password")] ThongTinCaNhan thongTinCaNhan)
+        public ActionResult Edit([Bind(Include = "IdTTCN,hoTen,gioiTinh,soDT,soLanHM,ngheNghiep,nhomMau,trinhDo,coQuanTH,diaChi,userName,ngaySinh,CCCD,idQuyen,trangThai,password")] ThongTinCaNhan model)
         {
             if (ModelState.IsValid)
             {
-                var ttcn = _donvi.GetByIdTTCN(thongTinCaNhan.IdTTCN);
-                ttcn.nhomMau = ttcn.nhomMau;
-                ttcn.trinhDo = ttcn.trinhDo;
-                ttcn.trangThai = ttcn.trangThai;
+                var ttcn = _donvi.GetByIdTTCN(model.IdTTCN);
+                ttcn.IdTTCN = ttcn.IdTTCN;
+                ttcn.CCCD = ttcn.CCCD;
                 ttcn.userName = ttcn.userName;
                 ttcn.password = ttcn.password;
-                ttcn.diaChi = ttcn.diaChi;
-                ttcn.coQuanTH = ttcn.coQuanTH;
-                ttcn.CCCD = ttcn.CCCD;                
-                ttcn.soDT = ttcn.soDT;
-                ttcn.gioiTinh = ttcn.gioiTinh;
                 ttcn.ngaySinh = ttcn.ngaySinh;
+                ttcn.trangThai = ttcn.trangThai;
+                ttcn.coQuanTH = ttcn.coQuanTH;
                 ttcn.ngheNghiep = ttcn.ngheNghiep;
-                ttcn.hoTen = ttcn.hoTen;
+                ttcn.trinhDo = ttcn.trinhDo;
                 ttcn.soLanHM = ttcn.soLanHM;
+                ttcn.soDT = ttcn.soDT;
+                ttcn.CCCD = ttcn.CCCD;
 
-                db.Entry(thongTinCaNhan).State = EntityState.Modified;
+                db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
-                SetAlert("cập nhật thành công", "success");
+
+                //_donvi.UpdateDVLK(taiKhoan);
+                SetAlert("Cấp quyền thành công", "success");
                 return RedirectToAction("Index");
             }
             else
             {
-                SetAlert("cập nhật thất bại", "error");
+                SetAlert("Cấp quyền thất bại", "error");
                 return RedirectToAction("Index");
             }
         }
 
- 
+
         public ActionResult Create( )
         {          
             return View( );
@@ -177,3 +177,35 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         }
     }
 }
+
+//[HttpPost]
+//public ActionResult Edit([Bind(Include = "IdTTCN,hoTen,gioiTinh,soDT,soLanHM,ngheNghiep,nhomMau,trinhDo,coQuanTH,diaChi,userName,ngaySinh,CCCD,idQuyen,trangThai,password")] ThongTinCaNhan thongTinCaNhan)
+//{
+//    if (ModelState.IsValid)
+//    {
+//        var ttcn = _donvi.GetByIdTTCN(thongTinCaNhan.IdTTCN);
+//        ttcn.nhomMau = ttcn.nhomMau;
+//        ttcn.trinhDo = ttcn.trinhDo;
+//        ttcn.trangThai = ttcn.trangThai;
+//        ttcn.userName = ttcn.userName;
+//        ttcn.password = ttcn.password;
+//        ttcn.diaChi = ttcn.diaChi;
+//        ttcn.coQuanTH = ttcn.coQuanTH;
+//        ttcn.CCCD = ttcn.CCCD;
+//        ttcn.soDT = ttcn.soDT;
+//        ttcn.gioiTinh = ttcn.gioiTinh;
+//        ttcn.ngaySinh = ttcn.ngaySinh;
+//        ttcn.ngheNghiep = ttcn.ngheNghiep;
+//        ttcn.hoTen = ttcn.hoTen;
+//        ttcn.soLanHM = ttcn.soLanHM;
+
+//        db.Entry(thongTinCaNhan).State = EntityState.Modified;
+//        db.SaveChanges();
+//        SetAlert("cập nhật thành công", "success");
+//        return RedirectToAction("Index");
+//    }
+//    else
+//    {
+//        SetAlert("cập nhật thất bại", "error");
+//        return RedirectToAction("Index");
+//    }

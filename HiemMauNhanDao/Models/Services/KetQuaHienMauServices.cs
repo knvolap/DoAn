@@ -105,6 +105,19 @@ namespace Models.Services
             return result;
         }
 
-
+        public bool Delete(string id)
+        {
+            try
+            {
+                var ls = db.KetQuaHienMaus.Find(id);
+                db.KetQuaHienMaus.Remove(ls);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

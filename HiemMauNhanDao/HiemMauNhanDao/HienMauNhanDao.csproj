@@ -354,6 +354,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="favoicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -559,6 +560,7 @@
     <Content Include="Views\KetQuaHienMau\_leftMenu2.cshtml" />
     <Content Include="Views\KetQuaHienMau\Create.cshtml" />
     <Content Include="Views\KetQuaHienMau\TTDK.cshtml" />
+    <Content Include="Views\KetQuaHienMau\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

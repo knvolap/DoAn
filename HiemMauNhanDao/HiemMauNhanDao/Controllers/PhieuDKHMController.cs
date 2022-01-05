@@ -33,6 +33,12 @@ namespace HiemMauNhanDao.Controllers
             return View(phieuDKHM);
         }
 
+
+        // get được idTTCN, nhưng không phải show ra drop list để chọn mà show ra đúng  idTTCN của mình luôn
+        // get được idDTCHM, nhưng không phải show ra drop list để chọn mà show ra đúng  idDTCHM khi ấn vào luôn
+        // chưa hết hạn thì vẫn có thể sửa
+        // phải tích đủ các nội dung
+        // khi đăng ký xong trả về thông báo : stt , idPDKHM, thời gian dự kiến = (thời gian tổ chức + 10' cho 5 người đk ) 
         public ActionResult Create(string id)
         {
             ViewBag.idDTCHM = new SelectList(db.DotToChucHMs, "IdDTCHM", "IdDTCHM");
@@ -56,7 +62,6 @@ namespace HiemMauNhanDao.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.idDTCHM = new SelectList(db.DotToChucHMs, "IdDTCHM", "IdDTCHM", phieuDKHM.idDTCHM);
             ViewBag.idTTCN = new SelectList(db.ThongTinCaNhans, "IdTTCN", "IdTTCN", phieuDKHM.idTTCN);
             return View(phieuDKHM);

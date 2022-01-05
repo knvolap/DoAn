@@ -1,17 +1,16 @@
 ﻿@model Models.EF.KetQuaHienMau
-
 @{
-    ViewBag.Title = "Kết quả hiến máu";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
+
 <section class="breadcrumb_part breadcrumb_bg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Nhập kết quả hiến máu</h2>
+                        <h2>Cập nhật kết quả </h2>
                     </div>
                 </div>
             </div>
@@ -114,12 +113,14 @@
                                             <th class="col-lg-6">
                                                 <div>
                                                     Thể tích
-                                                    @Html.DropDownListFor(model => model.luongMauHien, new[] { new SelectListItem { Text = "250"},
-                                                                          new SelectListItem { Text = "350"} , new SelectListItem { Text = "450" }},
+                                                    @Html.DropDownListFor(model => model.luongMauHien, new[] { new SelectListItem { Text = "250 ml"},
+                                                                          new SelectListItem { Text = "350 ml"} , new SelectListItem { Text = "450 ml" }},
                                                    new { @class = "single-input" })
                                                 </div>
                                             </th>
                                         </tr>
+
+
                                     </table>
 
                                     <table class="mt-10">
@@ -196,17 +197,9 @@
                                     <table class="mt-10">
                                         <tr>
                                             <th style="width:400px">
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Người xét nghiệm
-                                                <div class="form-select" id="default-select_1">
-                                                    <select>
-                                                        <option value="">Người khám  </option>
-                                                        <option>Võ Lập</option>
-                                                        <option>Quang Nhã</option>
-                                                        <option>Ngọc Huy</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
-                                                </div>
+                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Người khám
+                                                @Html.EditorFor(model => model.nguoiKham, new { htmlAttributes = new { @class = "single-input", @placeholder = "danh sách người khám" } })
+
                                             </th>
                                             <th class="col-lg-6">
                                                 <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Trạng thái
@@ -220,7 +213,7 @@
                                     </table>
                                 </form>
                                 <div class="text-center " style="margin-top: 20px;">
-                                    <a class="btn_2 " href="#">Cập nhật</a>
+                                    <a class="btn_2 " href="#" type="sumit">Cập nhật</a>
                                 </div>
                             </div>
 
@@ -278,17 +271,7 @@
                                     <table class="mt-10">
                                         <tr>
                                             <th style="width:400px">
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Người khám
-                                                <div class="form-select" id="default-select_1">
-                                                    <select>
-                                                        <option value="">Người khám  </option>
-                                                        <option>Võ Lập</option>
-                                                        <option>Quang Nhã</option>
-                                                        <option>Ngọc Huy</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
-                                                </div>
+                                              
                                             </th>
                                             <th class="col-lg-6">
                                                 <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Trạng thái
@@ -302,43 +285,43 @@
                                     </table>
                                 </form>
                                 <div class="text-center " style="margin-top: 20px;">
-                                    <a class="btn_2 " href="#">Cập nhật</a>
+                                    <a class="btn_2 " href="#" type="sumit">Cập nhật</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    }
-                    <hr />
-                    <h2>Lưu ý</h2>
-                    <table class="mt-10">
-                        <tr>
-                            <th style="width:400px">
-                                <div>
-                                    SA: <a> giờ buổi sáng</a>
-                                </div>
-                            </th>
-                            <th class="col-lg-6">
-                                <div>
-                                    Ngày bắt đầu < ngày kết thúc < Ngày triển khai
-                                </div>
-                            </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <th style="width:400px">
-                                <div>
-                                    CH : <a>giờ buổi chiều </a>
-                                </div>
-                            </th>
-                            <th class="col-lg-6">
-                                <div>
-                                    Chỉ được chỉnh sửa trước ngày triển khai
-                                </div>
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-       
+                }
+                <hr />
+                <h2>Lưu ý</h2>
+                <table class="mt-10">
+                    <tr>
+                        <th style="width:400px">
+                            <div>
+                                SA: <a> giờ buổi sáng</a>
+                            </div>
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                Ngày bắt đầu < ngày kết thúc < Ngày triển khai
+                            </div>
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="width:400px">
+                            <div>
+                                CH : <a>giờ buổi chiều </a>
+                            </div>
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                Chỉ được chỉnh sửa trước ngày triển khai
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
         </div>
     </div>
 </section>
@@ -349,5 +332,5 @@
     $(function () {
         $('#AlertBox').removeClass('hide');
         $('#AlertBox').delay(5000).slideUp(500);
-                });
+    });
 </script>

@@ -56,6 +56,38 @@ namespace Models.Services
             return model.OrderByDescending(x => x.idQuyen= "Q05").ToPagedList(page, pageSize);
         }
 
+        public IEnumerable<NhanVienView> GetListNVYT(string keysearch, int page, int pagesize)
+        {
+            var query = from nv in db.NhanVienYTes                      
+                        join tt in db.ThongTinCaNhans on nv.idTTCN equals tt.IdTTCN
+                        join cv in db.ChucVus on nv.idChucVu equals cv.IdChucVu
+                        select new { nv, tt,cv };
+
+            //check từ khóa có tồn tại hay k
+            if (!string.IsNullOrEmpty(keysearch))
+            {
+                query = query.Where(x => x.nv.IdNVYT.Contains(keysearch) || x.nv.idChucVu.Contains(keysearch)
+                || x.tt.IdTTCN.Contains(keysearch) || x.tt.hoTen.Contains(keysearch) || x.tt.soDT.Contains(keysearch));
+            }
+            //tạo biến result -> hiển thị sp ->           
+            var result = query.Select(x => new NhanVienView()
+            {
+                IdTTCN = x.tt.IdTTCN,
+                hoTen = x.tt.hoTen,
+                gioiTinh = x.tt.gioiTinh,
+                CCCD = x.tt.CCCD,
+                IdNVYT = x.nv.IdNVYT,
+                idBenhVien =x.nv.idBenhVien,
+                idChucVu=x.cv.IdChucVu,
+                tenChucVu=x.cv.TenChucVu
+
+                
+            }).OrderByDescending(x => x.IdNVYT).ThenBy(q => q.IdTTCN).ToPagedList(page, pagesize);
+            return result;
+        }
+
+
+
         public void addNVYT2(NhanVienView nhanVienView)
         {           
             var id1= db.ThongTinCaNhans.Max(x => x.IdTTCN);
