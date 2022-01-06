@@ -19,6 +19,7 @@ namespace HiemMauNhanDao.Controllers
 
 
         // GET: NguoiDung
+        [HttpGet]
         public ActionResult Index()
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
@@ -26,19 +27,21 @@ namespace HiemMauNhanDao.Controllers
             ThongTinCaNhan thongTinCaNhan = db.ThongTinCaNhans.Find(id);
 
             if (thongTinCaNhan.hoTen == "" || thongTinCaNhan.soDT == "" || thongTinCaNhan.userName == "" || thongTinCaNhan.CCCD == "" ||
-                thongTinCaNhan.gioiTinh == null || thongTinCaNhan.ngaySinh == null || thongTinCaNhan.soLanHM == null || thongTinCaNhan.nhomMau == "" ||
+                  thongTinCaNhan.ngaySinh == null || thongTinCaNhan.soLanHM == null || thongTinCaNhan.nhomMau == "" ||
                 thongTinCaNhan.trinhDo == "" || thongTinCaNhan.ngheNghiep == "" || thongTinCaNhan.coQuanTH == "" || thongTinCaNhan.diaChi == ""
                 )
             {
                 SetAlert("Vui lòng cập nhập đủ thông tin cá nhân ", "error");
             }
-            else if(thongTinCaNhan.hoTen != null || thongTinCaNhan.soDT != null || thongTinCaNhan.userName != null || thongTinCaNhan.CCCD != null ||
-                thongTinCaNhan.gioiTinh != null || thongTinCaNhan.ngaySinh != null || thongTinCaNhan.soLanHM != null || thongTinCaNhan.nhomMau != null ||
-                thongTinCaNhan.trinhDo != null || thongTinCaNhan.ngheNghiep != null || thongTinCaNhan.coQuanTH != null || thongTinCaNhan.diaChi != null
+            else if (thongTinCaNhan.hoTen != null || thongTinCaNhan.soDT != null || thongTinCaNhan.userName != null || thongTinCaNhan.CCCD != null ||
+                thongTinCaNhan.ngaySinh != null || thongTinCaNhan.soLanHM != null || thongTinCaNhan.nhomMau != null || thongTinCaNhan.trinhDo != null ||
+               thongTinCaNhan.ngheNghiep != null || thongTinCaNhan.coQuanTH != null || thongTinCaNhan.diaChi != null
                 )
             {
                 SetAlert("Đã cập nhật đầy đủ thông tin cá nhân ", "success");
-            }    
+
+            }
+              
             return View(thongTinCaNhan);
         }
 
@@ -71,6 +74,7 @@ namespace HiemMauNhanDao.Controllers
                 ttcn.idQuyen = ttcn.idQuyen;
                 ttcn.trangThai = ttcn.trangThai;
                 ttcn.password = ttcn.password;
+                ttcn.soDT = ttcn.soDT;
 
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();

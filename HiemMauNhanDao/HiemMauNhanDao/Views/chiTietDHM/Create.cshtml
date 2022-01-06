@@ -34,7 +34,7 @@
                                 <tr class="col-lg-6">
                                     <th>
                                         <label class="">Chọn đợt hiến máu</label>
-                                        @Html.DropDownList("idDHM", null, htmlAttributes: new { @class = "form-select" })
+                                        @Html.DropDownList("idDHM", null, htmlAttributes: new { @class = "single-input" })
                                         @Html.ValidationMessageFor(model => model.idDHM, "", new { @class = "text-danger" })
                                     </th>
                                 </tr>
@@ -47,7 +47,7 @@
                                     <tr style="margin-top:20px">
                                         <th>
                                             <label class="">Chọn đơn vị liên kết</label>
-                                            @Html.DropDownList("idDVLK", null, htmlAttributes: new { @class = "form-select" })
+                                            @Html.DropDownList("idDVLK", null, htmlAttributes: new { @class = "single-input" })
                                             @Html.ValidationMessageFor(model => model.idDVLK, "", new { @class = "text-danger" })
                                         </th>
                                     </tr>

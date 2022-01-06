@@ -74,7 +74,7 @@
                         @using (Html.BeginForm("NguoiDung", "DangKyTK", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
-
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                             <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
                                 @if (@ViewBag.ThongBao != null)
                                 {
@@ -90,12 +90,14 @@
                                                     <div>
                                                         <a>Họ và tên </a>
                                                         @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "single-input", @type = "text", @placeholder = "Họ và tên" } })
+
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>Số điện thoại</a>
                                                         @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @type = "number", @placeholder = "nhập số điện thoại" } })
+
                                                     </div>
                                                 </th>
                                             </tr>
@@ -106,6 +108,7 @@
                                                     <div>
                                                         <a>Ngày Sinh</a>
                                                         @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "single-input", @type = "date", @for = "datepicker" } })
+                                                     
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
@@ -118,7 +121,6 @@
                                             </tr>
                                         </table>
                                         <table class="mt-10">
-
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
@@ -134,6 +136,8 @@
                                                 </th>
                                             </tr>
                                         </table>
+                                        @Html.HiddenFor(model => model.idQuyen)
+
                                     </form>
                                     <div class="text-center" style="margin-top:20px">
                                         <button type="submit" class="btn btn-primary">Đăng ký</button>
@@ -161,17 +165,16 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <th style ="width:400px">
+                        <th style="width:400px">
                             <div>
-                                Ngày sinh:  <a>phải đủ 18 tuổi</a>
+                                Nội dung:  <a>phải điền đẩy đủ các thông tin</a>
                             </div>
-                            </th>
-                            <th class="col-lg-6">
-                                <div>
-                                    Số điện thoại :<a> từ 8-12 số</a>
-                                </div>
-                            </th>
-
+                        </th>
+                        <th class="col-lg-6">
+                            <div>
+                                Số điện thoại :<a> từ 8-12 số</a>
+                            </div>
+                        </th>
                     </tr>
                 </table>
             </div>
@@ -179,3 +182,4 @@
         </div>
     </div>
 </section>
+

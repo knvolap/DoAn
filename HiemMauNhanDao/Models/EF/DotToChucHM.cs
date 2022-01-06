@@ -1,4 +1,4 @@
-﻿namespace Models.EF
+namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -39,21 +39,15 @@
         [StringLength(150)]
         public string diaChiToChuc { get; set; }
 
-        [Range(1, Int32.MaxValue, ErrorMessage = "vui lòng nhập số từ 1")]
         public int soLuong { get; set; }
 
         [Column(TypeName = "date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ngayBatDauDK { get; set; }
 
         [Column(TypeName = "date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ngayKetThucDK { get; set; }
 
-        [Column(TypeName = "date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime ngayToChuc { get; set; }
-
 
         [StringLength(50)]
         public string trangThai { get; set; }

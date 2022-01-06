@@ -42,11 +42,7 @@ namespace HiemMauNhanDao.Controllers
                 else if (_DKTK.isExistCCCD(thongTinCaNhan.CCCD))
                 {
                     SetAlert("CCCD/ CMND đã tồn tại!!", "error");
-                }              
-                //else if (fc["txtXacNhanMK"] != thongTinCaNhan.password)
-                //{
-                //    ViewBag.ThongBao = "Vui lòng nhập mật khẩu dài hơn!";
-                //}
+                }                
                 else
                 {
                     var encryptedMd5Pas = Encryptor.MD5Hash(thongTinCaNhan.password);
@@ -63,6 +59,7 @@ namespace HiemMauNhanDao.Controllers
                 SetAlert("Tạo tài khoản thất bại ", "error");
                 return RedirectToAction("NguoiDung");
             }
+
             return View(thongTinCaNhan);
         }
         public ActionResult DonVi()

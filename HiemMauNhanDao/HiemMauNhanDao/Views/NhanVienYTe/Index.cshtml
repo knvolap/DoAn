@@ -1,4 +1,6 @@
-﻿
+﻿@model PagedList.IPagedList<Models.ViewModel.NhanVienView>
+@using PagedList.Mvc
+@using System.Data;
 @{
     ViewBag.Title = "Danh sách nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,6 +28,7 @@
             <div class="col-lg-4">
                 @RenderPage("_leftMenu2.cshtml")
             </div>
+
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="col-lg-12 col-md-8">
                     <h3 class="mb-30">Danh sách nhân viên</h3>
@@ -33,7 +36,7 @@
                     <hr>
                     <div class="main-card mb-3 card">
                         <div class="card-body">
-                            <h5 class="card-title">Tìm kiếm</h5>
+                            <h5 class="card-title">Tìm kiếm nhân viên</h5>
                             <form class="">
                                 <div class="form-row">
                                     <table class="mt-10">
@@ -43,21 +46,21 @@
                                                    class="single-input">
                                             @*<input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">*@
                                         </th>
-                                        <th class="col-lg-6">
-                                            <div>
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                                <div class="form-select" id="default-select_1">
-                                                    <select>
-                                                        <option value=" 1">Đợt tổ chức</option>
-                                                        <option value="1">Chưa chọn</option>
-                                                        <option value="1">Hiến máu nhân đạo tháng 10</option>
-                                                        <option value="1">Hiến máu nhân đạo tháng 11</option>
-                                                        <option value="1">Hiến máu nhân đạo tháng 12</option>
-                                                        <option value="1">Hiến máu nhân đạo tháng 01</option>
-                                                    </select>
+                                        @*<th class="col-lg-6">
+                                                <div>
+                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                    <div class="form-select" id="default-select_1">
+                                                        <select>
+                                                            <option value=" 1">Đợt tổ chức</option>
+                                                            <option value="1">Chưa chọn</option>
+                                                            <option value="1">Hiến máu nhân đạo tháng 10</option>
+                                                            <option value="1">Hiến máu nhân đạo tháng 11</option>
+                                                            <option value="1">Hiến máu nhân đạo tháng 12</option>
+                                                            <option value="1">Hiến máu nhân đạo tháng 01</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </th>
+                                            </th>*@
                                     </table>
 
                                 </div>
@@ -71,80 +74,83 @@
                             </form>
                         </div>
                     </div>
-                    @*Thêm đợt*@
-                    <ul></ul>
-                    <div class="app-header-left" style="margin-bottom:10px">
-                        <li class="genric-btn info-border radius">
-                            <a href="@Url.Action("EditKQHM", "NhanVienYTe")"> cập nhật kết quả </a>
-                        </li>
-                    </div>
-                    <div class="main-card mb-3 card">
-                        <div class="card-body">
+                    <div>
+                        <div>
                             <table class="mb-0 table table-hover table table-bordered">
-                                <tr>
+                                <tr class="text-center">
                                     <th>
                                         STT
                                     </th>
                                     <th>
-                                        Mã nhân viên
+                                        Mã NV
                                     </th>
                                     <th>
-                                        Tên tên nhân viên
+                                        Tên nhân viên
+                                    </th>
+                                    <th>
+                                        CCCD
                                     </th>
                                     <th>
                                         Chức vụ
                                     </th>
                                     <th>
-                                        Nhiệm vụ
-                                    </th>
-                                    <th>
                                         Trạng thái
                                     </th>
                                     <th>
-                                        Thao tác
+                                        Chức năng
                                     </th>
                                 </tr>
-                                @*@{ var i = 1;}
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @i
-                                            </td>
-                                            <td>
-                                                @item.IdDHM
-                                            </td>
-                                            <td>
-                                                @item.TenDHM
-                                            </td>
-                                            <td>
-                                                @item.noiDung
-                                            </td>
-                                            <td>
-                                                @item.tgBatDau
-                                            </td>
-                                            <td>
-                                                <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                                    @(item.trangThai == true ? "Active" : "Blocked")
-                                                </button>
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Chỉnh sửa", "EditDHM", new { id = item.IdDHM }) |
-                                                @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDHM }) |
-                                                @Html.ActionLink("Xóa", "DeleteDHM", new { id = item.IdDHM })
-                                            </td>
-                                        </tr>
-                                        i++;
-                                                }*@
+                                @{ var i = 1;}
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                       
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @item.IdNVYT
+                                        </td>
+                                        <td>
+                                            @item.hoTen
+                                        </td>
+                                        <td>
+                                            @item.CCCD
+                                        </td>
+                                        <td>
+                                            @item.tenChucVu.
+                                        </td>
+                                        <td class="text-center">
+                                            <b href="#" class="btn-active" data-id="@item.IdNVYT">@Html.Raw(item.trangThai ? "Hoạt động" : "khóa")</b>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Cấp quyền", "CapQuyenNVYT", new { id = item.IdTTCN })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdNVYT })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdNVYT })</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
                             </table>
-                            <ul></ul>
-                            @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))*@
+
                         </div>
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV, @class = "page-link" }))
+                            </ul>
+                        </nav>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </section>
 
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="~/Assets/Admin/scripts/duyetNVYT.js"></script>

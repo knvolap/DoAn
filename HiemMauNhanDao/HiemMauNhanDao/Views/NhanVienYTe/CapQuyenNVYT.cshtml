@@ -1,9 +1,8 @@
 ﻿@model Models.EF.ThongTinCaNhan
 @{
-    ViewBag.Title = "Cập nhật thông tin";
+    ViewBag.Title = "Cấp quyền nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <section class="breadcrumb_part breadcrumb_bg">
     <div class="container">
@@ -32,12 +31,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
-                @RenderPage("_leftMenu1.cshtml")
+                @RenderPage("_leftMenu2.cshtml")
             </div>
             <div class="col-lg-8 mb-5 mb-lg-0">
 
                 <div class="blog_left_sidebar">
-                    <h3 class="mb-10">Vui lòng điền đầy đủ thông tin</h3>
+                    <h3 class="mb-10">Vui lòng kiểm tra thông tin nhân viên</h3>
                     <hr />
                     <div class="panel-body">
                         @if (TempData["AlertMessage"] != null)
@@ -49,7 +48,7 @@
                     </div>
 
                     <div>
-                        @using (Html.BeginForm("CapnhatTTCN", "NguoiDung", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("CapQuyenNVYT", "NhanVienYTe", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -62,21 +61,18 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-8">
                                     <form action="#">
-
-                                        @Html.HiddenFor(model => model.IdTTCN)
-
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
-                                                        <a>Tài khoản</a>
-                                                        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control ", @type = "text", @readonly = "readonly" } })
+                                                        <a>Mã cá nhân</a>
+                                                        @Html.EditorFor(model => model.IdTTCN, new { htmlAttributes = new { @class = "single-input ", @type = "text", @readonly = "readonly" } })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
-                                                        <a>CMND / CCCD </a>
-                                                        @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+                                                        <a>Trình độ học vấn </a>
+                                                        @Html.EditorFor(model => model.trinhDo, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
 
                                                     </div>
                                                 </th>
@@ -87,57 +83,84 @@
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Họ và tên </a>
-                                                        @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-                                                        @Html.ValidationMessageFor(model => model.hoTen, "", new { @class = "text-danger" })
+                                                        @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "single-input", @type = "text", @readonly = "readonly" } })
+
 
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
+                                                    <div>
+                                                        <a>Nghề nghiệp</a>
+                                                        @Html.EditorFor(model => model.coQuanTH, new { htmlAttributes = new { @class = "single-input", @type = "number", @readonly = "readonly" } })
+
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <a>CCCD / CMND</a>
+                                                        @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "single-input", @type = "number", @readonly = "readonly" } })
+
+
+
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <a>Số lần hiến máu</a>
+                                                    @Html.EditorFor(model => model.soLanHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
                                                     <div>
                                                         <a>Số điện thoại</a>
-                                                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
-                                                        @Html.ValidationMessageFor(model => model.soDT, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                        </table>
-                                        <table class="mt-10">
-                                            <tr>
-                                                <th style="width:400px">
-                                                    <div>
-                                                        <a>Giới tính </a>
-                                                        @Html.DropDownListFor(model => model.gioiTinh, new[] { new SelectListItem { Text = "Nam", Value = "True" },
-                                                       new SelectListItem { Text = "Nữ", Value = "False" } }, new { @class = "single-input" })
-                                                        @Html.ValidationMessageFor(model => model.gioiTinh, "", new { @class = "text-danger" })
+                                                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @type = "number", @readonly = "readonly" } })
 
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
-                                                    <a>Ngày sinh </a>
-                                                    @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
-                                                    @Html.ValidationMessageFor(model => model.ngaySinh, "", new { @class = "text-danger" })
+                                                    <div>
+                                                        <a>Cơ quan / trường học </a>
+                                                        @Html.EditorFor(model => model.coQuanTH, new { htmlAttributes = new { @class = "single-input", @type = "number", @readonly = "readonly" } })
 
+                                                    </div>
                                                 </th>
                                             </tr>
                                         </table>
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
+                                                    <a>Email </a>
+                                                    @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
+
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <a>số lần hiến máu </a>
+                                                    @Html.EditorFor(model => model.soLanHM, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
+                                                </th>
+                                            </tr>
+                                        </table>
+
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
                                                     <div>
-                                                        <a>Lần hiến máu </a>
-                                                        @Html.EditorFor(model => model.soLanHM, new { htmlAttributes = new { @class = "single-input", @type = "number" } })
+                                                        <a>Ngày sinh</a>
+                                                        @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "single-input" , @readonly = "readonly" } })
 
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>Nhóm máu </a>
-                                                        @Html.DropDownListFor(model => model.nhomMau, new[] { new SelectListItem { Text = "Chưa biết"},
-                                                                              new SelectListItem { Text = "A +"} , new SelectListItem { Text = "A -" } ,
-                                                                              new SelectListItem { Text = "B +" } , new SelectListItem { Text = "B -" } ,
-                                                                              new SelectListItem { Text = "AB +" } ,  new SelectListItem { Text = "AB -" } ,
-                                                                              new SelectListItem { Text = "O +" } ,  new SelectListItem { Text = "O -" } },
-                                                                              new { @class = "single-input" })
+                                                        @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "single-input", @type = "text", @readonly = "readonly" } })
+
                                                     </div>
                                                 </th>
                                             </tr>
@@ -145,59 +168,51 @@
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
-                                                    <a>Trình độ học vấn </a>
-                                                    @Html.EditorFor(model => model.trinhDo, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-                                                    @Html.ValidationMessageFor(model => model.trinhDo, "", new { @class = "text-danger" })
+                                                    <div>
+                                                        <a>Giới tính</a>
+                                                        @Html.DropDownListFor(model => model.gioiTinh, new[] { new SelectListItem { Text = "Nam", Value = "true" }, new SelectListItem { Text = "Nữ", Value = "false" } },
+                                                          new { @class = "single-input", @disabled = "disabled" })
+                                                    </div>
                                                 </th>
                                                 <th class="col-lg-6">
-                                                    <a>Nghề nghiệp </a>
-                                                    @Html.EditorFor(model => model.ngheNghiep, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-                                                    @Html.ValidationMessageFor(model => model.ngheNghiep, "", new { @class = "text-danger" })
-                                                </th>
-                                            </tr>
-                                        </table>
-                                        <table class="mt-10">
-                                            <tr>
-                                                <th style="width:735px">
-                                                    <a>Cơ quan / Trường lớp </a>
-                                                    @Html.EditorFor(model => model.coQuanTH, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-                                                    @Html.ValidationMessageFor(model => model.coQuanTH, "", new { @class = "text-danger" })
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:735px">
-                                                    <a>Địa chỉ tạm trú</a>
-                                                    @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "single-input", @type = "text" } })
-                                                    @Html.ValidationMessageFor(model => model.diaChi, "", new { @class = "text-danger" })
-                                                </th>
-                                            </tr>
-                                        </table>
-                                        <table class="mt-10">
-                                            <tr>
-                                                <th style="width:735px">
-                                                  @*  <a>Quyền </a>*@
-                                                    @Html.HiddenFor(model => model.idQuyen, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    <div>
+                                                        <a>Địa chỉ tạm trú </a>
+                                                        @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "single-input", @type = "number", @readonly = "readonly" } })
 
+                                                    </div>
                                                 </th>
                                             </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <a>Quyền</a>
+                                                        <input class = "single-input" value="Nhân Viên y tế" readonly/>
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <a>Trạng thái </a>
+                                                        @Html.DropDownListFor(model => model.trangThai, new[] { new SelectListItem { Text = "Hoạt động", Value = "true" }, new SelectListItem { Text = "Khóa", Value = "false" } },
+                                                         new { @class = "single-input", @disabled = "disabled" })
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">                                          
                                             <tr>
                                                 <th style="width:735px">
-                                                   @* <a>password</a>*@
+                                                    @* <a>password</a>*@
                                                     @Html.HiddenFor(model => model.password, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
 
                                                 </th>
                                             </tr>
-                                            <tr>
-                                                <th  >
-                                                   @* <a>trangThai</a>*@
-                                                    @Html.HiddenFor(model => model.trangThai)
-                                                    
-                                                </th>
-                                            </tr>
+                                            
                                         </table>
                                     </form>
                                     <div class="text-center" style="margin-top:20px">
-                                        <button type="submit" class="genric-btn primary-border radius">Cập nhật thông tin</button>
+                                        <button type="submit" class="genric-btn primary-border radius">Cấp quyền</button>
                                     </div>
                                 </div>
                             </div>

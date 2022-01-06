@@ -86,19 +86,20 @@
                                                     <div>
                                                         <label>khoa</label>
 
-                                                        @Html.DropDownListFor(model => model.khoa, new[] { new SelectListItem { Text = "Chưa biết"},
-                                                                           new SelectListItem { Text = "Khoa Truyền máu"} , new SelectListItem { Text = "Khoa Lọc máu" }},
-                                                                           new { @class = "single-input" })
+                                                        @Html.DropDownListFor(model => model.khoa, new[] { new SelectListItem { Text = "Khoa Lọc máu"},
+                                                                                                           new SelectListItem { Text = "Khoa Truyền máu" } }, 
+                                                                                                           new { @class = "single-input" })
                                                         @Html.ValidationMessageFor(model => model.khoa, "", new { @class = "text-danger" })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <label>Chức vụ</label>
+                                                        @Html.DropDownListFor(model => model.tenChucVu, new[] { new SelectListItem { Text = "Trưởng khoa"},
+                                                                                                              new SelectListItem { Text = "Phó khoa" },new SelectListItem { Text = "Bác sĩ" },
+                                                                                                              new SelectListItem { Text = "Điều dưỡng" }}, new { @class = "single-input" })
 
-                                                        @*@Html.DropDownList("IdChucVu", null, "", new { htmlAttributes = new { @class = "form-control" } })*@
-                                                        @Html.DropDownList("IdChucVu", ViewBag.IdChucVu as SelectList, htmlAttributes: new { @class = "single-input" })
-                                                        @Html.ValidationMessageFor(model => model.idChucVu, "", new { @class = "text-danger" })
+                                                        @Html.ValidationMessageFor(model => model.tenChucVu, "", new { @class = "text-danger" })
                                                     </div>
                                                 </th>
                                             </tr>
@@ -107,11 +108,11 @@
                                             <tr>
                                                 <th style="width:735px">
                                                     <label>Trình độ chuyên môn</label>
-                                                    @Html.DropDownListFor(model => model.trinhDo, new[] { new SelectListItem { Text = "Chưa biết"},
-                                                                            new SelectListItem { Text = "Bác sĩ"} , new SelectListItem { Text = "Bác sĩ dự phòng" } ,
-                                                                            new SelectListItem { Text = "Điều dưỡng" } , new SelectListItem { Text = "Y tá" } , new SelectListItem { Text = "Y tế công cộng" } },
+                                                    @Html.DropDownListFor(model => model.trinhDoCM, new[] { new SelectListItem { Text = "Cao đẳng"},
+                                                                            new SelectListItem { Text = "Cử nhân"} , new SelectListItem { Text = "Đại học" } ,
+                                                                            new SelectListItem { Text = "Thạc sĩ" } , new SelectListItem { Text = "Tiến sĩ" } , new SelectListItem { Text = "Giáo sư" } },
                                                                             new { @class = "single-input" })                                                   
-                                                    @Html.ValidationMessageFor(model => model.trinhDo, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessageFor(model => model.trinhDoCM, "", new { @class = "text-danger" })
 
                                                 </th>
                                             </tr>

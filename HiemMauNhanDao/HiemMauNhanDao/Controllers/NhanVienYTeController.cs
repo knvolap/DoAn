@@ -2,8 +2,10 @@
 using HiemMauNhanDao.Common;
 using Models.EF;
 using Models.Services;
+using Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -17,21 +19,31 @@ namespace HiemMauNhanDao.Controllers
         BenhVienServices _BenhVien = new BenhVienServices();
         private DbContextHM db = new DbContextHM();
         // GET: Client/NhanVienYTe
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult ViewNVYT(string searchString1, int page = 1, int pageSize = 10)
-        {
+        public ActionResult Index(string searchString1, int page = 1, int pageSize = 10)
+        {   
             var viewNVYT = new NhanVienYTeServices();
             var model = viewNVYT.GetListNVYT(searchString1, page, pageSize);
             if (!string.IsNullOrEmpty(searchString1))
             {
                 ViewBag.SearchStringNV = searchString1;
             }
-            ViewBag.idChucVu = new SelectList(db.ChucVus, "IdChucVu", "TenChucVu");
-            ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien");
+
+            return View(model);
+
+        }
+
+        public ActionResult ViewNVYT(BenhVien benhVien,string searchString1,string idbv, int page = 1, int pageSize = 10)
+        {
+            BenhVien bv = db.BenhViens.Find(idbv);
+            var viewNVYT = new NhanVienYTeServices();
+            var bv1 = _nhanvien.GetByIdBV1(benhVien.IdBenhVien);
+
+            var model = viewNVYT.GetListNVYT2(searchString1,idbv ,  page, pageSize);
+            if (!string.IsNullOrEmpty(searchString1))
+            {
+                ViewBag.SearchStringNV = searchString1;
+            }
+ 
             return View(model);
         }
 
@@ -77,7 +89,7 @@ namespace HiemMauNhanDao.Controllers
             string id = session.UserID;
             ViewBag.IdUser = id;
             ViewBag.IdBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien");
-            ViewBag.IdChucVu = new SelectList(db.ChucVus, "IdChucVu", "TenChucVu");
+            
             return View();
         }
         [HttpPost]
@@ -86,7 +98,7 @@ namespace HiemMauNhanDao.Controllers
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             ViewBag.IdBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien", nhanVienYTe.idBenhVien);
-            ViewBag.IdChucVu = new SelectList(db.ChucVus, "IdChucVu", "TenChucVu", nhanVienYTe.idChucVu);
+          
             if (ModelState.IsValid)
             {
                 if (_nhanvien.isExistNVYT(nhanVienYTe.IdNVYT))
@@ -115,6 +127,48 @@ namespace HiemMauNhanDao.Controllers
             }
             return View(nhanVienYTe);
         }
+        public ActionResult CapQuyenNVYT(string id)
+        {
+            var model = _nhanvien.GetByIdTTCN(id);
+            ViewBag.IdQuyen = new SelectList(db.Quyens, "IdQuyen", "tenQuyen");
+            return View(model);
+ 
+        }
+        [HttpPost]
+        public ActionResult CapQuyenNVYT([Bind(Include = "IdTTCN,hoTen,gioiTinh,soDT,soLanHM,ngheNghiep,nhomMau,trinhDo,coQuanTH,diaChi,userName,ngaySinh,CCCD,idQuyen,trangThai,password")] ThongTinCaNhan model)
+        {
+            if (ModelState.IsValid)
+            {
+                var ttcn = _nhanvien.GetByIdTTCN(model.IdTTCN);
+                ttcn.IdTTCN = ttcn.IdTTCN;
+                ttcn.CCCD = ttcn.CCCD;
+                ttcn.userName = ttcn.userName;
+                ttcn.password = ttcn.password;
+                ttcn.ngaySinh = ttcn.ngaySinh;
+                ttcn.trangThai = ttcn.trangThai;
+                ttcn.coQuanTH = ttcn.coQuanTH;
+                ttcn.ngheNghiep = ttcn.ngheNghiep;
+                ttcn.trinhDo = ttcn.trinhDo;
+                ttcn.soLanHM = ttcn.soLanHM;
+                ttcn.soDT = ttcn.soDT;
+                ttcn.hoTen = ttcn.hoTen;
+                ttcn.gioiTinh = ttcn.gioiTinh;
+                ttcn.trangThai = ttcn.trangThai;
+                ttcn.nhomMau = ttcn.nhomMau;
+                model.idQuyen = "Q05";
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+
+                SetAlert("Cấp quyền thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Cấp quyền thất bại", "error");
+                return RedirectToAction("CapQuyenNVYT");
+            }
+        }
+
 
         public ActionResult EditKQHM()
         {
@@ -141,6 +195,49 @@ namespace HiemMauNhanDao.Controllers
 
             _BenhVien.EditBV(benhVien, fileName);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                _nhanvien.XoaNVYT(id);
+                SetAlert("Xóa thành công", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Xóa thất bại", "error");
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Details(string id)
+        {
+            var model = _nhanvien.GetByIdNVYT2(id);
+
+            return View(model);
+        }
+
+        //xử lý duyệt = json
+        [HttpPost]
+        public JsonResult ChangeStatus3(string id)
+        {
+            var result = new NhanVienYTeServices().ChangeStatus3(id);
+            return Json(new
+            {
+                tt = result
+            });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

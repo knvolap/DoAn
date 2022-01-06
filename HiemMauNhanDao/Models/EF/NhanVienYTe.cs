@@ -27,22 +27,20 @@ namespace Models.EF
         public string idBenhVien { get; set; }
 
         [StringLength(20)]
-        public string idChucVu { get; set; }
+        public string tenChucVu { get; set; }
 
         [StringLength(20)]
         public string khoa { get; set; }
 
         [StringLength(50)]
-        public string trinhDo { get; set; }
+        public string trinhDoCM { get; set; }
 
-        public bool? trangThai { get; set; }
+        public bool trangThai { get; set; }
 
         public virtual BenhVien BenhVien { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
-
-        public virtual ChucVu ChucVu { get; set; }
 
         public virtual DSNVTH DSNVTH { get; set; }
 

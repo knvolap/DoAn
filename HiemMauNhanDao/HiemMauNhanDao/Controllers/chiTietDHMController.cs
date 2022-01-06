@@ -12,9 +12,7 @@ namespace HiemMauNhanDao.Controllers
     public class chiTietDHMController : BaseController2
     {
         // GET: chiTietDHM
- 
        private DbContextHM db = new DbContextHM();
-
        DKDHMServices _DkDHM = new DKDHMServices();
 
        public ActionResult Index(DotHienMau dotHienMau, string searchString, int page = 1, int pageSize = 5)

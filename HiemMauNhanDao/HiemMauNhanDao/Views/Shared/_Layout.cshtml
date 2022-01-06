@@ -234,28 +234,3 @@
 
 </html>
 
-@*<script type="text/javascript" src="~/Assets/Admin/scripts/main.js"></script>*@
-@*<script src="~/Assets/Admin/scripts/userController.js"></script>*@
-@*@{
-        var session6 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-    }
-    @if (session6.AuthorID == "Q03" || session6.AuthorID == "Q04" || session6.AuthorID == "Q05" || session6.AuthorID == "Q06")
-    {
-
-            <h6 class="nav-link" href="/Client/LoginClient/Mgs"> Đăng ký</h6>
-
-    }
-    else
-    {
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="dangKy.html" id="navbarDropdown_1"
-               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Đăng ký
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                <a class="dropdown-item" href="dkThanhVien.html">Đăng ký thành viên</a>
-                <a class="dropdown-item" href="dkDoiTac.html">Đăng ký đối tác</a>
-                <a class="dropdown-item" href="dkBenhVien.html">Đăng ký bệnh viện</a>
-            </div>
-        </li>
-    }*@

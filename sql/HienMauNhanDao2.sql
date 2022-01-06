@@ -70,21 +70,15 @@ CREATE TABLE BenhVien(
 GO
 
 
---Table 6 ChucVu
-CREATE TABLE ChucVu(
-	IdChucVu	 VARCHAR(20) PRIMARY KEY,
-	TenChucVu	 NVARCHAR (50) not null,	
-)
-GO
 
 --Table 7 NhanVienYTe
 CREATE TABLE NhanVienYTe(
 	IdNVYT		VARCHAR(20) PRIMARY KEY,
 	idTTCN		VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE ,
-	idBenhVien	 VARCHAR(20)FOREIGN KEY REFERENCES dbo.BenhVien(IdBenhVien)  ON DELETE CASCADE ON UPDATE CASCADE ,
-	idChucVu	VARCHAR(20)   null,
+	idBenhVien	VARCHAR(20)FOREIGN KEY REFERENCES dbo.BenhVien(IdBenhVien)  ON DELETE CASCADE ON UPDATE CASCADE ,
+	tenChucVu	NVARCHAR(20)   null, 
 	khoa		NVARCHAR(20)   null, --  Khoa Huyết học - Khoa Lọc máu - Khoa Truyền máu 	
-	trinhDo		NVARCHAR (50)  null,	
+	trinhDoCM		NVARCHAR (50)  null,	
 	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
@@ -216,7 +210,7 @@ CREATE TABLE KetQuaHienMau(
 )
 GO
 
---Table 14 DanhSachNhanVienThucHien
+--Table 13 DanhSachNhanVienThucHien
 CREATE TABLE DSNVTH(
 	idDTCHM		VARCHAR(20) ,
 	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,
@@ -224,7 +218,7 @@ CREATE TABLE DSNVTH(
 )
 GO
 
---Table 15 LichSuHienMau
+--Table 14 LichSuHienMau
 CREATE TABLE LichSuHienMau(
 	idTTCN			VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE not null,
 	idKQHM			VARCHAR(20) FOREIGN KEY REFERENCES dbo.KetQuaHienMau(IdKQHM) not null,
@@ -277,18 +271,6 @@ ALTER TABLE BenhVien
 									 or soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 									 or soDTBV LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'  )
 GO
-
-
-
--- BẢNG 6--ChucVu
-
-
--- BẢNG 7--
-ALTER TABLE NhanVienYTe
-	ADD CONSTRAINT FK_NVYT_IdKChucVu FOREIGN KEY (idChucVu) REFERENCES ChucVu(IdChucVu)ON DELETE CASCADE ON UPDATE CASCADE
-
-GO
-
 
 -- BẢNG 8--DonViLienKet
 ALTER TABLE DonViLienKet
@@ -439,29 +421,29 @@ VALUES	('BV01',N'Chưa có'  ,N'Đà Nẵng' ,'demobv0@gmail.com','0900944488','
 		('BV03',N'Đa Khoa Đà Nẵng',N'50 Cao Thắng - Hải Châu - Đà Nẵng' ,'bvdakhoa@gmail.com','0888004499','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','')
 GO
 
---B6
-INSERT INTO dbo.ChucVu
-		(IdChucVu,TenChucVu )
-VALUES	('CV01',N'Giám Đốc'),
-		('CV02',N'Trưởng Khoa'),
-		('CV03',N'Phó khoa'),
-		('CV04',N'Bác sĩ'),
-		('CV05',N'Y tá'),			
-		('CV06',N'Chưa có')
-GO
+----B6
+--INSERT INTO dbo.ChucVu
+--		(IdChucVu,TenChucVu )
+--VALUES	('CV01',N'Giám Đốc'),
+--		('CV02',N'Trưởng Khoa'),
+--		('CV03',N'Phó khoa'),
+--		('CV04',N'Bác sĩ'),
+--		('CV05',N'Y tá'),			
+--		('CV06',N'Chưa có') Bác sĩ Điều dưỡng Phó khoa 
+--GO
 
 --B7
 INSERT INTO dbo.NhanVienYTe
-		(IdNVYT,idTTCN,idBenhVien,idChucVu,khoa,trinhDo,trangThai )
-VALUES	('NV01','TT03','BV02','CV01',N'Khoa Truyền máu',N'Giáo sư ','1'),
-		('NV02','TT05','BV02','CV02',N'Khoa Truyền máu',N'Đại học','1')	,
-        ('NV03','TT10','BV02','CV02',N'Khoa Truyền máu',N'Đại học','1')	,
-		('NV05','TT11','BV02','CV04',N'Khoa Truyền máu',N'Đại học','1')	,
-		('NV04','TT12','BV02','CV04',N'Khoa Truyền máu',N'Đại học','1')	,
-		('NV06','TT13','BV02','CV03',N'Khoa Truyền máu',N'Đại học','1')	,
-		('NV07','TT14','BV02','CV03',N'Khoa Truyền máu',N'Đại học','1')	,
-		('NV08','TT15','BV03','CV01',N'Khoa Truyền máu',N'Đại học','1')	,
-		('NV09','TT16','BV03','CV02',N'Khoa Truyền máu',N'Đại học','1')	
+		(IdNVYT,idTTCN,idBenhVien,tenChuVu,khoa,trinhDo,trangThai )
+VALUES	('NV01','TT03','BV02',N'Trưởng khoa ',N'Khoa Truyền máu',N'Giáo sư ','1'),
+		('NV02','TT05','BV02',N'Phó Khoa',N'Khoa Truyền máu',N'Đại học','1')	,
+        ('NV03','TT10','BV02',N'Bác sĩ',N'Khoa Truyền máu',N'Đại học','1')	,
+		('NV05','TT11','BV02',N'Điều dưỡng',N'Khoa Truyền máu',N'Đại học','1')	,
+		('NV04','TT12','BV02',N'Điều dưỡng',N'Khoa Truyền máu',N'Đại học','1')	,
+		('NV06','TT13','BV02',N'Điều dưỡng',N'Khoa Truyền máu',N'Đại học','1')	,
+		('NV07','TT14','BV02',N'Điều dưỡng',N'Khoa Truyền máu',N'Đại học','1')	,
+		('NV08','TT15','BV03',N'Trưởng khoa ',N'Khoa Truyền máu',N'Đại học','1')	,
+		('NV09','TT16','BV03',N'Bác sĩ',N'Khoa Truyền máu',N'Đại học','1')	
 GO
 
 

@@ -179,10 +179,10 @@
     <Content Include="Assets\Admin\images\logo.png" />
     <Content Include="Assets\Admin\images\logo2.png" />
     <Content Include="Assets\Admin\images\logo3.png" />
+    <Content Include="Assets\Admin\scripts\duyetNVYT.js" />
     <Content Include="Assets\Admin\scripts\duyetDVLK.js" />
     <Content Include="Assets\Admin\scripts\main.js" />
     <Content Include="Assets\Admin\scripts\userController.js" />
-    <Content Include="Assets\Admin\scripts\userCTL - Copy.js" />
     <Content Include="Assets\Admin\scripts\duyetDHMController.js" />
     <Content Include="Assets\client\css\animate.css" />
     <Content Include="Assets\client\css\aos.css" />
@@ -354,7 +354,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="favoicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Index.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -561,6 +560,8 @@
     <Content Include="Views\KetQuaHienMau\Create.cshtml" />
     <Content Include="Views\KetQuaHienMau\TTDK.cshtml" />
     <Content Include="Views\KetQuaHienMau\Edit.cshtml" />
+    <Content Include="Views\NhanVienYTe\CapQuyenNVYT.cshtml" />
+    <Content Include="Views\NhanVienYTe\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

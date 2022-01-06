@@ -8,13 +8,12 @@ namespace Models.EF
     public partial class DbContextHM : DbContext
     {
         public DbContextHM()
-            : base("name=DbContextHM8")
+            : base("name=DbContextHM9")
         {
         }
 
         public virtual DbSet<BenhVien> BenhViens { get; set; }
         public virtual DbSet<chiTietDHM> chiTietDHMs { get; set; }
-        public virtual DbSet<ChucVu> ChucVus { get; set; }
         public virtual DbSet<DonViLienKet> DonViLienKets { get; set; }
         public virtual DbSet<DotHienMau> DotHienMaus { get; set; }
         public virtual DbSet<DotToChucHM> DotToChucHMs { get; set; }
@@ -67,15 +66,6 @@ namespace Models.EF
             modelBuilder.Entity<chiTietDHM>()
                 .Property(e => e.idNVYT)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<ChucVu>()
-                .Property(e => e.IdChucVu)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ChucVu>()
-                .HasMany(e => e.NhanVienYTes)
-                .WithOptional(e => e.ChucVu)
-                .WillCascadeOnDelete();
 
             modelBuilder.Entity<DonViLienKet>()
                 .Property(e => e.IdDVLK)
@@ -164,10 +154,6 @@ namespace Models.EF
 
             modelBuilder.Entity<NhanVienYTe>()
                 .Property(e => e.idBenhVien)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<NhanVienYTe>()
-                .Property(e => e.idChucVu)
                 .IsUnicode(false);
 
             modelBuilder.Entity<NhanVienYTe>()

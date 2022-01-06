@@ -1,6 +1,6 @@
-﻿var user = {
+﻿var ct = {
     init: function () {
-        user.registerEvents();
+        ct.registerEvents();
     },
     registerEvents: function () {
         $('.btn-active').off('click').on('click', function (e) {
@@ -8,21 +8,22 @@
             var btn = $(this);
             var id = btn.data('id');
             $.ajax({
-                url: "/Admin/NhanVien/ChangeStatus",
+                url: "/NhanVienYTe/ChangeStatus3",
                 data: { id: id },
                 dataType: "json",
                 type: "POST",
                 success: function (response) {
                     console.log(response);
-                    if (response.status == true) {
-                        btn.text('Kích hoạt');
+                    if (response.tt == true) {
+                        btn.text('Hoạt động');
                     }
                     else {
-                        btn.text('Khoá');
+                        btn.text('khóa');
                     }
+                  
                 }
             });
         });
     }
 }
-user.init();
+ct.init();

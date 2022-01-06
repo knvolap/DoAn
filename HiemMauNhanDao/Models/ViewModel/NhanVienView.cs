@@ -27,10 +27,11 @@ namespace Models.ViewModel
 
         public string IdNVYT { get; set; }
         public string idBenhVien { get; set; }
-        public string idChucVu { get; set; }
+        public string tenBenhVien { get; set; }
+        public string tenChucVu { get; set; }
         public string khoa { get; set; }
-        public string trinhDo2 { get; set; }
-        public bool? trangThai { get; set; }
+        public string trinhDoCM { get; set; }
+        public bool trangThai { get; set; }
 
     }
 }

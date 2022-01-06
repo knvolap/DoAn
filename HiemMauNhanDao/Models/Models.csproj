@@ -132,7 +132,6 @@
     <Compile Include="EF\BenhVien.cs" />
     <Compile Include="EF\chiTietDHM.cs" />
     <Compile Include="EF\ChiTietPhanCong.cs" />
-    <Compile Include="EF\ChucVu.cs" />
     <Compile Include="DbContext\DbContextHM.cs" />
     <Compile Include="EF\DonViLienKet.cs" />
     <Compile Include="EF\DotHienMau.cs" />

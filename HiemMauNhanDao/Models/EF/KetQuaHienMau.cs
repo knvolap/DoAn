@@ -48,15 +48,17 @@ namespace Models.EF
 
         public int? luongMauHien { get; set; }
 
-        public bool hienMau { get; set; }
+        public bool? hienMau { get; set; }
 
         [StringLength(150)]
         public string noiDung { get; set; }
 
         [StringLength(20)]
         public string HST { get; set; }
+
         [StringLength(20)]
         public string HBV { get; set; }
+
         [StringLength(20)]
         public string MSD { get; set; }
 

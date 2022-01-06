@@ -100,7 +100,7 @@
                                                     <div>
                                                         <label>Giới tính </label>
                                                      
-                                                        @Html.DropDownListFor(model => model.gioiTinh, new[] { new SelectListItem { Text = "Nam", Value = "1" }, new SelectListItem { Text = "Nữ", Value = "0" } },
+                                                        @Html.DropDownListFor(model => model.gioiTinh, new[] { new SelectListItem { Text = "Nam", Value = "true" }, new SelectListItem { Text = "Nữ", Value = "false" } },
                                                        new { @class = "single-input", @disabled = "disabled" })
 
                                                     </div>
@@ -121,13 +121,7 @@
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
-                                                        <label>Nhóm máu </label>
-                                                        @*@Html.DropDownListFor(model => model.nhomMau, new[] { new SelectListItem { Text = "Chưa biết"},
-                                        new SelectListItem { Text = "A +"} , new SelectListItem { Text = "A -" } ,
-                                        new SelectListItem { Text = "B +" } , new SelectListItem { Text = "B -" } ,
-                                        new SelectListItem { Text = "AB +" } ,  new SelectListItem { Text = "AB -" } ,
-                                        new SelectListItem { Text = "O +" } ,  new SelectListItem { Text = "O -" } },
-                                        new { @class = "single-input" })*@
+                                                        <label>Nhóm máu </label>                                                      
                                                         @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </div>
                                                 </th>
@@ -158,6 +152,8 @@
                                                     @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                 </th>
                                             </tr>
+                                            @Html.HiddenFor(model => model.password)
+                                            @Html.HiddenFor(model => model.idQuyen)
                                         </table>
                                     </form>
                                     <div class="text-center" style="margin-top:20px">

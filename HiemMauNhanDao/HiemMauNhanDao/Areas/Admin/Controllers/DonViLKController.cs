@@ -62,6 +62,9 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
                 ttcn.soLanHM = ttcn.soLanHM;
                 ttcn.soDT = ttcn.soDT;
                 ttcn.CCCD = ttcn.CCCD;
+                ttcn.gioiTinh = ttcn.gioiTinh;
+                ttcn.trangThai = ttcn.trangThai;
+                ttcn.nhomMau = ttcn.nhomMau;
 
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
