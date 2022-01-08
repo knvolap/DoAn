@@ -43,7 +43,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             else
             {
                 SetAlert("Thêm thất bại", "error");
-                return RedirectToAction("Index");
+                return RedirectToAction("CreateTK");
             }
             return View(taiKhoan);
         }

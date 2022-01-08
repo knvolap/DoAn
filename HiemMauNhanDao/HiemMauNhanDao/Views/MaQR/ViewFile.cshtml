@@ -1,0 +1,32 @@
+﻿@model List<KeyValuePair<string, Byte[]>>
+@{
+    ViewBag.Title = "ViewFile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewFile</h2>
+
+<div class="container">
+    <div id="content">
+        <h1>Implementing QRCoder in ASP.NET Core - View QR Code Files</h1>
+        <h2>
+            <a href="http://www.yogihosting.com/category/aspnet-core/">Read the tutorial on YogiHosting » </a>
+            <button id="reset" onclick="location=''">Reset »</button>
+        </h2>
+        <div id="viewContent">
+            <table>
+                <tbody>
+                    @foreach (KeyValuePair<string, Byte[]> k in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(k.Value))" />
+                                <span>@k.Key</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

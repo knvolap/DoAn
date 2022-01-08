@@ -1,0 +1,68 @@
+﻿@model Byte[]
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ 
+
+<div class="container">
+    <div id="content">
+        <h1>Tạo mã QR</h1>
+        <hr/>
+        
+        <div id="viewContent">
+            @using (Html.BeginForm(null, null, FormMethod.Post))
+            {
+                <table>
+                    <tbody>
+                        <tr>
+                            <th style="width:400px">
+                                <div>
+                                    <label>Mã cá nhân</label>
+                                    @* @Html.EditorFor(model => model.IdTTCN, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })*@
+                                    <input class="single-input" type="text" name="qrText" />
+                                </div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th style="width:400px">
+                                <div>
+                                    <label>Mã cá nhân</label>
+                                    @* @Html.EditorFor(model => model.IdTTCN, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })*@
+                                    <input class="single-input" type="text" name="Mã người dùng" />
+                                </div>
+                            </th>
+                            <th class="col-lg-6">
+                                <div>
+                                    <label>Mã phiếu đăng ký</label>
+                                    <input class="single-input" type="text" name="Mã kết quả hiếm máu" />
+
+                                    @*  @Html.EditorFor(model => model.idPDKHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })*@
+                                </div>
+                            </th>
+                        </tr>
+                        <tr style="margin-top:20px">
+                            <th>
+                                <button>Tạo mã</button>
+                            </th>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            <div class="mt-10">
+                <button id="reset" onclick="location=''">Làm mới »</button>
+            </div>
+        </div>
+        @{
+            if (Model != null)
+            {
+                <h3>Tạo mã thành công</h3>
+                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model))" />
+            }
+        }
+    </div>
+</div>

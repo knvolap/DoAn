@@ -11,13 +11,13 @@ using Models.Services;
 
 namespace HiemMauNhanDao.Areas.Admin.Controllers
 {
-    public class ChiTietDHMController : Controller
+    public class ChiTietDHMController : BaseController2
     {
         private DbContextHM db = new DbContextHM();
 
         public ActionResult Index()
         {
-            var chiTietDHMs = db.chiTietDHMs.Include(c => c.DonViLienKet).Include(c => c.DotHienMau).Include(c => c.NhanVienYTe);
+            var chiTietDHMs = db.chiTietDHMs.Include(c => c.DonViLienKet).Include(c => c.DotHienMau).Include(c => c.BenhVien);
             return View(chiTietDHMs.ToList());
         }
 
@@ -46,14 +46,14 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "TenDonVi", chiTietDHM.idDVLK);
+            ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien", chiTietDHM.idBenhVien);
+            ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "idTTCN", chiTietDHM.idDVLK);
             ViewBag.idDHM = new SelectList(db.DotHienMaus, "IdDHM", "TenDHM", chiTietDHM.idDHM);
-            ViewBag.idNVYT = new SelectList(db.NhanVienYTes, "IdNVYT", "idTTCN", chiTietDHM.idNVYT);
             return View(chiTietDHM);
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "IdChiTietDHM,idDHM,idDVLK,idNVYT,ngayDK,trangThai")] chiTietDHM chiTietDHM)
+        public ActionResult Edit([Bind(Include = "IdChiTietDHM,idDHM,idDVLK,idBenhVien,ngayDK,trangThai")] chiTietDHM chiTietDHM)
         {
             if (ModelState.IsValid)
             {
@@ -61,9 +61,9 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien", chiTietDHM.idBenhVien);
             ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "idTTCN", chiTietDHM.idDVLK);
             ViewBag.idDHM = new SelectList(db.DotHienMaus, "IdDHM", "TenDHM", chiTietDHM.idDHM);
-            ViewBag.idNVYT = new SelectList(db.NhanVienYTes, "IdNVYT", "idTTCN", chiTietDHM.idNVYT);
             return View(chiTietDHM);
         }
 

@@ -1,4 +1,5 @@
-﻿using Models.EF;
+﻿using HiemMauNhanDao.Areas.Admin.Controllers;
+using Models.EF;
 using Models.Services;
 using Models.ViewModel;
 using System;
@@ -11,7 +12,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class KetQuaHienMauController : Controller
+    public class KetQuaHienMauController : BaseController2
     {
         private DbContextHM db = new DbContextHM();
         KetQuaHienMauServices _kqhm = new KetQuaHienMauServices();

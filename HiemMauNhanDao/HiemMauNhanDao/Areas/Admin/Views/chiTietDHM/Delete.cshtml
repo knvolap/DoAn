@@ -9,6 +9,10 @@
 
 <div>
     <dl class="dl-horizontal">
+        <dd>
+            @Html.DisplayFor(model => model.IdChiTietDHM)
+        </dd>
+
         <dt>
             Tên đơn vị liên kết
         </dt>
@@ -30,7 +34,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NhanVienYTe.BenhVien.TenBenhVien)
+            @Html.DisplayFor(model => model.BenhVien.TenBenhVien)
         </dd>
 
         <dt>

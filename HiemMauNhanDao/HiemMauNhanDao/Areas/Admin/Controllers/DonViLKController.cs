@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Areas.Admin.Controllers
 {
-    public class DonViLKController : BaseController2
+    public class DonViLKController : BaseController
     {
         DonViLienKetServices _donvi = new DonViLienKetServices();
         DbContextHM db = new DbContextHM();

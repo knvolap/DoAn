@@ -9,6 +9,9 @@ namespace Models.EF
     [Table("LichSuHienMau")]
     public partial class LichSuHienMau
     {
+        [StringLength(20)]
+        public string idLSHM { get; set; }
+
         [Key]
         [Column(Order = 0)]
         [StringLength(20)]
@@ -21,6 +24,9 @@ namespace Models.EF
 
         [StringLength(150)]
         public string quaTang { get; set; }
+
+        [StringLength(50)]
+        public string maQR { get; set; }
 
         [StringLength(50)]
         public string anhChungNhan { get; set; }

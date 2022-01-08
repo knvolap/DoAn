@@ -99,8 +99,26 @@ namespace Models.Services
                 ungThu        = x.pdk.ungThu,
                 dangMangThai  =x.pdk.dangMangThai,
                 xacNhan       =x.pdk.xacNhan,
-                nhomMau = x.kqhm.nhomMau,
-                trangThai2 = x.kqhm.trangThai,
+
+                IdKQHM        =x.kqhm.IdKQHM,
+                nhomMau       = x.kqhm.nhomMau,
+                trangThai2     = x.kqhm.trangThai,
+                nguoiKham        =x.kqhm.nguoiKham       ,
+                nguoiXN          =x.kqhm.nguoiXN         ,
+                nguoiLayMau      =x.kqhm.nguoiLayMau     ,
+                canNang          =x.kqhm.canNang         ,
+                machMau          =x.kqhm.machMau         ,
+                tinhTrangLS      =x.kqhm.tinhTrangLS     ,
+                huyetAp          =x.kqhm.huyetAp         ,
+                luongMauHien     =x.kqhm.luongMauHien    ,
+                hienMau2          =x.kqhm.hienMau        ,
+                noiDung          =x.kqhm.noiDung         ,
+                HST              =x.kqhm.HST             ,
+                HBV              =x.kqhm.HBV             ,
+                MSD              =x.kqhm.MSD             ,
+                phanUng          =x.kqhm.phanUng         ,
+                thoiGianLayMau   =x.kqhm.thoiGianLayMau  ,
+                ghiChu           =x.kqhm.ghiChu          ,
             }).SingleOrDefault();
             return result;
         }

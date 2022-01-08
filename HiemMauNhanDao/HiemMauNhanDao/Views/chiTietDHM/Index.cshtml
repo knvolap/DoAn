@@ -70,15 +70,15 @@
                                         }
                                         @if (session5 == null)
                                         {
-                                            <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
+                                            <li class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</li>
                                         }
                                         else if (session5.AuthorID == "Q04" || session5.AuthorID == "Q03")
                                         {
-                                            <a class="genric-btn info radius" href="@Url.Action("Create", "chiTietDHM")">Đăng ký</a>
+                                            <li class="genric-btn info radius" href="@Url.Action("Create", "chiTietDHM")">Đăng ký</li>
                                         }
                                         else
                                         {
-                                            <a class="genric-btn info radius" href="@Url.Action("NotFound", "LoginClient")">Không có quyền đăng ký</a>
+                                            <li class="genric-btn info radius" href="@Url.Action("NotFound", "LoginClient")">Không có quyền đăng ký</li>
                                         }
                                     </ul>
                                 </div>

@@ -12,6 +12,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BenhVien()
         {
+            chiTietDHMs = new HashSet<chiTietDHM>();
             NhanVienYTes = new HashSet<NhanVienYTe>();
         }
 
@@ -39,6 +40,9 @@ namespace Models.EF
         public string minhChung { get; set; }
 
         public bool? trangThai { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<chiTietDHM> chiTietDHMs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhanVienYTe> NhanVienYTes { get; set; }

@@ -27,7 +27,7 @@ namespace Models.Services
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(searchString1))
             {
-                query = query.Where(x => x.c.idDHM.Contains(searchString1) || x.c.idNVYT.Contains(searchString1)
+                query = query.Where(x => x.c.idDHM.Contains(searchString1) || x.c.idBenhVien.Contains(searchString1)
                                      || x.c.idDVLK.Contains(searchString1) || x.dhm.TenDHM.Contains(searchString1));
             }
             var result = query.Select(x => new DotHienMauView()
@@ -38,7 +38,7 @@ namespace Models.Services
                 tgKetThuc = x.dhm.tgKetThuc,
                 trangThai = x.dhm.trangThai,
                 idDVLK = x.c.idDVLK,
-                idNVYT = x.c.idNVYT,
+                idBenhVien = x.c.idBenhVien,
                 ngayDK = x.c.ngayDK,
             }).OrderByDescending(x => x.IdDHM).ThenBy(q => q.ngayDK).ToPagedList(page, pageSize);
             return result;
@@ -83,7 +83,7 @@ namespace Models.Services
         {
             chiTietDHM ct = GetChiTietDHMID(ChiTietDHM.idDHM);
             ct.idDVLK = ChiTietDHM.idDHM;
-            ct.idNVYT = ChiTietDHM.idNVYT;
+            ct.idBenhVien = ChiTietDHM.idBenhVien;
             ct.trangThai = ChiTietDHM.trangThai;
             db.SaveChanges();
         }
@@ -93,7 +93,7 @@ namespace Models.Services
         {
             chiTietDHM ct = GetChiTietDHMID(ChiTietDHM.idDHM);
             ct.idDVLK = ChiTietDHM.idDHM;
-            ct.idNVYT = ChiTietDHM.idNVYT;
+            ct.idBenhVien = ChiTietDHM.idBenhVien;
             ct.idDHM = ChiTietDHM.idDHM;
             ct.ngayDK = ChiTietDHM.ngayDK;
             ct.trangThai = ChiTietDHM.trangThai;

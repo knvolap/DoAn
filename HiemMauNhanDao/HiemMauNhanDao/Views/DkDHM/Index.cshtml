@@ -74,15 +74,19 @@
                                         }
                                         @if (session5 == null)
                                         {
-                                            <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
+                                            <li><a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a></li>
                                         }
-                                        else if (session5.AuthorID == "Q04" || session5.AuthorID == "Q03")
+                                        else if (session5.AuthorID == "Q04")
                                         {
-                                            <a class="genric-btn info radius" href="@Url.Action("Create", "chiTietDHM")">Đăng ký</a>
+                                            @Html.ActionLink("Đăng ký", "Create", "chiTietDHM", new { id = item.IdDHM ,@class="genric-btn info radius"}, null)
+                                        }
+                                        else if (session5.AuthorID == "Q03")
+                                        {
+                                            @Html.ActionLink("Đăng ký", "Create2", "chiTietDHM", new { id = item.IdDHM, @class = "genric-btn info radius" }, null)
                                         }
                                         else
                                         {
-                                        <a class="genric-btn info radius" href="@Url.Action("NotFound", "LoginClient")">Không có quyền đăng ký</a>
+                                            <li><a class="genric-btn info radius" href="@Url.Action("NotFound", "LoginClient")">Không có quyền đăng ký</a></li>
                                         }
                                     </ul>
                                 </div>

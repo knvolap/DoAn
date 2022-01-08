@@ -53,7 +53,7 @@ namespace Models.ViewModel
         public string tinhTrangLS { get; set; }
         public string huyetAp { get; set; }
         public int? luongMauHien { get; set; }
-        public bool? xnhienMau { get; set; }
+        public bool? hienMau2 { get; set; }
         public string noiDung { get; set; }
         public string HST { get; set; }
         public string HBV { get; set; }

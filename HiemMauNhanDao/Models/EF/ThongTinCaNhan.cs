@@ -1,4 +1,4 @@
-﻿namespace Models.EF
+namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -25,30 +25,24 @@
         [StringLength(20)]
         public string idQuyen { get; set; }
 
-        [StringLength(50, ErrorMessage = "Tên đăng nhập sai định dạng.")]
-        [Required(ErrorMessage = " không được để trống.")]
+        [StringLength(50)]
         public string userName { get; set; }
 
-
-        [StringLength(maximumLength: 40, MinimumLength = 9, ErrorMessage = "Độ dài mật khẩu ít nhất 9 kí tự")]
-        [Required(ErrorMessage = "Mật khẩu không được để trống.")]
+        [StringLength(50)]
         public string password { get; set; }
 
-        [StringLength(50, ErrorMessage = "Họ và Tên không được để trống.")]
-        [Required(ErrorMessage = " không được để trống.")]
+        [StringLength(50)]
         public string hoTen { get; set; }
 
-        [StringLength(12, MinimumLength = 9, ErrorMessage = "Chỉ nhập tối đa 9 - 12 số")]
-        [Required(ErrorMessage = " không được để trống.")]
+        [StringLength(12)]
         public string CCCD { get; set; }
 
-        [StringLength(12, MinimumLength = 8, ErrorMessage = "Chỉ nhập từ 8 - 12 số")]
-        [Required(ErrorMessage = " không được để trống.")]
+        [StringLength(12)]
         public string soDT { get; set; }
 
         [Column(TypeName = "date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd /MM / yyyy}")]
         public DateTime? ngaySinh { get; set; }
+
         public bool? gioiTinh { get; set; }
 
         [StringLength(100)]

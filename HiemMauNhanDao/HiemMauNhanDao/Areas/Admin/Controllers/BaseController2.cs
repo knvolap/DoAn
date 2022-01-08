@@ -15,8 +15,19 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
     {
         // GET: Admin/Base
         /*check đăng nhập thì phải login*/
-       
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            var session = (UserLogin)Session[CommonConstant.USER_SESSION];
+            if (session == null)
+            {
+                filterContext.Result = new RedirectToRouteResult(new
+                    RouteValueDictionary(new { controller = "LoginClient", action = "Index" }));
+            }
+            base.OnActionExecuting(filterContext);
+        }
+
         // GET: Admin/CheckErro
+
         protected void SetAlert(String message, String type)
         {
             TempData["AlertMessage"] = message;

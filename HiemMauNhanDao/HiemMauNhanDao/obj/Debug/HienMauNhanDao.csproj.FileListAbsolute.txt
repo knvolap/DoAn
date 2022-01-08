@@ -118,3 +118,8 @@ D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Memory.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Numerics.Vectors.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Runtime.CompilerServices.Unsafe.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Text.Encodings.Web.xml
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\QRCoder.dll
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\zxing.dll
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\zxing.presentation.dll
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\zxing.xml
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\zxing.presentation.xml

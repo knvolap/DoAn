@@ -94,6 +94,11 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.3.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.3\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
@@ -131,6 +136,13 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="zxing, Version=0.16.7.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.7\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.7.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.7\lib\net47\zxing.presentation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +493,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KetQuaHienMauController.cs" />
     <Compile Include="Controllers\LoginClientController.cs" />
+    <Compile Include="Controllers\MaQRController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\NhanVienYTeController.cs" />
     <Compile Include="Controllers\PhieuDKHMController.cs" />
@@ -562,6 +575,11 @@
     <Content Include="Views\KetQuaHienMau\Edit.cshtml" />
     <Content Include="Views\NhanVienYTe\CapQuyenNVYT.cshtml" />
     <Content Include="Views\NhanVienYTe\Details.cshtml" />
+    <Content Include="Views\MaQR\TaoMaQR.cshtml" />
+    <Content Include="Views\MaQR\Index.cshtml" />
+    <Content Include="Views\MaQR\ViewFile.cshtml" />
+    <Content Include="Views\chiTietDHM\CreateDV.cshtml" />
+    <Content Include="Views\chiTietDHM\Create2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -576,6 +594,7 @@
     <Folder Include="Assets\Admin\File\" />
     <Folder Include="FileUpLoad\benhvien\" />
     <Folder Include="FileUpLoad\dvlk\" />
+    <Folder Include="FileUpLoad\qrCoder\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

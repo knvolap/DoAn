@@ -97,8 +97,19 @@ CREATE TABLE DonViLienKet(
 )
 GO
 
+--Table 9
+CREATE TABLE chiTietDHM(
+    IdChiTietDHM	VARCHAR(20) PRIMARY KEY NOT NULL,
+	idDHM			VARCHAR(20) FOREIGN KEY REFERENCES dbo.DotHienMau(IdDHM) not null,
+	idDVLK			VARCHAR(20) FOREIGN KEY REFERENCES dbo.DonViLienKet(IdDVLK) not null,
+	idBenhVien		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.BenhVien(IdBenhVien) not null,
+	ngayDK			DATE  DEFAULT GETDATE()null,
+	trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
+)
+GO
 
---Table 9 PhieuYCNM
+
+--Table 10 PhieuYCNM
 CREATE TABLE PhieuYCNM(
 	IdPhieuYCNM		VARCHAR(20) PRIMARY KEY,
 	idNVYT			VARCHAR(20) not null,
@@ -124,16 +135,6 @@ CREATE TABLE ChiTietPhanCong(
 )
 GO
 
---Table 11 
-CREATE TABLE chiTietDHM(
-    IdChiTietDHM	VARCHAR(20) PRIMARY KEY NOT NULL,
-	idDHM		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DotHienMau(IdDHM) not null,
-	idDVLK		VARCHAR(20) FOREIGN KEY REFERENCES dbo.DonViLienKet(IdDVLK) not null,
-	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,
-	ngayDK		DATE  DEFAULT GETDATE()null,
-	trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
-)
-GO
 
 
 --Table 13 DotToChucHM
@@ -220,13 +221,15 @@ GO
 
 --Table 14 LichSuHienMau
 CREATE TABLE LichSuHienMau(
-	idTTCN			VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE not null,
-	idKQHM			VARCHAR(20) FOREIGN KEY REFERENCES dbo.KetQuaHienMau(IdKQHM) not null,
-	quaTang			NVARCHAR(150),
-	anhChungNhan    VARCHAR(50)  NULL,	 
+	idLSHM		VARCHAR(20) ,
+	idTTCN		VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE not null,
+	idKQHM		VARCHAR(20) FOREIGN KEY REFERENCES dbo.KetQuaHienMau(IdKQHM) not null,
+	quaTang		NVARCHAR(150),
+	maQR		VARCHAR(50)  NULL	,
+	anhChungNhan   VARCHAR(50)  NULL
 )
 GO
-
+ 
 
 --RÀNG BUỘC CÁC BẢNG--
 
@@ -303,7 +306,7 @@ ALTER TABLE ChiTietPhanCong
 	--	CONSTRAINT CK_CTPC_TrangThai	check(trangThai in ( N'Chờ duyệt' , N'Đã duyệt',N'Đã tiếp nhận', N'Hủy' ))	
 GO
 
--- BẢNG 11 DotToChucHM
+-- BẢNG  DotToChucHM
 ALTER TABLE DotToChucHM
 	ADD 
 		CONSTRAINT FK_DTCHM_IdDHM		FOREIGN KEY (idChiTietDHM) REFERENCES chiTietDHM(IdChiTietDHM)ON DELETE CASCADE ON UPDATE CASCADE,
@@ -416,9 +419,10 @@ GO
 --B5
 INSERT INTO dbo.BenhVien
 		(IdBenhVien, TenBenhVien,diaChi,Email,soDTBV,minhChung,trangThai)
-VALUES	('BV01',N'Chưa có'  ,N'Đà Nẵng' ,'demobv0@gmail.com','0900944488','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA',''),
-		('BV02',N'Ung Bướu Đà Nẵng',N'28  Hoàng Thị Loan  - Hòa Khánh - Đà Nẵng','benhvienungbuou@gmail.com','0888004468','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA',''),
-		('BV03',N'Đa Khoa Đà Nẵng',N'50 Cao Thắng - Hải Châu - Đà Nẵng' ,'bvdakhoa@gmail.com','0888004499','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','')
+VALUES	('BV01',N'Chưa có'  ,N'Đà Nẵng' ,'demobv0@gmail.com','0900944488','bvDN.pdf','1'),
+		('BV02',N'Ung Bướu Đà Nẵng',N'28  Hoàng Thị Loan  - Hòa Khánh - Đà Nẵng','benhvienungbuou@gmail.com','0888004468','bvDN.pdf','1'),
+		('BV03',N'Đa Khoa Đà Nẵng',N'50 Cao Thắng - Hải Châu - Đà Nẵng' ,'bvdakhoa@gmail.com','0888004499','bvDN.pdf','1'),
+		('BV04',N'Bệnh viện Đà Nẵng',N'50 Cao Thắng - Hải Châu - Đà Nẵng' ,'bvDN@gmail.com','0888004129','bvDN.pdf','1')
 GO
 
 ----B6
@@ -434,7 +438,7 @@ GO
 
 --B7
 INSERT INTO dbo.NhanVienYTe
-		(IdNVYT,idTTCN,idBenhVien,tenChuVu,khoa,trinhDo,trangThai )
+		(IdNVYT,idTTCN,idBenhVien,tenChucVu,khoa,trinhDoCM,trangThai )
 VALUES	('NV01','TT03','BV02',N'Trưởng khoa ',N'Khoa Truyền máu',N'Giáo sư ','1'),
 		('NV02','TT05','BV02',N'Phó Khoa',N'Khoa Truyền máu',N'Đại học','1')	,
         ('NV03','TT10','BV02',N'Bác sĩ',N'Khoa Truyền máu',N'Đại học','1')	,
@@ -458,8 +462,8 @@ GO
 INSERT INTO dbo.DonViLienKet
 		(IdDVLK, idTTCN,TenDonVi,diaChi,Email,soDT,minhChung,trangThai)
 VALUES	
-		('DV01','TT09',N'Chưa có',N'Đà Nẵng','demodv1@gmail.com','0900944411','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','1'),
-		('DV02','TT04',N'Đại học Sư Phạm Kỹ Thuật',N'48 Cao Thắng-Hải Châu-Đà Nẵng','SPKT@ute.udn.com','0900944499','https://images.app.goo.gl/C8uuYjnrWkNDF1sJA','1')		
+		('DV01','TT09',N'Chưa có',N'Đà Nẵng','demodv1@gmail.com','0900944411','dvlk/dvlk_kt.pdf','1'),
+		('DV02','TT04',N'Đại học Sư Phạm Kỹ Thuật',N'48 Cao Thắng-Hải Châu-Đà Nẵng','SPKT@ute.udn.com','0900944499','dvlk/dvlk_kt.pdf','1')		
 GO
 
 --B9
@@ -471,9 +475,9 @@ GO
 
 --B13
 INSERT INTO dbo.chiTietDHM
-		( IdChiTietDHM,idDHM,idDVLK,idNVYT,ngayDK,trangThai)
-VALUES	('CT01','DHM03','DV01','NV01' ,'20/7/2021','1' ),
-		('CT02','DHM04','DV01','NV01','20/11/2021','1' )
+		( IdChiTietDHM,idDHM,idDVLK,idBenhVien,ngayDK,trangThai)
+VALUES	('CT01','DHM03','DV01','BV02' ,'20/7/2021','1' ),
+		('CT02','DHM04','DV01','BV02','20/11/2021','1' )
 GO
 
 --B11

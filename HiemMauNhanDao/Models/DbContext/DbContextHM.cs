@@ -8,7 +8,7 @@ namespace Models.EF
     public partial class DbContextHM : DbContext
     {
         public DbContextHM()
-            : base("name=DbContextHM9")
+            : base("name=DbContextHM11")
         {
         }
 
@@ -47,6 +47,11 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<BenhVien>()
+                .HasMany(e => e.chiTietDHMs)
+                .WithRequired(e => e.BenhVien)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BenhVien>()
                 .HasMany(e => e.NhanVienYTes)
                 .WithOptional(e => e.BenhVien)
                 .WillCascadeOnDelete();
@@ -64,7 +69,7 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<chiTietDHM>()
-                .Property(e => e.idNVYT)
+                .Property(e => e.idBenhVien)
                 .IsUnicode(false);
 
             modelBuilder.Entity<DonViLienKet>()
@@ -155,11 +160,6 @@ namespace Models.EF
             modelBuilder.Entity<NhanVienYTe>()
                 .Property(e => e.idBenhVien)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<NhanVienYTe>()
-                .HasMany(e => e.chiTietDHMs)
-                .WithRequired(e => e.NhanVienYTe)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NhanVienYTe>()
                 .HasOptional(e => e.DSNVTH)
@@ -258,11 +258,19 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<LichSuHienMau>()
+                .Property(e => e.idLSHM)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LichSuHienMau>()
                 .Property(e => e.idTTCN)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LichSuHienMau>()
                 .Property(e => e.idKQHM)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LichSuHienMau>()
+                .Property(e => e.maQR)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LichSuHienMau>()

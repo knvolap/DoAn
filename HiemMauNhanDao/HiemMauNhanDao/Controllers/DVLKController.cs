@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class DVLKController : BaseController
+    public class DVLKController : BaseController2
     {
         DonViLienKetServices _dvlk = new DonViLienKetServices();
         private DbContextHM db = new DbContextHM();
@@ -35,13 +35,12 @@ namespace HiemMauNhanDao.Controllers
         public ActionResult DKDVLK(DonViLienKet donViLienKet, HttpPostedFileBase file)
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-            
-
+ 
                 if (_dvlk.isExistIDTK(donViLienKet.idTTCN))
                 {
                     SetAlert("Bạn đã đăng ký rồi", "error");
                     return RedirectToAction("DKDVLK", "DVLK");
-                }              
+                }
                 else if (_dvlk.isExistSDT(donViLienKet.soDT))
                 {
                     SetAlert("Số điện thoại đã tồn tại", "error");
@@ -51,24 +50,25 @@ namespace HiemMauNhanDao.Controllers
                 {
                     SetAlert("Email đã tồn tại", "error");
                     return RedirectToAction("DKDVLK", "DVLK");
-                }               
+                }
                 else
-                {                  
+                {
                     donViLienKet.idTTCN = session.UserID;
                     string duongDan = Server.MapPath("~/FileUpLoad/dvlk/");
                     string fileName = Path.GetFileName(file.FileName);
                     string fullDuongDan = Path.Combine(duongDan, fileName);
-                    file.SaveAs(fullDuongDan);                
+                    file.SaveAs(fullDuongDan);
 
                     _dvlk.AddDVLK(donViLienKet, fileName);
                     db.SaveChanges();
                     SetAlert("Đăng ký thành công", "success");
                     return RedirectToAction("DKDVLK", "DVLK");
                 }
-           
+          
                 SetAlert("Đăng ký thất bại!! Vui lòng kiểm tra lại thông tin nhập", "error");
                 return RedirectToAction("DKDVLK", "DVLK");
-            
+     
+          
         }
 
 
