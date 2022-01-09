@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Models.EF.chiTietDHM>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách đăng ký";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -43,7 +43,7 @@
                     <div class="col-md-6">
                         <div class="position-relative form-group">
                             <label for="exampleCity" class="">Nội dung</label>
-                            <input name="SearchString" value="@ViewBag.SearchStringBV" id="exampleCity" type="text" class="form-control">
+                            <input name="SearchString" value="@ViewBag.SearchStringCT" id="exampleCity" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -73,6 +73,9 @@
             <tr class="text-center">
                 <th>
                     STT
+                </th>               
+                <th>
+                    Tên đợt tổ chức
                 </th>
                 <th>
                     Tên bệnh viện
@@ -80,9 +83,7 @@
                 <th>
                     Tên đơn vị liên kết
                 </th>
-                <th>
-                    Tên đợt tổ chức
-                </th>
+
                 <th>
                     Ngày đăng ký
                 </th>
@@ -98,6 +99,10 @@
             <td>
                 @i
             </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.DotHienMau.TenDHM)
+            </td>
             <td>
 
                 @Html.DisplayFor(modelItem => item.BenhVien.TenBenhVien)
@@ -105,9 +110,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DonViLienKet.TenDonVi)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DotHienMau.TenDHM)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.ngayDK)
 
@@ -116,27 +119,15 @@
             <td class="text-center">
                 <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
 
-                @*@if (@item.trangThai == true )
-            {
-                <button class="mb-2 mr-2 btn-transition btn btn-outline-info" data-id= "@item.IdChiTietDHM">
-                   @Html.Raw(item.trangThai == true ? "Đã duyệt" : "Chưa duyệt")
-                </button>
-            }
-            @if (@item.trangThai == false)
-            {
-                <button class="mb-2 mr-2 btn-transition btn btn-outline-danger" data-id = "@item.IdChiTietDHM">
-                   @Html.Raw(item.trangThai == false ? "Chưa duyệt" : "Đã duyệt"  )
-                </button>
-            }*@
 
             </td>
             <td class="text-center">
                 <div class="mb-2 mr-2 dropright btn-group">
                     <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                     <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                        <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdChiTietDHM })</button>
                         <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdChiTietDHM })</button>
                         <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdChiTietDHM })</button>
-                        @* <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "EditBV", new { id = item.IdBenhVien })</button>*@
                         @* <button type="button" tabindex="0" class="dropdown-item pe-7s-cloud-download  "> @Html.ActionLink("Download", "Download", new { fileName = item.minhChung })</button>*@
 
                     </div>
@@ -144,10 +135,11 @@
             </td>
         </tr>
                 i++;
-            }
+ 
+}
         </table>
         <ul></ul>
-        @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV }))*@
+        @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringCT }))*@
     </div>
 </div>
 

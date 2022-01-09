@@ -11,28 +11,24 @@ using Models.Services;
 
 namespace HiemMauNhanDao.Areas.Admin.Controllers
 {
-    public class ChiTietDHMController : BaseController2
+    public class ChiTietDHMController : BaseController
     {
         private DbContextHM db = new DbContextHM();
+        ChiTietDHMServices _chitiet = new ChiTietDHMServices();
 
-        public ActionResult Index()
+        // GET: Admin/
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 15)
         {
-            var chiTietDHMs = db.chiTietDHMs.Include(c => c.DonViLienKet).Include(c => c.DotHienMau).Include(c => c.BenhVien);
+            var chiTietDHMs = db.chiTietDHMs.Include(c => c.BenhVien).Include(c => c.DonViLienKet).Include(c => c.DotHienMau);           
             return View(chiTietDHMs.ToList());
         }
 
+        [HttpGet]
         public ActionResult Details(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            chiTietDHM chiTietDHM = db.chiTietDHMs.Find(id);
-            if (chiTietDHM == null)
-            {
-                return HttpNotFound();
-            }
-            return View(chiTietDHM);
+            var model = _chitiet.GetByIdChiTietDHM(id);
+
+            return View(model);
         }
 
         public ActionResult Edit(string id)
@@ -41,15 +37,10 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            chiTietDHM chiTietDHM = db.chiTietDHMs.Find(id);
-            if (chiTietDHM == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien", chiTietDHM.idBenhVien);
-            ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "idTTCN", chiTietDHM.idDVLK);
-            ViewBag.idDHM = new SelectList(db.DotHienMaus, "IdDHM", "TenDHM", chiTietDHM.idDHM);
-            return View(chiTietDHM);
+            ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien" );
+            ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "TenDonVi" );
+            ViewBag.idDHM = new SelectList(db.DotHienMaus, "IdDHM", "TenDHM" );
+            return View(_chitiet.GetByIdChiTietDHM(id));
         }
 
         [HttpPost]
@@ -57,41 +48,41 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var ctdhm = _chitiet.GetByIdChiTietDHM(chiTietDHM.IdChiTietDHM);
+                ctdhm.IdChiTietDHM = ctdhm.IdChiTietDHM;
+                ctdhm.idDHM = ctdhm.idDHM;
+                ctdhm.idBenhVien = ctdhm.idBenhVien;
+                ctdhm.idDVLK = ctdhm.idDVLK;
+                ctdhm.ngayDK = ctdhm.ngayDK;
+                ctdhm.trangThai = ctdhm.trangThai;
                 db.Entry(chiTietDHM).State = EntityState.Modified;
                 db.SaveChanges();
+                SetAlert("Cập nhật thành công", "success");
                 return RedirectToAction("Index");
+
             }
-            ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien", chiTietDHM.idBenhVien);
-            ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "idTTCN", chiTietDHM.idDVLK);
-            ViewBag.idDHM = new SelectList(db.DotHienMaus, "IdDHM", "TenDHM", chiTietDHM.idDHM);
+            ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien" );
+            ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "TenDonVi" );
+            ViewBag.idDHM = new SelectList(db.DotHienMaus, "IdDHM", "TenDHM" );
             return View(chiTietDHM);
         }
 
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                _chitiet.Delete(id);
+                SetAlert("Xóa thành công", "success");
+                return RedirectToAction("Index");
             }
-            chiTietDHM chiTietDHM = db.chiTietDHMs.Find(id);
-            if (chiTietDHM == null)
+            else
             {
-                return HttpNotFound();
+                SetAlert("Xóa thất bại", "error");
+                return RedirectToAction("Index");
             }
-            return View(chiTietDHM);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            chiTietDHM chiTietDHM = db.chiTietDHMs.Find(id);
-            db.chiTietDHMs.Remove(chiTietDHM);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-
+            
         //xử lý duyệt = json
         [HttpPost]
         public JsonResult ChangeStatus(string id)

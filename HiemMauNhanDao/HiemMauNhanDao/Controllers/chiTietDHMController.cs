@@ -51,7 +51,7 @@ namespace HiemMauNhanDao.Controllers
                 db.SaveChanges();
 
                 SetAlert("Đăng ký thành công ", "success");
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
             ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "TenDonVi", chiTietDHM.idDVLK);
             return View(chiTietDHM);
@@ -83,7 +83,7 @@ namespace HiemMauNhanDao.Controllers
                 db.SaveChanges();
 
                 SetAlert("Đăng ký thành công ", "success");
-                return RedirectToAction("Create2");
+                return RedirectToAction("Index");
             }   
             ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien", chiTietDHM.idBenhVien);
             return View(chiTietDHM);

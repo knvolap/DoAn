@@ -146,6 +146,7 @@
     <Compile Include="EF\ThongTinCaNhan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BenhVienServices.cs" />
+    <Compile Include="Services\ChiTietDHMServices.cs" />
     <Compile Include="Services\DKDHMServices.cs" />
     <Compile Include="Services\DKTKServices.cs" />
     <Compile Include="Services\DonViLienKetServices.cs" />

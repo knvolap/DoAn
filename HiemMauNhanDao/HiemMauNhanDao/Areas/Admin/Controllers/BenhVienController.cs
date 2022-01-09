@@ -160,12 +160,6 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             return File(fileBytes, "applocation.octet-stream", fileName);
         }
 
-
-
-
-
-      
-
         public ActionResult Delete(string id)
         {
             if (ModelState.IsValid)
@@ -183,8 +177,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
 
         public ActionResult Details(string id)
         {
-            var model = _benhVien.GetByIdBenhVien1(id);
-           
+            var model = _benhVien.GetByIdBenhVien1(id);          
             return View(model);
         }
        
