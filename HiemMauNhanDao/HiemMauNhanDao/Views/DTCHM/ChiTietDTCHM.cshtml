@@ -19,127 +19,142 @@
     </div>
 </section>
 
+@using (Html.BeginForm("ChiTietDTCHM", "DTCHM", FormMethod.Get))
+{
+    <section class="blog_area single-post-area section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                   
+                    <div class="single-post">
+                        <div class="feature-img">
+                            <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="">
+                        </div>
+                        <div class="blog_details">
+                            Đợt tổ chức
+                            <a>
+                                @Html.DisplayFor(model => model.tenDotHienMau)
+                            </a>
+                            <ul class="blog-info-link mt-3 mb-4">
+                                <li><a href="#"><i class="far fa-comments"></i> Thời gian tổ chức: </a></li>
+                                <li><a href="#"><i class="far fa-user"></i> @Html.DisplayFor(model => model.ngayToChuc)  </a></li>
+                                <li><a href="#"><i class="far fa-comments"></i> Ngày đếm ngược</a></li>
+                            </ul>
+                            <div class="quote-wrapper">
+                                Thông tin
+                                <div class="quotes">
 
-<section class="blog_area single-post-area section_padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 posts-list">
-                <div class="single-post">
-                    <div class="feature-img">
-                        <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="">
-                    </div>
-                    <div class="blog_details">Đợt tổ chức
-                        <a>
-                            @Html.DisplayFor(model => model.tenDotHienMau)
-                        </a>
-                        <ul class="blog-info-link mt-3 mb-4">
-                            <li><a href="#"><i class="far fa-comments"></i> Thời gian tổ chức: </a></li>
-                            <li><a href="#"><i class="far fa-user"></i> @Html.DisplayFor(model => model.ngayToChuc)  </a></li>
-                            <li><a href="#"><i class="far fa-comments"></i> Ngày đếm ngược</a></li>
-                        </ul>
-                        <div class="quote-wrapper">
-                            Thông tin
-                            <div class="quotes">
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                <a>Nội dung: </a>  @Html.DisplayFor(model => model.noiDung)
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <a>Đối tượng thamg gia: </a>  @Html.DisplayFor(model => model.doiTuongThamGia)
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <a>Số lượng: </a>  @Html.DisplayFor(model => model.soLuong)
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <a>Địa chỉ tổ chức: </a>  @Html.DisplayFor(model => model.diaChiToChuc)
+                                            </th>
+                                        </tr>
 
-                                <table>
-                                    <tr>
-                                        <th>
-                                            <a>Nội dung: </a>  @Html.DisplayFor(model => model.noiDung)
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <a>Đối tượng thamg gia: </a>  @Html.DisplayFor(model => model.doiTuongThamGia)
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <a>Số lượng: </a>  @Html.DisplayFor(model => model.soLuong)
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <a>Địa chỉ tổ chức: </a>  @Html.DisplayFor(model => model.diaChiToChuc)
-                                        </th>
-                                    </tr>
-
-                                    <tr>
-                                        <th>
-                                            <a>Đơn vị chịu trách nhiệm: </a> Bệnh viện Đa Khoa
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <a>Liên hệ: </a>0999 8000
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <a>Thời gian đăng ký: </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <a>Từ ngày: </a> @Html.DisplayFor(model => model.ngayBatDauDK)
-                                            <a>- Đến ngày: </a> @Html.DisplayFor(model => model.ngayKetThucDK)
-                                        </th>
-                                    </tr>
-                                </table>
+                                        <tr>
+                                            <th>
+                                                <a>Đơn vị chịu trách nhiệm: </a> Bệnh viện Đa Khoa
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <a>Liên hệ: </a>0999 8000
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <a>Thời gian đăng ký: </a>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <a>Từ ngày: </a> @Html.DisplayFor(model => model.ngayBatDauDK)
+                                                <a>- Đến ngày: </a> @Html.DisplayFor(model => model.ngayKetThucDK)
+                                            </th>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <ul class="blog-info-link" style="margin-top:10px">
-                        @{
-                            var session7 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-                        }
-                        @if (session7 == null)
+                        @if (Model.ngayKetThucDK < DateTime.Now)
                         {
-                            <li>
-                                <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
-                            </li>
+                            <ul class="blog-info-link" style="margin-top:10px">
+                                <li>
+                                    <a class="genric-btn danger-border radius">Hết hạn đăng ký</a>
+                                </li>
+                            </ul>
                         }
                         else
                         {
-                            <li>
-                                <a class="genric-btn info radius" href="@Url.Action("DangKyHiemMau", "DTCHM")">Đăng ký</a>
-                            </li>
+                            <ul class="blog-info-link" style="margin-top:10px">
+                                @{
+                                    var session7 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+                                }
+                                @if (session7 == null)
+                                {
+                                    <li>
+                                        <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="genric-btn info radius" href="@Url.Action("DangKyHiemMau", "DTCHM")">Đăng ký</a>
+                                    </li>
+                                }
+                                @*@if (session7.AuthorID == "Q04")
+                {
+                    <li>
+                        <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Tài khoản không hợp lệ</a> (vui lòng sử dụng tài khoản cá nhân)
+                    </li>
+                }*@
+                            </ul>
                         }
-                        @*@if (session7.AuthorID == "Q04")
-                        {
-                            <li>
-                                <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Tài khoản không hợp lệ</a> (vui lòng sử dụng tài khoản cá nhân)
-                            </li>
-                        }*@
-                    </ul>
-                   @* <a href="  @Url.Action("DangKyHiemMau","DTCHM")/" class="genric-btn info radius">Đăng ký</a>*@
+
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="blog_right_sidebar">
-                    <aside class="single_sidebar_widget search_widget">
-                        <form action="#">
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder='Search Keyword'
-                                           onfocus="this.placeholder = ''"
-                                           onblur="this.placeholder = 'Nhập nội dung'">
-                                    <div class="input-group-append">
-                                        <button class="btn" type="button"><i class="ti-search"></i></button>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <form action="#">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder='Search Keyword'
+                                               onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = 'Nhập nội dung'">
+                                        <div class="input-group-append">
+                                            <button class="btn" type="button"><i class="ti-search"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button class="button rounded-0 primary-bg text-white w-100 btn_1"
-                                    type="submit">
-                                Tìm kiếm
-                            </button>
-                        </form>
-                    </aside>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1"
+                                        type="submit">
+                                    Tìm kiếm
+                                </button>
+                            </form>
+                        </aside>
 
-                    @RenderPage("_RightMenu.cshtml")
+                        @RenderPage("_RightMenu.cshtml")
 
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+                                }

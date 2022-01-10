@@ -60,6 +60,8 @@ namespace Models.ViewModel
         public string MSD { get; set; }
         public string phanUng { get; set; }
         public DateTime? thoiGianLayMau { get; set; }
+        public DateTime? thoiGianKham { get; set; }
+        public DateTime? thoiGianXN{ get; set; }
         public string ghiChu { get; set; }
         public string trangThai2 { get; set; }
 

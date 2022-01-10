@@ -30,88 +30,219 @@
                     <div class="blog_left_sidebar">
                         @foreach (var item in listDTCHM)
                         {
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="" href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">
-                                    <a class="blog_item_date">
-                                        <p>Thời gian: @Html.DisplayFor(model => item.ngayToChuc)</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <table>
-                                        <tr>
-                                            <th style="width:400px">
-                                                Đợt tổ chức:
-                                                <a href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">@item.tenDotHienMau</a>
-                                            </th>
-                                            <th class="col-lg-2">  </th>
-                                                
-                                            <th >
-                                                <a class="genric-btn link circle" href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">Xem chi tiết</a>                                            
-                                            </th>
+                            if (item.ngayKetThucDK < DateTime.Now)
+                            {
+                                <article class="blog_item">
+                                    <div class="blog_item_img">
+                                        <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="" href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">
+                                        <a class="blog_item_date">
+                                            <p>Thời gian: @Html.DisplayFor(model => item.ngayToChuc)</p>
+                                        </a>
+                                    </div>
+                                    <div class="blog_details">
+                                        <table>
+                                            <tr>
+                                                <th style="width:400px">
+                                                    Đợt tổ chức:
+                                                    <a href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">@item.tenDotHienMau</a>
+                                                </th>
+                                                <th class="col-lg-2">  </th>
 
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                Nội dung:  <a> @item.noiDung</a>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                Đối tượng tham gia:  <a>@item.doiTuongThamGia</a>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                Địa chỉ:  <a>@item.diaChiToChuc</a>
-                                            </th>
+                                                <th>
+                                                    <a class="genric-btn link circle" href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">Xem chi tiết</a>
+                                                </th>
 
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th>
-                                                Thời gian đăng ký:
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                Từ ngày:  <a> @Html.DisplayFor(model => item.ngayBatDauDK)</a>
-                                            </th>
-                                            <th>
-                                                - Đến ngày: <a> @Html.DisplayFor(model => item.ngayKetThucDK) </a>
-                                            </th>
-                                        </tr>
-                                       
-                                    </table>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Nội dung:  <a> @item.noiDung</a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Đối tượng tham gia:  <a>@item.doiTuongThamGia</a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Địa chỉ:  <a>@item.diaChiToChuc</a>
+                                                </th>
 
-                                    <ul class="blog-info-link" style="margin-top:10px">
-                                        @{
-                                            var session7 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-                                        }
-                                        @if (session7 == null)
-                                        {
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    Thời gian đăng ký:
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Từ ngày:  <a> @Html.DisplayFor(model => item.ngayBatDauDK)</a>
+                                                </th>
+                                                <th>
+                                                    - Đến ngày: <a> @Html.DisplayFor(model => item.ngayKetThucDK) </a>
+                                                </th>
+                                            </tr>
+
+                                        </table>
+
+                                        <ul class="blog-info-link" style="margin-top:10px">
                                             <li>
-                                                <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
+                                                <button class="genric-btn danger radius">Hết hạn đăng ký</button>
                                             </li>
+                                        </ul>
+                                    </div>
+                                </article>
+                            }
 
-                                        }
-                                        else
-                                        {
-                                            <li>
-                                                <a class="genric-btn info radius" href="@Url.Action("DangKyHiemMau", "DTCHM")">Đăng ký</a>
-                                            </li>
-                                        }
-                                        @*@if (session7.AuthorID == "Q04")
-                                        {
-                                            <li>
-                                                <a class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Tài khoản không hợp lệ</a> (vui lòng sử dụng tài khoản cá nhân)
-                                            </li>
-                                        }*@
-                                    </ul>
-                                </div>
-                            </article>
+                            else if (item.trangThai == "Chờ duyệt")
+                            {
+                                <article class="blog_item">
+                                    <div class="blog_item_img">
+                                        <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="" href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">
+                                        <a class="blog_item_date">
+                                            <p>Thời gian: @Html.DisplayFor(model => item.ngayToChuc)</p>
+                                        </a>
+                                    </div>
+                                    <div class="blog_details">
+                                        <table>
+                                            <tr>
+                                                <th style="width:400px">
+                                                    Đợt tổ chức:
+                                                    <a href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">@item.tenDotHienMau</a>
+                                                </th>
+                                                <th class="col-lg-2">  </th>
 
+                                                <th>
+                                                    <a class="genric-btn link circle" href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">Xem chi tiết</a>
+                                                </th>
+
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Nội dung:  <a> @item.noiDung</a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Đối tượng tham gia:  <a>@item.doiTuongThamGia</a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Địa chỉ:  <a>@item.diaChiToChuc</a>
+                                                </th>
+
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    Thời gian đăng ký:
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Từ ngày:  <a> @Html.DisplayFor(model => item.ngayBatDauDK)</a>
+                                                </th>
+                                                <th>
+                                                    - Đến ngày: <a> @Html.DisplayFor(model => item.ngayKetThucDK) </a>
+                                                </th>
+                                            </tr>
+
+                                        </table>
+
+                                        <ul class="blog-info-link" style="margin-top:10px">
+                                            <li>
+                                                <button class="genric-btn warning radius">Chưa duyệt</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </article>
+                            }
+                            else
+                            {
+                                <article class="blog_item">
+                                    <div class="blog_item_img">
+                                        <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="" href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">
+                                        <a class="blog_item_date">
+                                            <p>Thời gian: @Html.DisplayFor(model => item.ngayToChuc)</p>
+                                        </a>
+                                    </div>
+                                    <div class="blog_details">
+                                        <table>
+                                            <tr>
+                                                <th style="width:400px">
+                                                    Đợt tổ chức:
+                                                    <a href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">@item.tenDotHienMau</a>
+                                                </th>
+                                                <th class="col-lg-2">  </th>
+
+                                                <th>
+                                                    <a class="genric-btn link circle" href="@Url.Action("ChiTietDTCHM","DTCHM", new { id = item.IdDTCHM })">Xem chi tiết</a>
+                                                </th>
+
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Nội dung:  <a> @item.noiDung</a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Đối tượng tham gia:  <a>@item.doiTuongThamGia</a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Địa chỉ:  <a>@item.diaChiToChuc</a>
+                                                </th>
+
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    Thời gian đăng ký:
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Từ ngày:  <a> @Html.DisplayFor(model => item.ngayBatDauDK)</a>
+                                                </th>
+                                                <th>
+                                                    - Đến ngày: <a> @Html.DisplayFor(model => item.ngayKetThucDK) </a>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <ul class="blog-info-link" style="margin-top:10px">
+                                            @{
+                                                var session7 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+                                            }
+                                            @if (session7 == null)
+                                            {
+                                                <li>
+                                                    <button class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</button>
+                                                </li>
+
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <button class="genric-btn info radius" href="@Url.Action("DangKyHiemMau", "DTCHM")">Đăng ký</button>
+                                                </li>
+                                            }
+                                            @if (session7.AuthorID == "Q04" || session7.AuthorID == "Q02" || session7.AuthorID == "Q01")
+                                            {
+                                                <li>
+                                                    <button class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Tài khoản không hợp lệ</button> (vui lòng sử dụng tài khoản cá nhân)
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </article>
+                            }
                         }
                     </div>
                     <ul class="pagination">

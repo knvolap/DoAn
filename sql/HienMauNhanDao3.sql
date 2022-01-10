@@ -1,14 +1,14 @@
 ﻿USE master
 GO
-IF EXISTS(SELECT name FROM sysdatabases WHERE name ='HienMauNhanDao')
-DROP DATABASE HienMauNhanDao
+IF EXISTS(SELECT name FROM sysdatabases WHERE name ='HienMauNhanDao3')
+DROP DATABASE HienMauNhanDao3
 go
 
 ----Bắt đầu ----
 
-CREATE DATABASE HienMauNhanDao
+CREATE DATABASE HienMauNhanDao3
 GO
-USE HienMauNhanDao
+USE HienMauNhanDao3
 GO
 
 SET DATEFORMAT dmy
@@ -184,6 +184,8 @@ CREATE TABLE PhieuDKHM(
 )
 GO
 
+ 
+
 --Table 14 KetQuaHienMau
 CREATE TABLE KetQuaHienMau(
 	IdKQHM			VARCHAR(20) PRIMARY KEY,
@@ -194,6 +196,7 @@ CREATE TABLE KetQuaHienMau(
 	tgKham			DATETIME null,
 	tgXetNghiem		DATETIME null,
 	tgLayMau		DATETIME null,
+
 	nhomMau			VARCHAR(10)  NULL,
 	canNang			float  null,
 	machMau			VARCHAR(10)  null,
@@ -210,9 +213,6 @@ CREATE TABLE KetQuaHienMau(
 	trangThai		NVARCHAR(50) ---Cập nhật xong, đang cập nhật , chưa cập nhật
 )
 GO
-
-
-
 
 --Table 13 DanhSachNhanVienThucHien
 CREATE TABLE DSNVTH(

@@ -73,7 +73,10 @@
             <tr class="text-center">
                 <th>
                     STT
-                </th>               
+                </th>
+                <th>
+                    Mã đăng ký
+                </th>
                 <th>
                     Tên đợt tổ chức
                 </th>
@@ -95,48 +98,50 @@
             @{ var i = 1;}
             @foreach (var item in Model)
             {
-        <tr>
-            <td>
-                @i
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.DotHienMau.TenDHM)
-            </td>
-            <td>
+                <tr class ="text-center">
+                    <td>
+                        @i
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdChiTietDHM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DotHienMau.TenDHM)
+                    </td>
+                    <td>
 
-                @Html.DisplayFor(modelItem => item.BenhVien.TenBenhVien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonViLienKet.TenDonVi)
-            </td>
+                        @Html.DisplayFor(modelItem => item.BenhVien.TenBenhVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DonViLienKet.TenDonVi)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.ngayDK)
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ngayDK)
 
-            </td>
-            @Html.HiddenFor(modelItem => item.IdChiTietDHM)
-            <td class="text-center">
-                <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
+                    </td>
+                    @Html.HiddenFor(modelItem => item.IdChiTietDHM)
+                    <td class="text-center">
+                        <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
 
 
-            </td>
-            <td class="text-center">
-                <div class="mb-2 mr-2 dropright btn-group">
-                    <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                        <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdChiTietDHM })</button>
-                        <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdChiTietDHM })</button>
-                        <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdChiTietDHM })</button>
-                        @* <button type="button" tabindex="0" class="dropdown-item pe-7s-cloud-download  "> @Html.ActionLink("Download", "Download", new { fileName = item.minhChung })</button>*@
+                    </td>
+                    <td class="text-center">
+                        <div class="mb-2 mr-2 dropright btn-group">
+                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdChiTietDHM })</button>
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdChiTietDHM })</button>
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdChiTietDHM })</button>
+                                @* <button type="button" tabindex="0" class="dropdown-item pe-7s-cloud-download  "> @Html.ActionLink("Download", "Download", new { fileName = item.minhChung })</button>*@
 
-                    </div>
-                </div>
-            </td>
-        </tr>
-                i++;
- 
-}
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+                    i++;
+
+                }
         </table>
         <ul></ul>
         @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringCT }))*@

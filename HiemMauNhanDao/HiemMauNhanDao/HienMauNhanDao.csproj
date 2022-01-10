@@ -470,6 +470,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController3.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController2.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\BenhVienController.cs" />
@@ -578,7 +579,6 @@
     <Content Include="Views\MaQR\TaoMaQR.cshtml" />
     <Content Include="Views\MaQR\Index.cshtml" />
     <Content Include="Views\MaQR\ViewFile.cshtml" />
-    <Content Include="Views\chiTietDHM\CreateDV.cshtml" />
     <Content Include="Views\chiTietDHM\Create2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

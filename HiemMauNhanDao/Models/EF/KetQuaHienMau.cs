@@ -23,17 +23,23 @@ namespace Models.EF
         [StringLength(20)]
         public string idPDKHM { get; set; }
 
+        [StringLength(20)]
+        public string idnguoiKham { get; set; }
+
+        [StringLength(20)]
+        public string idnguoiXN { get; set; }
+
+        [StringLength(20)]
+        public string idnguoiLayMau { get; set; }
+
+        public DateTime? tgKham { get; set; }
+
+        public DateTime? tgXetNghiem { get; set; }
+
+        public DateTime? tgLayMau { get; set; }
+
         [StringLength(10)]
         public string nhomMau { get; set; }
-
-        [StringLength(50)]
-        public string nguoiKham { get; set; }
-
-        [StringLength(50)]
-        public string nguoiXN { get; set; }
-
-        [StringLength(50)]
-        public string nguoiLayMau { get; set; }
 
         public double? canNang { get; set; }
 
@@ -65,13 +71,17 @@ namespace Models.EF
         [StringLength(50)]
         public string phanUng { get; set; }
 
-        public DateTime? thoiGianLayMau { get; set; }
-
         [StringLength(50)]
         public string ghiChu { get; set; }
 
         [StringLength(50)]
         public string trangThai { get; set; }
+
+        public virtual NhanVienYTe NhanVienYTe { get; set; }
+
+        public virtual NhanVienYTe NhanVienYTe1 { get; set; }
+
+        public virtual NhanVienYTe NhanVienYTe2 { get; set; }
 
         public virtual PhieuDKHM PhieuDKHM { get; set; }
 

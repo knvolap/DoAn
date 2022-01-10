@@ -8,7 +8,7 @@ namespace Models.EF
     public partial class DbContextHM : DbContext
     {
         public DbContextHM()
-            : base("name=DbContextHM11")
+            : base("name=DbContextHM12")
         {
         }
 
@@ -22,6 +22,7 @@ namespace Models.EF
         public virtual DbSet<PhieuDKHM> PhieuDKHMs { get; set; }
         public virtual DbSet<PhieuYCNM> PhieuYCNMs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ThongTinCaNhan> ThongTinCaNhans { get; set; }
         public virtual DbSet<ChiTietPhanCong> ChiTietPhanCongs { get; set; }
         public virtual DbSet<DSNVTH> DSNVTHs { get; set; }
@@ -133,6 +134,18 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<KetQuaHienMau>()
+                .Property(e => e.idnguoiKham)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<KetQuaHienMau>()
+                .Property(e => e.idnguoiXN)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<KetQuaHienMau>()
+                .Property(e => e.idnguoiLayMau)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<KetQuaHienMau>()
                 .Property(e => e.nhomMau)
                 .IsUnicode(false);
 
@@ -160,6 +173,21 @@ namespace Models.EF
             modelBuilder.Entity<NhanVienYTe>()
                 .Property(e => e.idBenhVien)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<NhanVienYTe>()
+                .HasMany(e => e.KetQuaHienMaus)
+                .WithOptional(e => e.NhanVienYTe)
+                .HasForeignKey(e => e.idnguoiKham);
+
+            modelBuilder.Entity<NhanVienYTe>()
+                .HasMany(e => e.KetQuaHienMaus1)
+                .WithOptional(e => e.NhanVienYTe1)
+                .HasForeignKey(e => e.idnguoiXN);
+
+            modelBuilder.Entity<NhanVienYTe>()
+                .HasMany(e => e.KetQuaHienMaus2)
+                .WithOptional(e => e.NhanVienYTe2)
+                .HasForeignKey(e => e.idnguoiLayMau);
 
             modelBuilder.Entity<NhanVienYTe>()
                 .HasOptional(e => e.DSNVTH)

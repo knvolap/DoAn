@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class DTCHMController : BaseController2
+    public class DTCHMController : Controller
     {
         TCDHMServices _DkDHM = new TCDHMServices();
         // GET: DotHienMau

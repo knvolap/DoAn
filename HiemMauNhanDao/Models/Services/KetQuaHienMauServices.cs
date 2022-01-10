@@ -103,9 +103,9 @@ namespace Models.Services
                 IdKQHM        =x.kqhm.IdKQHM,
                 nhomMau       = x.kqhm.nhomMau,
                 trangThai2     = x.kqhm.trangThai,
-                nguoiKham        =x.kqhm.nguoiKham       ,
-                nguoiXN          =x.kqhm.nguoiXN         ,
-                nguoiLayMau      =x.kqhm.nguoiLayMau     ,
+                nguoiKham        =x.kqhm.idnguoiKham       ,
+                nguoiXN          =x.kqhm.idnguoiXN         ,
+                nguoiLayMau      =x.kqhm.idnguoiLayMau     ,
                 canNang          =x.kqhm.canNang         ,
                 machMau          =x.kqhm.machMau         ,
                 tinhTrangLS      =x.kqhm.tinhTrangLS     ,
@@ -117,7 +117,9 @@ namespace Models.Services
                 HBV              =x.kqhm.HBV             ,
                 MSD              =x.kqhm.MSD             ,
                 phanUng          =x.kqhm.phanUng         ,
-                thoiGianLayMau   =x.kqhm.thoiGianLayMau  ,
+                thoiGianLayMau   =x.kqhm.tgLayMau        ,
+                thoiGianKham     = x.kqhm.tgKham,
+                thoiGianXN       = x.kqhm.tgXetNghiem,
                 ghiChu           =x.kqhm.ghiChu          ,
             }).SingleOrDefault();
             return result;

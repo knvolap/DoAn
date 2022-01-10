@@ -19,7 +19,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         // GET: Admin/
         public ActionResult Index(string searchString, int page = 1, int pageSize = 15)
         {
-            var chiTietDHMs = db.chiTietDHMs.Include(c => c.BenhVien).Include(c => c.DonViLienKet).Include(c => c.DotHienMau);           
+            var chiTietDHMs = db.chiTietDHMs.OrderByDescending(c=>c.IdChiTietDHM).Include(c => c.BenhVien).Include(c => c.DonViLienKet).Include(c => c.DotHienMau);           
             return View(chiTietDHMs.ToList());
         }
 

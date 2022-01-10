@@ -50,8 +50,11 @@ namespace Models.Services
             {
                 model = model.Where(x => x.IdDHM.Contains(keysearch) || x.TenDHM.Contains(keysearch)  || x.noiDung.Contains(keysearch));
             }
-            return model.OrderByDescending(x => x.IdDHM).ThenBy(x => x.TenDHM).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.IdDHM).ThenBy(x => x.tgKetThuc).ToPagedList(page, pageSize);
         }
+
+    
+
 
         public List<chiTietDHM> ListAllChiTietDHM()
         {
@@ -59,7 +62,7 @@ namespace Models.Services
         }
         public List<DotHienMau> GetDotHienMaus()
         {
-            return db.DotHienMaus.ToList();
+            return db.DotHienMaus.OrderByDescending(x => x.IdDHM).ThenBy(x => x.TenDHM).ToList();
         }
         public List<DonViLienKet> GetDonViLienKets()
         {

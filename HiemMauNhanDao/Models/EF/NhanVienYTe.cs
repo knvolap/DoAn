@@ -12,6 +12,9 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhanVienYTe()
         {
+            KetQuaHienMaus = new HashSet<KetQuaHienMau>();
+            KetQuaHienMaus1 = new HashSet<KetQuaHienMau>();
+            KetQuaHienMaus2 = new HashSet<KetQuaHienMau>();
             PhieuYCNMs = new HashSet<PhieuYCNM>();
         }
 
@@ -37,6 +40,15 @@ namespace Models.EF
         public bool trangThai { get; set; }
 
         public virtual BenhVien BenhVien { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KetQuaHienMau> KetQuaHienMaus { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KetQuaHienMau> KetQuaHienMaus1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KetQuaHienMau> KetQuaHienMaus2 { get; set; }
 
         public virtual DSNVTH DSNVTH { get; set; }
 
