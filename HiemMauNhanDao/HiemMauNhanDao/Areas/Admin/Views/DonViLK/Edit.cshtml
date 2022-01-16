@@ -4,128 +4,142 @@
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
 
 <h2>Thông tin người đăng ký</h2>
 @using (Html.BeginForm("Edit", "DonViLK", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-<div class="card-body">
-    <hr />
-    <div class="dl-horizontal">
-        <div class="row">
-            <div class="col-md-6">
-                <dl class="dl-horizontal">
-                    <dt>
-                        Mã mã người dùng
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.IdTTCN, new { htmlAttributes = new { @class = "form-control",  @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Tên người đăng ký
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        CCCD
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Số điện thoại
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Email
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Ngày sinh
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Địa chỉ tạm trú
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-
-                    <dt>
-                        Nâng cấp Quyền
-                    </dt>
-                    <dd>
-                        @Html.DropDownList("IdQuyen", ViewBag.IdQuyen as SelectList, htmlAttributes: new {   })
-                    </dd>
-                    <dt>
-                        Trạng thái
-                    </dt>
-                    <dd>
-                        @*@Html.DisplayFor(model => model.Status)*@
-                        @Html.DropDownListFor(modelItem => modelItem.trangThai, new[] {
-                       new SelectListItem { Text = "Hoạt động", Value = "True" },
-                       new SelectListItem { Text = "Không hoạt động", Value = "False" } },
-                        new { @disabled = "disabled" })
-                    </dd>
-                </dl>
+    <div class="panel-body">
+        @if (TempData["AlertMessage"] != null)
+        {
+            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                @TempData["AlertMessage"]
             </div>
-            <div class="col-md-6">
-                <dl class="dl-horizontal">
-                    <dt>
-                        Trình độ
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.trinhDo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Nghề nghiệp
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.ngheNghiep, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Cơ quan
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.coQuanTH, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
+        }
+    </div>
+    <div class="card-body">
+        <hr />
+        <div class="dl-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Mã mã người dùng
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.IdTTCN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Tên người đăng ký
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            CCCD
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Số điện thoại
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Email
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Ngày sinh
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Địa chỉ tạm trú
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
 
-                    <dt>
-                        Số lần hiến máu
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.soLanHM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Nhóm máu
-                    </dt>
-                    <dd>
-                        @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </dd>
-                    <dt>
-                        Minh chứng
-                    </dt>
-                    @Html.HiddenFor(model => model.password)
-                    @Html.HiddenFor(model => model.gioiTinh)
+                        <dt>
+                            Cấp Quyền
+                        </dt>
+                        <dd>
+                            @Html.DropDownListFor(model => model.idQuyen, new[] { new SelectListItem { Text = "Đơn vị liên kết", Value = "Q03" }, new SelectListItem { Text = "Người dùng", Value = "Q06" } },
+                                                     new { @class = "form-control" })
+                            @*@Html.DropDownList("IdQuyen", ViewBag.IdQuyen as SelectList, htmlAttributes: new { })*@
+                        </dd>
+                        <dt>
+                            Trạng thái
+                        </dt>
+                        <dd>
+                            @*@Html.DisplayFor(model => model.Status)*@
+                            @Html.DropDownListFor(modelItem => modelItem.trangThai, new[] {
+                           new SelectListItem { Text = "Hoạt động", Value = "True" },
+                           new SelectListItem { Text = "Không hoạt động", Value = "False" } },
+                            new { @disabled = "disabled" })
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Trình độ
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.trinhDo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Nghề nghiệp
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.ngheNghiep, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Cơ quan
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.coQuanTH, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
 
-                    <lable>Tải file về để xem rõ hơn</lable>
-                </dl>
+                        <dt>
+                            Số lần hiến máu
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.soLanHM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Nhóm máu
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Minh chứng
+                        </dt>
+                        @Html.HiddenFor(model => model.password)
+                        @Html.HiddenFor(model => model.gioiTinh)                                             
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="mt-2 btn btn-primary"> <i class="fa fa-save" type="submit"></i> Cấp quyền</button>
             </div>
         </div>
     </div>
-    <div class="form-group text-center">
-        <div class="col-md-offset-2 col-md-10">
-            <button class="mt-2 btn btn-primary"> <i class="fa fa-save" type="submit"></i> Cấp quyền</button>
-        </div>
-    </div>
-</div>
 
 }
 <ul></ul>

@@ -30,14 +30,12 @@
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
-
             <div class="col-lg-4">
                 @RenderPage("_leftMenu2.cshtml")
             </div>
-
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="col-lg-12 col-md-8">
-                    <h3 class="mb-30">Danh sách đợt tổ chức </h3>
+                    <h3 class="mb-30">Danh sách bài đăng </h3>
                     <div class="panel-body">
                         @if (TempData["AlertMessage"] != null)
                         {
@@ -53,26 +51,15 @@
                             <form class="">
                                 <div class="form-row">
                                     <table class="mt-10">
-                                        <th style="width:400px">
-                                            <input type="email" name="EMAIL" placeholder="Nội dung"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung '" required
-                                                   class="single-input">
-                                        </th>
-                                        @*<th class="col-lg-6">
-                                <div>
-                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                    <div class="form-select" id="default-select_1">
-                                        <select>
-                                            <option value=" 1">Đợt tổ chức</option>
-                                            <option value="1">Chưa chọn</option>
-                                            <option value="1">Hiến máu nhân đạo tháng 10</option>
-                                            <option value="1">Hiến máu nhân đạo tháng 11</option>
-                                            <option value="1">Hiến máu nhân đạo tháng 12</option>
-                                            <option value="1">Hiến máu nhân đạo tháng 01</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </th>*@
+                                        <tr>
+                                            <th style="width:400px">
+                                                <input type="email" name="EMAIL" placeholder="Nội dung"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung '" required
+                                                       class="single-input">
+                                            </th>
+                                        </tr>
+                                       
+                                    
                                     </table>
 
                                 </div>
@@ -141,12 +128,7 @@
                                         <td>
                                             @item.trangThai
                                         </td>
-                                        @*<td>
-                                <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                    @(item.trangThai == true ? "Active" : "Blocked")
-                                </button>
-                            </td>*@
-                                        @*  @item.tgKetThuc*@
+                                   
                                         <td>
 
                                             <div>
@@ -168,26 +150,7 @@
                                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV, @class = "page-link" }))
                             </ul>
                         </nav>
-                        @*<nav class="blog-pagination justify-content-center d-flex">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a href="#" class="page-link" aria-label="Previous">
-                            <i class="ti-angle-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a href="#" class="page-link">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link" aria-label="Next">
-                            <i class="ti-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>*@
+                        
                     </div>
             </div>
         </div>

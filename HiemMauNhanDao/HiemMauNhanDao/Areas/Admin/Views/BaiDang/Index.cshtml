@@ -1,6 +1,8 @@
-﻿@model IEnumerable<Models.EF.chiTietDHM>
+﻿@model PagedList.IPagedList<Models.ViewModel.ChiTietvsToChucHMView>
+@using PagedList.Mvc
+@using System.Data;
 @{
-    ViewBag.Title = "Danh sách đăng ký";
+    ViewBag.Title = "Danh sách bài đăng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +13,7 @@
             <i class="pe-7s-menu icon-gradient bg-ripe-malin"></i>
         </div>
         <div>
-            Danh sách đăng ký đợt hiến máu
+            Danh sách bài đăng
             <div class="page-title-subheading">
             </div>
         </div>
@@ -32,7 +34,7 @@
     }
 </div>
 
-@using (Html.BeginForm("Index", "BenhVien", FormMethod.Get))
+@using (Html.BeginForm("Index", "BaiDang", FormMethod.Get))
 {
     @*Tìm Kiếm nhân viên*@
     <div class="main-card mb-3 card">
@@ -43,7 +45,7 @@
                     <div class="col-md-6">
                         <div class="position-relative form-group">
                             <label for="exampleCity" class="">Nội dung</label>
-                            <input name="SearchString" value="@ViewBag.SearchStringCT" id="exampleCity" type="text" class="form-control">
+                            <input name="searchString1" value="@ViewBag.SearchStringBD" id="exampleCity" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -54,17 +56,16 @@
 }
 
 
-@*Thêm đợt*@
-<!--<ul></ul>
+<ul></ul>
 <div class="app-header-left">
     <ul class="header-menu nav">
         <li class="btn btn-success">
-            <a href="@Url.Action("CreateBV", "BenhVien")" style="color:white">
-                <i class="nav-link-icon fa fa-edit">   Thêm bệnh viện</i>
+            <a href="@Url.Action("Create", "DonViLK")" style="color:white">
+                <i class="nav-link-icon fa fa-edit">   Thêm đơn vị</i>
             </a>
         </li>
     </ul>
-</div>-->
+</div>
 
 <ul></ul>
 <div class="main-card mb-3 card">
@@ -75,20 +76,19 @@
                     STT
                 </th>
                 <th>
-                    Mã đăng ký
+                    Đợt hiếm máu
                 </th>
                 <th>
-                    Tên đợt tổ chức
+                    Tên bài đăng
                 </th>
                 <th>
-                    Tên bệnh viện
+                    Bệnh viện
                 </th>
                 <th>
-                    Tên đơn vị liên kết
+                    Đơn vị
                 </th>
-
                 <th>
-                    Ngày đăng ký
+                    Ngày tổ chức
                 </th>
                 <th>
                     Trạng thái
@@ -98,53 +98,50 @@
             @{ var i = 1;}
             @foreach (var item in Model)
             {
-                <tr class ="text-center">
+                <tr class="text-center">
                     <td>
                         @i
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdChiTietDHM)
+                        @item.tenDHM
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DotHienMau.TenDHM)
+                        @item.tenDTCHM
                     </td>
                     <td>
+                        @item.tenBenhVien
+                    </td>
+                    <td>
+                        @item.tenDVLK
+                    </td>
+                    <td>
+                        @item.ngayToChuc
+                    </td>
 
-                        @Html.DisplayFor(modelItem => item.BenhVien.TenBenhVien)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DonViLienKet.TenDonVi)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ngayDK)
-
-                    </td>
-                    @Html.HiddenFor(modelItem => item.IdChiTietDHM)
                     <td class="text-center">
-                        <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
+                        @item.trangThai
                     </td>
                     <td class="text-center">
                         <div class="mb-2 mr-2 dropright btn-group">
                             <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                             <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdChiTietDHM })</button>
-                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdChiTietDHM })</button>
-                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdChiTietDHM })</button>
-                                @* <button type="button" tabindex="0" class="dropdown-item pe-7s-cloud-download  "> @Html.ActionLink("Download", "Download", new { fileName = item.minhChung })</button>*@
-
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Cập nhật", "Edit", new { id = item.IdDTCHM })</button>
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
+                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
                             </div>
                         </div>
-                    </td>
-                    </tr>
-                    i++;
 
-                }
+                    </td>
+                </tr>
+                i++;
+            }
         </table>
         <ul></ul>
-        @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringCT }))*@
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBD }))
     </div>
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="~/Assets/Admin/scripts/duyetDHMController.js"></script>
+<script src="~/Assets/Admin/scripts/duyetBaiDang.js"></script>
+
+

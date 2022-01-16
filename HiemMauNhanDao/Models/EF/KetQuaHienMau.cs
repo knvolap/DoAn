@@ -31,12 +31,20 @@ namespace Models.EF
 
         [StringLength(20)]
         public string idnguoiLayMau { get; set; }
-
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? tgKham { get; set; }
-
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? tgXetNghiem { get; set; }
 
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? tgLayMau { get; set; }
+
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
+        public DateTime? tgCapNhat { get; set; }
 
         [StringLength(10)]
         public string nhomMau { get; set; }

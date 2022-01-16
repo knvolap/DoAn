@@ -20,7 +20,12 @@
         </div>
     </div>
 </section>
-
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
 @using (Html.BeginForm("Index", "DKDHM", FormMethod.Get))
 {
     <section class="blog_area section_padding">
@@ -29,7 +34,14 @@
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
                         @foreach (var item in listDTCHM)
-                        {
+                        {  <div class="panel-body">
+                                @if (TempData["AlertMessage"] != null)
+                                {
+                                    <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                        @TempData["AlertMessage"]
+                                    </div>
+                                }
+                            </div>
                             if (item.ngayKetThucDK < DateTime.Now)
                             {
                                 <article class="blog_item">
@@ -65,7 +77,7 @@
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    Địa chỉ:  <a>@item.diaChiToChuc</a>
+                                                    Địa chỉ tổ chức:  <a>@item.diaChiToChuc</a>
                                                 </th>
 
                                             </tr>
@@ -96,7 +108,7 @@
                                 </article>
                             }
 
-                            else if (item.trangThai == "Chờ duyệt")
+                            else if (item.trangThai == false)
                             {
                                 <article class="blog_item">
                                     <div class="blog_item_img">
@@ -131,7 +143,7 @@
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    Địa chỉ:  <a>@item.diaChiToChuc</a>
+                                                    Địa chỉ tổ chức:  <a>@item.diaChiToChuc</a>
                                                 </th>
 
                                             </tr>
@@ -196,7 +208,7 @@
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    Địa chỉ:  <a>@item.diaChiToChuc</a>
+                                                    Địa chỉ tổ chức:  <a>@item.diaChiToChuc</a>
                                                 </th>
 
                                             </tr>
@@ -227,18 +239,19 @@
                                                 </li>
 
                                             }
-                                            else
-                                            {
-                                                <li>
-                                                    <button class="genric-btn info radius" href="@Url.Action("DangKyHiemMau", "DTCHM")">Đăng ký</button>
-                                                </li>
-                                            }
-                                            @if (session7.AuthorID == "Q04" || session7.AuthorID == "Q02" || session7.AuthorID == "Q01")
+                                            else if (session7.AuthorID == "Q04" || session7.AuthorID == "Q02" || session7.AuthorID == "Q01")
                                             {
                                                 <li>
                                                     <button class="genric-btn warning" href="@Url.Action("Index", "LoginClient") ">Tài khoản không hợp lệ</button> (vui lòng sử dụng tài khoản cá nhân)
                                                 </li>
                                             }
+                                            else
+                                            {
+
+                                             @Html.ActionLink("Đăng ký", "Create", "PhieuDKHM", new { id = item.IdDTCHM }, new { @class = "btn btn-outline-primary" })
+
+                                            }
+
                                         </ul>
                                     </div>
                                 </article>

@@ -19,31 +19,35 @@ namespace HiemMauNhanDao.Controllers
         BenhVienServices _BenhVien = new BenhVienServices();
         private DbContextHM db = new DbContextHM();
         // GET: Client/NhanVienYTe
-        public ActionResult Index(string searchString1, int page = 1, int pageSize = 10)
-        {   
+        public ActionResult Index(string searchString1, string idbv, int page = 1, int pageSize = 10)
+        {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            string id = session.UserID;
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+
             var viewNVYT = new NhanVienYTeServices();
-            var model = viewNVYT.GetListNVYT(searchString1, page, pageSize);
+            var model = viewNVYT.GetListNVYT2(searchString1, tempNVYT.idBenhVien, page, pageSize);
             if (!string.IsNullOrEmpty(searchString1))
             {
                 ViewBag.SearchStringNV = searchString1;
             }
-
             return View(model);
-
         }
 
-        public ActionResult ViewNVYT(BenhVien benhVien,string searchString1,string idbv, int page = 1, int pageSize = 10)
-        {
-            BenhVien bv = db.BenhViens.Find(idbv);
-            var viewNVYT = new NhanVienYTeServices();
-            var bv1 = _nhanvien.GetByIdBV1(benhVien.IdBenhVien);
 
-            var model = viewNVYT.GetListNVYT2(searchString1,idbv ,  page, pageSize);
+        //show danh sách nhân viên thuộc bệnh viện
+        public ActionResult ViewNVYT(string searchString1,string idbv, int page = 1, int pageSize = 10)
+        {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            string id = session.UserID;
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+
+            var viewNVYT = new NhanVienYTeServices();      
+            var model = viewNVYT.GetListNVYT2(searchString1, tempNVYT.idBenhVien,  page, pageSize);
             if (!string.IsNullOrEmpty(searchString1))
             {
                 ViewBag.SearchStringNV = searchString1;
             }
- 
             return View(model);
         }
 
@@ -137,38 +141,47 @@ namespace HiemMauNhanDao.Controllers
         [HttpPost]
         public ActionResult CapQuyenNVYT([Bind(Include = "IdTTCN,hoTen,gioiTinh,soDT,soLanHM,ngheNghiep,nhomMau,trinhDo,coQuanTH,diaChi,userName,ngaySinh,CCCD,idQuyen,trangThai,password")] ThongTinCaNhan model)
         {
+            var ttcn = _nhanvien.GetByIdTTCN(model.IdTTCN);
             if (ModelState.IsValid)
             {
-                var ttcn = _nhanvien.GetByIdTTCN(model.IdTTCN);
-                ttcn.IdTTCN = ttcn.IdTTCN;
-                ttcn.CCCD = ttcn.CCCD;
-                ttcn.userName = ttcn.userName;
-                ttcn.password = ttcn.password;
-                ttcn.ngaySinh = ttcn.ngaySinh;
-                ttcn.trangThai = ttcn.trangThai;
-                ttcn.coQuanTH = ttcn.coQuanTH;
-                ttcn.ngheNghiep = ttcn.ngheNghiep;
-                ttcn.trinhDo = ttcn.trinhDo;
-                ttcn.soLanHM = ttcn.soLanHM;
-                ttcn.soDT = ttcn.soDT;
-                ttcn.hoTen = ttcn.hoTen;
-                ttcn.gioiTinh = ttcn.gioiTinh;
-                ttcn.trangThai = ttcn.trangThai;
-                ttcn.nhomMau = ttcn.nhomMau;
-                model.idQuyen = "Q05";
-                db.Entry(model).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ttcn.idQuyen == model.idQuyen)
+                {
+                    SetAlert("Quyền này đã có", "error");
+                }
+                else
+                {                    
+                    ttcn.IdTTCN = ttcn.IdTTCN;
+                    ttcn.CCCD = ttcn.CCCD;
+                    ttcn.userName = ttcn.userName;
+                    ttcn.password = ttcn.password;
+                    ttcn.ngaySinh = ttcn.ngaySinh;
+                    ttcn.trangThai = ttcn.trangThai;
+                    ttcn.coQuanTH = ttcn.coQuanTH;
+                    ttcn.ngheNghiep = ttcn.ngheNghiep;
+                    ttcn.trinhDo = ttcn.trinhDo;
+                    ttcn.soLanHM = ttcn.soLanHM;
+                    ttcn.soDT = ttcn.soDT;
+                    ttcn.hoTen = ttcn.hoTen;
+                    ttcn.gioiTinh = ttcn.gioiTinh;
+                    ttcn.trangThai = ttcn.trangThai;
+                    ttcn.nhomMau = ttcn.nhomMau;
+                    db.Entry(model).State = EntityState.Modified;
+                    db.SaveChanges();
 
-                SetAlert("Cấp quyền thành công", "success");
-                return RedirectToAction("Index");
+                    SetAlert("Cấp quyền thành công", "success");
+                    return RedirectToAction("Index");
+                }    
+               
             }
             else
             {
                 SetAlert("Cấp quyền thất bại", "error");
                 return RedirectToAction("CapQuyenNVYT");
             }
+            return View(model);
         }
-
+        
+       
 
         public ActionResult EditKQHM()
         {

@@ -42,15 +42,21 @@ namespace Models.EF
         public int soLuong { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ngayBatDauDK { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ngayKetThucDK { get; set; }
 
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime ngayToChuc { get; set; }
 
         [StringLength(50)]
-        public string trangThai { get; set; }
+        public string tenNguoiDangBai { get; set; }
+
+        public bool trangThai { get; set; }
 
         public virtual chiTietDHM chiTietDHM { get; set; }
 

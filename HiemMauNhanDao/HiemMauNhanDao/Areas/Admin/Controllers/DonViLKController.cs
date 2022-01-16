@@ -47,37 +47,46 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "IdTTCN,hoTen,gioiTinh,soDT,soLanHM,ngheNghiep,nhomMau,trinhDo,coQuanTH,diaChi,userName,ngaySinh,CCCD,idQuyen,trangThai,password")] ThongTinCaNhan model)
         {
+            var ttcn = _donvi.GetByIdTTCN(model.IdTTCN);
             if (ModelState.IsValid)
             {
-                var ttcn = _donvi.GetByIdTTCN(model.IdTTCN);
-                ttcn.IdTTCN = ttcn.IdTTCN;
-                ttcn.CCCD = ttcn.CCCD;
-                ttcn.userName = ttcn.userName;
-                ttcn.password = ttcn.password;
-                ttcn.ngaySinh = ttcn.ngaySinh;
-                ttcn.trangThai = ttcn.trangThai;
-                ttcn.coQuanTH = ttcn.coQuanTH;
-                ttcn.ngheNghiep = ttcn.ngheNghiep;
-                ttcn.trinhDo = ttcn.trinhDo;
-                ttcn.soLanHM = ttcn.soLanHM;
-                ttcn.soDT = ttcn.soDT;
-                ttcn.CCCD = ttcn.CCCD;
-                ttcn.gioiTinh = ttcn.gioiTinh;
-                ttcn.trangThai = ttcn.trangThai;
-                ttcn.nhomMau = ttcn.nhomMau;
+                if (ttcn.idQuyen == model.idQuyen)
+                {
+                    SetAlert("Quyền này đã có", "error");
+                }
+                else
+                {
 
-                db.Entry(model).State = EntityState.Modified;
-                db.SaveChanges();
+                    ttcn.IdTTCN = ttcn.IdTTCN;
+                    ttcn.CCCD = ttcn.CCCD;
+                    ttcn.userName = ttcn.userName;
+                    ttcn.password = ttcn.password;
+                    ttcn.ngaySinh = ttcn.ngaySinh;
+                    ttcn.trangThai = ttcn.trangThai;
+                    ttcn.coQuanTH = ttcn.coQuanTH;
+                    ttcn.ngheNghiep = ttcn.ngheNghiep;
+                    ttcn.trinhDo = ttcn.trinhDo;
+                    ttcn.soLanHM = ttcn.soLanHM;
+                    ttcn.soDT = ttcn.soDT;
+                    ttcn.CCCD = ttcn.CCCD;
+                    ttcn.gioiTinh = ttcn.gioiTinh;
+                    ttcn.trangThai = ttcn.trangThai;
+                    ttcn.nhomMau = ttcn.nhomMau;
 
-                //_donvi.UpdateDVLK(taiKhoan);
-                SetAlert("Cấp quyền thành công", "success");
-                return RedirectToAction("Index");
+                    db.Entry(model).State = EntityState.Modified;
+                    db.SaveChanges();
+
+
+                    SetAlert("Cấp quyền thành công", "success");
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
                 SetAlert("Cấp quyền thất bại", "error");
                 return RedirectToAction("Index");
             }
+            return View(model);
         }
 
 

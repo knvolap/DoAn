@@ -30,7 +30,7 @@ namespace Models.EF
         [StringLength(100)]
         public string benhKhac { get; set; }
 
-        public bool? trangThai { get; set; }
+        public bool trangThai { get; set; }
 
         public DateTime? tgDuKien { get; set; }
 

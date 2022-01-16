@@ -15,9 +15,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         // GET: Admin/DotHiemMau
         public ActionResult Index(string searchString1, string searchString2, int page = 1, int pageSize = 5)
         {
-            var services = new DotHienMauServices();
-            //  var session = (HienMauNhanDao.Common.UserLogin)Session[HienMauNhanDao.Common.CommonConstant.USER_SESSION];
-
+            var services = new DotHienMauServices();         
             var model = services.ListAllPagingDHM(searchString1, searchString2,page, pageSize);
 
             if (!string.IsNullOrEmpty(searchString1))

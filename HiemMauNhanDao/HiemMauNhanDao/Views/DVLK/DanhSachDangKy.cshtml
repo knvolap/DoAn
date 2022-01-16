@@ -2,7 +2,7 @@
 @using PagedList.Mvc
 @using System.Data;
 @{
-    ViewBag.Title = "Lịch sử đăng ký";
+    ViewBag.Title = "Danh sách đăng ký đăng ký";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,7 +29,7 @@
         <div class="row">
 
             <div class="col-lg-4">
-                @RenderPage("_leftMenu1.cshtml")
+                @RenderPage("_leftMenu2.cshtml")
             </div>
 
             <div class="col-lg-8 mb-5 mb-lg-0">
@@ -43,7 +43,7 @@
                         </th>
                         <th class="col-lg-6">
                             <div>
-                                Kiểm tra đầy đủ các thông tin   
+                                Kiểm tra đầy đủ các thông tin
                             </div>
                         </th>
                         <th></th>
@@ -54,12 +54,12 @@
                                 Ấn nút Chọn:  <a>để sử dụng các chức năng khác</a>
                             </div>
                         </th>
-                         
+
 
                     </tr>
                 </table>
                 <hr />
- 
+
             </div>
         </div>
 
@@ -83,7 +83,7 @@
                                 <table class="mt-10">
                                     <tr>
                                         <th style="width:400px">
-                                            <input  placeholder="Nội dung"
+                                            <input placeholder="Nội dung"
                                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung '" required
                                                    class="single-input">
                                             @*<input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">*@
@@ -134,7 +134,7 @@
                                     Họ tên
                                 </th>
                                 <th>
-                                    thời gian khám
+                                    Giới tính
                                 </th>
                                 <th>
                                     Số điện thoại
@@ -163,7 +163,7 @@
                                         @item.hoTen
                                     </td>
                                     <td>
-                                        @item.tgDuKien
+                                        @(item.gioiTinh == true ? "Nam" : "Nữ")
                                     </td>
                                     <td>
                                         @item.soDT
@@ -173,7 +173,7 @@
                                         <a href="#" class="btn-active" data-id="@item.idPDKHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
                                     </td>
 
-                                    <td>                                      
+                                    <td>
                                         <div>
                                             <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                                             <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
@@ -200,7 +200,7 @@
 </section>
 
 
- 
+
 <script>
     $(function () {
         $('#AlertBox').removeClass('hide');

@@ -37,20 +37,20 @@
                                     <div class="blog_item_img">
                                         <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="">
                                         <a class="blog_item_date">
-                                            <h3>      @Html.DisplayFor(model => item.tgBatDau)</h3>
+                                            <p>   Ngày bắt đầu:    @Html.DisplayFor(model => item.tgBatDau)</p>
                                         </a>
                                     </div>
                                     <div class="blog_details">
                                         <table>
                                             <tr>
                                                 <th>
-                                                    <a href="@Url.Action("DKTC", "DkDHM", new { id = item.IdDHM })">@item.TenDHM</a>
+                                                    Tên đợt hiến máu: <a >@item.TenDHM</a>
                                                 
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <a>@item.noiDung</a>
+                                                    Nội dung:<a> @item.noiDung</a>
                                                 </th>
 
                                             </tr>
@@ -58,15 +58,15 @@
                                         <table>
                                             <tr>
                                                 <th>
-                                                    <a>Thời gian triển khai:</a>
+                                                    Thời gian triển khai:
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <a>Từ ngày:  @Html.DisplayFor(model => item.tgBatDau)</a>
+                                                    Từ ngày:   <a>  @Html.DisplayFor(model => item.tgBatDau)</a>
                                                 </th>
                                                 <th>
-                                                    <a>- Đến ngày: @Html.DisplayFor(model => item.tgKetThuc) </a>
+                                                    - Đến ngày:<a> @Html.DisplayFor(model => item.tgKetThuc) </a>
                                                 </th>
                                             </tr>
                                         </table>
@@ -84,19 +84,20 @@
                                     <div class="blog_item_img">
                                         <img class="card-img rounded-0" src="~/Assets/client/img/blog/single_blog_10.png" alt="">
                                         <a class="blog_item_date">
-                                            <h3>      @Html.DisplayFor(model => item.tgBatDau)</h3>
+                                            <p>   Ngày bắt đầu:    @Html.DisplayFor(model => item.tgBatDau)</p>
                                         </a>
                                     </div>
                                     <div class="blog_details">
                                         <table>
                                             <tr>
                                                 <th>
-                                                    <a href="@Url.Action("DKTC", "DkDHM")  ">@item.TenDHM</a>
+                                                    Tên đợt hiến máu: <a>@item.TenDHM</a>
+
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <a>@item.noiDung</a>
+                                                    Nội dung:<a> @item.noiDung</a>
                                                 </th>
 
                                             </tr>
@@ -104,15 +105,15 @@
                                         <table>
                                             <tr>
                                                 <th>
-                                                    <a>Thời gian triển khai:</a>
+                                                    Thời gian triển khai:
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <a>Từ ngày:  @Html.DisplayFor(model => item.tgBatDau)</a>
+                                                    Từ ngày: <a>  @Html.DisplayFor(model => item.tgBatDau)</a>
                                                 </th>
                                                 <th>
-                                                    <a>- Đến ngày: @Html.DisplayFor(model => item.tgKetThuc) </a>
+                                                    - Đến ngày: <a> @Html.DisplayFor(model => item.tgKetThuc) </a>
                                                 </th>
                                             </tr>
                                         </table>

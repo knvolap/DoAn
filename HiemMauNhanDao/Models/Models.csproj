@@ -160,6 +160,7 @@
     <Compile Include="Services\QuanLyTKServices.cs" />
     <Compile Include="Services\TCDHMServices.cs" />
     <Compile Include="ViewModel\ChiTietPDKHvsKQHMView.cs" />
+    <Compile Include="ViewModel\ChiTietvsToChucHMView.cs" />
     <Compile Include="ViewModel\DotHienMauView.cs" />
     <Compile Include="ViewModel\NhanVienvaDVLKView.cs" />
     <Compile Include="ViewModel\NhanVienView.cs" />

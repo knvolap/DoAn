@@ -41,6 +41,7 @@ namespace Models.EF
         public string soDT { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? ngaySinh { get; set; }
 
         public bool? gioiTinh { get; set; }

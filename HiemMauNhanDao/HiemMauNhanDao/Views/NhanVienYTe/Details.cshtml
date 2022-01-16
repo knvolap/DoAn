@@ -185,7 +185,8 @@
                                             <th style="width:400px">
                                                 <div>
                                                     <a>Quyền</a>
-                                                    <input class="single-input" value="Nhân Viên y tế" readonly />
+                                                    @Html.DropDownListFor(model => model.idQuyen, new[] { new SelectListItem { Text = "Nhân viên y tế", Value = "Q05" }, new SelectListItem { Text = "Người dùng", Value = "Q06" } },
+                                                    new { @class = "single-input", @disabled = "disabled" })
                                                 </div>
                                             </th>
                                             <th class="col-lg-6">

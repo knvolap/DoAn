@@ -27,10 +27,12 @@ namespace Models.EF
         public string noiDung { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? tgBatDau { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime tgBatDau { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? tgKetThuc { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime tgKetThuc { get; set; }
 
         public bool? trangThai { get; set; }
 

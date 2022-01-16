@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class DangKyTKController : BaseController2
+    public class DangKyTKController : BaseController3
     {
         DKTKServices _DKTK = new DKTKServices();
         private DbContextHM db = new DbContextHM();

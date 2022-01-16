@@ -1,4 +1,5 @@
-﻿using Models.EF;
+﻿using HiemMauNhanDao.Areas.Admin.Controllers;
+using Models.EF;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class PhieuDKHMController : Controller
+    public class PhieuDKHMController : BaseController3
     {
         private DbContextHM db = new DbContextHM();
 
@@ -40,31 +41,41 @@ namespace HiemMauNhanDao.Controllers
         // phải tích đủ các nội dung
         // khi đăng ký xong trả về thông báo : stt , idPDKHM, thời gian dự kiến = (thời gian tổ chức + 10' cho 5 người đk ) 
         public ActionResult Create(string id)
-        {
-            ViewBag.idDTCHM = new SelectList(db.DotToChucHMs, "IdDTCHM", "IdDTCHM");
-            ViewBag.idTTCN = new SelectList(db.ThongTinCaNhans, "IdTTCN", "IdTTCN");
+        {           
             return View();
-        }
-
+        }       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPDKHM,idDTCHM,idTTCN,benhKhac,trangThai,tgDuKien,sutCan,noiHach,chamCu,xamMinh,duocTruyenMau,suDungMatuy,NguyCoHIV,QHTD,tiemVacXin,dungTKS,biSot,dTTT,dangMangThai,xacNhan")] PhieuDKHM phieuDKHM, string id)
+        public ActionResult Create([Bind(Include = "idPDKHM,idDTCHM, idTTCN, benhKhac,trangThai,tgDuKien,sutCan, noiHach ,chamCu, xamMinh," +
+                                                   "duocTruyenMau,suDungMatuy, NguyCoHIV , QHTD, tiemVacXin, dungTKS ,biSot, dTTT, dangMangThai," +
+                                                   "ungThu,hienMau, xacNhan")] PhieuDKHM phieuDKHM, string id)
         {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var tempDTCHM = db.DotToChucHMs.Where(x => x.IdDTCHM == id).SingleOrDefault();
             string idpdk = db.PhieuDKHMs.Max(x => x.idPDKHM);
-            int stt = Convert.ToInt32(idpdk.Substring(5)) + 1;
-
-            if (ModelState.IsValid)
+            int stt = Convert.ToInt32(idpdk.Substring(3)) + 1;
+         
+            if (ModelState.IsValid ==  false)
             {
-                phieuDKHM.idPDKHM = stt > 9 ? "PDKHM" + stt : "PDKHM0" + stt;
-                phieuDKHM.idTTCN = "TT06";
-
+                var tempTTCN = db.PhieuDKHMs.Where(x => x.idTTCN == session.UserID).FirstOrDefault();             
+                phieuDKHM.idPDKHM = stt > 9 ? "PDK" + stt : "PDK0" + stt;
+                phieuDKHM.idTTCN = tempTTCN.idTTCN;
+                phieuDKHM.idDTCHM = id;            
+                phieuDKHM.trangThai = false;
+                phieuDKHM.tgDuKien = tempDTCHM.ngayToChuc;
+             
                 db.PhieuDKHMs.Add(phieuDKHM);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                SetAlert("Đăng ký thành công ", "success");
+                return RedirectToAction("Index", "DotToChucHM");  
             }
-            ViewBag.idDTCHM = new SelectList(db.DotToChucHMs, "IdDTCHM", "IdDTCHM", phieuDKHM.idDTCHM);
-            ViewBag.idTTCN = new SelectList(db.ThongTinCaNhans, "IdTTCN", "IdTTCN", phieuDKHM.idTTCN);
-            return View(phieuDKHM);
+            else
+            {
+                SetAlert("Đăng ký thất bại ", "error");
+                return RedirectToAction("Create");
+            }    
+       
+            
         }      
         protected override void Dispose(bool disposing)
         {

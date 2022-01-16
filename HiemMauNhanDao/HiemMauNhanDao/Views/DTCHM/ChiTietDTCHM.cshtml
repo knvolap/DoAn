@@ -36,9 +36,9 @@
                                 @Html.DisplayFor(model => model.tenDotHienMau)
                             </a>
                             <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="#"><i class="far fa-comments"></i> Thời gian tổ chức: </a></li>
+                                <li><a href="#"> <b style="color:black">  Thời gian tổ chức:</b> </a></li>
                                 <li><a href="#"><i class="far fa-user"></i> @Html.DisplayFor(model => model.ngayToChuc)  </a></li>
-                                <li><a href="#"><i class="far fa-comments"></i> Ngày đếm ngược</a></li>
+                    
                             </ul>
                             <div class="quote-wrapper">
                                 Thông tin
@@ -66,16 +66,7 @@
                                             </th>
                                         </tr>
 
-                                        <tr>
-                                            <th>
-                                                <a>Đơn vị chịu trách nhiệm: </a> Bệnh viện Đa Khoa
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <a>Liên hệ: </a>0999 8000
-                                            </th>
-                                        </tr>
+
                                         <tr>
                                             <th>
                                                 <a>Thời gian đăng ký: </a>
@@ -85,6 +76,12 @@
                                             <th>
                                                 <a>Từ ngày: </a> @Html.DisplayFor(model => model.ngayBatDauDK)
                                                 <a>- Đến ngày: </a> @Html.DisplayFor(model => model.ngayKetThucDK)
+                                            </th>
+                                        </tr>
+
+                                        <tr>
+                                            <th>
+                                                <a>Người đăng bài: </a>@Html.DisplayFor(model => model.tenNguoiDangBai)
                                             </th>
                                         </tr>
                                     </table>

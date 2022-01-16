@@ -1,0 +1,108 @@
+﻿@model Models.ViewModel.ChiTietvsToChucHMView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết bài đăng</h2>
+
+ 
+
+@using (Html.BeginForm("Details", "BaiDang", FormMethod.Get, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        @if (TempData["AlertMessage"] != null)
+        {
+            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                @TempData["AlertMessage"]
+            </div>
+        }
+    </div>
+    <div class="card-body">
+        <hr />
+        <div class="dl-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Đợt hiến máu
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.tenDHM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Bệnh viện
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.tenBenhVien, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Đơn vị liên kết
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.tenDVLK, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Bài đăng
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.tenDTCHM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Nội dung
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.noiDung, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Ngày bắt đầu
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.ngayBatDauDK, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            ngày kết thúc
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.ngayKetThucDK, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        <dt>
+                            Ngày tổ chức
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.ngayToChuc, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+
+                        <dt>
+                            trạng thái
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.trangThai, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                        </dd>
+                        
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Đối tượng tham gia
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.doiTuongThamGia, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </dd>
+                        
+                    </dl>
+                </div>
+            </div>
+        </div>
+         
+    </div>
+
+}
+<ul></ul>
+<button class="mb-2 mr-2 btn-transition btn btn-outline-info">
+    @Html.ActionLink("Quay lại danh sách", "Index", new { @class = "mb-2 mr-2 btn btn-success" })
+</button>

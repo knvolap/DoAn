@@ -94,26 +94,36 @@ namespace Models.Services
             db.SaveChanges();
         }
 
-        public NhanVienvaDVLKView GetByIdTTCN1(string id)
+        public IEnumerable<ChiTietPDKHvsKQHMView> GetByIdDVLK(string keysearch, string id, int page, int pagesize)
         {
-            var query = from dv in db.DonViLienKets
-                        join nv in db.ThongTinCaNhans on dv.idTTCN equals nv.IdTTCN
-                        where nv.IdTTCN == id
-                        select new { dv, nv };
-            var result = query.Select(x => new NhanVienvaDVLKView()
+            var query = from pdk in db.PhieuDKHMs
+                        join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
+                        join dtchm in db.DotToChucHMs on pdk.idDTCHM equals dtchm.IdDTCHM
+                        join ctDHM in db.chiTietDHMs on dtchm.idChiTietDHM equals ctDHM.IdChiTietDHM
+                        join dvlk in db.DonViLienKets on ctDHM.idDVLK equals dvlk.IdDVLK
+                        where dvlk.IdDVLK == id
+
+                        select new { pdk, tt, dtchm , dvlk , ctDHM };
+            //check từ khóa có tồn tại hay k
+            if (!string.IsNullOrEmpty(keysearch))
             {
-                IdTTCN = x.nv.IdTTCN,
-                idQuyen = x.nv.idQuyen,
-                hoTen = x.nv.hoTen,
-                CCCD = x.nv.CCCD,
-                IdDVLK = x.dv.IdDVLK,
-                TenDonVi = x.dv.TenDonVi,
-                diaChi = x.dv.diaChi,
-                Email = x.dv.Email,
-                soDT = x.dv.soDT,
-                minhChung = x.dv.minhChung,
-                trangThai = x.dv.trangThai
-            }).SingleOrDefault();
+                query = query.Where(x => x.pdk.idDTCHM.Contains(keysearch) || x.pdk.idPDKHM.Contains(keysearch)
+                || x.tt.IdTTCN.Contains(keysearch) || x.tt.hoTen.Contains(keysearch) || x.tt.soDT.Contains(keysearch));
+            }
+            //tạo biến result -> hiển thị sp ->           
+            var result = query.Select(x => new ChiTietPDKHvsKQHMView()
+            {
+                IdTTCN = x.tt.IdTTCN,
+                hoTen = x.tt.hoTen,
+                gioiTinh = x.tt.gioiTinh,
+                soDT = x.tt.soDT,
+                idPDKHM = x.pdk.idPDKHM,
+                idDTCHM = x.pdk.idDTCHM,
+                tenDTCHM = x.dtchm.tenDotHienMau,
+                IdChiTietDHM=x.ctDHM.IdChiTietDHM,
+                idDVLK=x.dvlk.IdDVLK,
+
+            }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
             return result;
         }
 

@@ -1,7 +1,7 @@
 ﻿@model Models.ViewModel.ChiTietPDKHvsKQHMView
 
 @{
-    ViewBag.Title = "Thông tin chi tiết";
+    ViewBag.Title = "Kết quả hiến máu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,7 +32,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
-                @RenderPage("_leftMenu2.cshtml")
+                @RenderPage("_leftMenu1.cshtml")
             </div>
             <div class="col-lg-8 mb-5 mb-lg-0">
 
@@ -49,7 +49,7 @@
                     </div>
                     <div>
 
-                        @using (Html.BeginForm("TTDK", "KetQuaHienMau", new { @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("Details", "KetQuaHienMau", new { @enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
                             <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
@@ -107,6 +107,7 @@
                                                 <th class="col-lg-6">
                                                     <label>Ngày sinh </label>
                                                     @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+
                                                 </th>
                                             </tr>
                                         </table>
@@ -152,7 +153,7 @@
                                         </table>
                                     </form>
 
-                                    @*<h3 class="mb-10" style="margin-top:20px">Kết quả hiến máu</h3>
+                                    <h3 class="mb-10" style="margin-top:20px">Kết quả hiến máu</h3>
                                     <hr />
                                     <form action="#">
                                         <table class="mt-10">
@@ -216,6 +217,16 @@
                                                         <label>Lý do  </label>
                                                         @Html.EditorFor(model => model.ghiChu, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <label>Người khám </label>
+                                                    @Html.EditorFor(model => model.nguoiKham, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                </th>
+                                                <th class="col-lg-6">
                                                 </th>
                                             </tr>
                                         </table>
@@ -309,11 +320,9 @@
                                                 </th>
                                             </tr>
                                         </table>
-                                    </form>*@
+                                    </form>
 
-                                    <div class="text-center" style="margin-top:20px">
-                                        <a href="@Url.Action("Index", "MaQR", new { id = Model.IdTTCN })  " class="genric-btn primary-border radius">Tạo mã QR</a>
-                                    </div>
+
                                 </div>
                             </div>
 
@@ -326,138 +335,3 @@
 </section>
 
 
-<div class="whole-wrap">
-    <div class="container box_1170">
-        <div class="section-top-border">
-            <div class="row ">
-                <div class="col-lg-12">
-                    <div>
-                        <div class="card-body">                          
-                            <table class="mb-0 table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="col-lg-10">Nội dung</th>
-                                        <th>Có</th>
-                                        <th>Không</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><b style="color:rgb(0, 0, 0)">1/ Trước đây quý vị đã từng hiến máu chưa ?</b></td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.hienMau2, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.hienMau2, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <b style="color:rgb(0, 0, 0)">2/ Từ nhỏ quý vị có bị các bệnh mãn tính:</b> Thấp khớp, chảy máu tiêu hóa, viêm gan vàng da, bệnh tiêm, huyết áp thấp/cao, bệnh thận, ho kéo dài, lao, ung thư...?</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.ungThu, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.ungThu, value: false)</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td> <b style="color:rgb(0, 0, 0)">3/ Trong vòng 6 tháng gần đây, quý vị có:</b> </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                    </tr>
-                                    <tr>
-                                        <td> Sút cân > 4 kg không rõ nguyên nhân ?</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.sutCan, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.sutCan, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td> Nổi hạch kéo dài?</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.noiHach, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.noiHach, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>  Xăm mình, xỏ lỗi qua da (tai, mũi...)</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.xamMinh, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.xamMinh, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td> Sử dụng ma túy, tiêm chích</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.suDungMatuy, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.suDungMatuy, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>  Quan hệ thân mật với người nhiễm HIV hoặc có nguy cơ cao lây qua đường lây nhiễm HIV</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.QHTD, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.QHTD, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tiêm Vacxin phòng bệnh ?</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.tiemVacXin, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.tiemVacXin, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td> Sống trong vùng có dịch lưu hành (sốt rét, covid19...)?</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.NguyCoHIV, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.NguyCoHIV, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <b style="color:rgb(0, 0, 0)">4/ Trong vòng 1 tuần gần đây, quý vị có:</b> </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                    </tr>
-                                    <tr>
-                                        <td> Bị cúm, ho, nhứt đầu, sốt</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.biSot, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.biSot, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dùng thuốc kháng sinh, ASPIRIN, CORTICOID...?</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.dungTKS, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.dungTKS, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>  Dùng thuốc kháng sinh, ASPIRIN, CORTICOID...?</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.chamCu, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.chamCu, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <b style="color:rgb(0, 0, 0)">5/ Quý vị hiện là đối tượng tàn tật hoặc hưởng trợ cấp tàn tật, nạn nhân chất độc màu da cam không?</b></td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.dTTT, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.dTTT, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <b style="color:rgb(0, 0, 0)">6/ Câu hỏi dành cho phụ nữ </b>Chị hiện có thai hoặc nuôi con dưới 12 tháng tuổi?</td>
-                                        <td>   @Html.RadioButtonFor(expression: model => model.dangMangThai, value: true)</td>
-                                        <td>  @Html.RadioButtonFor(expression: model => model.dangMangThai, value: false)</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <b style="color:rgb(0, 0, 0)">7 / Bệnh khác : </b></td>
-                                        <td>   </td>
-                                        <td>   </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            @Html.EditorFor(model => model.benhKhac, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ghi rõ nếu có" } })
-                                        </td>
-
-                                    </tr>
-
-                                </tbody>
-                                <tr>
-                                    <th>
-                                        Tôi đã đọc, hiểu và trả lời trung thực những câu hỏi trên. Nếu tôi phát hiệt bất cứ thông tin gì liên quang
-                                        tới an toànn cho đơn vị máu tôi đã hiến, tôi sẽ liên hệ ngày với Quý Bệnh Viện để đảm bảo an toàn cho người nhận máu của tôi.
-                                        Hôm nay tôi hoàn toàn khỏe mạnh và sẵn sàng tham gia hiến máu tình nguyện.
-                                    </th>
-                                    <th>
-                                        @Html.EditorFor(model => model.xacNhan)
-                                        Tôi đồng ý
-                                    </th>
-                                    <th>
-
-                                    </th>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-        </div>
-    </div>
-</div>
-
- 

@@ -71,6 +71,17 @@ namespace HiemMauNhanDao.Controllers
           
         }
 
+        public ActionResult DanhSachDangKy(string searchString, int page = 1, int pageSize = 5)
+        {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            string id = session.UserID;
+            var tempTTCN = db.DonViLienKets.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+
+            var dsdk = new DonViLienKetServices();
+            var model = dsdk.GetByIdDVLK(searchString, tempTTCN.IdDVLK, page, pageSize);
+            ViewBag.SearchStringDK = searchString;
+            return View(model);
+        }
 
         public ActionResult DangBai()
         {

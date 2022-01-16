@@ -2,7 +2,7 @@
 @using PagedList.Mvc
 @using System.Data;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách đăng ký";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,7 +15,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Cập nhật kết quả </h2>
+                        <h2>Danh sách đăng ký </h2>
                     </div>
                 </div>
             </div>
@@ -63,9 +63,11 @@
                     </tr>
                 </table>
                 <hr />
-                <p class="genric-btn primary radius" >
-                    @Html.ActionLink("Tạo mới", "Create")
+              
+                <p class="genric-btn info radius">
+                    @Html.ActionLink("Danh sách đã cập nhật", "DanhSachKQ", new { @class = "genric-btn info radius" })
                 </p>
+
                
 
             </div>
@@ -89,27 +91,27 @@
                         <form class="">
                             <div class="form-row">
                                 <table class="mt-10">
-                                    <th style="width:400px">
-                                        <input type="email" name="EMAIL" placeholder="Nội dung"
-                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung '" required
-                                               class="single-input">
-                                        @*<input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">*@
-                                    </th>
-                                    <th class="col-lg-6">
-                                        <div>
-                                            <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                            <div class="form-select" id="default-select_1">
-                                                <select>
-                                                    <option value=" 1">Đợt tổ chức</option>
-                                                    <option value="1">Chưa chọn</option>
-                                                    <option value="1">Hiến máu nhân đạo tháng 10</option>
-                                                    <option value="1">Hiến máu nhân đạo tháng 11</option>
-                                                    <option value="1">Hiến máu nhân đạo tháng 12</option>
-                                                    <option value="1">Hiến máu nhân đạo tháng 01</option>
-                                                </select>
+                                    <tr>
+                                        <th style="width:400px">
+                                            <input name="SearchString" value="@ViewBag.SearchStringDK" id="exampleCity" type="text" class="single-input">
+                                            </th>
+                                        <th class="col-lg-6">
+                                            <div>
+                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                                <div class="form-select" id="default-select_1">
+                                                    <select>
+                                                        <option value=" 1">Đợt tổ chức</option>
+                                                        <option value="1">Chưa chọn</option>
+                                                        <option value="1">Hiến máu nhân đạo tháng 10</option>
+                                                        <option value="1">Hiến máu nhân đạo tháng 11</option>
+                                                        <option value="1">Hiến máu nhân đạo tháng 12</option>
+                                                        <option value="1">Hiến máu nhân đạo tháng 01</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </th>
+                                        </th>
+                                    </tr>
+                                  
                                 </table>
 
                             </div>
@@ -117,7 +119,6 @@
                                 <button type="submit" class="mt-2 btn btn-primary">
                                     <i class="fa fa-search"></i> Tìm kiếm
                                 </button>
-
                                 <button class="mb-2  btn btn-outline-danger" style="margin-top:18px"><i class="fa fa-times-circle"></i> Huỷ</button>
                             </div>
                         </form>
@@ -146,9 +147,6 @@
                                     Số điện thoại
                                 </th>
                                 <th>
-                                    Nhóm máu
-                                </th>
-                                <th>
                                     Trạng thái
                                 </th>
                                 <th>
@@ -163,7 +161,7 @@
                                         @i
                                     </td>
                                     <td>
-                                        @item.idDTCHM
+                                        @item.tenDTCHM
                                     </td>
                                     <td>
                                         @item.idPDKHM
@@ -177,27 +175,36 @@
                                     <td>
                                         @item.soDT
                                     </td>
-                                    <td>
-                                        @item.nhomMau
+ 
+                                    <td class="text-center">
+                                        <a href="#" class="btn-active" data-id="@item.idPDKHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a> 
                                     </td>
+                                   
                                     <td>
-                                        <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                            @item.trangThai2
-                                        </button>
-                                    </td>
-
-                                    <td>
-
-                                        <div>
-                                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Tạo kết quả", "Create", new { id = item.idPDKHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Cập nhật kết quả", "Edit", new { id = item.idPDKHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.idPDKHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
+                                        @if (item.trangThai == false)
+                                        {
+                                            <div>
+                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Tạo kết quả", "Create", new { id = item.IdTTCN })</button>
+                                                     <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.IdTTCN })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
+
+                                                </div>
+                                            </div>
+                                        }
+
                                     </td>
                                 </tr>
                                 i++;
@@ -217,6 +224,8 @@
 </section>
 
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="~/Assets/Admin/scripts/duyetPDKHM.js"></script>
 
 <script>
     $(function () {

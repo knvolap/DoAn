@@ -1,0 +1,338 @@
+﻿@model Models.ViewModel.ChiTietPDKHvsKQHMView
+
+@{
+    ViewBag.Title = "Kết quả hiến máu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Thông tin cá nhân</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!--================Blog Area =================-->
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
+
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                @RenderPage("_leftMenu2.cshtml")
+            </div>
+            <div class="col-lg-8 mb-5 mb-lg-0">
+
+                <div class="blog_left_sidebar">
+                    <h3 class="mb-10">Thông tin cá nhân </h3>
+                    <hr />
+                    <div class="panel-body">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+                    </div>
+                    <div>
+
+                        @using (Html.BeginForm("Details", "KetQuaHienMau", new { @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
+                                @if (@ViewBag.ThongBao != null)
+                                {
+                                    <label>@ViewBag.ThongBao </label>
+                                }
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-8">
+                                    <form action="#">
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <label>Mã người dùng</label>
+                                                        @Html.EditorFor(model => model.IdTTCN, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <label>Mã phiếu đăng ký</label>
+                                                        @Html.EditorFor(model => model.idPDKHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <label>Họ và tên</label>
+                                                        @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <label>số điện thoại </label>
+                                                        @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <label>Giới tính </label>
+
+                                                        @Html.DropDownListFor(model => model.gioiTinh, new[] { new SelectListItem { Text = "Nam", Value = "true" }, new SelectListItem { Text = "Nữ", Value = "false" } },
+                                                       new { @class = "single-input", @disabled = "disabled" })
+
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <label>Ngày sinh </label>
+                                                    @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
+                                                        <label>Lần hiến máu </label>
+                                                        @Html.EditorFor(model => model.soLanHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <label>Nhóm máu </label>
+                                                        @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <label>Trình độ học vấn </label>
+                                                    @Html.EditorFor(model => model.trinhDo, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <label>Nghề nghiệp </label>
+                                                    @Html.EditorFor(model => model.ngheNghiep, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <label>Cơ quan / Trường lớp </label>
+                                                    @Html.EditorFor(model => model.coQuanTH, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <label>Địa chỉ tạm trú</label>
+                                                    @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </form>
+
+                                    <h3 class="mb-10" style="margin-top:20px">Kết quả hiến máu</h3>
+                                        <hr />
+                                        <form action="#">
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <div>
+                                                            <label>Mã kết quả</label>
+                                                            @Html.EditorFor(model => model.IdKQHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                        </div>
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <div>
+                                                            <label>cân nặng</label>
+                                                            @Html.EditorFor(model => model.canNang, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <div>
+                                                            <label>Huyết áp</label>
+                                                            @Html.EditorFor(model => model.huyetAp, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                        </div>
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <div>
+                                                            <label>Mạch máu </label>
+                                                            @Html.EditorFor(model => model.machMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <div>
+                                                            <label>Tình trạng lâm sàn</label>
+                                                            @Html.EditorFor(model => model.tinhTrangLS, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                        </div>
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <label>Thể tích (ml) </label>
+                                                        @Html.EditorFor(model => model.luongMauHien, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <div>
+                                                            <label>Hiến máu </label>
+
+                                                            @Html.DropDownListFor(model => model.hienMau, new[] { new SelectListItem { Text = "Đạt", Value = "true" }, new SelectListItem { Text = "không đạt", Value = "false" } },
+                                                           new { @class = "single-input", @disabled = "disabled" })
+                                                        </div>
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <div>
+                                                            <label>Lý do  </label>
+                                                            @Html.EditorFor(model => model.ghiChu, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <label>Người khám </label>
+                                                        @Html.EditorFor(model => model.nguoiKham, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <label>
+                                                            Xét nghiệm huyết sắc tố
+                                                        </label>
+                                                        @Html.EditorFor(model => model.HST, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <label>
+                                                            Xét nghiệm huyết sắc tố
+                                                        </label>
+                                                        @Html.EditorFor(model => model.HBV, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <label>Người xét nghiệm </label>
+                                                        @Html.EditorFor(model => model.nguoiXN, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                    </th>
+                                                </tr>
+                                            </table>
+
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <label>
+                                                            Xét nghiệm máu
+                                                        </label>
+                                                        @Html.EditorFor(model => model.MSD, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <label>
+                                                            Thời gian lấy máu
+                                                        </label>
+                                                        @Html.EditorFor(model => model.thoiGianLayMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <label>
+                                                            Phản ứng
+                                                        </label>
+                                                        @Html.EditorFor(model => model.phanUng, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <label>
+                                                            Xử lý
+                                                        </label>
+                                                        @Html.EditorFor(model => model.noiDung, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <label>
+                                                            Nhóm máu
+                                                        </label>
+                                                        @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <label>
+                                                            Người lấy máu
+                                                        </label>
+                                                        @Html.EditorFor(model => model.nguoiLayMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table class="mt-10">
+                                                <tr>
+                                                    <th style="width:400px">
+                                                        <label>
+                                                            Trạng thái
+                                                        </label>
+                                                        @Html.EditorFor(model => model.trangThai2, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <label>
+
+                                                        </label>
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                        </form>
+
+                                   
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+ 

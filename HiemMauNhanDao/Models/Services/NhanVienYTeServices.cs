@@ -45,6 +45,15 @@ namespace Models.Services
             }
             return false;
         }
+        public bool isExistQuyen(string id)
+        {
+            ThongTinCaNhan kh = db.ThongTinCaNhans.Where(t => t.idQuyen == id).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
         public ThongTinCaNhan GetByIdTTCN(string id)
         {
             return db.ThongTinCaNhans.Where(s => s.IdTTCN.CompareTo(id) == 0).SingleOrDefault();
@@ -71,7 +80,7 @@ namespace Models.Services
             if (!string.IsNullOrEmpty(keysearch))
             {
                 query = query.Where(x => x.nv.IdNVYT.Contains(keysearch) || x.nv.idBenhVien.Contains(keysearch)
-                || x.tt.IdTTCN.Contains(keysearch) || x.tt.hoTen.Contains(keysearch) || x.tt.soDT.Contains(keysearch));
+                || x.tt.IdTTCN.Contains(keysearch) || x.tt.hoTen.Contains(keysearch) || x.tt.soDT.Contains(keysearch) || x.tt.CCCD.Contains(keysearch));
             }
             //tạo biến result -> hiển thị sp ->           
             var result = query.Select(x => new NhanVienView()
@@ -189,8 +198,9 @@ namespace Models.Services
             var query = from nv in db.NhanVienYTes
                         join tt in db.ThongTinCaNhans on nv.idTTCN equals tt.IdTTCN
                         join bv in db.BenhViens on nv.idBenhVien equals bv.IdBenhVien
-                        where bv.IdBenhVien==idbv
+                        where bv.IdBenhVien== idbv
                         select new { nv, tt, bv };
+            
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
             {

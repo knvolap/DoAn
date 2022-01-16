@@ -52,9 +52,7 @@ namespace HiemMauNhanDao.Controllers
             ThongTinCaNhan thongTinCaNhan = db.ThongTinCaNhans.Find(id);
             return View(thongTinCaNhan);
         }
-
-        
-
+       
         //cập nhật thành công. nhưng k check được lỗi
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -84,25 +82,33 @@ namespace HiemMauNhanDao.Controllers
             else
             {
                 SetAlert("Cập nhật thất bại", "error");
-                return RedirectToAction("CapnhaTTCN", "NguoiDung");
+                return RedirectToAction("CapnhatTTCN", "NguoiDung");
             }    
-         
-        
         }
 
+
         //tình trạng sức khỏe
-        public ActionResult TTSK()
-        {         
-            return View();
+        public ActionResult TTSK(string searchString ,int page = 1, int pageSize = 5)
+        {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            string id = session.UserID;
+            var tempTTCN = db.PhieuDKHMs.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+
+            var dsdk = new NguoiDungServices();
+            var model = dsdk.GetByIdLSDK(searchString, tempTTCN.idTTCN, page, pageSize);
+            ViewBag.SearchStringDK = searchString;
+            return View(model);
+        }
+        public ActionResult Details(string id)
+        {
+            var model = _NguoiDung.GetByIdLSDK2(id);
+            return View(model);
         }
 
         public ActionResult DoiMK()
         {
             return View();
         }
-
-      
-
     }
 }
 
@@ -177,24 +183,4 @@ namespace HiemMauNhanDao.Controllers
 //    return View(model);
 //}
 
-
-//[HttpGet]
-//public ActionResult CapnhatTTCN2(string id)
-//{
-//    ThongTinCaNhan thongTinCaNhan = db.ThongTinCaNhans.Find(id);
-//    return View(thongTinCaNhan);
-//}
-//[HttpGet]
-//public ActionResult CapnhatTTCN2(ThongTinCaNhan model)
-//{
-//    if (!ModelState.IsValid)
-//    {
-//        var dao = new NguoiDungServices();
-//        var ttcn = dao.GetByIdTTCN(model.IdTTCN);
-//        _NguoiDung.SuaTTCN2(model);
-//    SetAlert("Sửa thành công", "success");
-//    return RedirectToAction("Index");
-//    }
-//    return View(model);
-//}
 

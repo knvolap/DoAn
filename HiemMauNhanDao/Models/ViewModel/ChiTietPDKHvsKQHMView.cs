@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ namespace Models.ViewModel
         public string hoTen { get; set; }      
         public string CCCD { get; set; }    
         public string soDT { get; set; }
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? ngaySinh { get; set; }
         public bool? gioiTinh { get; set; }        
         public string diaChi { get; set; }      
@@ -21,9 +25,13 @@ namespace Models.ViewModel
         public string coQuanTH { get; set; }       
 
         public string idPDKHM { get; set; }    
-        public string idDTCHM { get; set; }           
+        public string idDTCHM { get; set; }
+        public string tenDTCHM { get; set; }
         public string benhKhac { get; set; }
-        public bool? trangThai { get; set; }
+        public bool trangThai { get; set; }
+
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? tgDuKien { get; set; }
         public bool sutCan { get; set; }
         public bool hienMau { get; set; }
@@ -59,12 +67,31 @@ namespace Models.ViewModel
         public string HBV { get; set; }
         public string MSD { get; set; }
         public string phanUng { get; set; }
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? thoiGianLayMau { get; set; }
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? thoiGianKham { get; set; }
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? thoiGianXN{ get; set; }
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
+        public DateTime? thoiGianCapNhat { get; set; }
         public string ghiChu { get; set; }
         public string trangThai2 { get; set; }
 
+        public string IdChiTietDHM { get; set; }
+        public string idDHM { get; set; }
+        public string idDVLK { get; set; }
+        public string tenDVLK { get; set; }
+        public string tenDHM { get; set; }
+        public string idBenhVien { get; set; }
+        public string tenBenhVien { get; set; }
+        public string idTTCN { get; set; }
+        public string tenNguoiDung { get; set; }
+        public string idNVYT { get; set; }
 
     }
 }

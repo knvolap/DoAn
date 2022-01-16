@@ -149,9 +149,11 @@ CREATE TABLE DotToChucHM(
 	ngayBatDauDK	DATE not null,	
 	ngayKetThucDK	DATE not null,
 	ngayToChuc		DATETIME not null,
-    trangThai		NVARCHAR(50)
+	tenNguoiDangBai NVARCHAR(50),
+    trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) )
 )
 GO
+ 
 
 
 
@@ -194,6 +196,7 @@ CREATE TABLE KetQuaHienMau(
 	tgKham			DATETIME null,
 	tgXetNghiem		DATETIME null,
 	tgLayMau		DATETIME null,
+	tgCapNhat		DATETIME null,
 	nhomMau			VARCHAR(10)  NULL,
 	canNang			float  null,
 	machMau			VARCHAR(10)  null,
@@ -211,7 +214,7 @@ CREATE TABLE KetQuaHienMau(
 )
 GO
 
-
+ 
 
 
 --Table 13 DanhSachNhanVienThucHien
@@ -485,9 +488,9 @@ GO
 
 --B11
 INSERT INTO dbo.DotToChucHM
-		(IdDTCHM, idChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai)
-VALUES	('DTC01','CT01',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021',N'Chờ duyệt'),
-		('DTC02','CT02',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021',N'Chờ duyệt')	
+		(IdDTCHM, idChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,tenNguoiDangBai,trangThai)
+VALUES	('DTC01','CT01',N'HMNĐ quý 4 năm 2021 lần 1',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/11/2021','18/11/2021','07:30 19/11/2021',N'Chờ duyệt','1'),
+		('DTC02','CT02',N'HMNĐ quý 4 năm 2021 lần 2',N'Bổ sung nguồn máu cho thành phố Đà Nẵng',N'Sinh viên',N'48 cao Thắng - HC- ĐN','300','15/12/2021','18/12/2021','07:30 19/12/2021',N'Chờ duyệt','1')	
 GO
 
 --B12

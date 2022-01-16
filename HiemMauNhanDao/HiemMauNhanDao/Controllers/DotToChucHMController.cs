@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace HiemMauNhanDao.Controllers
 {
-    public class DotToChucHMController : BaseController
+    public class DotToChucHMController : BaseController2
     {
         private DbContextHM db = new DbContextHM();
         DotToChucHMServices _DTCHM = new DotToChucHMServices();
@@ -26,7 +26,19 @@ namespace HiemMauNhanDao.Controllers
             ViewBag.SearchStringDTCHM = searchString;
             return View(model);
         }
+        public ActionResult Index2(string searchString, int page = 1, int pageSize = 10)
+        {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            string id = session.UserID;
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
 
+            var dotToChucHMs = new DotToChucHMServices();
+            var model = dotToChucHMs.ListAllBaiDang2(searchString, tempNVYT.idBenhVien, page, pageSize);
+            ViewBag.SearchStringDTCHM = searchString;
+            return View(model);
+                              
+        }
+       
 
         // thời gian bắt đầu và kết thúc nằm trong khoảng tg của đợt hiến máu
         // admin duyệt bài thì lên trang chủ nằm ở /DTCHM/Index và /DTCHM/ChiTietDTCHM/
@@ -36,31 +48,53 @@ namespace HiemMauNhanDao.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "IdChiTietDHM");
+            ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idChiTietDHM");
+
             return View();
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IdDTCHM,IdChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai")] DotToChucHM dotToChucHM)
         {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+
             string id = db.DotToChucHMs.Max(x => x.IdDTCHM);
             int stt = Convert.ToInt32(id.Substring(4)) + 1;
+           
+            var tempDSDK = db.chiTietDHMs.Where(x => x.IdChiTietDHM == dotToChucHM.idChiTietDHM).SingleOrDefault();
+            var tempDHM = db.DotHienMaus.Where(x => x.IdDHM == tempDSDK.idDHM).SingleOrDefault();
 
             if (ModelState.IsValid)
             {
-                dotToChucHM.IdDTCHM = stt > 9 ? "TCHM" + stt : "TCHM0" + stt;
-                dotToChucHM.trangThai = "Chờ Duyệt";
-                db.DotToChucHMs.Add(dotToChucHM);
-                db.SaveChanges();
+                if (_DTCHM.CheckTimeDuplicate(dotToChucHM.ngayBatDauDK, dotToChucHM.ngayKetThucDK, tempDHM.tgBatDau, tempDHM.tgKetThuc) == true)
+                {
+                    if (dotToChucHM.ngayBatDauDK < dotToChucHM.ngayKetThucDK && dotToChucHM.ngayToChuc >= dotToChucHM.ngayKetThucDK)
+                    {
 
-                return RedirectToAction("Index");
+
+                        dotToChucHM.IdDTCHM = stt > 9 ? "TCHM" + stt : "TCHM0" + stt;
+                        dotToChucHM.trangThai = true;
+                        dotToChucHM.tenNguoiDangBai = session.Name;
+
+                        db.DotToChucHMs.Add(dotToChucHM);
+                        db.SaveChanges();
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Thêm thất bại!");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Khoảng thời gian đăng ký không nằm trong đợt hiến máu!");
+                }
             }
             ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idChiTietDHM", dotToChucHM.idChiTietDHM);
             return View(dotToChucHM);
         }
-
         public ActionResult Edit(string id)
         {
             if (id == null)

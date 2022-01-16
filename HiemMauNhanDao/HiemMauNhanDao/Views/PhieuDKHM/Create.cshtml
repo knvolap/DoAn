@@ -33,30 +33,19 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
-                    @if (@ViewBag.ThongBao != null)
+                <div class="panel-body">
+                    @if (TempData["AlertMessage"] != null)
                     {
-                        <label>@ViewBag.ThongBao </label>
+                        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                            @TempData["AlertMessage"]
+                        </div>
                     }
                 </div>
-                <div class="row ">
-                    <div class="form-group">
-                        <label>id đợt tổ chức</label>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.idTTCN, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>id ttcn</label>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.idDTCHM, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
-                        </div>
-                    </div>
+                <div class="row ">      
                     <div class="col-lg-12">
                         <div>
                             <div class="card-body">
-                                <h5 class="card-title">Vui lòng điền đủ thông tin </h5>
+                                <h3 class="card-title">Vui lòng điền đủ thông tin </h3>
                                 <table class="mb-0 table table-striped">
                                     <thead>
                                         <tr>
@@ -167,11 +156,16 @@
                                             Hôm nay tôi hoàn toàn khỏe mạnh và sẵn sàng tham gia hiến máu tình nguyện.
                                         </th>
                                         <th>
-                                           
+
                                             @Html.EditorFor(model => model.xacNhan)
                                             Tôi đồng ý
                                         </th>
                                         <th>
+                                            @Html.HiddenFor(model => model.idPDKHM, new { htmlAttributes = new { @class = "single-input" } })
+                                            @Html.HiddenFor(model => model.idDTCHM, new { htmlAttributes = new { @class = "single-input" } })
+                                            @Html.HiddenFor(model => model.tgDuKien, new { htmlAttributes = new { @class = "single-input" } })
+                                            @Html.HiddenFor(model => model.idTTCN, new { htmlAttributes = new { @class = "single-input" } })
+
                                         </th>
                                     </tr>
                                 </table>
@@ -189,13 +183,13 @@
                         <li>
                             <a class="genric-btn primary-border circle warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
                         </li>
-
-                    }
+                    }                  
                     else
                     {
-                        <li>
-                            <button class="genric-btn primary-border circle " type="submit" >Đăng ký tham gia</button>
-                        </li>
+                    <li>
+                        <button class="genric-btn primary-border circle " type="submit">Đăng ký tham gia</button>
+                    </li>
+
                     }
                 </ul>
             }
