@@ -36,10 +36,11 @@ CREATE TABLE ThongTinCaNhan(
 	trinhDo		 NVARCHAR(50) NULL,
 	soLanHM		 int  null,
 	coQuanTH	 NVARCHAR(50) NULL,
-	nhomMau		 VARCHAR(5) null,
+	nhomMau		NVARCHAR(10) null,
 	trangThai	bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
+
 
 
 --B4
@@ -86,8 +87,8 @@ GO
 
 --Table 8 DonViLienKet
 CREATE TABLE DonViLienKet(
-	IdDVLK			VARCHAR(20) PRIMARY KEY,
 	idTTCN			VARCHAR(20) FOREIGN KEY REFERENCES  dbo.ThongTinCaNhan(IdTTCN) ON DELETE CASCADE ON UPDATE CASCADE  not null,
+	IdDVLK			VARCHAR(20) PRIMARY KEY,
 	TenDonVi		NVARCHAR (50) not null,
 	diaChi			NVARCHAR(100)  NULL,
 	Email			VARCHAR(50)   NULL,	
@@ -104,21 +105,23 @@ CREATE TABLE chiTietDHM(
 	idDVLK			VARCHAR(20) FOREIGN KEY REFERENCES dbo.DonViLienKet(IdDVLK) not null,
 	idBenhVien		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.BenhVien(IdBenhVien) not null,
 	ngayDK			DATE  DEFAULT GETDATE()null,
+	tenNguoiDK		NVARCHAR(50) ,
 	trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
 )
 GO
 
+ 
 
 --Table 10 PhieuYCNM
 CREATE TABLE PhieuYCNM(
 	IdPhieuYCNM		VARCHAR(20) PRIMARY KEY,
-	idNVYT			VARCHAR(20) not null,
-	idDHM			VARCHAR(20) FOREIGN KEY REFERENCES dbo.DotHienMau(IdDHM) not null,
+	idBenhVien		VARCHAR(20) FOREIGN KEY REFERENCES dbo.BenhVien(IdBenhVien)   null,
 	soLuong			int   null,
-	tgBatDau		DATE  null,	
+	tgYeuCau		DATE  null,	
 	tgKetThuc		DATE  null,
 	tgCapnhat		DATETime null,
 	lyDo			NVARCHAR(MAX) NOT NULL,
+	tenNguoiGui		NVARCHAR(50) ,
 	trangThai		NVARCHAR(50) 
 )
 GO
@@ -155,9 +158,6 @@ CREATE TABLE DotToChucHM(
 GO
  
 
-
-
-
 --Table 12 PhieuDKHM
 CREATE TABLE PhieuDKHM(
 	idPDKHM			VARCHAR(20) PRIMARY KEY,
@@ -182,7 +182,6 @@ CREATE TABLE PhieuDKHM(
 	ungThu		bit DEFAULT '0' CHECK ( ungThu IN ( '0', '1' ) ),
 	hienMau		    BIT DEFAULT '1' CHECK ( hienMau IN ( '0', '1' ) )  not null,
 	xacNhan			BIT  not null
-
 )
 GO
 
@@ -210,11 +209,12 @@ CREATE TABLE KetQuaHienMau(
 	MSD				NVARCHAR (20) ,
 	phanUng			NVARCHAR (50) ,	
 	ghiChu			NVARCHAR (50) ,
+	nguoiKham		NVARCHAR(50),  
+	nguoiXN			NVARCHAR(50), 
+	nguoiLayMau		NVARCHAR(50),
 	trangThai		NVARCHAR(50) ---Cập nhật xong, đang cập nhật , chưa cập nhật
 )
 GO
-
- 
 
 
 --Table 13 DanhSachNhanVienThucHien
@@ -227,11 +227,11 @@ GO
 
 --Table 14 LichSuHienMau
 CREATE TABLE LichSuHienMau(
-	idLSHM		VARCHAR(20) ,
-	idTTCN		VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE not null,
-	idKQHM		VARCHAR(20) FOREIGN KEY REFERENCES dbo.KetQuaHienMau(IdKQHM) not null,
-	quaTang		NVARCHAR(150),
-	maQR		VARCHAR(50)  NULL	,
+	idLSHM		   VARCHAR(20) ,	
+	idTTCN		   VARCHAR(20) FOREIGN KEY REFERENCES dbo.ThongTinCaNhan(IdTTCN)  ON DELETE CASCADE ON UPDATE CASCADE not null,
+	idKQHM		   VARCHAR(20) FOREIGN KEY REFERENCES dbo.KetQuaHienMau(IdKQHM) not null,
+	quaTang		   NVARCHAR(150),
+	maQR		   VARCHAR(50)  NULL	,
 	anhChungNhan   VARCHAR(50)  NULL
 )
 GO
@@ -474,9 +474,9 @@ GO
 
 --B9
 INSERT INTO dbo.PhieuYCNM
-		(IdPhieuYCNM, idNVYT,idDHM,soLuong,tgBatDau,tgKetThuc,tgCapnhat,lyDo,trangThai)
-VALUES	('PYC01','NV01','DHM04','10','15/11/2021','18/11/2021','07:30 19/11/2021',N'Cần nguồn máu hiếm. Nhóm máu AB+',N'Chờ Duyệt'),
-		('PYC02','NV01','DHM04','10','15/12/2021','18/12/2021','07:30 19/12/2021',N'Cần nguồn máu hiếm. Nhóm máu AB+',N'Chờ Duyệt')
+		(IdPhieuYCNM, idBenhVien,soLuong,tgYeuCau,tgKetThuc,tgCapnhat,lyDo,trangThai)
+VALUES	('PYC01','BV02' ,'10','15/11/2021','18/11/2021','07:30 19/11/2021',N'Cần nguồn máu hiếm. Nhóm máu AB+',N'Chờ Duyệt'),
+		('PYC02','BV02' ,'10','15/12/2021','18/12/2021','07:30 19/12/2021',N'Cần nguồn máu hiếm. Nhóm máu AB+',N'Chờ Duyệt')
 GO
 
 --B13

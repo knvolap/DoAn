@@ -60,7 +60,7 @@ namespace Models.EF
         [StringLength(50)]
         public string coQuanTH { get; set; }
 
-        [StringLength(5)]
+        [StringLength(10)]
         public string nhomMau { get; set; }
 
         public bool? trangThai { get; set; }

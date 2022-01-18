@@ -160,6 +160,22 @@
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
+                                                        <label>Tên đợt tổ chức</label>
+                                                        @Html.EditorFor(model => model.tenDTCHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                                <th class="col-lg-6">
+                                                    <div>
+                                                        <label>Bệnh viện</label>
+                                                        @Html.EditorFor(model => model.tenBenhVien, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                        <table class="mt-10">
+                                            <tr>
+                                                <th style="width:400px">
+                                                    <div>
                                                         <label>Mã kết quả</label>
                                                         @Html.EditorFor(model => model.IdKQHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </div>

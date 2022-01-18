@@ -248,6 +248,7 @@
     <Content Include="Assets\client\img\cource\cource_1.png" />
     <Content Include="Assets\client\img\cource\cource_2.png" />
     <Content Include="Assets\client\img\cource\cource_3.png" />
+    <Content Include="Assets\client\img\doctor\dat.jpg" />
     <Content Include="Assets\client\img\doctor\deft.png" />
     <Content Include="Assets\client\img\doctor\doctor_1.png" />
     <Content Include="Assets\client\img\doctor\doctor_2.png" />

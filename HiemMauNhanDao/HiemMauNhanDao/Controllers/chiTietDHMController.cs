@@ -44,6 +44,7 @@ namespace HiemMauNhanDao.Controllers
                 chiTietDHM.IdChiTietDHM = stt > 9 ? "CT" + stt : "CT0" + stt;
                 chiTietDHM.idBenhVien = tempNVYT.idBenhVien;
                 chiTietDHM.idDHM = id;
+                chiTietDHM.tenNguoiDK = session.Name;
                 chiTietDHM.ngayDK = DateTime.Now;
                 chiTietDHM.trangThai = false;
 
@@ -76,6 +77,7 @@ namespace HiemMauNhanDao.Controllers
                 chiTietDHM.IdChiTietDHM = stt > 9 ? "CT" + stt : "CT0" + stt;
                 chiTietDHM.idDHM = id;
                 chiTietDHM.idDVLK = tempDVLK.IdDVLK;
+                chiTietDHM.tenNguoiDK = session.Name;
                 chiTietDHM.ngayDK = DateTime.Now;
                 chiTietDHM.trangThai = false;
 

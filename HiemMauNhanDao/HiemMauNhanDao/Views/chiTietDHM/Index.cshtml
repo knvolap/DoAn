@@ -2,7 +2,7 @@
 @using PagedList.Mvc
 @model PagedList.IPagedList<Models.EF.DotHienMau>
 @{
-    ViewBag.Title = "Đăng ký tổ chức";
+    ViewBag.Title = "Tha    m gia tổ chức";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listDHM = (List<Models.EF.DotHienMau>)ViewBag.listDHM;
 }
@@ -13,7 +13,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Tổ chức hiến máu</h2>
+                        <h2>Đợt hiến máu    </h2>
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                                                 </th>
                                             </tr>
                                         </table>
-                                        <ul class="blog-info-link" style="margin-top:10px">
+                                        <ul class="blog-info-link" style="margin-top:10px ">
                                             @{
                                                 var session5 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
                                             }
@@ -138,13 +138,13 @@
                                             }
                                             else if (session5.AuthorID == "Q04" )
                                             {
-                                                @Html.ActionLink("Đăng ký", "Create", "chiTietDHM", new { id = item.IdDHM }, new { @class = "btn btn-outline-primary" })
+                                                @Html.ActionLink("Đăng ký", "Create", "chiTietDHM", new { id = item.IdDHM }, new { @class = "genric-btn info radius" })
 
                                                 @*<li class="genric-btn info radius" href="@Url.Action("Create", "chiTietDHM")">Đăng ký</li>*@
                                             }
                                             else if (session5.AuthorID == "Q03")
                                             {
-                                                @Html.ActionLink("Đăng ký", "Create2", "chiTietDHM", new { id = item.IdDHM }, new { @class = "btn btn-outline-primary" })
+                                                @Html.ActionLink("Đăng ký", "Create2", "chiTietDHM", new { id = item.IdDHM }, new { @class = "genric-btn info radius" })
                                             }
                                             else
                                             {

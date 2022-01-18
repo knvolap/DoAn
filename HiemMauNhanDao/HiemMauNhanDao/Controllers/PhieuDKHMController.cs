@@ -67,12 +67,12 @@ namespace HiemMauNhanDao.Controllers
                 db.PhieuDKHMs.Add(phieuDKHM);
                 db.SaveChanges();
                 SetAlert("Đăng ký thành công ", "success");
-                return RedirectToAction("Index", "DotToChucHM");  
+                return RedirectToAction("Index", "DTCHM");  
             }
             else
             {
                 SetAlert("Đăng ký thất bại ", "error");
-                return RedirectToAction("Create");
+                return RedirectToAction("Create", "PhieuDKHM");
             }    
        
             

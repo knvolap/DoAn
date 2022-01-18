@@ -66,6 +66,7 @@ namespace HiemMauNhanDao.Controllers
                 ketQuaHienMau.IdKQHM = stt > 9 ? "KQ" + stt : "KQ0" + stt;
                 ketQuaHienMau.idPDKHM = id;
                 ketQuaHienMau.idnguoiKham = tempNVYT.IdNVYT;
+                ketQuaHienMau.nguoiKham = session.Name;
                 ketQuaHienMau.tgKham = DateTime.Now;
                 db.KetQuaHienMaus.Add(ketQuaHienMau);
                 db.SaveChanges();
@@ -111,7 +112,8 @@ namespace HiemMauNhanDao.Controllers
                 ketQuaHienMau.idnguoiXN = tempNVYT.IdNVYT;         
                 ketQuaHienMau.tgXetNghiem = DateTime.Now;
                 ketQuaHienMau.tgCapNhat = DateTime.Now;
-              
+                ketQuaHienMau.nguoiXN = session.Name;
+
                 kqhm.IdKQHM = kqhm.IdKQHM;
                 kqhm.idPDKHM = kqhm.idPDKHM;
                 kqhm.idnguoiKham = kqhm.idPDKHM;
@@ -170,6 +172,7 @@ namespace HiemMauNhanDao.Controllers
             if (ModelState.IsValid == false)
             {
                 ketQuaHienMau.idnguoiLayMau = tempNVYT.IdNVYT;
+                ketQuaHienMau.nguoiLayMau = session.Name;
                 ketQuaHienMau.IdKQHM = ketQuaHienMau.IdKQHM;
                 ketQuaHienMau.tgCapNhat = DateTime.Now;
                 db.Entry(ketQuaHienMau).State = EntityState.Modified;

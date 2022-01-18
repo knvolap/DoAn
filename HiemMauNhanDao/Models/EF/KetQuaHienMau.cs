@@ -31,6 +31,14 @@ namespace Models.EF
 
         [StringLength(20)]
         public string idnguoiLayMau { get; set; }
+
+        [StringLength(50)]
+        public string  nguoiLayMau { get; set; }
+        [StringLength(50)]
+        public string nguoiXN { get; set; }
+        [StringLength(50)]
+        public string nguoiKham { get; set; }
+
         [Column(TypeName = "date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? tgKham { get; set; }

@@ -97,7 +97,7 @@
                 @i
             </td>
             <td >            
-                @item.Quyen.IdQuyen
+                @item.Quyen.tenQuyen
             </td>
             <td >
                 @item.IdTTCN
@@ -128,9 +128,7 @@
                         <button type="button" tabindex="0" class="dropdown-item pe-7s-trash">    @Html.ActionLink("Xóa", "Delete", new { id = item.IdTTCN })</button>
                     </div>
                 </div>                 
-                @*@Html.ActionLink("Chỉnh sửa", "EditTK", new { id = item.IdTTCN }) |
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.IdTTCN }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.IdTTCN })*@
+              
             </td>
         </tr>
                 i++;

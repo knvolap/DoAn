@@ -55,6 +55,9 @@ namespace Models.ViewModel
         public string nguoiKham { get; set; }
         public string nguoiXN { get; set; }
         public string nguoiLayMau { get; set; }
+        public string idnguoiKham { get; set; }
+        public string idnguoiXN { get; set; }
+        public string idnguoiLayMau { get; set; }
 
         public double? canNang { get; set; }
         public string machMau { get; set; }

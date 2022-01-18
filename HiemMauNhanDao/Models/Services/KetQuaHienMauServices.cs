@@ -185,9 +185,15 @@ namespace Models.Services
                 IdKQHM = x.kqhm.IdKQHM,
                 nhomMau = x.kqhm.nhomMau,
                 trangThai2 = x.kqhm.trangThai,
-                nguoiKham = x.kqhm.idnguoiKham,
-                nguoiXN = x.kqhm.idnguoiXN,
-                nguoiLayMau = x.kqhm.idnguoiLayMau,
+
+                idnguoiKham = x.kqhm.idnguoiKham,
+                idnguoiXN = x.kqhm.idnguoiXN,
+                idnguoiLayMau = x.kqhm.idnguoiLayMau,
+
+                nguoiKham = x.kqhm.nguoiKham,
+                nguoiXN = x.kqhm.nguoiXN,
+                nguoiLayMau = x.kqhm.nguoiLayMau,
+
                 canNang = x.kqhm.canNang,
                 machMau = x.kqhm.machMau,
                 tinhTrangLS = x.kqhm.tinhTrangLS,

@@ -31,6 +31,9 @@ namespace Models.EF
         [StringLength(20)]
         public string idBenhVien { get; set; }
 
+        [StringLength(50)]
+        public string tenNguoiDK { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime? ngayDK { get; set; }
 

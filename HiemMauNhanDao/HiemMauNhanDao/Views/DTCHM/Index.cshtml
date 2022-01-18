@@ -2,7 +2,7 @@
 @using PagedList.Mvc
 @model PagedList.IPagedList<Models.EF.DotToChucHM>
 @{
-    ViewBag.Title = "Đợt tổ chức";
+    ViewBag.Title = "Tham gia hiến máu";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listDTCHM = (List<Models.EF.DotToChucHM>)ViewBag.listDTCHM;
 }
@@ -13,7 +13,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Tham gia hiến máu</h2>
+                        <h2>Đợt tổ chức</h2>
                     </div>
                 </div>
             </div>
@@ -248,7 +248,7 @@
                                             else
                                             {
 
-                                             @Html.ActionLink("Đăng ký", "Create", "PhieuDKHM", new { id = item.IdDTCHM }, new { @class = "btn btn-outline-primary" })
+                                             @Html.ActionLink("Đăng ký", "Create", "PhieuDKHM", new { id = item.IdDTCHM }, new { @class = "genric-btn info radius" })
 
                                             }
 
