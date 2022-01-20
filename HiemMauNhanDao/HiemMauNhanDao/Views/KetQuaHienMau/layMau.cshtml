@@ -31,18 +31,11 @@
                 @RenderPage("_leftMenu2.cshtml")
             </div>
             <div class="col-lg-8 mb-5 mb-lg-0">
-                @using (Html.BeginForm("Create", "KetQuaHienMau", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("layMau", "KetQuaHienMau", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="panel-body">
-                        @if (TempData["AlertMessage"] != null)
-                        {
-                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
-                                @TempData["AlertMessage"]
-                            </div>
-                        }
-                    </div>
+                     
                     <div class="col-lg-12 col-md-8">
                         <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
                             <li class="nav-item">
@@ -104,13 +97,37 @@
                                             </th>
                                             <th class="col-lg-6">
                                                 <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Trạng thái
-                                                @Html.DropDownListFor(model => model.trangThai, new[] { new SelectListItem { Text = "Đang cập nhật"},
-                                                                        new SelectListItem { Text = "Chưa cập nhật"} , new SelectListItem { Text = "A -" } ,
-                                                                        new SelectListItem { Text = "B +" } , new SelectListItem { Text = "Cập nhật xong" } },
+                                                @Html.DropDownListFor(model => model.trangThai, new[] { new SelectListItem { Text = "Đang cập nhật" }, new SelectListItem { Text = "Cập nhật xong" } },
                                                      new { @class = "single-input" })
                                             </th>
                                         </tr>
                                     </table>
+                                    @Html.HiddenFor(model => model.IdKQHM, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.idPDKHM, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.idnguoiKham, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.nguoiXN, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.nguoiKham, new { htmlAttributes = new { @class = "single-input" } })
+
+                                    @Html.HiddenFor(model => model.tgKham, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.tgLayMau, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.tgXetNghiem, new { htmlAttributes = new { @class = "single-input" } })
+
+                                    @Html.HiddenFor(model => model.HBV, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.HST, new { htmlAttributes = new { @class = "single-input" } })
+
+                                    @Html.HiddenFor(model => model.nhomMau, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.canNang, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.tinhTrangLS, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.machMau, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.huyetAp, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.noiDung, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.luongMauHien, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.hienMau, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.MSD, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.phanUng, new { htmlAttributes = new { @class = "single-input" } })
+                                    @Html.HiddenFor(model => model.ghiChu, new { htmlAttributes = new { @class = "single-input" } })
+
+
                                 </form>
                                 <div class="text-center " style="margin-top: 20px;">
                                     <button class="genric-btn primary-border circle " type="submit"  >Cập nhật</button>

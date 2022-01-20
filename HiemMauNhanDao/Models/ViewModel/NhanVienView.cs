@@ -33,5 +33,10 @@ namespace Models.ViewModel
         public string trinhDoCM { get; set; }
         public bool trangThai { get; set; }
 
+
+        public string idDTCHM { get; set; }
+        public string tenDTCHM { get; set; }
+        public string NhiemVu { get; set; }
+
     }
 }

@@ -19,11 +19,11 @@ namespace Models.EF
         [StringLength(20)]
         public string idPDKHM { get; set; }
 
-        [Required]
+    
         [StringLength(20)]
         public string idDTCHM { get; set; }
 
-        [Required]
+    
         [StringLength(20)]
         public string idTTCN { get; set; }
 

@@ -33,15 +33,16 @@
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
+                        <div class="panel-body">
+                            @if (TempData["AlertMessage"] != null)
+                            {
+                                <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                    @TempData["AlertMessage"]
+                                </div>
+                            }
+                        </div>
                         @foreach (var item in listDTCHM)
-                        {  <div class="panel-body">
-                                @if (TempData["AlertMessage"] != null)
-                                {
-                                    <div id="AlertBox" class="alert @TempData["AlertType"] hide">
-                                        @TempData["AlertMessage"]
-                                    </div>
-                                }
-                            </div>
+                        {
                             if (item.ngayKetThucDK < DateTime.Now)
                             {
                                 <article class="blog_item">
@@ -248,7 +249,7 @@
                                             else
                                             {
 
-                                             @Html.ActionLink("Đăng ký", "Create", "PhieuDKHM", new { id = item.IdDTCHM }, new { @class = "genric-btn info radius" })
+                                                @Html.ActionLink("Đăng ký", "Create", "PhieuDKHM", new { id = item.IdDTCHM }, new { @class = "genric-btn info radius" })
 
                                             }
 

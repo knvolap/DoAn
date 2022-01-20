@@ -35,6 +35,7 @@ namespace Models.Services
             var query = from pdk in db.PhieuDKHMs
                         join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
                         join dtchm in db.DotToChucHMs on pdk.idDTCHM equals dtchm.IdDTCHM
+ 
                         select new { pdk, tt , dtchm };
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
@@ -51,7 +52,8 @@ namespace Models.Services
                 soDT = x.tt.soDT,
                 idPDKHM = x.pdk.idPDKHM,
                 idDTCHM = x.pdk.idDTCHM,
-                tenDTCHM=x.dtchm.tenDotHienMau
+                trangThai = x.pdk.trangThai,
+                tenDTCHM =x.dtchm.tenDotHienMau
                
             }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
             return result;
@@ -88,16 +90,22 @@ namespace Models.Services
             }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
             return result;
         }
-        public ChiTietPDKHvsKQHMView GetByIdTTDK(string id)
+        public TTCNvsPhieuDKHMView GetByIdTTDK(string id)
         { 
             var query = from pdk in db.PhieuDKHMs                       
                         join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
                         join dtchm in db.DotToChucHMs on pdk.idDTCHM equals dtchm.IdDTCHM
-                        where tt.IdTTCN == id
+                        where pdk.idPDKHM == id
                         select new { pdk, tt , dtchm };
-                        
+
+            //var query = from pdk in db.PhieuDKHMs
+            //            join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
+            //            join dtchm in db.DotToChucHMs on pdk.idDTCHM equals dtchm.IdDTCHM
+            //            where tt.IdTTCN == id
+            //            select new { pdk, tt, dtchm };
+
             //tạo biến result -> hiển thị sp ->           
-            var result = query.Select(x => new ChiTietPDKHvsKQHMView()
+            var result = query.Select(x => new TTCNvsPhieuDKHMView()
             {
                 IdTTCN = x.tt.IdTTCN,
                 hoTen = x.tt.hoTen,
@@ -110,6 +118,7 @@ namespace Models.Services
                 diaChi  =x.tt.diaChi,
                 ngaySinh =x.tt.ngaySinh,
                 CCCD =x.tt.CCCD,
+                nhomMau = x.tt.nhomMau,
                 idPDKHM = x.pdk.idPDKHM,
                 idDTCHM = x.pdk.idDTCHM,
                 benhKhac      =x.pdk.benhKhac ,     
@@ -182,6 +191,7 @@ namespace Models.Services
                 dangMangThai = x.pdk.dangMangThai,
                 xacNhan = x.pdk.xacNhan,
 
+
                 IdKQHM = x.kqhm.IdKQHM,
                 nhomMau = x.kqhm.nhomMau,
                 trangThai2 = x.kqhm.trangThai,
@@ -210,6 +220,7 @@ namespace Models.Services
                 thoiGianXN = x.kqhm.tgXetNghiem,
                 thoiGianCapNhat= x.kqhm.tgCapNhat,
                 ghiChu = x.kqhm.ghiChu,
+
             }).SingleOrDefault();
             return result;
         }

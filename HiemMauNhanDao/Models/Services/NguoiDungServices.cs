@@ -211,6 +211,7 @@ namespace Models.Services
                 ungThu = x.pdk.ungThu,
                 dangMangThai = x.pdk.dangMangThai,
                 xacNhan = x.pdk.xacNhan,
+                trangThai=x.pdk.trangThai,
 
                 IdKQHM = x.kqhm.IdKQHM,
                 nhomMau = x.kqhm.nhomMau,

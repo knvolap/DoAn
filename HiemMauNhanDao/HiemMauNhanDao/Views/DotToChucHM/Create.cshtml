@@ -18,7 +18,12 @@
         </div>
     </div>
 </section>
-
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
@@ -36,8 +41,14 @@
                                 <div class="col-lg-12 col-md-8">
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
-                                    @* @Html.EditorFor(model => model.idChiTietDHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })*@
+                                    <div class="panel-body">
+                                        @if (TempData["AlertMessage"] != null)
+                                        {
+                                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                                @TempData["AlertMessage"]
+                                            </div>
+                                        }
+                                    </div>
                                     <form action="#">
                                         <table class="mt-10">
                                             <tr>

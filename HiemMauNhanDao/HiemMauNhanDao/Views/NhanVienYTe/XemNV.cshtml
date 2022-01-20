@@ -1,6 +1,8 @@
-﻿
+﻿@model PagedList.IPagedList<Models.ViewModel.NhanVienView>
+@using PagedList.Mvc
+@using System.Data;
 @{
-    ViewBag.Title = "XemNV";
+    ViewBag.Title = "Xem nhiệm vụ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -34,28 +36,14 @@
                                 <table class="mt-10">
                                     <tr>
                                         <th style="width:400px">
-                                            <input type="email" name="EMAIL" placeholder="Nội dung"
+                                            <input   placeholder="Nội dung"
                                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung '" required
                                                    class="single-input">
                                             @*<input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">*@
                                         </th>
-                                        <th class="col-lg-6">
-                                            <div>
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                                <div class="form-select" id="default-select_1">
-                                                    <select>
-                                                        <option value=" 1">Đợt tổ chức</option>
-                                                        <option value="1">Chưa chọn</option>
-                                                        <option value="1">Hiến máu nhân đạo tháng 10</option>
-                                                        <option value="1">Hiến máu nhân đạo tháng 11</option>
-                                                        <option value="1">Hiến máu nhân đạo tháng 12</option>
-                                                        <option value="1">Hiến máu nhân đạo tháng 01</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </th>
+                                        
                                     </tr>
-                                    
+
                                 </table>
 
                             </div>
@@ -77,9 +65,6 @@
                                     STT
                                 </th>
                                 <th>
-                                    Mã đợt tổ chức
-                                </th>
-                                <th>
                                     Tên đợt tổ chức
                                 </th>
                                 <th>
@@ -89,41 +74,25 @@
                                     Nhiệm vụ
                                 </th>
                             </tr>
-                            @*@{ var i = 1;}
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @i
-                                    </td>
-                                    <td>
-                                        @item.IdDHM
-                                    </td>
-                                    <td>
-                                        @item.TenDHM
-                                    </td>
-                                    <td>
-                                        @item.noiDung
-                                    </td>
-                                    <td>
-                                        @item.tgBatDau
-                                    </td>
-                                    <td>
-                                        @item.tgKetThuc
-                                    </td>
-                                    <td>
-                                        <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                            @(item.trangThai == true ? "Hoạt động" : "Khóa")
-                                        </button>
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Chỉnh sửa", "EditDHM", new { id = item.IdDHM }) |
-                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDHM }) |
-                                        @Html.ActionLink("Xóa", "DeleteDHM", new { id = item.IdDHM })
-                                    </td>
-                                </tr>
-                                i++;
-                            }*@
+                            @{ var i = 1;}
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @item.tenDTCHM
+                                        </td>
+                                        <td>
+                                            @item.hoTen
+                                        </td>
+                                        <td>
+                                            @item.NhiemVu
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
                         </table>
                         <ul></ul>
                         @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))*@

@@ -222,5 +222,40 @@ namespace Models.Services
             return result;
         }
 
+        public IEnumerable<NhanVienView> GetListNVYT3(string keysearch, string id, int page, int pagesize)
+        {
+            var query = from nv in db.NhanVienYTes
+                        join tt in db.ThongTinCaNhans on nv.idTTCN equals tt.IdTTCN
+                        join bv in db.BenhViens on nv.idBenhVien equals bv.IdBenhVien
+                        join dsnv in db.DSNVTHs on nv.IdNVYT equals dsnv.idNVYT
+                        join dtchm in db.DotToChucHMs on dsnv.idDTCHM equals dtchm.IdDTCHM
+
+                        where tt.IdTTCN == id
+                        select new { nv, tt, bv, dsnv, dtchm };
+
+            //check từ khóa có tồn tại hay k
+            if (!string.IsNullOrEmpty(keysearch))
+            {
+                query = query.Where(x => x.nv.IdNVYT.Contains(keysearch) || x.nv.idBenhVien.Contains(keysearch)
+                || x.tt.IdTTCN.Contains(keysearch) || x.tt.hoTen.Contains(keysearch) || x.tt.soDT.Contains(keysearch));
+            }
+            //tạo biến result -> hiển thị sp ->           
+            var result = query.Select(x => new NhanVienView()
+            {
+                IdTTCN = x.tt.IdTTCN,
+                idQuyen = x.tt.idQuyen,
+                hoTen = x.tt.hoTen,
+                CCCD = x.tt.CCCD,
+                IdNVYT = x.nv.IdNVYT,
+                idBenhVien = x.bv.IdBenhVien,
+                tenChucVu = x.nv.tenChucVu,            
+                trangThai = x.nv.trangThai,
+                idDTCHM=x.dtchm.IdDTCHM,
+                tenDTCHM=x.dtchm.tenDotHienMau,
+                NhiemVu = x.dsnv.nhiemVu,
+            }).OrderByDescending(x => x.IdNVYT).ThenBy(q => q.IdTTCN).ToPagedList(page, pagesize);
+            return result;
+        }
+
     }
 }

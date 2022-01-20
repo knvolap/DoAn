@@ -6,9 +6,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
 <section class="breadcrumb_part breadcrumb_bg">
     <div class="container">
         <div class="row">
@@ -22,8 +19,13 @@
         </div>
     </div>
 </section>
-<!-- breadcrumb start-->
-<!--================Blog Area =================-->
+
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
@@ -63,12 +65,12 @@
                     </tr>
                 </table>
                 <hr />
-              
+
                 <p class="genric-btn info radius">
                     @Html.ActionLink("Danh sách đã cập nhật", "DanhSachKQ", new { @class = "genric-btn info radius" })
                 </p>
 
-               
+
 
             </div>
         </div>
@@ -94,7 +96,7 @@
                                     <tr>
                                         <th style="width:400px">
                                             <input name="SearchString" value="@ViewBag.SearchStringDK" id="exampleCity" type="text" class="single-input">
-                                            </th>
+                                        </th>
                                         <th class="col-lg-6">
                                             <div>
                                                 <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
@@ -111,7 +113,7 @@
                                             </div>
                                         </th>
                                     </tr>
-                                  
+
                                 </table>
 
                             </div>
@@ -160,34 +162,34 @@
                                     <td>
                                         @i
                                     </td>
-                                    <td>
+
+                                    <td style=" width: 250px;  word-wrap: break-word;">
                                         @item.tenDTCHM
                                     </td>
-                                    <td>
+
+                                    <td class="text-center">
                                         @item.idPDKHM
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @item.hoTen
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @(item.gioiTinh == true ? "Nam" : "Nữ")
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @item.soDT
                                     </td>
- 
                                     <td class="text-center">
-                                        <a href="#" class="btn-active" data-id="@item.idPDKHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a> 
+                                        <b href="#" class="btn-active" data-id="@item.idPDKHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</b>
                                     </td>
-                                   
                                     <td>
                                         @if (item.trangThai == false)
                                         {
                                             <div>
                                                 <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Tạo kết quả", "Create", new { id = item.IdTTCN })</button>
-                                                     <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Tạo kết quả", "Create", new { id = item.idPDKHM })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.idPDKHM })</button>
                                                     <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
                                                 </div>
                                             </div>
@@ -198,7 +200,7 @@
                                                 <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
                                                     <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.IdTTCN })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.idPDKHM })</button>
                                                     <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
 
                                                 </div>
@@ -226,10 +228,3 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="~/Assets/Admin/scripts/duyetPDKHM.js"></script>
-
-<script>
-    $(function () {
-        $('#AlertBox').removeClass('hide');
-        $('#AlertBox').delay(5000).slideUp(500);
-    });
-</script>

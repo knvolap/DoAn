@@ -20,10 +20,10 @@ namespace HiemMauNhanDao.Controllers
         //Index
         // - chỉ hiện những người dùng đăng ký đợt tổ chức của mình đăng bài
         // VD: bênh viện 1 - đăng bài đợt tổ chức 1 -> thì chỉ hiện những người đk đợt tổ chức 1
-        public ActionResult Index(string searchString ,int page = 1, int pageSize = 100)
+        public ActionResult Index(string searchString  ,int page = 1, int pageSize = 100)
         {
             var dsdk = new KetQuaHienMauServices();
-            var model = dsdk.GetListKQHM(searchString , page, pageSize);
+            var model = dsdk.GetListKQHM(searchString  , page, pageSize);
             ViewBag.SearchStringDK = searchString;          
             return View(model);
         }
@@ -44,39 +44,45 @@ namespace HiemMauNhanDao.Controllers
         // ở chỗ này có thể bị bug thuộc tính idNVYT (chú ý)
         public ActionResult Create(string id)
         {
-            //ViewBag.idPDKHM = new SelectList(db.PhieuDKHMs, "idPDKHM", "idDTCHM");
-            var result = db.KetQuaHienMaus.Where(x => x.idPDKHM == id).FirstOrDefault();
-            if (result == null)
-            {
-                return RedirectToAction("Error");
-            }
+            //var result = db.KetQuaHienMaus.Where(x => x.idPDKHM == id).FirstOrDefault();
+            //if (result == null)
+            //{
+            //    return RedirectToAction("Error");
+            //}
             return View();
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdKQHM,idPDKHM,nhomMau,idnguoiKham,nguoiXN,nguoiLayMau,canNang,machMau,tinhTrangLS,huyetAp,luongMauHien,hienMau,noiDung,HST,HBV,MSD,phanUng,thoiGianLayMau,ghiChu,trangThai")] KetQuaHienMau ketQuaHienMau, string id)
+        public ActionResult Create([Bind(Include = "IdKQHM,idPDKHM,nhomMau,idnguoiKham,nguoiXN,nguoiLayMau,canNang,machMau,tinhTrangLS," +
+                                                    "huyetAp,luongMauHien,hienMau,noiDung,HST,HBV,MSD,phanUng,thoiGianLayMau,ghiChu," +
+                                                    "nguoiKham,trangThai")] KetQuaHienMau ketQuaHienMau, string id)
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).SingleOrDefault();
             string ids = db.KetQuaHienMaus.Max(x => x.IdKQHM);
             int stt = Convert.ToInt32(ids.Substring(2)) + 1;
 
-            if (ModelState.IsValid == false)
+            if (ModelState.IsValid==false  )
             {
                 ketQuaHienMau.IdKQHM = stt > 9 ? "KQ" + stt : "KQ0" + stt;
                 ketQuaHienMau.idPDKHM = id;
                 ketQuaHienMau.idnguoiKham = tempNVYT.IdNVYT;
                 ketQuaHienMau.nguoiKham = session.Name;
                 ketQuaHienMau.tgKham = DateTime.Now;
+                ketQuaHienMau.trangThai = "Đang cập nhật";
                 db.KetQuaHienMaus.Add(ketQuaHienMau);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                SetAlert("Cập nhật thành công ", "success");
+                return RedirectToAction("Index", "KetQuaHienMau");
             }
-
-            //ViewBag.idPDKHM = new SelectList(db.PhieuDKHMs, "idPDKHM", "idDTCHM", ketQuaHienMau.idPDKHM);
-            return View(ketQuaHienMau);
+            else
+            {
+                SetAlert("Vui lòng cập nhập thất bại.Vui lòng kiểm tra trường dữ liệu ", "error");
+                return RedirectToAction("Create", "KetQuaHienMau");
+            }    
         }
-
+     
 
         //Edit 
         // - 2 người có nhiện vụ còn lại sẽ cập nhật
@@ -100,24 +106,26 @@ namespace HiemMauNhanDao.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include =  "IdKQHM,idPDKHM, idnguoiKham,idnguoiXN,idnguoiLayMau,tgKham,tgXetNghiem," +
                                                   "tgLayMau,tgCapNhat,nhomMau,canNang,machMau,tinhTrangLS,huyetAp,luongMauHien," +
-                                                   "hienMau, noiDung, HST, HBV,MSD, phanUng,ghiChu,trangThai" )] KetQuaHienMau ketQuaHienMau, string id)
+                                                   "hienMau, noiDung, HST, HBV,MSD, phanUng,ghiChu,trangThai,nguoiXN,nguoiKham,nguoiLayMau," )] KetQuaHienMau ketQuaHienMau, string id)
         {
-            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).SingleOrDefault();
+            var session2 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var tempNVYT2 = db.NhanVienYTes.Where(x => x.idTTCN == session2.UserID).SingleOrDefault();
 
-            if (ModelState.IsValid == false)
+            if (ModelState.IsValid  )
             {
                 var kqhm = _kqhm.GetByIdKQHM(ketQuaHienMau.IdKQHM);
 
-                ketQuaHienMau.idnguoiXN = tempNVYT.IdNVYT;         
+                ketQuaHienMau.idnguoiXN = tempNVYT2.IdNVYT;         
                 ketQuaHienMau.tgXetNghiem = DateTime.Now;
                 ketQuaHienMau.tgCapNhat = DateTime.Now;
-                ketQuaHienMau.nguoiXN = session.Name;
+                ketQuaHienMau.nguoiXN = session2.Name;
 
                 kqhm.IdKQHM = kqhm.IdKQHM;
                 kqhm.idPDKHM = kqhm.idPDKHM;
                 kqhm.idnguoiKham = kqhm.idPDKHM;
+                kqhm.nguoiKham = kqhm.nguoiKham;
                 kqhm.idnguoiLayMau = kqhm.idnguoiLayMau;
+                kqhm.nguoiLayMau = kqhm.nguoiLayMau;
                 kqhm.tgKham = kqhm.tgKham;
                 kqhm.tgLayMau = kqhm.tgLayMau;
                 kqhm.nhomMau = kqhm.idPDKHM;
@@ -138,14 +146,15 @@ namespace HiemMauNhanDao.Controllers
                 db.Entry(ketQuaHienMau).State = EntityState.Modified;
                 db.SaveChanges();
                 SetAlert("Cập nhật thành công ", "success");
-                return RedirectToAction("Index", "KetQuaHienMau");
+                return RedirectToAction("DanhSachKQ", "KetQuaHienMau");
+
             }
             else
             {
                 SetAlert("Vui lòng cập nhập thất bại.Vui lòng kiểm tra trường dữ liệu ", "error");
                 return RedirectToAction("Edit", "KetQuaHienMau");
             }
-           
+
         }
 
         public ActionResult layMau(string id)
@@ -164,27 +173,54 @@ namespace HiemMauNhanDao.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult layMau([Bind(Include = "MSD,trangThai,nhomMau,noiDung,phanUng,tgLayMau")] KetQuaHienMau ketQuaHienMau, string id)
+        public ActionResult layMau([Bind(Include = "IdKQHM,idPDKHM, idnguoiKham,idnguoiXN,idnguoiLayMau,tgKham,tgXetNghiem," +
+                                                  "tgLayMau,tgCapNhat,nhomMau,canNang,machMau,tinhTrangLS,huyetAp,luongMauHien," +
+                                                   "hienMau, noiDung, HST, HBV,MSD, phanUng,ghiChu,trangThai,nguoiXN,nguoiKham,nguoiLayMau," )] KetQuaHienMau ketQuaHienMau, string id)
         {
-            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).SingleOrDefault();
+            var session3 = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var tempNVYT3 = db.NhanVienYTes.Where(x => x.idTTCN == session3.UserID).SingleOrDefault();
 
-            if (ModelState.IsValid == false)
+            if (ModelState.IsValid )
             {
-                ketQuaHienMau.idnguoiLayMau = tempNVYT.IdNVYT;
-                ketQuaHienMau.nguoiLayMau = session.Name;
+                var kqhm = _kqhm.GetByIdKQHM(ketQuaHienMau.IdKQHM);
+
+                ketQuaHienMau.idnguoiLayMau = tempNVYT3.IdNVYT;
+                ketQuaHienMau.nguoiLayMau = session3.Name;
                 ketQuaHienMau.IdKQHM = ketQuaHienMau.IdKQHM;
                 ketQuaHienMau.tgCapNhat = DateTime.Now;
+
+                kqhm.IdKQHM = kqhm.IdKQHM;
+                kqhm.idPDKHM = kqhm.idPDKHM;
+                kqhm.idnguoiKham = kqhm.idPDKHM;
+                kqhm.nguoiKham = kqhm.nguoiKham;
+                kqhm.idnguoiXN = kqhm.idnguoiXN;
+                kqhm.nguoiXN = kqhm.nguoiXN;
+                kqhm.tgKham = kqhm.tgKham;
+                kqhm.tgXetNghiem = kqhm.tgXetNghiem;
+                kqhm.nhomMau = kqhm.idPDKHM;
+                kqhm.canNang = kqhm.canNang;
+                kqhm.tinhTrangLS = kqhm.tinhTrangLS;
+                kqhm.machMau = kqhm.machMau;
+                kqhm.trangThai = kqhm.trangThai;
+                kqhm.huyetAp = kqhm.huyetAp;
+                kqhm.luongMauHien = kqhm.luongMauHien;
+                kqhm.hienMau = kqhm.hienMau;
+                kqhm.noiDung = kqhm.noiDung;
+                kqhm.HST = kqhm.HST;
+                kqhm.HBV = kqhm.HBV;
+                kqhm.MSD = kqhm.MSD;
+                kqhm.phanUng = kqhm.phanUng;
+                kqhm.ghiChu = kqhm.ghiChu;
+
                 db.Entry(ketQuaHienMau).State = EntityState.Modified;
                 db.SaveChanges();
                 SetAlert("Cập nhật thành công ", "success");
-                return RedirectToAction("Index", "KetQuaHienMau");
+                return RedirectToAction("DanhSachKQ", "KetQuaHienMau");
             }
             else
             {
                 SetAlert("Vui lòng cập nhập thất bại.Vui lòng kiểm tra trường dữ liệu ", "error");
                 return RedirectToAction("layMau", "KetQuaHienMau");
-
             }
 
            

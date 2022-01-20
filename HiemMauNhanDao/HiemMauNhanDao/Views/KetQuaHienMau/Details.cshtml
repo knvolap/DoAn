@@ -156,6 +156,13 @@
                                     <h3 class="mb-10" style="margin-top:20px">Kết quả hiến máu</h3>
                                         <hr />
                                         <form action="#">
+                                            <ul>
+                                                <li   margin-right:20px">
+                                                    <a role="tab" class="genric-btn info-border radius" data-toggle="tab" href="#tab-content-1">
+                                                        <h3>Khám sức khỏe</h3>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                             <table class="mt-10">
                                                 <tr>
                                                     <th style="width:400px">
@@ -227,9 +234,20 @@
                                                         @Html.EditorFor(model => model.nguoiKham, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </th>
                                                     <th class="col-lg-6">
+                                                        <label>
+                                                            Thời gian khám
+                                                        </label>
+                                                        @Html.EditorFor(model => model.thoiGianKham, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </th>
                                                 </tr>
                                             </table>
+                                            <ul style="margin-top:20px">
+                                                <li    margin-right:20px">
+                                                    <a role="tab" class="genric-btn info-border radius" data-toggle="tab" href="#tab-content-1">
+                                                        <h3>Xét nghiệm trước hiến máu</h3>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                             <table class="mt-10">
                                                 <tr>
                                                     <th style="width:400px">
@@ -253,10 +271,21 @@
                                                         @Html.EditorFor(model => model.nguoiXN, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </th>
                                                     <th class="col-lg-6">
+                                                        <label>
+                                                            Thời gian xét nghiệm
+                                                        </label>
+                                                        @Html.EditorFor(model => model.thoiGianXN, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+
                                                     </th>
                                                 </tr>
                                             </table>
-
+                                            <ul style="margin-top:20px">
+                                                <li   margin-right:20px">
+                                                    <a role="tab" class="genric-btn info-border radius" data-toggle="tab" href="#tab-content-1">
+                                                        <h3>Lấy máu</h3>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                             <table class="mt-10">
                                                 <tr>
                                                     <th style="width:400px">
@@ -293,15 +322,17 @@
                                                 <tr>
                                                     <th style="width:400px">
                                                         <label>
-                                                            Nhóm máu
-                                                        </label>
-                                                        @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
-                                                    </th>
-                                                    <th class="col-lg-6">
-                                                        <label>
                                                             Người lấy máu
                                                         </label>
                                                         @Html.EditorFor(model => model.nguoiLayMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+
+                                                    </th>
+                                                    <th class="col-lg-6">
+                                                        <label>
+                                                            Nhóm máu
+                                                        </label>
+                                                        @Html.EditorFor(model => model.nhomMau, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
+
                                                     </th>
                                                 </tr>
                                             </table>
@@ -315,17 +346,15 @@
                                                     </th>
                                                     <th class="col-lg-6">
                                                         <label>
-
+                                                            Thời gian cập nhật
                                                         </label>
+                                                        @Html.EditorFor(model => model.thoiGianCapNhat, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })
                                                     </th>
                                                 </tr>
                                             </table>
                                         </form>
-
-                                   
                                 </div>
                             </div>
-
                         }
                     </div>
                 </div>

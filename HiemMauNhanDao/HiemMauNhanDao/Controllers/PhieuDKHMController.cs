@@ -1,5 +1,6 @@
 ﻿using HiemMauNhanDao.Areas.Admin.Controllers;
 using Models.EF;
+using Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,7 +14,7 @@ namespace HiemMauNhanDao.Controllers
     public class PhieuDKHMController : BaseController3
     {
         private DbContextHM db = new DbContextHM();
-
+        DotToChucHMServices _pdkhm= new DotToChucHMServices();
         public ActionResult Index()
         {
             var phieuDKHMs = db.PhieuDKHMs.Include(p => p.DotToChucHM).Include(p => p.ThongTinCaNhan);
@@ -41,7 +42,14 @@ namespace HiemMauNhanDao.Controllers
         // phải tích đủ các nội dung
         // khi đăng ký xong trả về thông báo : stt , idPDKHM, thời gian dự kiến = (thời gian tổ chức + 10' cho 5 người đk ) 
         public ActionResult Create(string id)
-        {           
+        {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            if (_pdkhm.checkDangKyHienMau(session.UserID) == false)
+            {
+                SetAlert("Hiện tại đợt hiến máu này đã đăng ký. Vui lòng kiểm tra lại lịch sử đăng ký ", "error");
+                return RedirectToAction("Index", "DTCHM");
+                //return RedirectToAction("Error", "KetQuaHienMau");
+            }
             return View();
         }       
         [HttpPost]
@@ -54,29 +62,36 @@ namespace HiemMauNhanDao.Controllers
             var tempDTCHM = db.DotToChucHMs.Where(x => x.IdDTCHM == id).SingleOrDefault();
             string idpdk = db.PhieuDKHMs.Max(x => x.idPDKHM);
             int stt = Convert.ToInt32(idpdk.Substring(3)) + 1;
-         
-            if (ModelState.IsValid ==  false)
+            if (ModelState.IsValid)
             {
-                var tempTTCN = db.PhieuDKHMs.Where(x => x.idTTCN == session.UserID).FirstOrDefault();             
+                var tempTTCN = db.PhieuDKHMs.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
                 phieuDKHM.idPDKHM = stt > 9 ? "PDK" + stt : "PDK0" + stt;
-                phieuDKHM.idTTCN = tempTTCN.idTTCN;
-                phieuDKHM.idDTCHM = id;            
+                phieuDKHM.idTTCN = session.UserID;
+                phieuDKHM.idDTCHM = id;
                 phieuDKHM.trangThai = false;
-                phieuDKHM.tgDuKien = tempDTCHM.ngayToChuc;
-             
-                db.PhieuDKHMs.Add(phieuDKHM);
-                db.SaveChanges();
-                SetAlert("Đăng ký thành công ", "success");
-                return RedirectToAction("Index", "DTCHM");  
+                phieuDKHM.tgDuKien = tempDTCHM.ngayToChuc.AddMinutes(2);
+
+                if (db.PhieuDKHMs.Where(x => x.idDTCHM == id).ToList().Count() < db.DotToChucHMs.Find(id).soLuong)
+                { //l 10
+                    db.PhieuDKHMs.Add(phieuDKHM);
+                    db.SaveChanges();
+                    SetAlert("Đăng ký thành công ", "success");
+                    return RedirectToAction("Index", "DTCHM");
+                }
+                else
+                {
+                    SetAlert("Đã đủ lượt đăng ký", "error");
+                    return RedirectToAction("Index", "DTCHM");
+                }
+                
             }
             else
             {
                 SetAlert("Đăng ký thất bại ", "error");
                 return RedirectToAction("Create", "PhieuDKHM");
-            }    
-       
-            
+            }            
         }      
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -87,3 +102,5 @@ namespace HiemMauNhanDao.Controllers
         }
     }
 }
+// 5ng =+ 10p
+// 200ng= +400p = 6h

@@ -3,7 +3,7 @@
 @using System.Data;
 
 @{
-    ViewBag.Title = "Đợt tổ chức";
+    ViewBag.Title = "Bài đăng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -104,21 +104,16 @@
                                     STT
                                 </th>
                                 <th>
-                                    Mã đợt
-                                </th>
-                                <th>
-                                    Mã bài đăng
+                                    Mã ĐK
                                 </th>
                                 <th>
                                     Tên đợt tổ chức
                                 </th>
 
                                 <th>
-                                    Địa chỉ
+                                    Tên bài đăng
                                 </th>
-                                <th>
-                                    Số lượng
-                                </th>
+
                                 <th>
                                     Trạng thái
                                 </th>
@@ -129,41 +124,34 @@
                             @{ var i = 1;}
                             @foreach (var item in Model)
                             {
-                        <tr>
-                            <td>
-                                @i
-                            </td>
-                            <td>
-                                @item.IdChiTietDHM
-                            </td>
-                            <td>
-                                @item.IdDTCHM
-                            </td>
-                            <td>
-                                @item.tenDTCHM
-                            </td>
-                            <td>
-                                @item.diaChiToChuc
-                            </td>
-                            <td>
-                                @item.soLuong
-                            </td>
-                            <td>
-                                @item.trangThai
-                            </td>
-                          
-                            <td>
-
-                                <div>
-                                    <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                        <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdDTCHM })</button>
-                                        <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
-                                        <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @item.IdChiTietDHM
+                                    </td>
+                                    <td style=" width: 200px;  word-wrap: break-word;">
+                                        @item.tenDHM
+                                    </td>
+                                    <td style=" width: 200px;  word-wrap: break-word;">
+                                        @item.tenDTCHM
+                                    </td>
+                                    <td>
+                                        @(item.trangThai == true ? "Đã duyệt" : "Chưa Duyệt")
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdDTCHM })</button>
+                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
+                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Phân nhiệm vụ", "TaoNV", new { id = item.IdDTCHM })</button>
+                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                                 i++;
                             }
                         </table>

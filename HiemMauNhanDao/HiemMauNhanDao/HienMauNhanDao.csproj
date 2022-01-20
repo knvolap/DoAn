@@ -594,6 +594,7 @@
     <Content Include="Views\NguoiDung\Details.cshtml" />
     <Content Include="Views\DVLK\DanhSachDangKy.cshtml" />
     <Content Include="Views\KetQuaHienMau\Error.cshtml" />
+    <Content Include="Views\DotToChucHM\TaoNV.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

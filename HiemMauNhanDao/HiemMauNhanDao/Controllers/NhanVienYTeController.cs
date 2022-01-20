@@ -26,7 +26,7 @@ namespace HiemMauNhanDao.Controllers
             var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
 
             var viewNVYT = new NhanVienYTeServices();
-            var model = viewNVYT.GetListNVYT2(searchString1, tempNVYT.idBenhVien, page, pageSize);
+            var model = viewNVYT.GetListNVYT3(searchString1, tempNVYT.idBenhVien, page, pageSize);
             if (!string.IsNullOrEmpty(searchString1))
             {
                 ViewBag.SearchStringNV = searchString1;
@@ -34,6 +34,20 @@ namespace HiemMauNhanDao.Controllers
             return View(model);
         }
 
+        public ActionResult XemNV(string searchString1, string idbv, int page = 1, int pageSize = 10)
+        {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            string id = session.UserID;
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+
+            var viewNVYT = new NhanVienYTeServices();
+            var model = viewNVYT.GetListNVYT3(searchString1, tempNVYT.IdNVYT, page, pageSize);
+            if (!string.IsNullOrEmpty(searchString1))
+            {
+                ViewBag.SearchStringNV = searchString1;
+            }
+            return View(model);
+        }
 
         //show danh sách nhân viên thuộc bệnh viện
         public ActionResult ViewNVYT(string searchString1,string idbv, int page = 1, int pageSize = 10)
@@ -165,6 +179,9 @@ namespace HiemMauNhanDao.Controllers
                     ttcn.gioiTinh = ttcn.gioiTinh;
                     ttcn.trangThai = ttcn.trangThai;
                     ttcn.nhomMau = ttcn.nhomMau;
+                    ttcn.diaChi = ttcn.diaChi;
+                    ttcn.ngheNghiep = ttcn.ngheNghiep;
+                    ttcn.coQuanTH = ttcn.coQuanTH;
                     db.Entry(model).State = EntityState.Modified;
                     db.SaveChanges();
 
@@ -187,11 +204,7 @@ namespace HiemMauNhanDao.Controllers
         {
             return View();
         }
-        public ActionResult XemNV()
-        {
-            return View();
-        }
-
+     
         public ActionResult EditBV(string id)
         {
             return View(_BenhVien.GetByIdBenhVien1(id));

@@ -6201,6 +6201,7 @@ h1, h2, h3, h4, h5, h6 {
   align-content: center;
 }
 
+
 /* line 150, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
 .footer-area .footer-bottom .footer-social a i,
 .footer-area .footer-bottom .footer-social a span {
@@ -6254,5 +6255,20 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
   }
 }
+
+td.test-hm {
+    white-space: nowrap;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;    
+}
+
+td.test-hm2 {
+    width: 250px;
+    border-color:aqua;
+    word-wrap: break-word;
+}
+
+
 
 /*# sourceMappingURL=style.css.map */

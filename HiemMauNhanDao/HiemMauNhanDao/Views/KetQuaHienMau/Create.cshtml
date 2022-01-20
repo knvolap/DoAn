@@ -18,23 +18,26 @@
         </div>
     </div>
 </section>
-<!-- breadcrumb start-->
-<!--================Blog Area =================-->
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
+
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
-
             <div class="col-lg-4">
                 @RenderPage("_leftMenu2.cshtml")
             </div>
 
             <div class="col-lg-8 mb-5 mb-lg-0">
-
                 @using (Html.BeginForm("Create", "KetQuaHienMau", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                     <div class="col-lg-12 col-md-8">
                         <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
                             <li class="nav-item">
@@ -42,17 +45,7 @@
                                    href="#tab-content-0">
                                     <h3>Khám lâm sàng</h3>
                                 </a>
-                            </li>
-                            <li class="nav-item" style="margin-left:20px; margin-right:20px">
-                                <a role="tab" class="genric-btn info-border radius" data-toggle="tab" href="#tab-content-1">
-                                    <h3>Xét nghiệm trước HM</h3>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a role="tab" class="genric-btn info-border radius" id="tab-2" data-toggle="tab" href="#tab-content-2">
-                                    <h3>Lấy máu</h3>
-                                </a>
-                            </li>
+                            </li>                         
                         </ul>
 
                         <hr>
@@ -64,7 +57,7 @@
                         }
                         <div class="tab-content">
                             <!--================tab1 =================-->
-                            <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                            <div  >
                                 <form action="#">
                                     <table class="mt-10">
                                         <tr>
@@ -101,19 +94,20 @@
                                     </table>
                                     <table class="mt-10">
                                         <tr>
+                                            
                                             <th style="width:400px">
-                                                <p>
-                                                    <b style="color:rgb(0, 0, 0);">Hiến máu        </b>
-                                                </p>
-                                            </th>
-                                            <th style="width:400px">
-                                                <div class="checkbox" style="width:20px;height:20px">
-                                                    @Html.EditorFor(model => model.hienMau)
+                                                <div>
+                                                   Hiến máu
+
+                                                    @Html.DropDownListFor(model => model.hienMau, new[] { new SelectListItem { Text = "Đủ điều kiện", Value = "True" },
+                                                      new SelectListItem { Text = "Không đủ điều kiện", Value = "False" } }, new { @class = "single-input" })
+                                                    @Html.ValidationMessageFor(model => model.hienMau, "", new { @class = "text-danger" })
+
                                                 </div>
                                             </th>
                                             <th class="col-lg-6">
                                                 <div>
-                                                    Thể tích
+                                                    Thể tích (ml)
                                                     @Html.DropDownListFor(model => model.luongMauHien, new[] { new SelectListItem { Text = "250"},
                                                                           new SelectListItem { Text = "350"} , new SelectListItem { Text = "450" }},
                                                    new { @class = "single-input" })
@@ -125,8 +119,10 @@
                                     <table class="mt-10">
                                         <tr>
                                             <th style="width:400px">
-                                                Thời gian khám
-                                                @Html.EditorFor(model => model.tgLayMau, new { htmlAttributes = new { @class = "single-input", @type = "datetime-local", @for = "datepicker", @name = "thoiGianLayMau" } })
+                                                Người khám
+                                                @Html.EditorFor(model => model.nguoiKham, new { htmlAttributes = new { @class = "single-input", @placeholder = "người khám", @readonly = "@readonly" } })
+                                                @Html.HiddenFor(model => model.idnguoiKham, new { htmlAttributes = new { @class = "single-input", @placeholder = "người khám", @readonly = "@readonly" } })
+
                                             </th>
                                             <th class="col-lg-6">
                                                 <div>
@@ -137,174 +133,13 @@
                                             </th>
 
                                         </tr>
-
-
-                                    </table>
-
-
-                                    <table class="mt-10">
-                                        <tr>
-                                            <th style="width:400px">
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Người khám
-                                                <div class="form-select" id="default-select_1">
-                                                    <select>
-                                                        <option value="">Người khám  </option>
-                                                        <option>Võ Lập</option>
-                                                        <option>Quang Nhã</option>
-                                                        <option>Ngọc Huy</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
-                                                </div>
-                                            </th>
-                                            <th class="col-lg-6">
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Trạng thái
-                                                @Html.DropDownListFor(model => model.trangThai, new[] { new SelectListItem { Text = "Đang cập nhật"},
-                                                                        new SelectListItem { Text = "Chưa cập nhật"} , new SelectListItem { Text = "A -" } ,
-                                                                        new SelectListItem { Text = "B +" } , new SelectListItem { Text = "Cập nhật xong" } },
-                                                     new { @class = "single-input" })
-
-                                            </th>
-                                        </tr>
                                     </table>
                                 </form>
                                 <div class="text-center " style="margin-top: 20px;">
-                                    <a class="btn_2 " href="#" type="sumit">Cập nhật</a>
+                                    <button type="submit" class="genric-btn primary-border radius">Tạo kết quả</button>
                                 </div>
                             </div>
 
-                            <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel">
-                                <form action="#">
-                                    <table class="mt-10">
-                                        <tr>
-                                            <th style="width:400px">
-                                                <div>
-                                                    Xét nghiệm huyết sắc tố
-                                                    @Html.EditorFor(model => model.HST, new { htmlAttributes = new { @class = "single-input", @placeholder = " Xét nghiệm huyết sắc tố" } })
-                                                </div>
-                                            </th>
-                                            <th class="col-lg-6">
-                                                <div>
-                                                    Xét nghiệm viêm gan B
-                                                    @Html.EditorFor(model => model.HBV, new { htmlAttributes = new { @class = "single-input", @placeholder = "Xét nghiệm viêm gan B" } })
-
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </table>
-
-                                    <table class="mt-10">
-                                        <tr>
-                                            <th style="width:400px">
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Người xét nghiệm
-                                                <div class="form-select" id="default-select_1">
-                                                    <select>
-                                                        <option value="">Người khám  </option>
-                                                        <option>Võ Lập</option>
-                                                        <option>Quang Nhã</option>
-                                                        <option>Ngọc Huy</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
-                                                </div>
-                                            </th>
-                                            <th class="col-lg-6">
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Trạng thái
-                                                @Html.DropDownListFor(model => model.trangThai, new[] { new SelectListItem { Text = "Đang cập nhật"},
-                                                                        new SelectListItem { Text = "Chưa cập nhật"} , new SelectListItem { Text = "A -" } ,
-                                                                        new SelectListItem { Text = "B +" } , new SelectListItem { Text = "Cập nhật xong" } },
-                                                     new { @class = "single-input" })
-
-                                            </th>
-                                        </tr>
-                                    </table>
-                                </form>
-                                <div class="text-center " style="margin-top: 20px;">
-                                    <a class="btn_2 " href="#">Cập nhật</a>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
-                                <form action="#">
-                                    <table class="mt-10">
-                                        <tr>
-                                            <th style="width:400px">
-                                                Xét nghiệm máu
-                                                @Html.EditorFor(model => model.MSD, new { htmlAttributes = new { @class = "single-input", @placeholder = "Xét nghiệm máu" } })
-                                            </th>
-                                            <th class="col-lg-6">
-                                                Thời gian lấy máu
-                                                @Html.EditorFor(model => model.tgLayMau, new { htmlAttributes = new { @class = "single-input", @type = "datetime-local", @for = "datepicker", @name = "thoiGianLayMau" } })
-                                            </th>
-                                        </tr>
-                                    </table>
-                                    <table class="mt-10">
-                                        <tr>
-                                            <th style="width:400px">
-                                                Phản ứng
-                                                @Html.EditorFor(model => model.phanUng, new { htmlAttributes = new { @class = "single-input", @placeholder = "Phản ứng" } })
-
-                                            </th>
-                                            <th class="col-lg-6">
-                                                Xử lý
-                                                @Html.EditorFor(model => model.noiDung, new { htmlAttributes = new { @class = "single-input", @placeholder = " Xử lý" } })
-
-                                            </th>
-                                        </tr>
-                                    </table>
-                                    <table class="mt-10">
-                                        <tr>
-                                            <th style="width:400px">
-                                                <div>
-                                                    Lần hiến máu
-                                                    <input type="text" name="last_name" placeholder="Số lần hiếm máu"
-                                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số lần hiếm máu'" required
-                                                           class="single-input">
-                                                </div>
-                                            </th>
-                                            <th class="col-lg-6">
-                                                <div>
-                                                    Nhóm máu
-                                                    @Html.DropDownListFor(model => model.nhomMau, new[] { new SelectListItem { Text = "Chưa biết"},
-                                                                          new SelectListItem { Text = "A +"} , new SelectListItem { Text = "A -" } ,
-                                                                          new SelectListItem { Text = "B +" } , new SelectListItem { Text = "B -" } ,
-                                                                          new SelectListItem { Text = "AB +" } ,  new SelectListItem { Text = "AB -" } ,
-                                                                          new SelectListItem { Text = "O +" } ,  new SelectListItem { Text = "O -" } },
-                                                   new { @class = "single-input" })
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </table>
-                                    <table class="mt-10">
-                                        <tr>
-                                            <th style="width:400px">
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Lấy máu
-                                                <div class="form-select" id="default-select_1">
-                                                    <select>
-                                                        <option value="">Người khám  </option>
-                                                        <option>Võ Lập</option>
-                                                        <option>Quang Nhã</option>
-                                                        <option>Ngọc Huy</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
-                                                </div>
-                                            </th>
-                                            <th class="col-lg-6">
-                                                <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>Trạng thái
-                                                @Html.DropDownListFor(model => model.trangThai, new[] { new SelectListItem { Text = "Đang cập nhật"},
-                                                                        new SelectListItem { Text = "Chưa cập nhật"} , new SelectListItem { Text = "A -" } ,
-                                                                        new SelectListItem { Text = "B +" } , new SelectListItem { Text = "Cập nhật xong" } },
-                                                     new { @class = "single-input" })
-
-                                            </th>
-                                        </tr>
-                                    </table>
-                                </form>
-                                <div class="text-center " style="margin-top: 20px;">
-                                    <a class="btn_2 " href="#">Cập nhật</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     }
@@ -345,9 +180,4 @@
 
 
 
-<script>
-    $(function () {
-        $('#AlertBox').removeClass('hide');
-        $('#AlertBox').delay(5000).slideUp(500);
-                });
-</script>
+ 

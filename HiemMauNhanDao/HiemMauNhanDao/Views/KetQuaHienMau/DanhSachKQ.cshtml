@@ -2,7 +2,7 @@
 @using PagedList.Mvc
 @using System.Data;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cập nhật kết quả";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -166,11 +166,12 @@
                             @{ var i = 1;}
                             @foreach (var item in Model)
                             {
-                                <tr>
+                                <tr class ="text-center">
                                     <td>
                                         @i
                                     </td>
-                                    <td>
+
+                                    <td style=" width: 250px;  word-wrap: break-word;">
                                         @item.tenDTCHM
                                     </td>
                                     <td>
@@ -222,9 +223,9 @@
                                         }
 
                                     </td>
-                                </tr>
-                                i++;
-                            }
+                                    </tr>
+                                    i++;
+                                }
                         </table>
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">

@@ -165,6 +165,7 @@
     <Compile Include="ViewModel\NhanVienvaDVLKView.cs" />
     <Compile Include="ViewModel\NhanVienView.cs" />
     <Compile Include="ViewModel\PhieuDKHMView.cs" />
+    <Compile Include="ViewModel\TTCNvsPhieuDKHMView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

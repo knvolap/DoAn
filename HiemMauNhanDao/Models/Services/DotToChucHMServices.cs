@@ -39,15 +39,18 @@ namespace Models.Services
         public IEnumerable<ChiTietvsToChucHMView> ListAllBaiDang2(string searchString1, string idbv ,int page, int pageSize)
         {
             var query = from dtc in db.DotToChucHMs
-                        join ct in db.chiTietDHMs on dtc.idChiTietDHM equals ct.IdChiTietDHM
-                        join dv in db.DonViLienKets on ct.idDVLK equals dv.IdDVLK
+                        join ct in db.chiTietDHMs on dtc.idChiTietDHM equals ct.IdChiTietDHM 
+                        
                         join bv in db.BenhViens on ct.idBenhVien equals bv.IdBenhVien
-                        join dhm in db.DotHienMaus on ct.idDHM equals dhm.IdDHM
-                        join nv in db.NhanVienYTes on bv.IdBenhVien equals nv.idBenhVien
-                        join tt in db.ThongTinCaNhans on nv.idTTCN equals tt.IdTTCN
 
-                        where bv.IdBenhVien == idbv
-                        select new { dtc, ct, dv, bv, dhm ,nv,tt};
+
+
+                        join dhm in db.DotHienMaus on ct.idDHM equals dhm.IdDHM
+                        join dv in db.DonViLienKets on ct.idDVLK equals dv.IdDVLK
+
+                        where ct.idBenhVien == idbv && ct.IdChiTietDHM==dtc.idChiTietDHM
+
+                        select new { dtc, ct, dv, bv, dhm };
 
             //nv.idTTCN ->nv.IdNVYT ->bv.IdBenhVien ->ct.IdChiTietDHM ->dtc.IdDTCHM
             //check từ khóa có tồn tại hay k
@@ -78,8 +81,8 @@ namespace Models.Services
                 tenDHM = x.dhm.TenDHM,
                 tenBenhVien = x.bv.TenBenhVien,
                 tenDVLK = x.dv.TenDonVi,
-                idNVYT = x.nv.IdNVYT,
-                idTTCN = x.tt.IdTTCN,
+          
+             
 
             }).OrderByDescending(x => x.IdDTCHM).ThenBy(q => q.tenDTCHM).ToPagedList(page, pageSize);
             return result;
@@ -162,15 +165,20 @@ namespace Models.Services
             }).SingleOrDefault();
             return result;
         }
-        public bool CheckTimeDuplicate(DateTime t1, DateTime t2, DateTime s1, DateTime s2)
+        public bool CheckTimeDuplicate(DateTime t1, DateTime t2, DateTime t3, DateTime s1, DateTime s2)
         {
-            if (t1 >= s1 && t2 <= s2)
+            if (t1 >= s1 && t2 <= s2 && t3 <= s2)
             {
                 return true;
             }
             else
             { return false; }
         }
+        //  s1 = DotHienMau.ngayBD
+        //  s2 = DotHienMau.ngayKT
+        //  t1 = BaiDang.ngayBatDauDK
+        //  t2 = BaiDang.ngayKetThucDK
+        //  t3 = BaiDang.ngayToChuc
 
         public bool Delete(string id)
         {
@@ -187,5 +195,15 @@ namespace Models.Services
             }
 
         }
+
+        public bool checkDangKyHienMau(string idTTCN)
+        {
+            var result = db.PhieuDKHMs.Where(x => x.idTTCN == idTTCN).ToList();
+            if(result.Count() >= 1) {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

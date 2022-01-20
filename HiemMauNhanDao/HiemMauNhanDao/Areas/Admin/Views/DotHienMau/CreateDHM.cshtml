@@ -1,7 +1,7 @@
 ﻿@model Models.EF.DotHienMau
 
 @{
-    ViewBag.Title = "CreateDHM";
+    ViewBag.Title = "Thêm đợt hiến máu";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,7 +15,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.TenDHM, htmlAttributes: new { @class = "control-label col-md-2" })
+           Tên đợt hiến máu
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TenDHM, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TenDHM, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.noiDung, htmlAttributes: new { @class = "control-label col-md-2" })
+          Nội dung
             <div class="col-md-10">
                 @Html.EditorFor(model => model.noiDung, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.noiDung, "", new { @class = "text-danger" })
@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.tgBatDau, htmlAttributes: new { @class = "control-label col-md-2" })
+            Thời gian bắt đầu
             <div class="col-md-10">
                 @Html.EditorFor(model => model.tgBatDau, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.tgBatDau, "", new { @class = "text-danger" })
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.tgKetThuc, htmlAttributes: new { @class = "control-label col-md-2" })
+           Thời gian kết thúc
             <div class="col-md-10">
                 @Html.EditorFor(model => model.tgKetThuc, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.tgKetThuc, "", new { @class = "text-danger" })

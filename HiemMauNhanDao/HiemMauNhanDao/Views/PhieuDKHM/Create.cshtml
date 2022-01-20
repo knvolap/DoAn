@@ -29,7 +29,7 @@
 <div class="whole-wrap">
     <div class="container box_1170">
         <div class="section-top-border">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Create", "PhieuDKHM", FormMethod.Post, new { @enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })

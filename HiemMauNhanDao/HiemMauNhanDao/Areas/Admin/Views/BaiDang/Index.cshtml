@@ -2,7 +2,7 @@
 @using PagedList.Mvc
 @using System.Data;
 @{
-    ViewBag.Title = "Danh sách bài đăng";
+    ViewBag.Title = "Duyệt bài đăng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -119,7 +119,7 @@
                     </td>
 
                     <td class="text-center">
-                        @item.trangThai
+                        <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
                     </td>
                     <td class="text-center">
                         <div class="mb-2 mr-2 dropright btn-group">
