@@ -22,7 +22,10 @@ namespace Models.Services
         {
             var query = from c in db.chiTietDHMs
                         join dhm in db.DotHienMaus on c.idDHM equals dhm.IdDHM
-                        select new { c, dhm };
+                        join bv in db.BenhViens on c.idBenhVien equals bv.IdBenhVien
+                        join dv in db.DonViLienKets on c.idDVLK equals dv.IdDVLK
+
+                        select new { c, dhm ,dv,bv};
 
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(searchString1))
@@ -37,9 +40,14 @@ namespace Models.Services
                 tgBatDau = x.dhm.tgBatDau,
                 tgKetThuc = x.dhm.tgKetThuc,
                 trangThai = x.dhm.trangThai,
-                idDVLK = x.c.idDVLK,
-                idBenhVien = x.c.idBenhVien,
+                idDVLK = x.dv.IdDVLK,
+                sdtDVLK = x.dv.soDT,
+                tenDVLK = x.dv.TenDonVi,
+                idBenhVien = x.bv.IdBenhVien,
+                sdtBV = x.bv.soDTBV,
+                tenBV = x.bv.TenBenhVien,
                 ngayDK = x.c.ngayDK,
+                idCTDK = x.c.IdChiTietDHM,
             }).OrderByDescending(x => x.IdDHM).ThenBy(q => q.ngayDK).ToPagedList(page, pageSize);
             return result;
         }

@@ -35,7 +35,7 @@
                     <h3  >Nhiệm Vụ</h3>
                     <div class=" ">
                         <hr />
-                        @using (Html.BeginForm())
+                        @using (Html.BeginForm("TaoNV", "DotToChucHM", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                         {
                             <div class="row">
                                 <div class="col-lg-12 col-md-8">
@@ -55,7 +55,7 @@
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Bài đăng </a>
-                                                        @Html.EditorFor(model => model.idDTCHM, new { htmlAttributes = new { @class = "single-input", @readonly = "readonly" } })                                                       
+                                                        @Html.EditorFor(model => model.idDTCHM, new { htmlAttributes = new { @class = "single-input",@readonly= "readonly" } })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
@@ -73,8 +73,8 @@
                                                         @Html.DropDownListFor(model => model.nhiemVu, new[] {new SelectListItem { Text = "Khám sức khỏe"},
                                                                                new SelectListItem { Text = "Xét nghiệm" } ,  new SelectListItem { Text = "Lấy máu" }},
                                                                                new { @class = "single-input" })
-                                                                            
-                                                                             
+
+
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
@@ -82,12 +82,12 @@
                                             </tr>
 
                                         </table>
-                                        
+
                                     </form>
                                     @{
                                         var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
                                     }
-                                    @if ( session.AuthorID == "Q04")
+                                    @if (session.AuthorID == "Q04")
                                     {
                                         <div class="text-center " style="margin-top:20px">
                                             <input type="submit" value="Chấp nhận" class="genric-btn info-border radius" />

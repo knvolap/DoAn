@@ -224,21 +224,17 @@ namespace Models.Services
 
         public IEnumerable<NhanVienView> GetListNVYT3(string keysearch, string id, int page, int pagesize)
         {
-            var query = from nv in db.NhanVienYTes
+            var query = from dsnv in db.DSNVTHs
+                        join nv in db.NhanVienYTes on dsnv.idNVYT equals  nv.IdNVYT
                         join tt in db.ThongTinCaNhans on nv.idTTCN equals tt.IdTTCN
-                        join bv in db.BenhViens on nv.idBenhVien equals bv.IdBenhVien
-                        join dsnv in db.DSNVTHs on nv.IdNVYT equals dsnv.idNVYT
+                        join bv in db.BenhViens on nv.idBenhVien equals bv.IdBenhVien                       
                         join dtchm in db.DotToChucHMs on dsnv.idDTCHM equals dtchm.IdDTCHM
 
-                        where tt.IdTTCN == id
+                        where dsnv.idNVYT==nv.IdNVYT && bv.IdBenhVien == id
+
                         select new { nv, tt, bv, dsnv, dtchm };
 
-            //check từ khóa có tồn tại hay k
-            if (!string.IsNullOrEmpty(keysearch))
-            {
-                query = query.Where(x => x.nv.IdNVYT.Contains(keysearch) || x.nv.idBenhVien.Contains(keysearch)
-                || x.tt.IdTTCN.Contains(keysearch) || x.tt.hoTen.Contains(keysearch) || x.tt.soDT.Contains(keysearch));
-            }
+            //check từ khóa có tồn tại hay k           
             //tạo biến result -> hiển thị sp ->           
             var result = query.Select(x => new NhanVienView()
             {
@@ -252,8 +248,9 @@ namespace Models.Services
                 trangThai = x.nv.trangThai,
                 idDTCHM=x.dtchm.IdDTCHM,
                 tenDTCHM=x.dtchm.tenDotHienMau,
+                ngayToChuc=x.dtchm.ngayToChuc,
                 NhiemVu = x.dsnv.nhiemVu,
-            }).OrderByDescending(x => x.IdNVYT).ThenBy(q => q.IdTTCN).ToPagedList(page, pagesize);
+            }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.IdNVYT).ToPagedList(page, pagesize);
             return result;
         }
 

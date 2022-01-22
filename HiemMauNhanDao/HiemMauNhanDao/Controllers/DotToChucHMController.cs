@@ -21,11 +21,17 @@ namespace HiemMauNhanDao.Controllers
         //bệnh viện Đa khoa đăng bài thì hiển thị những bài đăng của nhân viên y tế thuộc bệnh viên đa khoa đăng
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+
             var dotToChucHMs = new DotToChucHMServices();
-            var model = dotToChucHMs.ListAllDTCHM(searchString, page, pageSize);
+            var model = dotToChucHMs.ListAllBaiDang2(searchString, tempNVYT.idBenhVien, page, pageSize);
             ViewBag.SearchStringDTCHM = searchString;
             return View(model);
+
         }
+
         [HttpGet]
         public ActionResult Index2(string searchString, int page = 1, int pageSize = 10)
         {
@@ -54,7 +60,7 @@ namespace HiemMauNhanDao.Controllers
             var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
 
             ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs.Where(x=>x.idBenhVien==tempNVYT.idBenhVien), "IdChiTietDHM", "idChiTietDHM");
-
+                
             return View();
         }
 
@@ -88,15 +94,13 @@ namespace HiemMauNhanDao.Controllers
                     else
                     {
                         SetAlert("Đăng bài thất bại!!! Vui lòng nhập Ngày bắt đầu < Ngày kết thúc < Ngày đăng ký" , "error");
-                        return RedirectToAction("Create");
-                        //ModelState.AddModelError("", "Thêm thất bại!");
+                        return RedirectToAction("Create");                
                     }
                 }
                 else
                 {
                     SetAlert("Khoảng thời gian đăng ký không nằm trong đợt hiến máu!" , "error");
-                    return RedirectToAction("Create");
-                    //ModelState.AddModelError("", "Khoảng thời gian đăng ký không nằm trong đợt hiến máu!");
+                    return RedirectToAction("Create");                
                 }
             }
             ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idChiTietDHM", dotToChucHM.idChiTietDHM);
@@ -133,40 +137,33 @@ namespace HiemMauNhanDao.Controllers
 
         public ActionResult TaoNV(string id)
         {
-            ViewBag.IdNVYT = new SelectList(db.NhanVienYTes, "IdNVYT" , "idBenhVien");
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DotToChucHM dotToChucHM = db.DotToChucHMs.Find(id);
-            if (dotToChucHM == null)
-            {
-                return HttpNotFound();
-            }
-            return View();
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+            ViewBag.IdNVYT = new SelectList(db.NhanVienYTes.Where(x => x.idBenhVien == tempNVYT.idBenhVien), "IdNVYT", "idNVYT");
+            return View( );
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult TaoNV([Bind(Include = "idDTCHM,idNVYT,nhiemVu ")] DSNVTH dsnv, string id)
         {
-            ViewBag.IdNVYT = new SelectList(db.NhanVienYTes, "IdNVYT", "IdNVYT", dsnv.idNVYT);
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+            ViewBag.IdNVYT = new SelectList(db.NhanVienYTes.Where(x => x.idBenhVien == tempNVYT.idBenhVien), "IdNVYT", "idNVYT");
+
             if (ModelState.IsValid)
             {
                 dsnv.idDTCHM = id;
-                db.Entry(dsnv).State = EntityState.Modified;
-                db.SaveChanges();
-                SetAlert("Phân nhiệm vụ thành công", "success");
+                db.DSNVTHs.Add(dsnv);
+                db.SaveChanges();               
+                SetAlert("Phân chia nhiệm vụ thành công", "success");
                 return RedirectToAction("Index");
             }
             else
             {
-                SetAlert("Phân nhiệm vụ thất bại!", "error");
+                SetAlert("Phân chia nhiệm vụ thất bại!", "error");
                 return RedirectToAction("TaoNV");
-            }    
-          
-           
- 
+            }            
         }
 
         public ActionResult Details(string id)

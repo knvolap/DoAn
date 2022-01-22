@@ -20,17 +20,23 @@ namespace HiemMauNhanDao.Controllers
         //Index
         // - chỉ hiện những người dùng đăng ký đợt tổ chức của mình đăng bài
         // VD: bênh viện 1 - đăng bài đợt tổ chức 1 -> thì chỉ hiện những người đk đợt tổ chức 1
-        public ActionResult Index(string searchString  ,int page = 1, int pageSize = 100)
+        public ActionResult Index(string searchString ,string id ,int page = 1, int pageSize = 100)
         {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+
             var dsdk = new KetQuaHienMauServices();
-            var model = dsdk.GetListKQHM(searchString  , page, pageSize);
+            var model = dsdk.GetListKQHM(searchString, tempNVYT.idBenhVien, page, pageSize);
             ViewBag.SearchStringDK = searchString;          
             return View(model);
         }
         public ActionResult DanhSachKQ(string searchString, int page = 1, int pageSize = 100)
         {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+
             var dsdk = new KetQuaHienMauServices();
-            var model = dsdk.GetListKQHM2(searchString, page, pageSize);
+            var model = dsdk.GetListKQHM2(searchString, tempNVYT.idBenhVien, page, pageSize);
             ViewBag.SearchStringKQ = searchString;
             return View(model);
         }

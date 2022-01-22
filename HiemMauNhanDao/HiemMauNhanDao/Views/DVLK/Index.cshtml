@@ -1,9 +1,11 @@
-﻿@model Models.EF.DonViLienKet
+﻿@model PagedList.IPagedList<Models.ViewModel.ChiTietvsToChucHMView>
+@using PagedList.Mvc
+@using System.Data;
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Đăng bài";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <section class="breadcrumb_part breadcrumb_bg">
     <div class="container">
@@ -11,14 +13,19 @@
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Thông tin bệnh viện</h2>
+                        <h2>Danh sách bài đăng</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
 
 <section class="blog_area section_padding">
     <div class="container">
@@ -26,83 +33,140 @@
             <div class="col-lg-4">
                 @RenderPage("_leftMenu2.cshtml")
             </div>
-
             <div class="col-lg-8 mb-5 mb-lg-0">
-                <div class="blog_left_sidebar">
-                    <h3 class="mb-30">Cập nhật thông đơn vị</h3>
-                    <div class="section-top-border">
-
-                        <div class="row">
-                            <div class="col-lg-12 col-md-8">
-
-                                <form action="#">
-                                    @using (Html.BeginForm())
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        <table class="mt-10">
-                                            <th style="width:400px">
-                                                <div>
-                                                    <label>Id bệnh viện</label>
-                                                    @Html.ValidationSummary(true, "", new { @class = "form-control" })
-                                                    @Html.HiddenFor(model => model.IdBenhVien)
-
-
-                                                </div>
-                                            </th>
-                                            <th class="col-lg-6">
-                                                <div>
-                                                    <label>Tên bệnh viện</label>
-                                                    @Html.EditorFor(model => model.TenBenhVien, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.TenBenhVien, "", new { @class = "text-danger" })
-                                                </div>
-                                            </th>
-                                        </table>
-                                        <table class="mt-10">
-                                            <th style="width:400px">
-                                                <div>
-                                                    <label>Email</label>
-                                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                                </div>
-                                            </th>
-                                            <th class="col-lg-6">
-                                                <div>
-                                                    <label>Số điện thoại</label>
-                                                    @Html.EditorFor(model => model.soDTBV, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.soDTBV, "", new { @class = "text-danger" })
-                                                </div>
-                                            </th>
-                                        </table>
-                                        <div class="mt-10">
-                                            <label>Địa chỉ</label>
-                                            <input type="email" name="EMAIL" placeholder=" Địa chỉ tạm trú"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = ' Địa chỉ '" required
-                                                   class="single-input">
-                                        </div>
-
-                                        <div class="mt-10">
-                                            <label>Minh chứng</label>
-                                            <input type="file" name="file" placeholder="Minh chứng"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Minh chứng'" required
-                                                   class="single-input">
-                                        </div>
-                                    }
-                                </form>
+                <div class="col-lg-12 col-md-8">
+                    <h3>Danh sách bài đăng </h3>
+                    <div class="panel-body">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                @TempData["AlertMessage"]
                             </div>
-                        </div>
-                        <div class="text-center " style="margin-top:20px">
-                            <a class="genric-btn primary-border radius" href="#">Cập nhật</a>
+                        }
+                    </div>
+                    <hr>
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tìm kiếm</h5>
+                            <form class="">
+                                <div class="form-row">
+                                    <table class="mt-10">
+                                        <tr>
+                                            <th style="width:400px">
+                                                <input placeholder="Nội dung"
+                                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung '" required
+                                                       class="single-input">
+                                            </th>
+                                        </tr>
+
+
+                                    </table>
+
+                                </div>
+                                <div>
+                                    <button type="submit" class="mt-2 btn btn-primary">
+                                        <i class="fa fa-search"></i> Tìm kiếm
+                                    </button>
+
+                                    <button class="mb-2  btn btn-outline-danger" style="margin-top:18px"><i class="fa fa-times-circle"></i> Huỷ</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+                    <ul></ul>
+                    @{
+                        var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+                    }
+                    @if (session.AuthorID == "Q03" || session.AuthorID == "Q04")
+                    {
+                        <div style="margin-bottom:10px">
+                            <a type="submit" class="genric-btn info radius" href="@Url.Action("CreateDV", "DVLK")" style="color:azure">
+                                Đăng bài
+                            </a>
+                        </div>
+                    }
+                    <div class="main-card mb-3 card">
+
+                        <table class="mb-0 table table-hover table table-bordered">
+                            <tr class="text-center">
+                                <th>
+                                    STT
+                                </th>
+                                <th>
+                                    Mã ĐK
+                                </th>
+                                <th>
+                                    Tên đợt tổ chức
+                                </th>
+
+                                <th>
+                                    Tên bài đăng
+                                </th>
+
+                                <th>
+                                    Trạng thái
+                                </th>
+                                <th>
+                                    Chức năng
+                                </th>
+                            </tr>
+                            @{ var i = 1;}
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @item.IdChiTietDHM
+                                    </td>
+                                    <td style=" width: 200px;  word-wrap: break-word;">
+                                        @item.tenDHM
+                                    </td>
+                                    <td style=" width: 200px;  word-wrap: break-word;">
+                                        @item.tenDTCHM
+                                    </td>
+                                    <td>
+                                        @(item.trangThai == true ? "Đã duyệt" : "Chưa Duyệt")
+                                    </td>
+                                    <td>
+                                        @if (item.ngayToChuc < DateTime.Now)
+                                        {
+                                            <div>
+                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
+                                                         </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdDTCHM })</button>
+                                                    <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
+                                                     </div>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </table>
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV, @class = "page-link" }))
+                            </ul>
+                        </nav>
+                    </div>
+
 
                 </div>
-
             </div>
         </div>
+    </div>
 </section>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 

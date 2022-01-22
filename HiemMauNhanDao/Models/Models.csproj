@@ -159,6 +159,7 @@
     <Compile Include="Services\PhieuDKHMServices.cs" />
     <Compile Include="Services\QuanLyTKServices.cs" />
     <Compile Include="Services\TCDHMServices.cs" />
+    <Compile Include="ViewModel\BaiDangView.cs" />
     <Compile Include="ViewModel\ChiTietPDKHvsKQHMView.cs" />
     <Compile Include="ViewModel\ChiTietvsToChucHMView.cs" />
     <Compile Include="ViewModel\DotHienMauView.cs" />

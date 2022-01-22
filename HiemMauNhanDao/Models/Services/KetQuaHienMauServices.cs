@@ -30,13 +30,19 @@ namespace Models.Services
         {
             return db.KetQuaHienMaus.ToList();
         }
-        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM(string keysearch  , int page, int pagesize)
+        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM(string keysearch ,string idNTG , int page, int pagesize)
         {
             var query = from pdk in db.PhieuDKHMs
                         join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
                         join dtchm in db.DotToChucHMs on pdk.idDTCHM equals dtchm.IdDTCHM
- 
-                        select new { pdk, tt , dtchm };
+                        join ct in db.chiTietDHMs on dtchm.idChiTietDHM equals ct.IdChiTietDHM
+                        join bv in db.BenhViens on ct.idBenhVien equals bv.IdBenhVien
+
+                        join dhm in db.DotHienMaus on ct.idDHM equals dhm.IdDHM
+                        join dv in db.DonViLienKets on ct.idDVLK equals dv.IdDVLK
+
+                        where ct.idBenhVien == idNTG && ct.IdChiTietDHM == dtchm.idChiTietDHM
+                        select new { pdk, tt , dtchm,dhm,bv,ct };
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
             {
@@ -58,13 +64,20 @@ namespace Models.Services
             }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
             return result;
         }
-        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM2(string keysearch, int page, int pagesize)
+        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM2(string keysearch, string idNTG, int page, int pagesize)
         {
             var query = from kqhm in db.KetQuaHienMaus
                         join pdk in db.PhieuDKHMs on kqhm.idPDKHM equals pdk.idPDKHM
                         join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
                         join dtchm in db.DotToChucHMs on pdk.idDTCHM equals dtchm.IdDTCHM
-                        select new { pdk, tt, kqhm, dtchm };
+                        join ct in db.chiTietDHMs on dtchm.idChiTietDHM equals ct.IdChiTietDHM
+                        join bv in db.BenhViens on ct.idBenhVien equals bv.IdBenhVien
+                        join dhm in db.DotHienMaus on ct.idDHM equals dhm.IdDHM
+                        join dv in db.DonViLienKets on ct.idDVLK equals dv.IdDVLK
+
+                        where ct.idBenhVien == idNTG && ct.IdChiTietDHM == dtchm.idChiTietDHM
+
+                        select new { pdk, tt, kqhm, dtchm , ct, bv, dhm , dv };
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
             {

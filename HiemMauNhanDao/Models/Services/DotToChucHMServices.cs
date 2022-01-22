@@ -39,11 +39,8 @@ namespace Models.Services
         public IEnumerable<ChiTietvsToChucHMView> ListAllBaiDang2(string searchString1, string idbv ,int page, int pageSize)
         {
             var query = from dtc in db.DotToChucHMs
-                        join ct in db.chiTietDHMs on dtc.idChiTietDHM equals ct.IdChiTietDHM 
-                        
+                        join ct in db.chiTietDHMs on dtc.idChiTietDHM equals ct.IdChiTietDHM                        
                         join bv in db.BenhViens on ct.idBenhVien equals bv.IdBenhVien
-
-
 
                         join dhm in db.DotHienMaus on ct.idDHM equals dhm.IdDHM
                         join dv in db.DonViLienKets on ct.idDVLK equals dv.IdDVLK
@@ -81,8 +78,52 @@ namespace Models.Services
                 tenDHM = x.dhm.TenDHM,
                 tenBenhVien = x.bv.TenBenhVien,
                 tenDVLK = x.dv.TenDonVi,
-          
-             
+            }).OrderByDescending(x => x.IdDTCHM).ThenBy(q => q.tenDTCHM).ToPagedList(page, pageSize);
+            return result;
+        }
+
+        public IEnumerable<ChiTietvsToChucHMView> ListAllBaiDang3(string searchString1, string idbv, int page, int pageSize)
+        {
+            var query = from dtc in db.DotToChucHMs
+                        join ct in db.chiTietDHMs on dtc.idChiTietDHM equals ct.IdChiTietDHM
+                        join bv in db.BenhViens on ct.idBenhVien equals bv.IdBenhVien
+
+                        join dhm in db.DotHienMaus on ct.idDHM equals dhm.IdDHM
+                        join dv in db.DonViLienKets on ct.idDVLK equals dv.IdDVLK
+
+                        where ct.idDVLK == idbv && ct.IdChiTietDHM == dtc.idChiTietDHM
+
+                        select new { dtc, ct, dv, bv, dhm };
+
+            //nv.idTTCN ->nv.IdNVYT ->bv.IdBenhVien ->ct.IdChiTietDHM ->dtc.IdDTCHM
+            //check từ khóa có tồn tại hay k
+            if (!string.IsNullOrEmpty(searchString1))
+            {
+                query = query.Where(x => x.dhm.TenDHM.Contains(searchString1) || x.bv.TenBenhVien.Contains(searchString1) || x.dv.TenDonVi.Contains(searchString1)
+                                     || x.dtc.tenDotHienMau.Contains(searchString1) || x.dtc.noiDung.Contains(searchString1));
+            }
+            var result = query.Select(x => new ChiTietvsToChucHMView()
+            {
+                IdDTCHM = x.dtc.IdDTCHM,
+                tenDTCHM = x.dtc.tenDotHienMau,
+                noiDung = x.dtc.noiDung,
+
+                ngayBatDauDK = x.dtc.ngayBatDauDK,
+                ngayKetThucDK = x.dtc.ngayKetThucDK,
+                ngayToChuc = x.dtc.ngayToChuc,
+                trangThai = x.dtc.trangThai,
+                doiTuongThamGia = x.dtc.diaChiToChuc,
+                diaChiToChuc = x.dtc.diaChiToChuc,
+                soLuong = x.dtc.soLuong,
+
+                IdChiTietDHM = x.ct.IdChiTietDHM,
+                idDHM = x.ct.idDHM,
+                idBenhVien = x.ct.idBenhVien,
+                idDVLK = x.ct.idDVLK,
+
+                tenDHM = x.dhm.TenDHM,
+                tenBenhVien = x.bv.TenBenhVien,
+                tenDVLK = x.dv.TenDonVi,
 
             }).OrderByDescending(x => x.IdDTCHM).ThenBy(q => q.tenDTCHM).ToPagedList(page, pageSize);
             return result;

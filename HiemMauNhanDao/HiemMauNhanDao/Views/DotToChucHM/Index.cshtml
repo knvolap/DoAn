@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Models.EF.DotToChucHM>
+﻿@model PagedList.IPagedList<Models.ViewModel.ChiTietvsToChucHMView>
 @using PagedList.Mvc
 @using System.Data;
 
@@ -35,7 +35,7 @@
             </div>
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="col-lg-12 col-md-8">
-                    <h3  >Danh sách bài đăng </h3>
+                    <h3>Danh sách bài đăng </h3>
                     <div class="panel-body">
                         @if (TempData["AlertMessage"] != null)
                         {
@@ -53,13 +53,13 @@
                                     <table class="mt-10">
                                         <tr>
                                             <th style="width:400px">
-                                                <input   placeholder="Nội dung"
+                                                <input placeholder="Nội dung"
                                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung '" required
                                                        class="single-input">
                                             </th>
                                         </tr>
-                                       
-                                    
+
+
                                     </table>
 
                                 </div>
@@ -85,81 +85,88 @@
                             </a>
                         </div>
                     }
-                <div class="main-card mb-3 card">
+                    <div class="main-card mb-3 card">
 
-                    <table class="mb-0 table table-hover table table-bordered">
-                        <tr class="text-center">
-                            <th>
-                                STT
-                            </th>
-                            <th>
-                                Tên đợt tổ chức
-                            </th>
+                        <table class="mb-0 table table-hover table table-bordered">
+                            <tr class="text-center">
+                                <th>
+                                    STT
+                                </th>
+                                <th>
+                                    Mã ĐK
+                                </th>
+                                <th>
+                                    Tên đợt tổ chức
+                                </th>
 
-                            <th>
-                                Địa chỉ
-                            </th>
-                            <th>
-                                Ngày tổ chức
-                            </th>
-                            <th>
-                                Chức năng
-                            </th>
-                        </tr>
-                        @{ var i = 1;}
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @i
-                                </td>
-                                <td style=" width: 200px;  word-wrap: break-word;">
-                                    @item.tenDotHienMau
-                                </td>
-                                <td style=" width: 200px;  word-wrap: break-word;">
-                                    @item.diaChiToChuc
-                                </td>
-                                <td>
-                                    @item.ngayToChuc
-                                </td>
-                                <td>
-                                    @if (item.ngayToChuc < DateTime.Now)
-                                    {
-                                        <div>
-                                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Phân nhiệm vụ", "TaoNV", new { id = item.IdDTCHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div>
-                                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdDTCHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Phân nhiệm vụ", "TaoNV", new { id = item.IdDTCHM })</button>
-                                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
-                                            </div>
-                                        </div>
-                                    }
-                                </td>
+                                <th>
+                                    Tên bài đăng
+                                </th>
+
+                                <th>
+                                    Trạng thái
+                                </th>
+                                <th>
+                                    Chức năng
+                                </th>
                             </tr>
-                            i++;
-                        }
-                    </table>
-                    <nav class="blog-pagination justify-content-center d-flex">
-                        <ul class="pagination">
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV, @class = "page-link" }))
-                        </ul>
-                    </nav>
-                </div>
-                      
-                        
+                            @{ var i = 1;}
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @item.IdChiTietDHM
+                            </td>
+                            <td style=" width: 200px;  word-wrap: break-word;">
+                                @item.tenDHM
+                            </td>
+                            <td style=" width: 200px;  word-wrap: break-word;">
+                                @item.tenDTCHM
+                            </td>
+                            <td>
+                                @(item.trangThai == true ? "Đã duyệt" : "Chưa Duyệt")
+                            </td>
+                            <td>
+                                @if (item.ngayToChuc < DateTime.Now)
+                                {
+                                    <div>
+                                        <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                            <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
+                                            <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Phân nhiệm vụ", "TaoNV", new { id = item.IdDTCHM })</button>
+                                            <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div>
+                                        <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                            <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IdDTCHM })</button>
+                                            <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
+                                            <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Phân nhiệm vụ", "TaoNV", new { id = item.IdDTCHM })</button>
+                                            <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                                i++;
+                            }
+                        </table>
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchStringBV, @class = "page-link" }))
+                            </ul>
+                        </nav>
                     </div>
+
+
+                </div>
             </div>
         </div>
     </div>

@@ -65,34 +65,42 @@
                                     STT
                                 </th>
                                 <th>
-                                    Tên đợt tổ chức
+                                    Tên bài đăng
                                 </th>
                                 <th>
                                     Tên nhân viên
+                                </th>
+                                <th>
+                                    Thời gian tổ chức
                                 </th>
                                 <th>
                                     Nhiệm vụ
                                 </th>
                             </tr>
                             @{ var i = 1;}
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @i
-                                        </td>
-                                        <td>
-                                            @item.tenDTCHM
-                                        </td>
-                                        <td>
-                                            @item.hoTen
-                                        </td>
-                                        <td>
-                                            @item.NhiemVu
-                                        </td>
-                                    </tr>
-                                    i++;
-                                }
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                            <td style=" width: 200px;  word-wrap: break-word;">
+                                @item.tenDTCHM
+                            </td>
+                            <td>
+                                @item.hoTen
+                            </td>
+                            <td>
+                                @item.ngayToChuc
+                            </td>
+                            <td>
+                                @item.NhiemVu
+
+                            </td>
+
+                        </tr>
+                                i++;
+                            }                           
                         </table>
                         <ul></ul>
                         @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))*@

@@ -31,7 +31,7 @@ namespace HiemMauNhanDao.Controllers
 
         public ActionResult ChiTietDTCHM(string id)
         {
-            var model = _DkDHM.GetByIdTCHM(id);
+            var model = _DkDHM.GetByIdTCHM2(id);
             return View(model);
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +39,10 @@ namespace Models.ViewModel
         public string idDTCHM { get; set; }
         public string tenDTCHM { get; set; }
         public string NhiemVu { get; set; }
+
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime ngayToChuc { get; set; }
 
     }
 }
