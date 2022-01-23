@@ -54,35 +54,20 @@
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
-                                                        <a>Bài đăng </a>
-                                                        @Html.EditorFor(model => model.idDTCHM, new { htmlAttributes = new { @class = "single-input",@readonly= "readonly" } })
+                                                        <a>Nhân viên</a>
+                                                        @Html.DropDownList("IdNVYT", null, htmlAttributes: new { @class = "single-input" })
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
-                                                    <a>Nhân viên</a>
-                                                    @Html.DropDownList("IdNVYT", ViewBag.IdNVYT as SelectList, htmlAttributes: new { @class = "single-input" })
+                                                    <a>Nhiệm vụ</a>
+                                                    @Html.DropDownListFor(model => model.nhiemVu, new[] {new SelectListItem { Text = "Khám sức khỏe"},
+                                                                           new SelectListItem { Text = "Xét nghiệm" } ,  new SelectListItem { Text = "Lấy máu" }},
+                                                                           new { @class = "single-input" })
+
                                                 </th>
                                             </tr>
 
-                                        </table>
-                                        <table class="mt-10">
-                                            <tr>
-                                                <th style="width:400px">
-                                                    <div>
-                                                        <a>Nhiệm vụ</a>
-                                                        @Html.DropDownListFor(model => model.nhiemVu, new[] {new SelectListItem { Text = "Khám sức khỏe"},
-                                                                               new SelectListItem { Text = "Xét nghiệm" } ,  new SelectListItem { Text = "Lấy máu" }},
-                                                                               new { @class = "single-input" })
-
-
-                                                    </div>
-                                                </th>
-                                                <th class="col-lg-6">
-                                                </th>
-                                            </tr>
-
-                                        </table>
-
+                                        </table>                                     
                                     </form>
                                     @{
                                         var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];

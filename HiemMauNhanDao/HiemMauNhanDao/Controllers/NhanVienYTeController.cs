@@ -33,7 +33,21 @@ namespace HiemMauNhanDao.Controllers
             }
             return View(model);
         }
-    
+        public ActionResult ViewNVYT(string searchString1, string idbv, int page = 1, int pageSize = 10)
+        {           
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            string id = session.UserID;
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+          
+            var viewNVYT = new NhanVienYTeServices();
+            var model = viewNVYT.GetListNVYT2(searchString1, tempNVYT.idBenhVien, page, pageSize);
+            if (!string.IsNullOrEmpty(searchString1))
+            {
+                ViewBag.SearchStringNV = searchString1;
+            }
+
+            return View(model);
+        }
 
         public ActionResult XemNV(string searchString1, string idbv, int page = 1, int pageSize = 10)
         {

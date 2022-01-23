@@ -123,10 +123,30 @@
 
                             </div>
                             <div>
-                                <button type="submit" class="mt-2 btn btn-primary">
-                                    <i class="fa fa-search"></i> Tìm kiếm
-                                </button>
-                                <button class="mb-2  btn btn-outline-danger" style="margin-top:18px"><i class="fa fa-times-circle"></i> Huỷ</button>
+                                <table style="margin-top:10px" >
+                                    <tr class="col-lg-4">
+                                        <th class="col-lg-1">
+                                            
+                                            <button type="submit" class="genric-btn primary-border radius">
+                                                <i class="fa fa-search"></i> Tìm kiếm
+                                            </button>
+                                        </th>
+                                        <th  class="col-lg-1">
+                                            <button class="  genric-btn danger-border radius"><i class="fa fa-times-circle"></i> Huỷ</button>
+                                        </th>
+                                        <th class="col-lg-2">
+                                            <button type="submit" class="genric-btn success-border radius"   href="@Url.Action("xuatFileExcel","KetQuaHienMau")">
+                                                Xuất file Excel
+                                            </button>
+                                        </th>
+                                        <th   class="col-lg-5">                                             
+                                            <button type="submit" class="genric-btn info-border radius  " ng-click="xuatExcel">
+                                               Xuất file PDF
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </table>
+                             
                             </div>
                         </form>
                     </div>
@@ -157,6 +177,9 @@
                                     Số điện thoại
                                 </th>
                                 <th>
+                                    Nhóm máu
+                                </th>
+                                <th>
                                     Trạng thái
                                 </th>
                                 <th>
@@ -166,64 +189,57 @@
                             @{ var i = 1;}
                             @foreach (var item in Model)
                             {
-                                <tr class ="text-center">
-                                    <td>
-                                        @i
-                                    </td>
+                        <tr class="text-center">
+                            <td>
+                                @i
+                            </td>
 
-                                    <td style=" width: 250px;  word-wrap: break-word;">
-                                        @item.tenDTCHM
-                                    </td>
-                                    <td>
-                                        @item.idPDKHM
-                                    </td>
-                                    <td>
-                                        @item.IdKQHM
-                                    </td>
-                                    <td>
-                                        @item.hoTen
-                                    </td>
-                                    <td>
-                                        @(item.gioiTinh == true ? "Nam" : "Nữ")
-                                    </td>
-                                    <td>
-                                        @item.soDT
-                                    </td>
+                            <td style=" width: 250px;  word-wrap: break-word;">
+                                @item.tenDTCHM
+                            </td>
+                            <td>
+                                @item.idPDKHM
+                            </td>
+                            <td>
+                                @item.IdKQHM
+                            </td>
+                            <td>
+                                @item.hoTen
+                            </td>
+                            <td>
+                                @(item.gioiTinh == true ? "Nam" : "Nữ")
+                            </td>
+                            <td>
+                                @item.soDT
+                            </td>
+                            <td>
+                                @item.nhomMau
+                            </td>
+                            <td class="text-center">
+                                @item.trangThai2
+                            </td>
 
-                                    <td class="text-center">
-                                        @item.trangThai2
-                                    </td>
-
-                                    <td>
-                                        @if (item.trangThai2 != null)
+                            <td>
+                                <div>
+                                    <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                        @if (item.nhiemVu == "Lấy máu")
                                         {
-                                            <div>
-                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xét nghiệm", "Edit", new { id = item.IdKQHM })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Lấy máu", "layMau", new { id = item.IdKQHM })</button>
-
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.IdTTCN })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
-                                                </div>
-                                            </div>
+                                            <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xét nghiệm", "Edit", new { id = item.IdKQHM })</button>
                                         }
-                                        else
+                                        else if (item.nhiemVu == "Xét nghiệm ")
                                         {
-                                            <div>
-                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.IdTTCN })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
+                                            <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Lấy máu", "layMau", new { id = item.IdKQHM })</button>
 
-                                                </div>
-                                            </div>
                                         }
+                                        <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.IdTTCN })</button>
+                                        <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
 
-                                    </td>
-                                    </tr>
+                                    </div>
+                                </div>
+                              
+                            </td>
+                        </tr>
                                     i++;
                                 }
                         </table>
@@ -249,4 +265,5 @@
         $('#AlertBox').removeClass('hide');
         $('#AlertBox').delay(5000).slideUp(500);
     });
+
 </script>

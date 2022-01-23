@@ -36,7 +36,7 @@ namespace Models.Services
             IEnumerable<ThongTinCaNhan> model = db.ThongTinCaNhans;
             if (!string.IsNullOrEmpty(keysearch))
             {
-                model = model.Where(x => x.IdTTCN.Contains(keysearch) || x.userName.Contains(keysearch) || x.idQuyen.Contains(keysearch)  );
+                model = model.Where(x => x.IdTTCN.Contains(keysearch) || x.userName.Contains(keysearch) || x.idQuyen.Contains(keysearch) || x.Quyen.tenQuyen.Contains(keysearch));
             }
             return model.OrderByDescending(x => x.IdTTCN).ThenBy(x => x.userName).ToPagedList(page, pageSize);
         }

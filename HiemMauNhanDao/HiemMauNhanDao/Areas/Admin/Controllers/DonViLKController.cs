@@ -35,6 +35,24 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             }
             return View(model);
         }
+        public ActionResult Index2(string searchString, int page = 1, int pageSize = 5)
+        {
+            var donvi = new DonViLienKetServices();
+            var model = donvi.ListAllDVLK(searchString, page, pageSize);
+            ViewBag.SearchStringdv = searchString;
+
+            if (ModelState.IsValid)
+            {
+                string[] filepaths = Directory.GetFiles(Server.MapPath("~/FileUpLoad/dvlk/"));
+                List<DonViLienKet> filesBV = new List<DonViLienKet>();
+                foreach (string strfile in filepaths)
+                {
+                    filesBV.Add(new DonViLienKet { minhChung = Path.GetFileName(strfile) });
+
+                }
+            }
+            return View(model);
+        }
 
         [HttpGet]
         public ActionResult Edit(string id)
@@ -56,7 +74,6 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
                 }
                 else
                 {
-
                     ttcn.IdTTCN = ttcn.IdTTCN;
                     ttcn.CCCD = ttcn.CCCD;
                     ttcn.userName = ttcn.userName;
@@ -75,7 +92,6 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
 
                     db.Entry(model).State = EntityState.Modified;
                     db.SaveChanges();
-
 
                     SetAlert("Cấp quyền thành công", "success");
                     return RedirectToAction("Index");

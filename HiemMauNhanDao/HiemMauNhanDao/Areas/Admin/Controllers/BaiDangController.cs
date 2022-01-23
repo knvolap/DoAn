@@ -25,6 +25,17 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             
             return View(model);
         }
+        public ActionResult Index2(string searchString1, int page = 1, int pageSize = 10)
+        {
+            var services = new DotToChucHMServices();
+            var model = services.ListAllBaiDang(searchString1, page, pageSize);
+            if (!string.IsNullOrEmpty(searchString1))
+            {
+                ViewBag.SearchStringBD = searchString1;
+            }
+
+            return View(model);
+        }
 
         [HttpPost]
         public ActionResult Edit(string id)

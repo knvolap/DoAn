@@ -47,8 +47,7 @@ namespace HiemMauNhanDao.Controllers
             if (_pdkhm.checkDangKyHienMau(session.UserID) == false)
             {
                 SetAlert("Hiện tại đợt hiến máu này đã đăng ký. Vui lòng kiểm tra lại lịch sử đăng ký ", "error");
-                return RedirectToAction("Index", "DTCHM");
-                //return RedirectToAction("Error", "KetQuaHienMau");
+                return RedirectToAction("Index", "DTCHM");              
             }
             return View();
         }       
@@ -72,7 +71,7 @@ namespace HiemMauNhanDao.Controllers
                 phieuDKHM.tgDuKien = tempDTCHM.ngayToChuc.AddMinutes(2);
 
                 if (db.PhieuDKHMs.Where(x => x.idDTCHM == id).ToList().Count() < db.DotToChucHMs.Find(id).soLuong)
-                { //l 10
+                { 
                     db.PhieuDKHMs.Add(phieuDKHM);
                     db.SaveChanges();
                     SetAlert("Đăng ký thành công ", "success");

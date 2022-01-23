@@ -97,12 +97,13 @@ namespace HiemMauNhanDao.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdDTCHM,IdChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai")] DotToChucHM dotToChucHM)
+        public ActionResult CreateDV([Bind(Include = "IdDTCHM,IdChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai")] DotToChucHM dotToChucHM)
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
 
             string id = db.DotToChucHMs.Max(x => x.IdDTCHM);
-            int stt = Convert.ToInt32(id.Substring(4)) + 1;
+            string phanDau = id.Substring(0, 3);
+            int so = Convert.ToInt32(id.Substring(3)) + 1;
 
             var tempDSDK = db.chiTietDHMs.Where(x => x.IdChiTietDHM == dotToChucHM.idChiTietDHM).SingleOrDefault();
             var tempDHM = db.DotHienMaus.Where(x => x.IdDHM == tempDSDK.idDHM).SingleOrDefault();
@@ -113,7 +114,7 @@ namespace HiemMauNhanDao.Controllers
                 {
                     if (dotToChucHM.ngayBatDauDK < dotToChucHM.ngayKetThucDK && dotToChucHM.ngayToChuc >= dotToChucHM.ngayKetThucDK)
                     {
-                        dotToChucHM.IdDTCHM = stt > 9 ? "DTC" + stt : "DTC0" + stt;
+                        dotToChucHM.IdDTCHM = so > 9 ? phanDau + so : phanDau + "0" + so;
                         dotToChucHM.trangThai = true;
                         dotToChucHM.tenNguoiDangBai = session.Name;
 

@@ -30,7 +30,7 @@ namespace Models.Services
         {
             return db.KetQuaHienMaus.ToList();
         }
-        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM(string keysearch ,string idNTG , int page, int pagesize)
+        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM(string keysearch ,string idNTG, string idnvyt, int page, int pagesize)
         {
             var query = from pdk in db.PhieuDKHMs
                         join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
@@ -41,8 +41,11 @@ namespace Models.Services
                         join dhm in db.DotHienMaus on ct.idDHM equals dhm.IdDHM
                         join dv in db.DonViLienKets on ct.idDVLK equals dv.IdDVLK
 
-                        where ct.idBenhVien == idNTG && ct.IdChiTietDHM == dtchm.idChiTietDHM
-                        select new { pdk, tt , dtchm,dhm,bv,ct };
+                        join nvyt in db.NhanVienYTes on bv.IdBenhVien equals nvyt.idBenhVien
+                        join dsnv in db.DSNVTHs on nvyt.IdNVYT equals dsnv.idNVYT
+
+                        where ct.idBenhVien == idNTG && ct.IdChiTietDHM == dtchm.idChiTietDHM && dsnv.idNVYT == idnvyt
+                        select new { pdk, tt , dtchm,dhm,bv,ct , nvyt , dsnv };
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
             {
@@ -59,12 +62,13 @@ namespace Models.Services
                 idPDKHM = x.pdk.idPDKHM,
                 idDTCHM = x.pdk.idDTCHM,
                 trangThai = x.pdk.trangThai,
-                tenDTCHM =x.dtchm.tenDotHienMau
-               
+                tenDTCHM =x.dtchm.tenDotHienMau,
+                nhiemVu = x.dsnv.nhiemVu,
+
             }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
             return result;
         }
-        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM2(string keysearch, string idNTG, int page, int pagesize)
+        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM2(string keysearch, string idNTG, string idnvyt, int page, int pagesize)
         {
             var query = from kqhm in db.KetQuaHienMaus
                         join pdk in db.PhieuDKHMs on kqhm.idPDKHM equals pdk.idPDKHM
@@ -75,13 +79,16 @@ namespace Models.Services
                         join dhm in db.DotHienMaus on ct.idDHM equals dhm.IdDHM
                         join dv in db.DonViLienKets on ct.idDVLK equals dv.IdDVLK
 
-                        where ct.idBenhVien == idNTG && ct.IdChiTietDHM == dtchm.idChiTietDHM
-
-                        select new { pdk, tt, kqhm, dtchm , ct, bv, dhm , dv };
+                        join nvyt in db.NhanVienYTes on bv.IdBenhVien equals nvyt.idBenhVien
+                        join dsnv in db.DSNVTHs on nvyt.IdNVYT equals dsnv.idNVYT
+                       
+                        where ct.idBenhVien == idNTG && ct.IdChiTietDHM == dtchm.idChiTietDHM && dsnv.idNVYT==idnvyt
+                        
+                        select new { pdk, tt, kqhm, dtchm , ct, bv, dhm , dv , dsnv, nvyt };
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
             {
-                query = query.Where(x => x.pdk.idDTCHM.Contains(keysearch) || x.pdk.idPDKHM.Contains(keysearch)
+                query = query.Where(x => x.pdk.idDTCHM.Contains(keysearch) || x.pdk.idPDKHM.Contains(keysearch) || x.dtchm.tenDotHienMau.Contains(keysearch)
                 || x.tt.IdTTCN.Contains(keysearch) || x.tt.hoTen.Contains(keysearch) || x.tt.soDT.Contains(keysearch));
             }
             //tạo biến result -> hiển thị sp ->           
@@ -100,6 +107,7 @@ namespace Models.Services
                 nhomMau = x.kqhm.nhomMau,
                 trangThai2 = x.kqhm.trangThai,
                 IdKQHM = x.kqhm.IdKQHM,
+                nhiemVu=x.dsnv.nhiemVu,
             }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
             return result;
         }
@@ -111,11 +119,6 @@ namespace Models.Services
                         where pdk.idPDKHM == id
                         select new { pdk, tt , dtchm };
 
-            //var query = from pdk in db.PhieuDKHMs
-            //            join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
-            //            join dtchm in db.DotToChucHMs on pdk.idDTCHM equals dtchm.IdDTCHM
-            //            where tt.IdTTCN == id
-            //            select new { pdk, tt, dtchm };
 
             //tạo biến result -> hiển thị sp ->           
             var result = query.Select(x => new TTCNvsPhieuDKHMView()

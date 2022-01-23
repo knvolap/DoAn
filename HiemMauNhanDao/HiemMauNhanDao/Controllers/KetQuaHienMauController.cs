@@ -1,7 +1,9 @@
-﻿using HiemMauNhanDao.Areas.Admin.Controllers;
+﻿using ClosedXML.Excel;
+using HiemMauNhanDao.Areas.Admin.Controllers;
 using Models.EF;
 using Models.Services;
 using Models.ViewModel;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -26,17 +28,17 @@ namespace HiemMauNhanDao.Controllers
             var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
 
             var dsdk = new KetQuaHienMauServices();
-            var model = dsdk.GetListKQHM(searchString, tempNVYT.idBenhVien, page, pageSize);
+            var model = dsdk.GetListKQHM(searchString, tempNVYT.idBenhVien, tempNVYT.IdNVYT, page, pageSize);
             ViewBag.SearchStringDK = searchString;          
             return View(model);
         }
-        public ActionResult DanhSachKQ(string searchString, int page = 1, int pageSize = 100)
+        public ActionResult DanhSachKQ(string searchString,int page = 1, int pageSize = 100)
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
 
             var dsdk = new KetQuaHienMauServices();
-            var model = dsdk.GetListKQHM2(searchString, tempNVYT.idBenhVien, page, pageSize);
+            var model = dsdk.GetListKQHM2(searchString, tempNVYT.idBenhVien, tempNVYT.IdNVYT, page, pageSize);
             ViewBag.SearchStringKQ = searchString;
             return View(model);
         }
@@ -50,11 +52,7 @@ namespace HiemMauNhanDao.Controllers
         // ở chỗ này có thể bị bug thuộc tính idNVYT (chú ý)
         public ActionResult Create(string id)
         {
-            //var result = db.KetQuaHienMaus.Where(x => x.idPDKHM == id).FirstOrDefault();
-            //if (result == null)
-            //{
-            //    return RedirectToAction("Error");
-            //}
+            
             return View();
 
         }
@@ -66,12 +64,17 @@ namespace HiemMauNhanDao.Controllers
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).SingleOrDefault();
+
             string ids = db.KetQuaHienMaus.Max(x => x.IdKQHM);
-            int stt = Convert.ToInt32(ids.Substring(2)) + 1;
+            string phanDau = ids.Substring(0, 2);
+            int so = Convert.ToInt32(ids.Substring(2)) + 1;
+
+            //string ids = db.KetQuaHienMaus.Max(x => x.IdKQHM);
+            //int stt = Convert.ToInt32(ids.Substring(2)) + 1;
 
             if (ModelState.IsValid==false  )
             {
-                ketQuaHienMau.IdKQHM = stt > 9 ? "KQ" + stt : "KQ0" + stt;
+                ketQuaHienMau.IdKQHM = so > 9 ? phanDau + so : phanDau + "0" + so;
                 ketQuaHienMau.idPDKHM = id;
                 ketQuaHienMau.idnguoiKham = tempNVYT.IdNVYT;
                 ketQuaHienMau.nguoiKham = session.Name;
@@ -293,10 +296,53 @@ namespace HiemMauNhanDao.Controllers
             base.Dispose(disposing);
         }
 
-        //public ActionResult Index()
-        //{
-        //    var ketQuaHienMaus = db.KetQuaHienMaus.Include(k => k.PhieuDKHM);
-        //    return View(ketQuaHienMaus.ToList());
-        //}
+        public ActionResult ExporExcel()
+        {
+            var wb = new XLWorkbook();
+            var ws = wb.Worksheets.Add("KetQuaHM");
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public void xuatFileExcel()
+        {
+            List<KetQuaHienMau> dskq = db.KetQuaHienMaus.Select(x => new KetQuaHienMau
+            {
+                idPDKHM = x.idPDKHM,
+                IdKQHM =x.IdKQHM,             
+                luongMauHien=x.luongMauHien,
+                nhomMau=x.nhomMau,
+                trangThai=x.trangThai,
+                tgCapNhat=x.tgCapNhat,
+                nguoiLayMau=x.nguoiLayMau,
+            }).ToList();
+
+            ExcelPackage pck = new ExcelPackage();
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Reoprt");
+
+            ws.Cells["A1"].Value = "Kết quả hiến máu";
+            ws.Cells["B1"].Value = "Đợt 1";
+            ws.Cells["A2"].Value = "Report";
+            ws.Cells["B2"].Value = "Trang 1";
+            ws.Cells["A3"].Value = "Thời gian tạo";
+            ws.Cells["B3"].Value = string.Format("{0:dd/mm/yyyy} at {0:H:mm}",DateTimeOffset.Now);
+            
+            ws.Cells["A6"].Value = "Mã đăng ký";
+            ws.Cells["B6"].Value = "Mã kết quả";
+            ws.Cells["C6"].Value = "lượng máu  ";
+            ws.Cells["D6"].Value = "nhóm máu";
+            ws.Cells["E6"].Value = "trạng thái";
+            ws.Cells["F6"].Value = "thời gian cập nhật";
+            ws.Cells["G6"].Value = "người lấy máu";
+
+            int rowStar = 8;
+            foreach(var item in dskq)
+            {
+                ws.Row(rowStar).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+              
+            }
+
+        }
+
     }
 }

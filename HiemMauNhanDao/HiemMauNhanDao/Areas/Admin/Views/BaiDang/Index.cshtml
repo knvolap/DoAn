@@ -98,42 +98,46 @@
             @{ var i = 1;}
             @foreach (var item in Model)
             {
-                <tr class="text-center">
-                    <td>
-                        @i
-                    </td>
-                    <td>
-                        @item.tenDHM
-                    </td>
-                    <td>
-                        @item.tenDTCHM
-                    </td>
-                    <td>
-                        @item.tenBenhVien
-                    </td>
-                    <td>
-                        @item.tenDVLK
-                    </td>
-                    <td>
-                        @item.ngayToChuc
-                    </td>
+                if (item.trangThai == false)
+                {
+                    <tr class="text-center">
+                        <td>
+                            @i
+                        </td>
+                        <td style=" width: 250px;  word-wrap: break-word;">
+                            @item.tenDHM
+                        </td>
+                        <td style =" width: 250px;  word-wrap: break-word;">
+                            @item.tenDTCHM
+                            </td>
+                            <td>
+                                @item.tenBenhVien
+                            </td>
+                            <td>
+                                @item.tenDVLK
+                            </td>
+                            <td>
+                                @item.ngayToChuc
+                            </td>
 
-                    <td class="text-center">
-                        <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
-                    </td>
-                    <td class="text-center">
-                        <div class="mb-2 mr-2 dropright btn-group">
-                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Cập nhật", "Edit", new { id = item.IdDTCHM })</button>
-                                <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
-                                <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
-                            </div>
-                        </div>
+                            <td class="text-center">
+                                <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
+                            </td>
+                            <td class="text-center">
+                                <div class="mb-2 mr-2 dropright btn-group">
+                                    <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                        <button type="button" tabindex="0" class="dropdown-item pe-7s-pen"> @Html.ActionLink("Cập nhật", "Edit", new { id = item.IdDTCHM })</button>
+                                        <button type="button" tabindex="0" class="dropdown-item pe-7s-news-paper"> @Html.ActionLink("Chi tiết", "Details", new { id = item.IdDTCHM })</button>
+                                        <button type="button" tabindex="0" class="dropdown-item pe-7s-trash"> @Html.ActionLink(" Xóa", "Delete", new { id = item.IdDTCHM })</button>
+                                    </div>
+                                </div>
 
-                    </td>
-                </tr>
-                i++;
+                            </td>
+</tr>
+                    i++;
+                }
+
             }
         </table>
         <ul></ul>

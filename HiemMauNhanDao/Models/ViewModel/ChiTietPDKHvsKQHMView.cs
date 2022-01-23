@@ -95,6 +95,7 @@ namespace Models.ViewModel
         public string idTTCN { get; set; }
         public string tenNguoiDung { get; set; }
         public string idNVYT { get; set; }
+        public string nhiemVu { get; set; }
 
     }
 }

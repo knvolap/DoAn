@@ -34,14 +34,36 @@
                             </i>Duyệt đơn vị tham gia
                         </a>
                     </li>
+                    <li>
+                        <a href="@Url.Action("Index2","chiTietDHM")">
+                            <i class="metismenu-icon">
+                            </i>DS đơn vị tham gia
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>
                 <a href="@Url.Action("Index","BaiDang")">
                     <i class="metismenu-icon  pe-7s-note"> </i>
                     Duyệt bài đăng
+                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index","BaiDang")">
+                            <i class="metismenu-icon pe-7s-display2"></i>
+                            Chưa duyệt
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index2","BaiDang")">
+                            <i class="metismenu-icon">
+                            </i>Đã duyệt
+                        </a>
+                    </li>
+                </ul>
             </li>
+
             <li>
                 <a href="@Url.Action("Index","BenhVien")">
                     <i class="metismenu-icon pe-7s-display2"></i>
@@ -50,13 +72,28 @@
             </li>
             <li>
                 <a href="@Url.Action("Index","DonViLK")">
-                    <i class="metismenu-icon pe-7s-display2"></i>
+                    <i class="metismenu-icon  pe-7s-users"> </i>
                     Đơn vị liên kết
+                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index","DonViLK")">
+                            <i class="metismenu-icon pe-7s-display2"></i>
+                            Chưa duyệt
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index2","DonViLK")">
+                            <i class="metismenu-icon">
+                            </i>Đã duyệt
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="app-sidebar__heading">Chức năng khác</li>
             <li>
-                <a href="@Url.Action("Index","LoginClient")"> 
+                <a href="~/LoginClient/Index">
                     <i class="metismenu-icon pe-7s-user"></i>
                     Trang người dùng
                 </a>

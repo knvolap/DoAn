@@ -18,8 +18,8 @@
     <div class="form-group">
         <label>Tên đợt hiến máu</label>
         <div class="col-md-10">
-            @Html.DropDownList("IdDHM", ViewBag.idDHM as SelectList, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
-            @Html.ValidationMessageFor(model => model.idDHM, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.DotHienMau.TenDHM, null, new { @class = "form-control", @readonly = "readonly" })
+            @*@Html.DropDownList("IdDHM", ViewBag.idDHM as SelectList, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })*@
         </div>
     </div>
 

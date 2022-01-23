@@ -219,11 +219,16 @@ GO
 
 --Table 13 DanhSachNhanVienThucHien
 CREATE TABLE DSNVTH(
-	idDTCHM		VARCHAR(20) FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM) 	,
-	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT) not null,
+	idDTCHM		VARCHAR(20) FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM)  ON DELETE CASCADE ON UPDATE CASCADE,	
+	idNVYT		VARCHAR(20)  FOREIGN KEY REFERENCES dbo.NhanVienYTe(IdNVYT)   ON DELETE CASCADE ON UPDATE CASCADE,	
 	nhiemVu		NVARCHAR (50)  null ----Lấy máu , khám lâm sàn , xét nghiệm
 )
 GO
+
+
+--ALTER TABLE DonViLienKet
+--  ADD trangThai		bit DEFAULT '1' CHECK ( trangThai IN ( '0', '1' ) ), --0: chưa kích hoạt, 1: đã kích hoạt
+
 
 --Table 14 LichSuHienMau
 CREATE TABLE LichSuHienMau(
@@ -353,10 +358,6 @@ GO
 
 
 
--- BẢNG 14--
-ALTER TABLE DSNVTH
-	ADD CONSTRAINT FK_DSNVTH_idDotHienMau2	FOREIGN KEY (idDTCHM)	REFERENCES DotToChucHM(IdDTCHM) 	
-GO
 
 
 ---Nhập dữ liệu--

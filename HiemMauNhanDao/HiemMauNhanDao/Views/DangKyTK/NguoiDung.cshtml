@@ -22,6 +22,23 @@
     $(function () {
         $('#AlertBox').removeClass('hide');
         $('#AlertBox').delay(5000).slideUp(500);
+
+        $("btnSubmit").on('click', function (e) {
+            $("#NgaySinhError").empty();
+            var ngaySinh = $("#datepicker").val();
+            const now = new Date()
+            const ngaysinh2 = new Date(ngaySinh);
+            let namHT = now.getFullYear();
+            let namSinh = ngaysinh2.getFullYear();
+            if (namHT - namSinh >= 18) {
+                return;
+            }
+            else {
+                e.preventDefault();
+                document.getElementById("#NgaySinhError").innerHTML = "Bạn không đủ 18 tuổi!!! Không thể tham gia hiến máu";
+            }
+        })
+
     });
 </script>
 
@@ -42,7 +59,7 @@
                                     <p>Thành viên</p>
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </aside>
                 </div>
@@ -65,7 +82,46 @@
                         @using (Html.BeginForm("NguoiDung", "DangKyTK", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-lg-12 col-md-8">
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                @Html.ValidationMessageFor(model => model.hoTen, "", new { @class = "text-danger" })
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                @Html.ValidationMessageFor(model => model.soDT, "", new { @class = "text-danger" })
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                @Html.ValidationMessageFor(model => model.CCCD, "", new { @class = "text-danger" })
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                @Html.ValidationMessageFor(model => model.ngaySinh, "", new { @class = "text-danger" })
+                                                <span class="text-danger field-validation-error"><span id="NgaySinhError"></span></span>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+
                             <div class="panel-body" style="font-weight: bold; text-align: center; color: red">
                                 @if (@ViewBag.ThongBao != null)
                                 {
@@ -81,14 +137,12 @@
                                                     <div>
                                                         <a>Họ và tên </a>
                                                         @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "single-input", @type = "text", @placeholder = "Họ và tên" } })
-
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>Số điện thoại</a>
                                                         @Html.EditorFor(model => model.soDT, new { htmlAttributes = new { @class = "single-input", @type = "number", @placeholder = "nhập số điện thoại" } })
-
                                                     </div>
                                                 </th>
                                             </tr>
@@ -99,14 +153,12 @@
                                                     <div>
                                                         <a>Ngày Sinh</a>
                                                         @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "single-input", @type = "date", @for = "datepicker" } })
-                                                     
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>CCCD / CMND</a>
                                                         @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "single-input", @type = "number", @placeholder = "CCCD / CMND" } })
-
                                                     </div>
                                                 </th>
                                             </tr>
@@ -119,19 +171,23 @@
                                                         @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "single-input", @type = "text", @placeholder = "taikhoan@gmail.com" } })
                                                     </div>
                                                 </th>
+
                                                 <th class="col-lg-6">
                                                     <div>
                                                         <a>Mật khẩu</a>
                                                         @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "single-input", @type = "password", @name = "txtXacNhanMK", @placeholder = "độ dài trên 9 kí tự" } })
+
                                                     </div>
                                                 </th>
+
                                             </tr>
+
                                         </table>
                                         @Html.HiddenFor(model => model.idQuyen)
 
                                     </form>
                                     <div class="text-center" style="margin-top:20px">
-                                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                                        <button type="submit" class="btn btn-primary" id="btnSubmit">Đăng ký</button>
                                     </div>
                                 </div>
                             </div>

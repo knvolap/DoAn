@@ -53,13 +53,7 @@ namespace HiemMauNhanDao.Controllers
                     SetAlert("Tạo tài khoản thành công", "success");
                     return RedirectToAction("NguoiDung");
                 }
-            }
-            else
-            {
-                SetAlert("Tạo tài khoản thất bại ", "error");
-                return RedirectToAction("NguoiDung");
-            }
-
+            }         
             return View(thongTinCaNhan);
         }
         public ActionResult DonVi()

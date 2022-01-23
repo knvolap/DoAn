@@ -20,7 +20,7 @@
                     else {
                         btn.text('Chưa duyệt');
                     }
-                  
+
                 }
             });
         });

@@ -246,5 +246,15 @@ namespace Models.Services
             return true;
         }
 
+        public bool checkPhanChiaNV(string idTTCN)
+        {
+            var result = db.DSNVTHs.Where(x => x.idNVYT == idTTCN).ToList();
+            if (result.Count() >= 1)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
