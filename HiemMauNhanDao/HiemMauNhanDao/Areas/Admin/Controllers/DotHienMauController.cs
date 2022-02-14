@@ -39,9 +39,22 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _DHM.ThemDHM(dotHienMau);
-                SetAlert("Thêm thành công", "success");
-                return RedirectToAction("Index");
+                if (_DHM.isExistDTC(dotHienMau.TenDHM))
+                {
+                    SetAlert("Tên đợt đã tồn tại !", "error");
+                    return RedirectToAction("CreateDHM");
+                }
+                else if(dotHienMau.tgBatDau >= dotHienMau.tgKetThuc)
+                {
+                    SetAlert("Vui lòng nhập thời gian kết thúc lớn hơn thòi gian bắt đầu !", "error");
+                    return RedirectToAction("CreateDHM");
+                }
+                else
+                {
+                    _DHM.ThemDHM(dotHienMau);
+                    SetAlert("Thêm thành công", "success");
+                    return RedirectToAction("Index");
+                }        
             }
             return View(dotHienMau);
         }

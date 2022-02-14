@@ -94,7 +94,15 @@ namespace Models.Services
             }
         }
 
-
+        public bool isExistDTC(string tenDTC)
+        {
+            DotHienMau kh = db.DotHienMaus.Where(t => t.TenDHM == tenDTC).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
 
 
 

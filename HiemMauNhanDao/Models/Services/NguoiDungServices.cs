@@ -168,6 +168,8 @@ namespace Models.Services
             }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
             return result;
         }
+
+       
         public ChiTietPDKHvsKQHMView GetByIdLSDK2(string id)
         {
             var query = from kqhm in db.KetQuaHienMaus                      
@@ -238,6 +240,8 @@ namespace Models.Services
             }).SingleOrDefault();
             return result;
         }
+
+       
 
         //public void CapNhatTTCN(ThongTinCaNhan thongTinCaNhan)
         //{

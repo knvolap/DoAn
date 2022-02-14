@@ -57,21 +57,7 @@
                                                        class="single-input">
                                                 @*<input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">*@
                                             </th>
-                                            <th class="col-lg-6">
-                                                <div>
-                                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                                    <div class="form-select" id="default-select_1">
-                                                        <select>
-                                                            <option value=" 1">Đợt tổ chức</option>
-                                                            <option value="1">Chưa chọn</option>
-                                                            <option value="1">Hiến máu nhân đạo tháng 10</option>
-                                                            <option value="1">Hiến máu nhân đạo tháng 11</option>
-                                                            <option value="1">Hiến máu nhân đạo tháng 12</option>
-                                                            <option value="1">Hiến máu nhân đạo tháng 01</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </th>
+                                            
                                         </tr>
 
                                     </table>
@@ -97,13 +83,13 @@
                                         Tên đợt tổ chức
                                     </th>
                                     <th>
-                                        Mã đăng ký
+                                        Mã ĐK
                                     </th>
-                                    <th>
+                                    @*<th>
                                         Họ tên
-                                    </th>
+                                    </th>*@
                                     <th>
-                                        thời gian khám
+                                        Thời gian khám
                                     </th>
                                    
                                     <th>
@@ -120,15 +106,15 @@
                                         <td>
                                             @i
                                         </td>
-                                        <td>
+                                        <td style=" width: 200px;  word-wrap: break-word;">
                                             @item.tenDTCHM
                                         </td>
                                         <td>
                                             @item.idPDKHM
                                         </td>
-                                        <td>
+                                        @*<td>
                                             @item.hoTen
-                                        </td>
+                                        </td>*@
                                         <td>
                                             @item.tgDuKien
                                         </td>
@@ -143,7 +129,7 @@
                                                 <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
                                                     <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Tình trạng sức khỏe", "Details", new { id = item.IdTTCN })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>
+                                                   @* <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>*@
                                                 </div>
                                             </div>
                                         </td>

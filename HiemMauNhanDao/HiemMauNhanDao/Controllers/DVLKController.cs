@@ -62,6 +62,11 @@ namespace HiemMauNhanDao.Controllers
                     SetAlert("Email đã tồn tại", "error");
                     return RedirectToAction("DKDVLK", "DVLK");
                 }
+                else if (file==null)
+                {
+                    SetAlert("Vui lòng chọn File", "error");
+                    return RedirectToAction("DKDVLK", "DVLK");
+                }
                 else
                 {
                     donViLienKet.idTTCN = session.UserID;
@@ -126,13 +131,13 @@ namespace HiemMauNhanDao.Controllers
                     else
                     {
                         SetAlert("Đăng bài thất bại!!! Vui lòng nhập Ngày bắt đầu < Ngày kết thúc < Ngày đăng ký", "error");
-                        return RedirectToAction("Create");
+                        return RedirectToAction("CreateDV");
                     }
                 }
                 else
                 {
                     SetAlert("Khoảng thời gian đăng ký không nằm trong đợt hiến máu!", "error");
-                    return RedirectToAction("Create");
+                    return RedirectToAction("CreateDV");
                 }
             }
             ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idChiTietDHM", dotToChucHM.idChiTietDHM);

@@ -7,6 +7,7 @@ using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,7 +19,7 @@ namespace HiemMauNhanDao.Controllers
     {
         private DbContextHM db = new DbContextHM();
         KetQuaHienMauServices _kqhm = new KetQuaHienMauServices();
-
+        NguoiDungServices _ngDung = new NguoiDungServices();
         //Index
         // - chỉ hiện những người dùng đăng ký đợt tổ chức của mình đăng bài
         // VD: bênh viện 1 - đăng bài đợt tổ chức 1 -> thì chỉ hiện những người đk đợt tổ chức 1
@@ -44,12 +45,7 @@ namespace HiemMauNhanDao.Controllers
         }
 
 
-        //Create 1
-        // - người đầu tiên sẽ có nhiệm vụ tạo kết quả hiến máu cho người đăng ký
-        // - nhập các nội dung ở mục : Khám lâm sàng
-        // - các trường dữ liệu tạo ở mục Khám lâm sàn: idPDKHM, trangThai,ghiChu,LayMau,luongMauHien,hienMau,
-        //                                              tinhTrangLS,huyetAp,machMau,canNang,nguoiKham(lấy từ list nhân viên y tế "idNVYT")
-        // ở chỗ này có thể bị bug thuộc tính idNVYT (chú ý)
+       
         public ActionResult Create(string id)
         {
             
@@ -93,11 +89,7 @@ namespace HiemMauNhanDao.Controllers
         }
      
 
-        //Edit 
-        // - 2 người có nhiện vụ còn lại sẽ cập nhật
-        // - các trường dữ liệu tạo ở mục Lấy máu,Xét nghiệm trước HM:
-        //  Xét nghiệm: HST,HBV,trangThai,nguoiXN
-        // Lấy máu: trangThai,nhomMau,noiDung,phanUng,thoiGianLayMau,MSD, nguoiLayMau
+     
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -243,14 +235,23 @@ namespace HiemMauNhanDao.Controllers
             return View(model);
         }
 
-        //đã làm được, select từ 3 bảng : thông tin cá nhân + phiếu đăng ký + kết quả hiến máu
-        //chi tiết gồm thông tin cá nhân + phiếu đk + kết quả hiến máu
+
         [HttpGet]
         public ActionResult TTDK(string id)
         {
             var model = _kqhm.GetByIdTTDK(id);
             return View(model);
         }
+        [HttpGet]
+        public ActionResult LSDK(string searchString, string id,int page = 1, int pageSize = 5)
+        {
+           
+            var dsdk = new NguoiDungServices();
+            var model = dsdk.GetByIdLSDK(searchString, id,page, pageSize);
+
+            return View(model);
+        }
+       
 
 
         public ActionResult Delete(string id)
@@ -296,52 +297,48 @@ namespace HiemMauNhanDao.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ExporExcel()
+
+        [HttpGet]
+        public ActionResult xuatFileExcel(string searchString, int page = 1, int pageSize = 100)
         {
-            var wb = new XLWorkbook();
-            var ws = wb.Worksheets.Add("KetQuaHM");
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+            var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
+            var dsdk = new KetQuaHienMauServices();
 
-            return Json(true, JsonRequestBehavior.AllowGet);
-        }
-
-        public void xuatFileExcel()
-        {
-            List<KetQuaHienMau> dskq = db.KetQuaHienMaus.Select(x => new KetQuaHienMau
+            var model = dsdk.GetListKQHM2(searchString, tempNVYT.idBenhVien, tempNVYT.IdNVYT, page, pageSize);
+            var stream = new MemoryStream();
+            using (var package = new ExcelPackage(stream))
             {
-                idPDKHM = x.idPDKHM,
-                IdKQHM =x.IdKQHM,             
-                luongMauHien=x.luongMauHien,
-                nhomMau=x.nhomMau,
-                trangThai=x.trangThai,
-                tgCapNhat=x.tgCapNhat,
-                nguoiLayMau=x.nguoiLayMau,
-            }).ToList();
+                var sheet = package.Workbook.Worksheets.Add("DanhSachHBKK");
+                //đỗ dữ liệu vào sheet
+                sheet.Cells[1, 1].Value = "Tên đợt tổ chức";
+                sheet.Cells[1, 2].Value = "Mã kết quả";
+                sheet.Cells[1, 3].Value = "Họ tên";
+                sheet.Cells[1, 4].Value = "Giới tính";
+                sheet.Cells[1, 5].Value = "Số điện thoại";
+                sheet.Cells[1, 6].Value = "Nhóm máu";
+                sheet.Cells[1, 7].Value = "Trạng thái";
+                sheet.Cells[1, 8].Value = "Người cập nhật";
 
-            ExcelPackage pck = new ExcelPackage();
-            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Reoprt");
-
-            ws.Cells["A1"].Value = "Kết quả hiến máu";
-            ws.Cells["B1"].Value = "Đợt 1";
-            ws.Cells["A2"].Value = "Report";
-            ws.Cells["B2"].Value = "Trang 1";
-            ws.Cells["A3"].Value = "Thời gian tạo";
-            ws.Cells["B3"].Value = string.Format("{0:dd/mm/yyyy} at {0:H:mm}",DateTimeOffset.Now);
-            
-            ws.Cells["A6"].Value = "Mã đăng ký";
-            ws.Cells["B6"].Value = "Mã kết quả";
-            ws.Cells["C6"].Value = "lượng máu  ";
-            ws.Cells["D6"].Value = "nhóm máu";
-            ws.Cells["E6"].Value = "trạng thái";
-            ws.Cells["F6"].Value = "thời gian cập nhật";
-            ws.Cells["G6"].Value = "người lấy máu";
-
-            int rowStar = 8;
-            foreach(var item in dskq)
-            {
-                ws.Row(rowStar).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-              
+                int rowInd = 2;
+                foreach (var item in model)
+                {
+                    sheet.Cells[rowInd, 1].Value = item.tenDTCHM;
+                    sheet.Cells[rowInd, 2].Value = item.IdKQHM;
+                    sheet.Cells[rowInd, 3].Value = item.hoTen;
+                    sheet.Cells[rowInd, 4].Value = item.gioiTinh;
+                    sheet.Cells[rowInd, 5].Value = item.soDT;
+                    sheet.Cells[rowInd, 6].Value = item.nhomMau;
+                    sheet.Cells[rowInd, 7].Value = item.trangThai2;
+                    sheet.Cells[rowInd, 8].Value = item.nguoiLayMau;
+                    rowInd++;
+                }
+                //save
+                package.Save();
             }
-
+            stream.Position = 0;
+            var fileName = $"DSHBKK_{DateTime.Now.ToString("ddMMyyyy")}.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
 
     }

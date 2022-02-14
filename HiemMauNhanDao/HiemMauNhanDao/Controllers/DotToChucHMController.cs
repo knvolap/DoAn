@@ -66,7 +66,8 @@ namespace HiemMauNhanDao.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdDTCHM,IdChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai")] DotToChucHM dotToChucHM)
+        public ActionResult Create([Bind(Include = "IdDTCHM,IdChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia," +
+                    "diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai")] DotToChucHM dotToChucHM)
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
 
@@ -81,7 +82,12 @@ namespace HiemMauNhanDao.Controllers
             {
                 if (_DTCHM.CheckTimeDuplicate(dotToChucHM.ngayBatDauDK, dotToChucHM.ngayKetThucDK, dotToChucHM.ngayToChuc, tempDHM.tgBatDau, tempDHM.tgKetThuc) == true)
                 {
-                    if (dotToChucHM.ngayBatDauDK < dotToChucHM.ngayKetThucDK && dotToChucHM.ngayToChuc >= dotToChucHM.ngayKetThucDK)
+                    if (_DTCHM.isExistBaiDang(dotToChucHM.tenDotHienMau))
+                    {
+                        SetAlert("Tên bài đăng đã tồn tại !", "error");
+                        return RedirectToAction("Create");
+                    }
+                    else if (dotToChucHM.ngayBatDauDK < dotToChucHM.ngayKetThucDK && dotToChucHM.ngayToChuc >= dotToChucHM.ngayKetThucDK)
                     {
                         dotToChucHM.IdDTCHM = so > 9 ? phanDau + so : phanDau + "0" + so;
                         dotToChucHM.trangThai = true;
@@ -151,16 +157,14 @@ namespace HiemMauNhanDao.Controllers
                          b.idBenhVien,
                          b.IdNVYT,
                          a.IdTTCN
-                     };
-
-            
+                     };           
             ViewBag.IdNVYT = new SelectList(ts, "IdNVYT", "hoTen");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TaoNV([Bind(Include = "idDTCHM,idNVYT,nhiemVu ")] DSNVTH dsnv, string id)
+        public ActionResult TaoNV([Bind(Include = "idDTCHM,idNVYT,nhiemVu ")] DSNVTH dsnv, string id )
         {         
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             var tempNVYTs = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
@@ -177,10 +181,9 @@ namespace HiemMauNhanDao.Controllers
                          a.IdTTCN
                      };
             ViewBag.IdNVYT = new SelectList(ts, "IdNVYT", "hoTen", dsnv.idNVYT);
-            // **
             if (ModelState.IsValid)
             {
-                if (_DTCHM.checkPhanChiaNV(tempNVYTs.IdNVYT) == false)
+                if (_DTCHM.checkPhanChiaNV(tempNVYTs.IdNVYT ) == false)
                 {
                     SetAlert("Nhân viên này đã có nhiệm vụ", "error");
                     return RedirectToAction("TaoNV", "DotToChucHM");
@@ -193,8 +196,6 @@ namespace HiemMauNhanDao.Controllers
                     SetAlert("Phân chia nhiệm vụ thành công", "success");
                     return RedirectToAction("TaoNV", "DotToChucHM");
                 }
-
-
             }
             else
             {

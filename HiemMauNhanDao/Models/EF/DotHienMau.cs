@@ -1,4 +1,4 @@
-namespace Models.EF
+﻿namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -20,18 +20,21 @@ namespace Models.EF
         [StringLength(20)]
         public string IdDHM { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên đợt hiến máu không được để trống.")]
         [StringLength(150)]
         public string TenDHM { get; set; }
 
+        [Required(ErrorMessage = "Nội dung không được để trống.")]
         public string noiDung { get; set; }
 
         [Column(TypeName = "date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [Required(ErrorMessage = "thời gian bắt đầu không được để trống.")]
         public DateTime tgBatDau { get; set; }
 
         [Column(TypeName = "date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [Required(ErrorMessage = "thời gian kết thúc không được để trống.")]
         public DateTime tgKetThuc { get; set; }
 
         public bool? trangThai { get; set; }

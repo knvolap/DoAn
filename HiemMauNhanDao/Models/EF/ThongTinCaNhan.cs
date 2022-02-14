@@ -25,12 +25,15 @@
         [StringLength(20)]
         public string idQuyen { get; set; }
 
-        [StringLength(50, ErrorMessage = "Tên đăng nhập sai định dạng.")]
+        [StringLength(50) ]
+
         [Required(ErrorMessage = "Tài khoản không được để trống.")]
+        [RegularExpression(".+\\@.+\\..+",ErrorMessage ="Vui lòng nhập tài khoản đúng định dạng")]
         public string userName { get; set; }
 
         [StringLength(maximumLength: 40, MinimumLength = 9, ErrorMessage = "Độ dài mật khẩu ít nhất 9 kí tự")]
         [Required(ErrorMessage = "Mật khẩu không được để trống.")]
+        [RegularExpression("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{9,}$", ErrorMessage = "mật khẩu phải có ít nhất 9 ký tự và phải có 1 chữ cái  ")]
         public string password { get; set; }
 
         [StringLength(50, ErrorMessage = "Họ và Tên không được để trống.")]

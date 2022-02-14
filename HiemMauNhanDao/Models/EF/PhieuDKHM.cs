@@ -1,4 +1,4 @@
-namespace Models.EF
+﻿namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -32,6 +32,8 @@ namespace Models.EF
 
         public bool trangThai { get; set; }
 
+        [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime? tgDuKien { get; set; }
 
         public bool sutCan { get; set; }
@@ -60,10 +62,14 @@ namespace Models.EF
 
         public bool dangMangThai { get; set; }
 
+        [Range(typeof(bool), "false", "false", ErrorMessage = "Vui lòng không được để trống mục 2")]
         public bool ungThu { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng không được để trống mục 1")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Vui lòng không được để trống mục 1")]
         public bool hienMau { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng không được để trống mục 8")]
         public bool xacNhan { get; set; }
 
         public virtual DotToChucHM DotToChucHM { get; set; }

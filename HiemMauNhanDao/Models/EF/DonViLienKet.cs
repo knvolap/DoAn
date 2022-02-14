@@ -1,4 +1,4 @@
-namespace Models.EF
+﻿namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -37,7 +37,8 @@ namespace Models.EF
         [StringLength(12)]
         public string soDT { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Minh chứng sai định dạng.")]
+        [Required(ErrorMessage = "Minh chứng không được để trống.")]
         public string minhChung { get; set; }
 
         public bool trangThai { get; set; }

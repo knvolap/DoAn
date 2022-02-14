@@ -106,18 +106,17 @@ namespace HiemMauNhanDao.Controllers
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             string id = session.UserID;
             ViewBag.IdUser = id;
-            ViewBag.IdBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien");
-            
+            ViewBag.IdBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien");           
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LienKetNV([Bind(Include = "IdNVYT,idTTCN,trangThai,idChucVu,idBenhVien,khoa,trinhDo,")]NhanVienYTe nhanVienYTe)
+        public ActionResult LienKetNV([Bind(Include = "IdNVYT,idTTCN,trangThai,idChucVu,idBenhVien,khoa,trinhDo")]NhanVienYTe nhanVienYTe)
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             ViewBag.IdBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien", nhanVienYTe.idBenhVien);
           
-            if (ModelState.IsValid)
+            if (ModelState.IsValid==false)
             {
                 if (_nhanvien.isExistNVYT(nhanVienYTe.IdNVYT))
                 {
@@ -145,6 +144,8 @@ namespace HiemMauNhanDao.Controllers
             }
             return View(nhanVienYTe);
         }
+
+
         public ActionResult CapQuyenNVYT(string id)
         {
             var model = _nhanvien.GetByIdTTCN(id);

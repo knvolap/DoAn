@@ -628,6 +628,7 @@
     <Content Include="Views\KetQuaHienMau\Error.cshtml" />
     <Content Include="Views\DotToChucHM\TaoNV.cshtml" />
     <Content Include="Views\DVLK\CreateDV.cshtml" />
+    <Content Include="Views\KetQuaHienMau\LSDK.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

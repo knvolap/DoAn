@@ -44,6 +44,7 @@ namespace HiemMauNhanDao.Controllers
                         userSession.AuthorID = user.idQuyen;
                         userSession.Name = user.hoTen;
                         userSession.UserID = user.IdTTCN;
+                        userSession.Andress = user.diaChi;
                         Session.Add(CommonConstant.USER_SESSION, userSession);
                         return RedirectToAction("Index", "Home");
                     }

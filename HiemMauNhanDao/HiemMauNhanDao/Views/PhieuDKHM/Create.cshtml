@@ -33,6 +33,29 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-lg-12 col-md-8">
+                        <table>
+                            <tr>
+                                <th>
+                                    @Html.ValidationMessageFor(model => model.hienMau, "", new { @class = "text-danger", @TempData = "AlertMessage" })
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.ValidationMessageFor(model => model.ungThu, "", new { @class = "text-danger", @TempData = "AlertMessage" })
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.ValidationMessageFor(model => model.xacNhan, "", new { @class = "text-danger" })
+                                </th>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                </div>
                 <div class="panel-body">
                     @if (TempData["AlertMessage"] != null)
                     {
@@ -41,7 +64,7 @@
                         </div>
                     }
                 </div>
-                <div class="row ">      
+                <div class="row ">
                     <div class="col-lg-12">
                         <div>
                             <div class="card-body">
@@ -151,13 +174,12 @@
                                     </tbody>
                                     <tr>
                                         <th>
-                                            Tôi đã đọc, hiểu và trả lời trung thực những câu hỏi trên. Nếu tôi phát hiệt bất cứ thông tin gì liên quan
+                                            8/ Tôi đã đọc, hiểu và trả lời trung thực những câu hỏi trên. Nếu tôi phát hiệt bất cứ thông tin gì liên quan
                                             tới an toànn cho đơn vị máu tôi đã hiến, tôi sẽ liên hệ ngày với Quý Bệnh Viện để đảm bảo an toàn cho người nhận máu của tôi.
                                             Hôm nay tôi hoàn toàn khỏe mạnh và sẵn sàng tham gia hiến máu tình nguyện.
                                         </th>
                                         <th>
-
-                                            @Html.EditorFor(model => model.xacNhan)
+                                            @Html.EditorFor(model => model.xacNhan, new { htmlAttributes = new { @type = "checkbox", @name = "radiobutton" } })
                                             Tôi đồng ý
                                         </th>
                                         <th>
@@ -183,19 +205,39 @@
                         <li>
                             <a class="genric-btn primary-border circle warning" href="@Url.Action("Index", "LoginClient") ">Hãy đăng nhập</a>
                         </li>
-                    }                  
+                    }
                     else
                     {
-                    <li>
-                        <button class="genric-btn primary-border circle " type="submit">Đăng ký tham gia</button>
-                    </li>
+                        <li>
+                            <button class="genric-btn primary-border circle " type="submit">Đăng ký tham gia</button>
+                            @* <button type="Submit"   onclick="javascript: return ValidateRadioButton();" class="genric-btn primary-border circle ">Đăng ký tham gia</button>*@
+                        </li>
 
                     }
                 </ul>
             }
 
         </div>
-      
+
     </div>
 </div>
 
+<script>
+    function ValidateRadioButton() {
+        var rbtDetail = document.getElementsByName("radiobutton");
+        var isValid = false;
+        for (var i = 0; i < rbtDetail.length; i++) {
+            if (rbtDetail[i].checked) {
+                isValid = true;
+                break;
+            }
+        }
+        if (isValid == true) {           
+            return true;
+        }  
+        else {            
+            alert("Vui lòng xác nhận tham gia ở mục 8");
+            return false;
+        }
+    }
+</script>

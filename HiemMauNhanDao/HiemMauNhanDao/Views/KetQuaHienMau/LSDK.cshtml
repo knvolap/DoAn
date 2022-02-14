@@ -1,0 +1,117 @@
+﻿@model PagedList.IPagedList<Models.ViewModel.ChiTietPDKHvsKQHMView>
+@using PagedList.Mvc
+@using System.Data;
+@{
+    ViewBag.Title = "Lịch sử đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<section class="breadcrumb_part breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Lịch sử đăng ký</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!--================Blog Area =================-->
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4">
+                @RenderPage("_leftMenu2.cshtml")
+            </div>
+
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="col-lg-12 col-md-8">
+                    <h3 class="mb-30">Lịch sử tham gia</h3>
+                    <hr>
+                    <div class="panel-body">
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+                    </div>
+
+                    <div class="main-card mb-3 card">
+                        <div>
+                            <table class="mb-0 table table-hover table table-bordered">
+                                <tr class="text-center">
+                                    <th>
+                                        STT
+                                    </th>
+                                    <th>
+                                        Tên đợt tổ chức
+                                    </th>
+                                    <th>
+                                        Mã đăng ký
+                                    </th>
+                                    <th>
+                                        Họ tên
+                                    </th>
+                                    <th>
+                                        thời gian khám
+                                    </th>
+
+                                    <th>
+                                        Trạng thái
+                                    </th>
+                                   
+                                </tr>
+                                @{ var i = 1;}
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @item.tenDTCHM
+                                        </td>
+                                        <td>
+                                            @item.idPDKHM
+                                        </td>
+                                        <td>
+                                            @item.hoTen
+                                        </td>
+                                        <td>
+                                            @item.tgDuKien
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="#" class="btn-active" data-id="@item.idPDKHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
+                                        </td>                                      
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>

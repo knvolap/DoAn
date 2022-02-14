@@ -30,6 +30,7 @@ namespace Models.Services
         {
             return db.KetQuaHienMaus.ToList();
         }
+
         public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM(string keysearch ,string idNTG, string idnvyt, int page, int pagesize)
         {
             var query = from pdk in db.PhieuDKHMs

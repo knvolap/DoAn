@@ -237,12 +237,22 @@ namespace Models.Services
 
         }
 
-        public bool checkDangKyHienMau(string idTTCN)
+        public bool checkDangKyHienMau(string idTTCN,string idBaiDang)
         {
             var result = db.PhieuDKHMs.Where(x => x.idTTCN == idTTCN).ToList();
-            if(result.Count() >= 1) {
-                return false;
+            foreach (var item in result)
+            {
+                if (item.idDTCHM == idBaiDang)
+                {
+                    if (result.Count() >= 1)
+                    {
+                        return false;
+                    }
+                    break;
+
+                }
             }
+            
             return true;
         }
 
@@ -255,6 +265,14 @@ namespace Models.Services
             }
             return true;
         }
-
+        public bool isExistBaiDang(string tenDot)
+        {
+            DotToChucHM kh = db.DotToChucHMs.Where(t => t.tenDotHienMau == tenDot).FirstOrDefault();
+            if (kh != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
