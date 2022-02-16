@@ -27,6 +27,7 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="~/Assets/client/css/style.css">
 
+
     @*<link href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -56,8 +57,8 @@
                                     <a class="nav-link" href="@Url.Action("Index","Home") ">Trang chủ</a>
                                 </li>
                                 @*<li class="nav-item">
-            <a class="nav-link" href="/DotHienMau/Index">Đợt hiến máu</a>
-        </li>*@
+                                        <a class="nav-link" href="/DotHienMau/Index">Đợt hiến máu</a>
+                                    </li>*@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="@Url.Action("Index","DTCHM") " id="navbarDropdown_1"
                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,7 +79,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("NguoiDung","DangKyTK") ">Đăng ký</a>
                                 </li>
-                              
+
                             </ul>
                         </div>
 
@@ -227,7 +228,7 @@
     <script src="~/Assets/client/js/contact.js"></script>
     <!-- custom js -->
     <script src="~/Assets/client/js/custom.js"></script>
-
+   
 
     @RenderSection("ClientScript", false)
 </body>

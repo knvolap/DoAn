@@ -18,7 +18,12 @@
         </div>
     </div>
 </section>
-
+<script>
+    $(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(5000).slideUp(500);
+    });
+</script>
 <section class="blog_area section_padding">
     <div class="container">
         <div class="row">
@@ -27,7 +32,7 @@
             </div>
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="blog_left_sidebar">
-                    <h3 class="mb-30">Cập nhật đợt tổ chức</h3>
+                    <h3  >Cập nhật đợt tổ chức</h3>
                     <div class=" ">
                         <hr />
                         @using (Html.BeginForm())
@@ -38,21 +43,29 @@
                                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                                     @Html.HiddenFor(model => model.IdDTCHM)
                                     @Html.HiddenFor(model => model.idChiTietDHM)
-                                   
+                                    <div class="panel-body">
+                                        @if (TempData["AlertMessage"] != null)
+                                        {
+                                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                                @TempData["AlertMessage"]
+                                            </div>
+                                        }
+                                    </div>
                                     <form action="#">
                                         <table class="mt-10">
                                             <tr>
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Cập nhật đợt tổ chức</a>
-                                                        @Html.EditorFor(model => model.tenDotHienMau, new { htmlAttributes = new { @class = "form-control " } })
+                                                        @Html.EditorFor(model => model.tenDotHienMau, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
                                                         @*  @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
 
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
-                                                    <a>Ngày bắt đầu</a>
-                                                    @Html.EditorFor(model => model.ngayBatDauDK, new { htmlAttributes = new { @class = "form-control " } })
+                                                    <a>Ngày bắt đầu</a>                                                  
+                                                    @Html.EditorFor(model => model.ngayBatDauDK, new { htmlAttributes = new { @class = "single-input", @type = "date", @for = "datepicker", @name = "ngayBatDauDK" } })
+
                                                 </th>
                                             </tr>
 
@@ -67,7 +80,7 @@
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <a>Ngày kết thúc</a>
-                                                    @Html.EditorFor(model => model.ngayKetThucDK, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+                                                    @Html.EditorFor(model => model.ngayKetThucDK, new { htmlAttributes = new { @class = "single-input", @type = "date", @for = "datepicker", @name = "ngayKetThucDK" } })
 
                                                 </th>
                                             </tr>
@@ -78,13 +91,15 @@
                                                 <th style="width:400px">
                                                     <div>
                                                         <a>Mã chi tiết</a>
-                                                        @Html.DropDownList("IdChiTietDHM", ViewBag.IdChiTietDHM as SelectList, htmlAttributes: new { @class = "single-input" })
-                                                        @*  @Html.DropDownListFor(model => model.idChiTietDHM, null, new { htmlAttributes = new { @class = "single-input" } })*@
+                                                        @Html.EditorFor(model => model.idChiTietDHM, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+                                                        @*@Html.DropDownList("IdChiTietDHM", ViewBag.IdChiTietDHM as SelectList, htmlAttributes: new { @class = "single-input" })*@
+
                                                     </div>
                                                 </th>
                                                 <th class="col-lg-6">
                                                     <a>Ngày triển khai </a>
-                                                    @Html.EditorFor(model => model.ngayToChuc, new { htmlAttributes = new { @class = "single-input", @type = "datetime-local", @for = "datepicker", @name = "ngayToChuc" } })
+                                                     @Html.EditorFor(model => model.ngayToChuc, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+
                                                 </th>
                                             </tr>
                                         </table>
@@ -95,7 +110,7 @@
                                         </div>
                                         <div class="mt-10" style="margin-right:15px">
                                             <a>Nội dung</a>
-                                            <textarea class="single-textarea" @Html.TextBoxFor(model => model.noiDung)></textarea>
+                                            @Html.EditorFor(model => model.noiDung, new { htmlAttributes = new { @class = "single-textarea" } })
                                             @* @Html.ValidationMessageFor(model => model.tenDotHienMau, "", new { @class = "text-danger" })*@
                                         </div>
                                         <div class="mt-10" style="margin-right:15px">

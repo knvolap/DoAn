@@ -50,7 +50,7 @@ namespace Models.Services
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
             {
-                query = query.Where(x => x.pdk.idDTCHM.Contains(keysearch) || x.pdk.idPDKHM.Contains(keysearch)
+                query = query.Where(x => x.pdk.idDTCHM.Contains(keysearch) || x.pdk.idPDKHM.Contains(keysearch) || x.dtchm.tenDotHienMau.Contains(keysearch)
                 || x.tt.IdTTCN.Contains(keysearch) || x.tt.hoTen.Contains(keysearch) || x.tt.soDT.Contains(keysearch));
             }
             //tạo biến result -> hiển thị sp ->           
@@ -237,7 +237,6 @@ namespace Models.Services
                 thoiGianXN = x.kqhm.tgXetNghiem,
                 thoiGianCapNhat= x.kqhm.tgCapNhat,
                 ghiChu = x.kqhm.ghiChu,
-
             }).SingleOrDefault();
             return result;
         }
@@ -250,6 +249,7 @@ namespace Models.Services
             db.SaveChanges();
             return chiTiet.trangThai;
         }
+        
 
         public bool Delete(string id)
         {

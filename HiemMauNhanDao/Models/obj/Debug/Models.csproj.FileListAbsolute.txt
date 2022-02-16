@@ -1,3 +1,4 @@
+D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.pdb
 D:\DoAn\HiemMauNhanDao\Models\bin\Debug\Models.dll.config
 D:\DoAn\HiemMauNhanDao\Models\bin\Debug\Models.dll
 D:\DoAn\HiemMauNhanDao\Models\bin\Debug\Models.pdb
@@ -53,8 +54,6 @@ D:\DoAn\HiemMauNhanDao\Models\bin\Debug\System.Text.Encodings.Web.xml
 D:\DoAn\HiemMauNhanDao\Models\bin\Debug\System.Text.Json.xml
 D:\DoAn\HiemMauNhanDao\Models\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\DoAn\HiemMauNhanDao\Models\bin\Debug\System.ValueTuple.xml
-D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csprojAssemblyReference.cache
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csproj.CopyComplete
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.dll
-D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.pdb

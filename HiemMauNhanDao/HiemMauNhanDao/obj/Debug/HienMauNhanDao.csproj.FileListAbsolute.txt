@@ -1,5 +1,4 @@
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HienMauNhanDao.csprojAssemblyReference.cache
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HienMauNhanDao.csproj.CoreCompileInputs.cache
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\HiemMauNhanDao.dll.config
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\HiemMauNhanDao.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\HiemMauNhanDao.pdb
@@ -10,7 +9,6 @@ D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\csi.exe
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\csi.exe.config
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\csi.rsp
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
@@ -133,6 +131,8 @@ D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Webpages.Razor.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Helpers.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\System.Web.Mvc.xml
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HienMauNhanDao.csprojAssemblyReference.cache
+D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HienMauNhanDao.csproj.CoreCompileInputs.cache
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HienMauNhanDao.csproj.CopyComplete
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HiemMauNhanDao.dll
 D:\DoAn\HiemMauNhanDao\HiemMauNhanDao\obj\Debug\HiemMauNhanDao.pdb

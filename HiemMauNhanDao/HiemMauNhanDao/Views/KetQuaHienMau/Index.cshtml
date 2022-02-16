@@ -180,7 +180,7 @@
                                         @item.soDT
                                     </td>
                                     <td class="text-center">
-                                        <b href="#" class="btn-active" data-id="@item.idPDKHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</b>
+                                        <a href="#" class="btn-active" data-id="@item.idPDKHM"><strong>@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</strong></a>
                                     </td>
                                     <td>
                                         @if (item.trangThai == false)
@@ -228,7 +228,6 @@
         </div>
     </div>
 </section>
-
-
+<a href="~/Scripts/bootstrap.min.js.map">~/Scripts/bootstrap.min.js.map</a>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="~/Assets/Admin/scripts/duyetPDKHM.js"></script>

@@ -18,29 +18,14 @@
         </div>
     </div>
 </section>
-<script>
+@*<script>
     $(function () {
         $('#AlertBox').removeClass('hide');
         $('#AlertBox').delay(5000).slideUp(500);
 
-        $("btnSubmit").on('click', function (e) {
-            $("#NgaySinhError").empty();
-            var ngaySinh = $("#datepicker").val();
-            const now = new Date()
-            const ngaysinh2 = new Date(ngaySinh);
-            let namHT = now.getFullYear();
-            let namSinh = ngaysinh2.getFullYear();
-            if (namHT - namSinh >= 18) {
-                return;
-            }
-            else {
-                e.preventDefault();
-                document.getElementById("#NgaySinhError").innerHTML = "Bạn không đủ 18 tuổi!!! Không thể tham gia hiến máu";
-            }
-        })
-
     });
-</script>
+   
+</script>*@
 
 @{ var txt1 = " [kytu]@gmail.com";}
 @{ var txt2 = " [kytu]@[kytu].com";}
@@ -229,4 +214,4 @@
         </div>
     </div>
 </section>
-
+<script src="~/Assets/Admin/scripts/nguoiDung.js"></script>

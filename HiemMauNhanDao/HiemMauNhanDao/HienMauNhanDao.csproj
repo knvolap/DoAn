@@ -225,6 +225,7 @@
     <Content Include="Assets\Admin\scripts\duyetNVYT.js" />
     <Content Include="Assets\Admin\scripts\duyetDVLK.js" />
     <Content Include="Assets\Admin\scripts\main.js" />
+    <Content Include="Assets\Admin\scripts\nguoiDung.js" />
     <Content Include="Assets\Admin\scripts\userController.js" />
     <Content Include="Assets\Admin\scripts\duyetDHMController.js" />
     <Content Include="Assets\client\css\animate.css" />

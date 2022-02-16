@@ -110,9 +110,9 @@ namespace HiemMauNhanDao.Controllers
                     return RedirectToAction("Create");
                 }
             }
-
             return View(dotToChucHM);
         }
+
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -130,15 +130,53 @@ namespace HiemMauNhanDao.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdDTCHM,IdChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK,ngayKetThucDK,ngayToChuc,trangThai")] DotToChucHM dotToChucHM)
+        public ActionResult Edit([Bind(Include = "IdDTCHM,IdChiTietDHM,tenDotHienMau,noiDung,doiTuongThamGia,diaChiToChuc,soLuong,ngayBatDauDK," +
+            "ngayKetThucDK,ngayToChuc,trangThai")] DotToChucHM dotToChucHM)
         {
+            var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
+
+            string id = db.DotToChucHMs.Max(x => x.IdDTCHM);
+            string phanDau = id.Substring(0, 3);
+            int so = Convert.ToInt32(id.Substring(3)) + 1;
+
+            var tempDSDK = db.chiTietDHMs.Where(x => x.IdChiTietDHM == dotToChucHM.idChiTietDHM).SingleOrDefault();
+            var tempDHM = db.DotHienMaus.Where(x => x.IdDHM == tempDSDK.idDHM).SingleOrDefault();
+            ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idChiTietDHM", dotToChucHM.idChiTietDHM);
             if (ModelState.IsValid)
             {
-                db.Entry(dotToChucHM).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (_DTCHM.CheckTimeDuplicate(dotToChucHM.ngayBatDauDK, dotToChucHM.ngayKetThucDK, dotToChucHM.ngayToChuc, tempDHM.tgBatDau, tempDHM.tgKetThuc) == true)
+                {                 
+                    if (dotToChucHM.ngayBatDauDK < dotToChucHM.ngayKetThucDK && dotToChucHM.ngayToChuc >= dotToChucHM.ngayKetThucDK)
+                    {
+                        var dtchm = _DTCHM.GetByIdDTCHM(dotToChucHM.IdDTCHM);
+                        dtchm.tenDotHienMau = dtchm.tenDotHienMau;
+                        dtchm.IdDTCHM = dtchm.IdDTCHM;
+                        dtchm.idChiTietDHM = dtchm.idChiTietDHM;
+                        dtchm.ngayBatDauDK = dtchm.ngayBatDauDK;
+                        dtchm.ngayKetThucDK = dtchm.ngayKetThucDK;
+                        dtchm.ngayToChuc = dtchm.ngayToChuc;
+                        dtchm.noiDung = dtchm.noiDung;
+
+                        dotToChucHM.trangThai = true;
+                        dotToChucHM.tenNguoiDangBai = session.Name;
+
+                        db.Entry(dotToChucHM).State = EntityState.Modified;
+                        db.SaveChanges();
+                        SetAlert("Cập nhật  thành công", "success");
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        SetAlert("Cập nhật thất bại!!! Vui lòng nhập Ngày bắt đầu < Ngày kết thúc < Ngày đăng ký", "error");
+                        return RedirectToAction("Edit");
+                    }
+                }
+                else
+                {
+                    SetAlert("Khoảng thời gian đăng ký không nằm trong đợt hiến máu!", "error");
+                    return RedirectToAction("Edit");
+                }
             }
-            ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idDHM", dotToChucHM.idChiTietDHM);
             return View(dotToChucHM);
         }
 

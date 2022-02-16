@@ -28,7 +28,7 @@ namespace HiemMauNhanDao.Controllers
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
 
-            var dsdk = new KetQuaHienMauServices();
+            var dsdk = new KetQuaHienMauServices(); 
             var model = dsdk.GetListKQHM(searchString, tempNVYT.idBenhVien, tempNVYT.IdNVYT, page, pageSize);
             ViewBag.SearchStringDK = searchString;          
             return View(model);
@@ -222,12 +222,8 @@ namespace HiemMauNhanDao.Controllers
             {
                 SetAlert("Vui lòng cập nhập thất bại.Vui lòng kiểm tra trường dữ liệu ", "error");
                 return RedirectToAction("layMau", "KetQuaHienMau");
-            }
-
-           
+            }          
         }
-
-
 
         public ActionResult Details(string id)
         {
@@ -244,11 +240,9 @@ namespace HiemMauNhanDao.Controllers
         }
         [HttpGet]
         public ActionResult LSDK(string searchString, string id,int page = 1, int pageSize = 5)
-        {
-           
+        {           
             var dsdk = new NguoiDungServices();
             var model = dsdk.GetByIdLSDK(searchString, id,page, pageSize);
-
             return View(model);
         }
        
@@ -288,6 +282,7 @@ namespace HiemMauNhanDao.Controllers
                 tt = result
             });
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
