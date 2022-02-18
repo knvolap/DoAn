@@ -65,27 +65,46 @@ namespace HiemMauNhanDao.Controllers
             string phanDau = ids.Substring(0, 2);
             int so = Convert.ToInt32(ids.Substring(2)) + 1;
 
-            //string ids = db.KetQuaHienMaus.Max(x => x.IdKQHM);
-            //int stt = Convert.ToInt32(ids.Substring(2)) + 1;
 
             if (ModelState.IsValid==false  )
             {
-                ketQuaHienMau.IdKQHM = so > 9 ? phanDau + so : phanDau + "0" + so;
-                ketQuaHienMau.idPDKHM = id;
-                ketQuaHienMau.idnguoiKham = tempNVYT.IdNVYT;
-                ketQuaHienMau.nguoiKham = session.Name;
-                ketQuaHienMau.tgKham = DateTime.Now;
-                ketQuaHienMau.trangThai = "Đang cập nhật";
-                db.KetQuaHienMaus.Add(ketQuaHienMau);
-                db.SaveChanges();
-                SetAlert("Cập nhật thành công ", "success");
-                return RedirectToAction("Index", "KetQuaHienMau");
+                if (ketQuaHienMau.canNang == null)
+                {
+                    SetAlert("Vui lòng nhập cân nặng", "error");
+                }
+                else if (ketQuaHienMau.machMau == null)
+                {
+                    SetAlert("Vui lòng nhập mạch máu", "error");
+                }
+                else if (ketQuaHienMau.huyetAp == null)
+                {
+                    SetAlert("Vui lòng nhập huyết áp", "error");
+                }
+                else if (ketQuaHienMau.luongMauHien == null)
+                {
+                    SetAlert("Vui lòng chọn lượng máu hiến", "error");
+                }
+                else
+                {
+                    ketQuaHienMau.IdKQHM = so > 9 ? phanDau + so : phanDau + "0" + so;
+                    ketQuaHienMau.idPDKHM = id;
+                    ketQuaHienMau.idnguoiKham = tempNVYT.IdNVYT;
+                    ketQuaHienMau.nguoiKham = session.Name;
+                    ketQuaHienMau.tgKham = DateTime.Now;
+                    ketQuaHienMau.trangThai = "Đang cập nhật";
+                    db.KetQuaHienMaus.Add(ketQuaHienMau);
+                    db.SaveChanges();
+                    SetAlert("Cập nhật thành công ", "success");
+                    return RedirectToAction("Index", "KetQuaHienMau");
+                }                  
             }
             else
             {
                 SetAlert("Vui lòng cập nhập thất bại.Vui lòng kiểm tra trường dữ liệu ", "error");
                 return RedirectToAction("Create", "KetQuaHienMau");
-            }    
+            }
+            return View(ketQuaHienMau);
+          
         }
      
 
@@ -114,48 +133,54 @@ namespace HiemMauNhanDao.Controllers
 
             if (ModelState.IsValid  )
             {
-                var kqhm = _kqhm.GetByIdKQHM(ketQuaHienMau.IdKQHM);
+                if (ketQuaHienMau.HST == null)
+                {
+                    SetAlert("Vui lòng nhập kết quả huyết sắc tố", "error");
+                }
+                else 
+                {
+                    var kqhm = _kqhm.GetByIdKQHM(ketQuaHienMau.IdKQHM);
 
-                ketQuaHienMau.idnguoiXN = tempNVYT2.IdNVYT;         
-                ketQuaHienMau.tgXetNghiem = DateTime.Now;
-                ketQuaHienMau.tgCapNhat = DateTime.Now;
-                ketQuaHienMau.nguoiXN = session2.Name;
+                    ketQuaHienMau.idnguoiXN = tempNVYT2.IdNVYT;
+                    ketQuaHienMau.tgXetNghiem = DateTime.Now;
+                    ketQuaHienMau.tgCapNhat = DateTime.Now;
+                    ketQuaHienMau.nguoiXN = session2.Name;
 
-                kqhm.IdKQHM = kqhm.IdKQHM;
-                kqhm.idPDKHM = kqhm.idPDKHM;
-                kqhm.idnguoiKham = kqhm.idPDKHM;
-                kqhm.nguoiKham = kqhm.nguoiKham;
-                kqhm.idnguoiLayMau = kqhm.idnguoiLayMau;
-                kqhm.nguoiLayMau = kqhm.nguoiLayMau;
-                kqhm.tgKham = kqhm.tgKham;
-                kqhm.tgLayMau = kqhm.tgLayMau;
-                kqhm.nhomMau = kqhm.idPDKHM;
-                kqhm.canNang = kqhm.canNang;
-                kqhm.tinhTrangLS = kqhm.tinhTrangLS;
-                kqhm.machMau = kqhm.machMau;
-                kqhm.trangThai = kqhm.trangThai;
-                kqhm.huyetAp = kqhm.huyetAp;
-                kqhm.luongMauHien = kqhm.luongMauHien;
-                kqhm.hienMau = kqhm.hienMau;
-                kqhm.noiDung = kqhm.noiDung;
-                kqhm.HST = kqhm.HST;
-                kqhm.HBV = kqhm.HBV;
-                kqhm.MSD = kqhm.MSD;
-                kqhm.phanUng = kqhm.phanUng;
-                kqhm.ghiChu = kqhm.ghiChu;
+                    kqhm.IdKQHM = kqhm.IdKQHM;
+                    kqhm.idPDKHM = kqhm.idPDKHM;
+                    kqhm.idnguoiKham = kqhm.idPDKHM;
+                    kqhm.nguoiKham = kqhm.nguoiKham;
+                    kqhm.idnguoiLayMau = kqhm.idnguoiLayMau;
+                    kqhm.nguoiLayMau = kqhm.nguoiLayMau;
+                    kqhm.tgKham = kqhm.tgKham;
+                    kqhm.tgLayMau = kqhm.tgLayMau;
+                    kqhm.nhomMau = kqhm.idPDKHM;
+                    kqhm.canNang = kqhm.canNang;
+                    kqhm.tinhTrangLS = kqhm.tinhTrangLS;
+                    kqhm.machMau = kqhm.machMau;
+                    kqhm.trangThai = kqhm.trangThai;
+                    kqhm.huyetAp = kqhm.huyetAp;
+                    kqhm.luongMauHien = kqhm.luongMauHien;
+                    kqhm.hienMau = kqhm.hienMau;
+                    kqhm.noiDung = kqhm.noiDung;
+                    kqhm.HST = kqhm.HST;
+                    kqhm.HBV = kqhm.HBV;
+                    kqhm.MSD = kqhm.MSD;
+                    kqhm.phanUng = kqhm.phanUng;
+                    kqhm.ghiChu = kqhm.ghiChu;
 
-                db.Entry(ketQuaHienMau).State = EntityState.Modified;
-                db.SaveChanges();
-                SetAlert("Cập nhật thành công ", "success");
-                return RedirectToAction("DanhSachKQ", "KetQuaHienMau");
-
+                    db.Entry(ketQuaHienMau).State = EntityState.Modified;
+                    db.SaveChanges();
+                    SetAlert("Cập nhật thành công ", "success");
+                    return RedirectToAction("DanhSachKQ", "KetQuaHienMau");
+                }
             }
             else
             {
                 SetAlert("Vui lòng cập nhập thất bại.Vui lòng kiểm tra trường dữ liệu ", "error");
                 return RedirectToAction("Edit", "KetQuaHienMau");
             }
-
+            return View(ketQuaHienMau);
         }
 
         public ActionResult layMau(string id)
@@ -183,46 +208,54 @@ namespace HiemMauNhanDao.Controllers
 
             if (ModelState.IsValid )
             {
-                var kqhm = _kqhm.GetByIdKQHM(ketQuaHienMau.IdKQHM);
+                if (ketQuaHienMau.MSD == null)
+                {
+                    SetAlert("Vui lòng nhập kết quả hiến máu", "error");
+                }
+                else
+                {
+                    var kqhm = _kqhm.GetByIdKQHM(ketQuaHienMau.IdKQHM);
 
-                ketQuaHienMau.idnguoiLayMau = tempNVYT3.IdNVYT;
-                ketQuaHienMau.nguoiLayMau = session3.Name;
-                ketQuaHienMau.IdKQHM = ketQuaHienMau.IdKQHM;
-                ketQuaHienMau.tgCapNhat = DateTime.Now;
+                    ketQuaHienMau.idnguoiLayMau = tempNVYT3.IdNVYT;
+                    ketQuaHienMau.nguoiLayMau = session3.Name;
+                    ketQuaHienMau.IdKQHM = ketQuaHienMau.IdKQHM;
+                    ketQuaHienMau.tgCapNhat = DateTime.Now;
 
-                kqhm.IdKQHM = kqhm.IdKQHM;
-                kqhm.idPDKHM = kqhm.idPDKHM;
-                kqhm.idnguoiKham = kqhm.idPDKHM;
-                kqhm.nguoiKham = kqhm.nguoiKham;
-                kqhm.idnguoiXN = kqhm.idnguoiXN;
-                kqhm.nguoiXN = kqhm.nguoiXN;
-                kqhm.tgKham = kqhm.tgKham;
-                kqhm.tgXetNghiem = kqhm.tgXetNghiem;
-                kqhm.nhomMau = kqhm.idPDKHM;
-                kqhm.canNang = kqhm.canNang;
-                kqhm.tinhTrangLS = kqhm.tinhTrangLS;
-                kqhm.machMau = kqhm.machMau;
-                kqhm.trangThai = kqhm.trangThai;
-                kqhm.huyetAp = kqhm.huyetAp;
-                kqhm.luongMauHien = kqhm.luongMauHien;
-                kqhm.hienMau = kqhm.hienMau;
-                kqhm.noiDung = kqhm.noiDung;
-                kqhm.HST = kqhm.HST;
-                kqhm.HBV = kqhm.HBV;
-                kqhm.MSD = kqhm.MSD;
-                kqhm.phanUng = kqhm.phanUng;
-                kqhm.ghiChu = kqhm.ghiChu;
+                    kqhm.IdKQHM = kqhm.IdKQHM;
+                    kqhm.idPDKHM = kqhm.idPDKHM;
+                    kqhm.idnguoiKham = kqhm.idPDKHM;
+                    kqhm.nguoiKham = kqhm.nguoiKham;
+                    kqhm.idnguoiXN = kqhm.idnguoiXN;
+                    kqhm.nguoiXN = kqhm.nguoiXN;
+                    kqhm.tgKham = kqhm.tgKham;
+                    kqhm.tgXetNghiem = kqhm.tgXetNghiem;
+                    kqhm.nhomMau = kqhm.idPDKHM;
+                    kqhm.canNang = kqhm.canNang;
+                    kqhm.tinhTrangLS = kqhm.tinhTrangLS;
+                    kqhm.machMau = kqhm.machMau;
+                    kqhm.trangThai = kqhm.trangThai;
+                    kqhm.huyetAp = kqhm.huyetAp;
+                    kqhm.luongMauHien = kqhm.luongMauHien;
+                    kqhm.hienMau = kqhm.hienMau;
+                    kqhm.noiDung = kqhm.noiDung;
+                    kqhm.HST = kqhm.HST;
+                    kqhm.HBV = kqhm.HBV;
+                    kqhm.MSD = kqhm.MSD;
+                    kqhm.phanUng = kqhm.phanUng;
+                    kqhm.ghiChu = kqhm.ghiChu;
 
-                db.Entry(ketQuaHienMau).State = EntityState.Modified;
-                db.SaveChanges();
-                SetAlert("Cập nhật thành công ", "success");
-                return RedirectToAction("DanhSachKQ", "KetQuaHienMau");
+                    db.Entry(ketQuaHienMau).State = EntityState.Modified;
+                    db.SaveChanges();
+                    SetAlert("Cập nhật thành công ", "success");
+                    return RedirectToAction("DanhSachKQ", "KetQuaHienMau");
+                }
             }
             else
             {
                 SetAlert("Vui lòng cập nhập thất bại.Vui lòng kiểm tra trường dữ liệu ", "error");
                 return RedirectToAction("layMau", "KetQuaHienMau");
-            }          
+            }
+            return View(ketQuaHienMau);
         }
 
         public ActionResult Details(string id)

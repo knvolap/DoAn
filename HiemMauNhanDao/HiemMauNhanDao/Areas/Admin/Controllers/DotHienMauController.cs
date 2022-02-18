@@ -69,7 +69,7 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             SetAlert("Sửa thành công", "success");
             return RedirectToAction("Index");
         }
-
+        
 
         public ActionResult DetailsDHM(string id)
         {

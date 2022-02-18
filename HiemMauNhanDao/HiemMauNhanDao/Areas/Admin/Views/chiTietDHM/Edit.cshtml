@@ -1,7 +1,7 @@
 ﻿@model Models.EF.chiTietDHM
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Phân chia đơn vị";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -18,8 +18,29 @@
     <div class="form-group">
         <label>Tên đợt hiến máu</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DotHienMau.TenDHM, null, new { @class = "form-control", @readonly = "readonly" })
+
+            @Html.EditorFor(model => model.DotHienMau.TenDHM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             @*@Html.DropDownList("IdDHM", ViewBag.idDHM as SelectList, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })*@
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Người đăng ký</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tenNguoiDK, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Thời gian đăng ký</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ngayDK, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Tên Bệnh viện</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BenhVien.TenBenhVien, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+            @Html.ValidationMessageFor(model => model.idBenhVien, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -31,24 +52,12 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label>Tên Bệnh viện</label>
-        <div class="col-md-10">
-            @Html.DropDownList("IdBenhVien", ViewBag.idBenhVien as SelectList, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idBenhVien, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.trangThai, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.trangThai)
-                @Html.ValidationMessageFor(model => model.trangThai, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    @Html.HiddenFor(model => model.ngayDK, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.HiddenFor(model => model.idBenhVien, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    @Html.HiddenFor(model => model.idDHM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+  
+
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

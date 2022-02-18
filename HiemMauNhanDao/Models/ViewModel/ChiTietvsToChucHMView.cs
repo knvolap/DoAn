@@ -44,5 +44,7 @@ namespace Models.ViewModel
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm    dd/MM/yyyy}")]
         public DateTime ngayToChuc { get; set; }
         public bool trangThai { get; set; }
+
+        public bool trangThai2 { get; set; }
     }
 }

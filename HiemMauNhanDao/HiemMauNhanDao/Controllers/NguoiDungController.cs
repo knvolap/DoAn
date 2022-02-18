@@ -60,30 +60,51 @@ namespace HiemMauNhanDao.Controllers
         {        
             if (ModelState.IsValid)
             {
-                if (_NguoiDung.isExistSDT(model.soDT))
+             
+                if (model.soLanHM == null)
+                {
+                    SetAlert("Vui lòng nhập số lần hiến máu", "error");
+                }
+                else if (model.trinhDo == null)
+                {
+                    SetAlert("Vui lòng nhập địa chỉ", "error");           
+                }
+                else if(model.diaChi==null)
+                {
+                    SetAlert("Vui lòng nhập địa chỉ", "error");        
+                }
+                else if (_NguoiDung.isExistSDT(model.soDT))
                 {
                     SetAlert("Số điện thoại đã tồn tại", "error");
-                }              
-                var ttcn = _NguoiDung.GetByIdTTCN(model.IdTTCN);
-                ttcn.IdTTCN = ttcn.IdTTCN;
-                ttcn.CCCD = ttcn.CCCD;
-                ttcn.userName = ttcn.userName;
-                ttcn.ngaySinh = ttcn.ngaySinh;
-                ttcn.idQuyen = ttcn.idQuyen;
-                ttcn.trangThai = ttcn.trangThai;
-                ttcn.password = ttcn.password;
-                ttcn.soDT = ttcn.soDT;
+                }
+                else if (model.ngheNghiep == null)
+                {
+                    SetAlert("Vui lòng nhập nghề nghiệp", "error");       
+                }
+                else
+                {
+                    var ttcn = _NguoiDung.GetByIdTTCN(model.IdTTCN);
+                    ttcn.IdTTCN = ttcn.IdTTCN;
+                    ttcn.CCCD = ttcn.CCCD;
+                    ttcn.userName = ttcn.userName;
+                    ttcn.ngaySinh = ttcn.ngaySinh;
+                    ttcn.idQuyen = ttcn.idQuyen;
+                    ttcn.trangThai = ttcn.trangThai;
+                    ttcn.password = ttcn.password;
+                    ttcn.soDT = ttcn.soDT;
 
-                db.Entry(model).State = EntityState.Modified;
-                db.SaveChanges();
-                SetAlert("Cập nhật thành công", "success");
-                return RedirectToAction("Index", "NguoiDung");
+                    db.Entry(model).State = EntityState.Modified;
+                    db.SaveChanges();
+                    SetAlert("Cập nhật thành công", "success");
+                    return RedirectToAction("Index", "NguoiDung");
+                }                              
             }
             else
             {
                 SetAlert("Cập nhật thất bại", "error");
                 return RedirectToAction("CapnhatTTCN", "NguoiDung");
-            }    
+            }
+            return View(model);
         }
 
 

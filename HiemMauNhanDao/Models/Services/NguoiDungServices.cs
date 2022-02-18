@@ -163,6 +163,7 @@ namespace Models.Services
                 tgDuKien=x.pdk.tgDuKien,
                 idPDKHM = x.pdk.idPDKHM,
                 idDTCHM = x.pdk.idDTCHM,
+                trangThai = x.pdk.trangThai,
                 tenDTCHM = x.dtchm.tenDotHienMau
 
             }).OrderByDescending(x => x.idDTCHM).ThenBy(q => q.idPDKHM).ToPagedList(page, pagesize);
@@ -172,12 +173,13 @@ namespace Models.Services
        
         public ChiTietPDKHvsKQHMView GetByIdLSDK2(string id)
         {
-            var query = from kqhm in db.KetQuaHienMaus                      
+            var query = from kqhm in db.KetQuaHienMaus
                         join pdk in db.PhieuDKHMs on kqhm.idPDKHM equals pdk.idPDKHM
                         join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
                         join dtchm in db.DotToChucHMs on pdk.idDTCHM equals dtchm.IdDTCHM
                         where tt.IdTTCN == id
-                        select new { pdk, tt, kqhm , dtchm };
+                        select new { pdk, tt, kqhm, dtchm };
+
 
             //tạo biến result -> hiển thị sp ->           
             var result = query.Select(x => new ChiTietPDKHvsKQHMView()
@@ -213,14 +215,20 @@ namespace Models.Services
                 ungThu = x.pdk.ungThu,
                 dangMangThai = x.pdk.dangMangThai,
                 xacNhan = x.pdk.xacNhan,
-                trangThai=x.pdk.trangThai,
+
 
                 IdKQHM = x.kqhm.IdKQHM,
                 nhomMau = x.kqhm.nhomMau,
                 trangThai2 = x.kqhm.trangThai,
-                nguoiKham = x.kqhm.idnguoiKham,
-                nguoiXN = x.kqhm.idnguoiXN,
-                nguoiLayMau = x.kqhm.idnguoiLayMau,
+
+                idnguoiKham = x.kqhm.idnguoiKham,
+                idnguoiXN = x.kqhm.idnguoiXN,
+                idnguoiLayMau = x.kqhm.idnguoiLayMau,
+
+                nguoiKham = x.kqhm.nguoiKham,
+                nguoiXN = x.kqhm.nguoiXN,
+                nguoiLayMau = x.kqhm.nguoiLayMau,
+
                 canNang = x.kqhm.canNang,
                 machMau = x.kqhm.machMau,
                 tinhTrangLS = x.kqhm.tinhTrangLS,

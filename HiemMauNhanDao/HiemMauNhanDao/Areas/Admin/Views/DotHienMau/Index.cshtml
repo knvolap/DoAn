@@ -1,7 +1,7 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<Models.EF.DotHienMau>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Đợt hiến máu";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -99,9 +99,7 @@
                     <th>
                         Ngày kết thúc
                     </th>
-                    <th>
-                        Trạng thái
-                    </th>
+                   
                     <th>
                         Chức năng
                     </th>
@@ -129,11 +127,7 @@
                             @Html.DisplayFor(model => item.tgKetThuc)
                         
                         </td>
-                        <td>
-                            <button class="mb-2 mr-2 btn-transition btn btn-outline-info">
-                                @(item.trangThai == true ? "Còn hạn" : "Hết hạn")
-                            </button>
-                        </td>
+                        
                         <td>
                             <div class="mb-2 mr-2 dropright btn-group">
                                 <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>

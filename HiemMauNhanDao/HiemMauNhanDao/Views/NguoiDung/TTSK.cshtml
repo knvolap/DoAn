@@ -57,7 +57,7 @@
                                                        class="single-input">
                                                 @*<input name="searchString1" value="@ViewBag.SearchString1" id="exampleCity" type="text" class="form-control">*@
                                             </th>
-                                            
+
                                         </tr>
 
                                     </table>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="main-card mb-3 card">
-                        <div  >
+                        <div>
                             <table class="mb-0 table table-hover table table-bordered">
                                 <tr class="text-center">
                                     <th>
@@ -86,12 +86,12 @@
                                         Mã ĐK
                                     </th>
                                     @*<th>
-                                        Họ tên
-                                    </th>*@
+                                            Họ tên
+                                        </th>*@
                                     <th>
                                         Thời gian khám
                                     </th>
-                                   
+
                                     <th>
                                         Trạng thái
                                     </th>
@@ -113,15 +113,25 @@
                                             @item.idPDKHM
                                         </td>
                                         @*<td>
-                                            @item.hoTen
-                                        </td>*@
+                                                @item.hoTen
+                                            </td>*@
                                         <td>
                                             @item.tgDuKien
                                         </td>
-                                        
-
                                         <td class="text-center">
-                                            <a href="#" class="btn-active" data-id="@item.idPDKHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
+
+                                            @if (@item.trangThai == true)
+                                            {
+
+                                                @(item.trangThai == true ? "Duyệt" : "Chưa duyệt")
+
+                                            }
+                                            @if (@item.trangThai == false)
+                                            {
+
+                                                @(item.trangThai == false ? "Chưa duyệt" : " Duyệt")
+
+                                            }
                                         </td>
 
                                         <td>
@@ -129,7 +139,7 @@
                                                 <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
                                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
                                                     <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Tình trạng sức khỏe", "Details", new { id = item.IdTTCN })</button>
-                                                   @* <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>*@
+                                                    @* <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.IdTTCN })</button>*@
                                                 </div>
                                             </div>
                                         </td>
@@ -146,14 +156,14 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
 
-        
+
     </div>
 </section>
 
 
- 
+
 <script>
     $(function () {
         $('#AlertBox').removeClass('hide');

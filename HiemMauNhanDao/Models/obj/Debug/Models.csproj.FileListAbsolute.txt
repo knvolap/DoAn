@@ -57,3 +57,4 @@ D:\DoAn\HiemMauNhanDao\Models\bin\Debug\System.ValueTuple.xml
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csproj.CopyComplete
 D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.dll
+D:\DoAn\HiemMauNhanDao\Models\obj\Debug\Models.csprojAssemblyReference.cache

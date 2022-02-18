@@ -50,22 +50,18 @@ namespace HiemMauNhanDao.Controllers
                 if (_dvlk.isExistIDTK(donViLienKet.idTTCN))
                 {
                     SetAlert("Bạn đã đăng ký rồi", "error");
-                    return RedirectToAction("DKDVLK", "DVLK");
                 }
                 else if (_dvlk.isExistSDT(donViLienKet.soDT))
                 {
                     SetAlert("Số điện thoại đã tồn tại", "error");
-                    return RedirectToAction("DKDVLK", "DVLK");
                 }
                 else if (_dvlk.isExistEmail(donViLienKet.Email))
                 {
                     SetAlert("Email đã tồn tại", "error");
-                    return RedirectToAction("DKDVLK", "DVLK");
                 }
                 else if (file==null)
                 {
                     SetAlert("Vui lòng chọn File", "error");
-                    return RedirectToAction("DKDVLK", "DVLK");
                 }
                 else
                 {
@@ -87,6 +83,7 @@ namespace HiemMauNhanDao.Controllers
                 SetAlert("Đăng ký thất bại!! Vui lòng kiểm tra lại thông tin nhập", "error");
                 return RedirectToAction("DKDVLK", "DVLK");
             }
+            return View(donViLienKet);
                
         }
         public ActionResult CreateDV()
@@ -117,7 +114,12 @@ namespace HiemMauNhanDao.Controllers
             {
                 if (_DTCHM.CheckTimeDuplicate(dotToChucHM.ngayBatDauDK, dotToChucHM.ngayKetThucDK, dotToChucHM.ngayToChuc, tempDHM.tgBatDau, tempDHM.tgKetThuc) == true)
                 {
-                    if (dotToChucHM.ngayBatDauDK < dotToChucHM.ngayKetThucDK && dotToChucHM.ngayToChuc >= dotToChucHM.ngayKetThucDK)
+                    if (_DTCHM.isExistBaiDang(dotToChucHM.tenDotHienMau))
+                    {
+                        SetAlert("Tên bài đăng đã tồn tại !", "error");
+
+                    }
+                    else if (dotToChucHM.ngayBatDauDK < dotToChucHM.ngayKetThucDK && dotToChucHM.ngayToChuc >= dotToChucHM.ngayKetThucDK)
                     {
                         dotToChucHM.IdDTCHM = so > 9 ? phanDau + so : phanDau + "0" + so;
                         dotToChucHM.trangThai = true;
@@ -131,13 +133,13 @@ namespace HiemMauNhanDao.Controllers
                     else
                     {
                         SetAlert("Đăng bài thất bại!!! Vui lòng nhập Ngày bắt đầu < Ngày kết thúc < Ngày đăng ký", "error");
-                        return RedirectToAction("CreateDV");
+                        
                     }
                 }
                 else
                 {
                     SetAlert("Khoảng thời gian đăng ký không nằm trong đợt hiến máu!", "error");
-                    return RedirectToAction("CreateDV");
+                    
                 }
             }
             ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs, "IdChiTietDHM", "idChiTietDHM", dotToChucHM.idChiTietDHM);

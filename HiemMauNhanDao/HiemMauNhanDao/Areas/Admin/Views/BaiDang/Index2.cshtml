@@ -34,7 +34,7 @@
     }
 </div>
 
-@using (Html.BeginForm("Index", "BaiDang", FormMethod.Get))
+@using (Html.BeginForm("Index", "BaiDang", FormMethod.Post))
 {
     @*Tìm Kiếm nhân viên*@
     <div class="main-card mb-3 card">
@@ -53,7 +53,7 @@
             </form>
         </div>
     </div>
-}
+
 
 
 <ul></ul>
@@ -121,7 +121,7 @@
                         </td>
 
                         <td class="text-center">
-                            <a href="#" class="btn-active" data-id="@item.IdChiTietDHM">@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</a>
+                            <a href="#" class="btn-active" data-id="@item.IdDTCHM">@Html.Raw(item.trangThai2 ? "Đã duyệt" : "Chưa duyệt")</a>
                         </td>
                         <td class="text-center">
                             <div class="  mr-2 dropright btn-group">
@@ -142,7 +142,7 @@
         @Html.PagedListPager(Model, page => Url.Action("Index2", new { page, @searchString = ViewBag.SearchStringBD }))
     </div>
 </div>
-
+ }
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="~/Assets/Admin/scripts/duyetBaiDang.js"></script>
 

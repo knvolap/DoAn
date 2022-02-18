@@ -57,6 +57,18 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
             SetAlert("Xoá thành công", "success");
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public JsonResult ChangeStatus5(string id)
+        {
+            var result = new DotToChucHMServices().ChangeStatus5(id);
+            return Json(new
+            {
+                tt = result
+            });
+        }
+
+
         //[HttpGet]
         //public ActionResult Details(string id)
         //{

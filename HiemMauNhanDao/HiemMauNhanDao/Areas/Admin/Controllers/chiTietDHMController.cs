@@ -59,17 +59,22 @@ namespace HiemMauNhanDao.Areas.Admin.Controllers
                 ctdhm.idBenhVien = ctdhm.idBenhVien;
                 ctdhm.idDVLK = ctdhm.idDVLK;
                 ctdhm.ngayDK = ctdhm.ngayDK;
-                ctdhm.trangThai = ctdhm.trangThai;
+                ctdhm.trangThai = true;
                 db.Entry(chiTietDHM).State = EntityState.Modified;
                 db.SaveChanges();
                 SetAlert("Cập nhật thành công", "success");
                 return RedirectToAction("Index");
-
             }
+            else
+            {
+                SetAlert("cập nhật thất bại", "error");
+                return RedirectToAction("Edit");
+            }
+            return View(chiTietDHM);
             ViewBag.idBenhVien = new SelectList(db.BenhViens, "IdBenhVien", "TenBenhVien" );
             ViewBag.idDVLK = new SelectList(db.DonViLienKets, "IdDVLK", "TenDonVi" );
             ViewBag.idDHM = new SelectList(db.DotHienMaus, "IdDHM", "TenDHM" );
-            return View(chiTietDHM);
+     
         }
 
         public ActionResult Delete(string id)

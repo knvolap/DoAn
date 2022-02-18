@@ -56,11 +56,8 @@ namespace HiemMauNhanDao.Controllers
         public ActionResult Create()
         {
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-
             var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
-
             ViewBag.IdChiTietDHM = new SelectList(db.chiTietDHMs.Where(x => x.idBenhVien == tempNVYT.idBenhVien), "IdChiTietDHM", "idChiTietDHM");
-
             return View();
         }
 
@@ -85,7 +82,7 @@ namespace HiemMauNhanDao.Controllers
                     if (_DTCHM.isExistBaiDang(dotToChucHM.tenDotHienMau))
                     {
                         SetAlert("Tên bài đăng đã tồn tại !", "error");
-                        return RedirectToAction("Create");
+                     
                     }
                     else if (dotToChucHM.ngayBatDauDK < dotToChucHM.ngayKetThucDK && dotToChucHM.ngayToChuc >= dotToChucHM.ngayKetThucDK)
                     {
@@ -101,13 +98,13 @@ namespace HiemMauNhanDao.Controllers
                     else
                     {
                         SetAlert("Đăng bài thất bại!!! Vui lòng nhập Ngày bắt đầu < Ngày kết thúc < Ngày đăng ký", "error");
-                        return RedirectToAction("Create");
+                         
                     }
                 }
                 else
                 {
                     SetAlert("Khoảng thời gian đăng ký không nằm trong đợt hiến máu!", "error");
-                    return RedirectToAction("Create");
+                 
                 }
             }
             return View(dotToChucHM);
@@ -183,6 +180,8 @@ namespace HiemMauNhanDao.Controllers
 
         public ActionResult TaoNV(string id)
         {
+            TempData["BaiDang"] = id;
+            TempData.Keep();
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             var tempNVYTs = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();          
             var ts = from a in db.ThongTinCaNhans
@@ -202,7 +201,7 @@ namespace HiemMauNhanDao.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TaoNV([Bind(Include = "idDTCHM,idNVYT,nhiemVu ")] DSNVTH dsnv, string id )
+        public ActionResult TaoNV([Bind(Include = "idDTCHM,idNVYT,nhiemVu ")] DSNVTH dsnv)
         {         
             var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
             var tempNVYTs = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
@@ -221,14 +220,14 @@ namespace HiemMauNhanDao.Controllers
             ViewBag.IdNVYT = new SelectList(ts, "IdNVYT", "hoTen", dsnv.idNVYT);
             if (ModelState.IsValid)
             {
-                if (_DTCHM.checkPhanChiaNV(tempNVYTs.IdNVYT ) == false)
+                if (_DTCHM.checkPhanChiaNV2(dsnv.idNVYT,Convert.ToString(TempData["BaiDang"])) == false)
                 {
                     SetAlert("Nhân viên này đã có nhiệm vụ", "error");
                     return RedirectToAction("TaoNV", "DotToChucHM");
                 }
                 else
                 {
-                    dsnv.idDTCHM = id;
+                    dsnv.idDTCHM = Convert.ToString(TempData["BaiDang"]);
                     db.DSNVTHs.Add(dsnv);
                     db.SaveChanges();
                     SetAlert("Phân chia nhiệm vụ thành công", "success");
@@ -282,51 +281,3 @@ namespace HiemMauNhanDao.Controllers
     }
 }
 
-//public ActionResult TaoNV(string id)
-//{
-//    var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-//    var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
-//    ViewBag.IdNVYT = new SelectList(db.NhanVienYTes.Where(x => x.idBenhVien == tempNVYT.idBenhVien), "IdNVYT", "idNVYT");
-//    return View();
-//}
-
-//[HttpPost]
-//[ValidateAntiForgeryToken]
-//public ActionResult TaoNV([Bind(Include = "idDTCHM,idNVYT,nhiemVu ")] DSNVTH dsnv, string id)
-//{
-//    var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-//    var tempNVYT = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
-//    ViewBag.IdNVYT = new SelectList(db.NhanVienYTes.Where(x => x.idBenhVien == tempNVYT.idBenhVien), "IdNVYT", "idNVYT");
-
-//    if (ModelState.IsValid)
-//    {
-//        dsnv.idDTCHM = id;
-//        db.DSNVTHs.Add(dsnv);
-//        db.SaveChanges();
-//        SetAlert("Phân chia nhiệm vụ thành công", "success");
-//        return RedirectToAction("Index");
-//    }
-//    else
-//    {
-//        SetAlert("Phân chia nhiệm vụ thất bại!", "error");
-//        return RedirectToAction("TaoNV");
-//    }
-//}
-
-//public ActionResult TaoNV(string id)
-//{
-//    var session = (HiemMauNhanDao.Common.UserLogin)Session[HiemMauNhanDao.Common.CommonConstant.USER_SESSION];
-//    var tempNVYTs = db.NhanVienYTes.Where(x => x.idTTCN == session.UserID).FirstOrDefault();
-
-//    var tempTTCN = db.ThongTinCaNhans.ToList();
-//    var tempNVYT = db.NhanVienYTes.Where(x => x.idBenhVien == tempNVYTs.idBenhVien).ToList();
-//    //var tenNV = tempTTCN.AddRange(tempNVYT);
-
-//    //ViewBag.IdNVYT = new SelectList(db.NhanVienYTes.Where(x => x.idBenhVien == tenNV), "IdNVYT", "idNVYT");
-//    if (_DTCHM.checkPhanChiaNV(session.UserID) == false)
-//    {
-//        SetAlert("Nhân viên này đã có nhiệm vụ", "error");
-//        return RedirectToAction("TaoNV", "DotToChucHM");
-//    }
-//    return View();
-//}

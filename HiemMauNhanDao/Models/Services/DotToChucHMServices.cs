@@ -150,7 +150,8 @@ namespace Models.Services
                 IdDTCHM =x.dtc.IdDTCHM,
                 tenDTCHM=x.dtc.tenDotHienMau,
                 noiDung = x.dtc.noiDung,
-               
+                trangThai2=x.dtc.trangThai,
+
                 ngayBatDauDK=x.dtc.ngayBatDauDK,
                 ngayKetThucDK = x.dtc.ngayKetThucDK,
                 ngayToChuc = x.dtc.ngayToChuc,
@@ -251,8 +252,24 @@ namespace Models.Services
                     break;
 
                 }
+            }           
+            return true;
+        }
+
+        public bool checkPhanChiaNV2(string idTTCN,string idBaiDang)
+        {
+            var result = db.DSNVTHs.Where(x => x.idNVYT == idTTCN).ToList();
+            foreach (var item in result)
+            {
+                if (item.idDTCHM == idBaiDang)
+                {
+                    if (result.Count() >= 1)
+                    {
+                        return false;
+                    }
+                    break;
+                }
             }
-            
             return true;
         }
 
@@ -265,6 +282,7 @@ namespace Models.Services
             }
             return true;
         }
+
         public bool isExistBaiDang(string tenDot)
         {
             DotToChucHM kh = db.DotToChucHMs.Where(t => t.tenDotHienMau == tenDot).FirstOrDefault();
@@ -273,6 +291,13 @@ namespace Models.Services
                 return true;
             }
             return false;
+        }
+        public bool ChangeStatus5(string id)
+        {
+            var chiTiet = db.DotToChucHMs.Find(id);
+            chiTiet.trangThai = !chiTiet.trangThai;
+            db.SaveChanges();
+            return chiTiet.trangThai;
         }
     }
 }

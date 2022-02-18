@@ -31,7 +31,7 @@ namespace Models.Services
             return db.KetQuaHienMaus.ToList();
         }
 
-        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM(string keysearch ,string idNTG, string idnvyt, int page, int pagesize)
+        public IEnumerable<ChiTietPDKHvsKQHMView> GetListKQHM(string keysearch ,string idBV, string idnvyt, int page, int pagesize)
         {
             var query = from pdk in db.PhieuDKHMs
                         join tt in db.ThongTinCaNhans on pdk.idTTCN equals tt.IdTTCN
@@ -45,7 +45,7 @@ namespace Models.Services
                         join nvyt in db.NhanVienYTes on bv.IdBenhVien equals nvyt.idBenhVien
                         join dsnv in db.DSNVTHs on nvyt.IdNVYT equals dsnv.idNVYT
 
-                        where ct.idBenhVien == idNTG && ct.IdChiTietDHM == dtchm.idChiTietDHM && dsnv.idNVYT == idnvyt
+                        where ct.idBenhVien == idBV && ct.IdChiTietDHM == dtchm.idChiTietDHM && dsnv.idNVYT == idnvyt
                         select new { pdk, tt , dtchm,dhm,bv,ct , nvyt , dsnv };
             //check từ khóa có tồn tại hay k
             if (!string.IsNullOrEmpty(keysearch))
@@ -219,7 +219,7 @@ namespace Models.Services
 
                 nguoiKham = x.kqhm.nguoiKham,
                 nguoiXN = x.kqhm.nguoiXN,
-                nguoiLayMau = x.kqhm.nguoiLayMau,
+                nguoiLayMau = x.kqhm.nguoiLayMau,  
 
                 canNang = x.kqhm.canNang,
                 machMau = x.kqhm.machMau,

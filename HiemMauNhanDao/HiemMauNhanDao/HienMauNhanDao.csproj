@@ -219,6 +219,7 @@
     <Content Include="Assets\Admin\images\logo.png" />
     <Content Include="Assets\Admin\images\logo2.png" />
     <Content Include="Assets\Admin\images\logo3.png" />
+    <Content Include="Assets\Admin\scripts\duyetBaiDangDTCH.js" />
     <Content Include="Assets\Admin\scripts\duyetBaiDang.js" />
     <Content Include="Assets\Admin\scripts\KetQuaHienMauController.js" />
     <Content Include="Assets\Admin\scripts\duyetPDKHM.js" />
@@ -376,6 +377,9 @@
     <Content Include="Assets\client\js\mail-script.js" />
     <Content Include="Assets\client\js\owl.carousel.min.js" />
     <Content Include="Assets\client\js\popper.min.js" />
+    <Content Include="Assets\client\sodo\1.png" />
+    <Content Include="Assets\client\sodo\4.png" />
+    <Content Include="Assets\client\sodo\5.png" />
     <Content Include="Assets\Login\img\background.jpg" />
     <Content Include="Assets\Login\img\favoicon.png" />
     <Content Include="Assets\Login\style.css" />

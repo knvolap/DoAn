@@ -158,62 +158,53 @@
                             @{ var i = 1;}
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @i
-                                    </td>
-
-                                    <td style=" width: 250px;  word-wrap: break-word;">
-                                        @item.tenDTCHM
-                                    </td>
-
-                                    <td class="text-center">
-                                        @item.idPDKHM
-                                    </td>
-                                    <td class="text-center">
-                                        @item.hoTen
-                                    </td>
-                                    <td class="text-center">
-                                        @(item.gioiTinh == true ? "Nam" : "Nữ")
-                                    </td>
-                                    <td class="text-center">
-                                        @item.soDT
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn-active" data-id="@item.idPDKHM"><strong>@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</strong></a>
-                                    </td>
-                                    <td>
-                                        @if (item.trangThai == false)
-                                        {
-                                            <div>
-                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                    @if (item.nhiemVu == "Khám sức khỏe")
-                                                    {
-                                                        <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Khám sức khỏe", "Create", new { id = item.idPDKHM })</button>
-                                                    }
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.idPDKHM })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Lịch sử đăng ký", "LSDK", new { id = item.idTTCN })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
+                                if (item.trangThai == false)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td style=" width: 250px;  word-wrap: break-word;">
+                                            @item.tenDTCHM
+                                        </td>
+                                        <td class="text-center">
+                                            @item.idPDKHM
+                                        </td>
+                                        <td class="text-center">
+                                            @item.hoTen
+                                        </td>
+                                        <td class="text-center">
+                                            @(item.gioiTinh == true ? "Nam" : "Nữ")
+                                        </td>
+                                        <td class="text-center">
+                                            @item.soDT
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="#" class="btn-active" data-id="@item.idPDKHM"><strong>@Html.Raw(item.trangThai ? "Đã duyệt" : "Chưa duyệt")</strong></a>
+                                        </td>
+                                        <td>
+                                            @if (item.trangThai == false)
+                                            {
+                                                <div>
+                                                    <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
+                                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
+                                                        @if (item.nhiemVu == "Khám sức khỏe")
+                                                        {
+                                                            <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Khám sức khỏe", "Create", new { id = item.idPDKHM })</button>
+                                                        }
+                                                        <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.idPDKHM })</button>
+                                                        <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Lịch sử đăng ký", "LSDK", new { id = item.idTTCN })</button>
+                                                        <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div>
-                                                <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-outline-alternate">Chọn</button>
-                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu" x-placement="right-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(105px, 0px, 0px);">
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Chi tiết kết quả", "Details", new { id = item.IdTTCN })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink("Xem thông tin đăng ký", "TTDK", new { id = item.idPDKHM })</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item  "> @Html.ActionLink(" Xóa", "Delete", new { id = item.idPDKHM })</button>
+                                            }
+                                          
 
-                                                </div>
-                                            </div>
-                                        }
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
 
-                                    </td>
-                                </tr>
-                                i++;
                             }
                         </table>
                         <nav class="blog-pagination justify-content-center d-flex">
