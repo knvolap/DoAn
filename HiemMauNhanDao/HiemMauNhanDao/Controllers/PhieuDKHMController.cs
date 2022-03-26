@@ -92,16 +92,12 @@ namespace HiemMauNhanDao.Controllers
                     {
                         SetAlert("Đã đủ lượt đăng ký", "error");
                         return RedirectToAction("Index", "DTCHM");
-                    }
-                
+                    }               
                 }                   
             }
             return View(phieuDKHM);
         }      
-        //ngày tổ chức : 7h20p
-        // đứa thứ nhất đăng ký: 7h22p
-        //đứa thứ 2 đk: 7h24p
-        //kiểu vậy
+     
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -112,5 +108,3 @@ namespace HiemMauNhanDao.Controllers
         }
     }
 }
-// 5ng =+ 10p
-// 200ng= +400p = 6h
